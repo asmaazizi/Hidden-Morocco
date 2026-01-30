@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hidden Morocco</title>
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Hidden Morocco</h1>
+      <p>Découvrez des lieux uniques et des expériences inoubliables.</p>
+      <a href="#destinations" class="cta-button">Voir les Destinations</a>
+    </div>
+  </header>
+
+  <!-- Destinations Section -->
+  <section id="destinations" class="destinations">
+    <h2>Nos Destinations</h2>
+    <div class="grid">
+      <!-- Marrakech -->
+      <div class="card">
+        <img src="images/Marrakech/Marrakech.jpg" alt="Marrakech">
+        <div class="card-content">
+          <h3>Marrakech</h3>
+          <p>Ville impériale au charme unique.</p>
+          <span class="price">À partir de 400 DH</span>
+          <button onclick="openModal('marrakech')">Voir plus</button>
+        </div>
+      </div>
+      <div id="modal-marrakech" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('marrakech')">&times;</span>
+          <h2>Marrakech</h2>
+          <div class="swiper mySwiper-marrakech">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_11.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_12.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_4.webp"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_7.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_13.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_14.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakrch_9.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrakech_15.jpg"></div>
+              <div class="swiper-slide"><img src="images/Marrakech/marrkech_13.jpg"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <p>Marrakech, ville impériale au charme envoûtant, séduit par son mélange unique de traditions et de
+            modernité. Entre les souks animés de la médina, les palais majestueux, les jardins paisibles et l'ambiance
+            mythique de la place Jemaa el-Fna, chaque instant est une découverte. Séjourner dans un riad, profiter d'un
+            hammam traditionnel ou explorer la palmeraie au coucher du soleil fait de Marrakech une destination
+            inoubliable, riche en émotions et en expériences authentiques.</p>
+          <div class="travel-info">
+            <h3 class="travel-title">Comment voyager vers Marrakech</h3>
+            <div class="travel-cards">
+
+              <div class="travel-item">
+                <span>Avion</span>
+                <p>Aéroport Marrakech Menara – vols nationaux et internationaux</p>
+              </div>
+
+              <div class="travel-item">
+                <span>Train</span>
+                <p>ONCF depuis Casablanca, Rabat et Fès</p>
+              </div>
+
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>CTM & Supratours – trajets confortables</p>
+              </div>
+
+              <div class="travel-item">
+                <span>Voiture</span>
+                <p>Autoroutes et routes nationales bien accessibles</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="activities-luxury">
+            <h3 class="section-title">Expériences à vivre à Marrakech</h3>
+
+            <ul class="activities-list">
+              <li>
+                <h4>Explorer les souks traditionnels</h4>
+                <p>Découvrez l’âme de Marrakech à travers ses ruelles animées, ses artisans et ses couleurs vibrantes.
+                </p>
+              </li>
+
+              <li>
+                <h4>Balade dans la Palmeraie</h4>
+                <p>Une escapade paisible entre palmiers et désert, idéale pour se reconnecter à la nature.</p>
+              </li>
+
+              <li>
+                <h4>Hammam et bien-être marocain</h4>
+                <p>Offrez-vous un moment de détente absolue dans un hammam traditionnel aux rituels ancestraux.</p>
+              </li>
+
+              <li>
+                <h4>Soirée culturelle à Jemaa El-Fna</h4>
+                <p>Vivez l’effervescence nocturne entre musiciens, conteurs et gastronomie locale.</p>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+
+
+      <!-- Merzouga -->
+      <div class="card">
+        <img src="images/Merzouga/merzouga.jpg" alt="Merzouga">
+        <div class="card-content">
+          <h3>Merzouga</h3>
+          <p>Le désert à perte de vue.</p>
+          <span class="price">Dès 350 DH</span>
+          <button onclick="openModal('merzouga')">Voir plus</button>
+        </div>
+      </div>
+      <div id="modal-merzouga" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('merzouga')">&times;</span>
+          <h2>Merzouga</h2>
+          <div class="swiper mySwiper-merzouga">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_1.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_2.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_3.webp"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_4.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_5.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_6.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_7.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_8.jpg"></div>
+              <div class="swiper-slide"><img src="images/Merzouga/merzouga_9.jpg"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <p>Merzouga est la porte d'entrée majestueuse du désert du Sahara, célèbre pour ses immenses dunes de l'Erg
+            Chebbi qui changent de couleur au gré de la lumière du jour. Vivez une aventure inoubliable à dos de
+            chameau, passez une nuit sous les étoiles dans un bivouac traditionnel et laissez-vous envoûter par le
+            silence absolu et la beauté intemporelle du désert. C'est le lieu idéal pour se déconnecter du monde moderne
+            et se reconnecter avec la nature.</p>
+          <div class="travel-info">
+            <h3 class="travel-title">Comment voyager vers Merzouga</h3>
+            <div class="travel-cards">
+              <div class="travel-item">
+                <span>Avion</span>
+                <p>Vol vers Errachidia (ERH) + Transfert (2h)</p>
+              </div>
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>Supratours direct depuis Marrakech ou Fès</p>
+              </div>
+              <div class="travel-item">
+                <span>Voiture</span>
+                <p>Route panoramique via Ouarzazate</p>
+              </div>
+            </div>
+          </div>
+          <div class="activities-luxury">
+            <h3 class="section-title">Expériences à vivre à Merzouga</h3>
+            <ul class="activities-list">
+              <li>
+                <h4>Balade à dos de dromadaire</h4>
+                <p>Traversez les dunes dorées au rythme lent des caravanes pour un coucher de soleil magique.</p>
+              </li>
+              <li>
+                <h4>Nuit sous la belle étoile</h4>
+                <p>Dormez dans un bivouac de luxe et admirez la voie lactée comme jamais auparavant.</p>
+              </li>
+              <li>
+                <h4>Lever de soleil sur les dunes</h4>
+                <p>Un spectacle unique où le soleil embrase le sable d'une lumière indescriptible.</p>
+              </li>
+              <li>
+                <h4>Aventure en 4x4 ou Quad</h4>
+                <p>Vivez des sensations fortes en explorant les pistes sauvages du désert.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chefchaouen -->
+      <div class="card">
+        <img src="images/Chfchaouen/chefchaoun.jpg" alt="Chefchaouen">
+        <div class="card-content">
+          <h3>Chefchaouen</h3>
+          <p>La perle bleue du Maroc.</p>
+          <span class="price">Dès 300 DH</span>
+          <button onclick="openModal('chefchaouen')">Voir plus</button>
+        </div>
+      </div>
+      <div id="modal-chefchaouen" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('chefchaouen')">&times;</span>
+          <h2>Chefchaouen</h2>
+          <div class="swiper mySwiper-chefchaouen">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Chfchaouen/chechaouen_1.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_2.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chechaouen_3.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chechaouen_4.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chfchaouen_5.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_6.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_7.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_8.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_9.jpg"></div>
+              <div class="swiper-slide"><img src="images/Chfchaouen/chefchaouen_10.jpg"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <p>Surnommée la perle bleue du Maroc, Chefchaouen est un havre de paix niché dans les montagnes du Rif. Ses
+            ruelles sinueuses peintes de nuances de bleu offrent une atmosphère apaisante et féerique, parfaite pour
+            la
+            flânerie et la photographie. Découvrez son artisanat local, ses places ombragées et ses sources d'eau
+            pure.
+            Une visite à Chefchaouen est une invitation à la sérénité et à l'émerveillement visuel.</p>
+          <div class="travel-info">
+            <h3 class="travel-title">Comment voyager vers Chefchaouen</h3>
+            <div class="travel-cards">
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>CTM est l'option la plus populaire et fiable</p>
+              </div>
+              <div class="travel-item">
+                <span>Avion</span>
+                <p>Vol vers Tanger (TNG) + Taxi/Bus (2h)</p>
+              </div>
+              <div class="travel-item">
+                <span>Voiture</span>
+                <p>Routes de montagne depuis Tanger ou Fès</p>
+              </div>
+            </div>
+          </div>
+          <div class="activities-luxury">
+            <h3 class="section-title">Expériences à vivre à Chefchaouen</h3>
+            <ul class="activities-list">
+              <li>
+                <h4>Flânerie dans les ruelles bleues</h4>
+                <p>Perdez-vous dans le labyrinthe azur de la médina, un paradis pour les photographes.</p>
+              </li>
+              <li>
+                <h4>Coucher de soleil à la Mosquée Espagnole</h4>
+                <p>Une petite randonnée pour une vue panoramique inoubliable sur la ville bleue.</p>
+              </li>
+              <li>
+                <h4>Pause fraîcheur à Ras El Maa</h4>
+                <p>Détendez-vous au bord de la source où les femmes lavent le linge traditionnellement.</p>
+              </li>
+              <li>
+                <h4>Découverte de l'artisanat local</h4>
+                <p>Admirez les tissages, les couvertures en laine et les pigments colorés des souks.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <!-- Essaouira -->
+    <div class="card">
+      <img src="images/Essaouira/essaouira.jpg" alt="Essaouira">
+      <div class="card-content">
+        <h3>Essaouira</h3>
+        <p>Ville côtière au charme artistique.</p>
+        <span class="price">Dès 280 DH</span>
+        <button onclick="openModal('essaouira')">Voir plus</button>
+      </div>
+    </div>
+    <div id="modal-essaouira" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('essaouira')">&times;</span>
+        <h2>Essaouira</h2>
+        <div class="swiper mySwiper-essaouira">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_1.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_2.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_3.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_4.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_5.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_6.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_7.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_8.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_9.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_10.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_11.jpg"></div>
+            <div class="swiper-slide"><img src="images/Essaouira/essaouira_12.jpg"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+        <p>Ancienne Mogador, Essaouira est une ville portuaire fortifiée au charme bohème, balayée par les vents
+          de
+          l'Atlantique. Flânez dans sa médina classée au patrimoine mondial de l'UNESCO, admirez ses remparts
+          historiques et observez le ballet des bateaux de pêche bleus dans le port. Réputée pour ses festivals de
+          musique, ses galeries d'art et ses sports nautiques, Essaouira offre une escapade culturelle et
+          balnéaire
+          rafraîchissante.</p>
+        <div class="travel-info">
+          <h3 class="travel-title">Comment voyager vers Essaouira</h3>
+          <div class="travel-cards">
+            <div class="travel-item">
+              <span>Bus</span>
+              <p>Départs fréquents CTM/Supratours (3h)</p>
+            </div>
+            <div class="travel-item">
+              <span>Voiture</span>
+              <p>Route express R207 depuis Marrakech (2h30)</p>
+            </div>
+            <div class="travel-item">
+              <span>Avion</span>
+              <p>Aéroport Essaouira-Mogador (ESU)</p>
+            </div>
+          </div>
+        </div>
+        <div class="activities-luxury">
+          <h3 class="section-title">Expériences à vivre à Essaouira</h3>
+          <ul class="activities-list">
+            <li>
+              <h4>Balade sur les remparts (Skala)</h4>
+              <p>Marchez face à l'océan sur les anciennes fortifications portugaises chargées d'histoire.</p>
+            </li>
+            <li>
+              <h4>Dégustation de poissons frais</h4>
+              <p>Choisissez votre poisson directement au port et dégustez-le grillé sur place.</p>
+            </li>
+            <li>
+              <h4>Initiation au Kite Surf</h4>
+              <p>Profitez des vents constants ("Alizés") pour glisser sur les vagues de l'Atlantique.</p>
+            </li>
+            <li>
+              <h4>Découverte de la musique Gnaoua</h4>
+              <p>Laissez-vous envoûter par les rythmes spirituels lors d'une soirée ou du festival annuel.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ouzoud -->
+    <div class="card">
+      <img src="images/Ouzoud/ouzoud-falls.jpg" alt="Ouzoud">
+      <div class="card-content">
+        <h3>Ouzoud</h3>
+        <p>Les plus belles cascades du Maroc.</p>
+        <span class="price">Dès 250 DH</span>
+        <button onclick="openModal('ouzoud')">Voir plus</button>
+      </div>
+    </div>
+    <div id="modal-ouzoud" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('ouzoud')">&times;</span>
+        <h2>Ouzoud</h2>
+        <div class="swiper mySwiper-ouzoud">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_1.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_2.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_3.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_4.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_5.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_6.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_7.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_8.jpg"></div>
+            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_9.jpg"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+        <p>Les cascades d'Ouzoud, les plus hautes et les plus belles du Maroc, sont un spectacle naturel
+          époustouflant
+          au cœur du Moyen Atlas. Admirez les chutes d'eau se déverser sur plus de 100 mètres de hauteur,
+          entourées
+          d'oliviers et d'une végétation luxuriante. Randonnez sur les sentiers environnants, observez les
+          macaques de
+          Barbarie en liberté et profitez d'une baignade rafraîchissante dans les bassins naturels. Une
+          excursion
+          incontournable pour les amoureux de la nature.</p>
+        <div class="travel-info">
+          <h3 class="travel-title">Comment voyager vers Ouzoud</h3>
+          <div class="travel-cards">
+            <div class="travel-item">
+              <span>Excursion</span>
+              <p>Excursion d'une journée depuis Marrakech</p>
+            </div>
+            <div class="travel-item">
+              <span>Voiture</span>
+              <p>2h30 de route depuis Marrakech</p>
+            </div>
+            <div class="travel-item">
+              <span>Grand Taxi</span>
+              <p>Disponible depuis la gare routière</p>
+            </div>
+          </div>
+        </div>
+        <div class="activities-luxury">
+          <h3 class="section-title">Expériences à vivre à Ouzoud</h3>
+          <ul class="activities-list">
+            <li>
+              <h4>Balade en bateau</h4>
+              <p>Approchez-vous au plus près des chutes d'eau à bord de petits bateaux traditionnels.</p>
+            </li>
+            <li>
+              <h4>Rencontre avec les singes</h4>
+              <p>Observez les macaques de Barbarie qui jouent librement dans les arbres autour des chutes.</p>
+            </li>
+            <li>
+              <h4>Randonnée dans l'oliveraie</h4>
+              <p>Explorez les sentiers ombragés par des oliviers centenaires avec vue sur la vallée.</p>
+            </li>
+            <li>
+              <h4>Déjeuner avec vue panoramique</h4>
+              <p>Savourez un tajine berbère dans l'un des petits restaurants surplombant les cascades.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fès -->
+    <div class="card">
+      <img src="images/Fes/fes.jpg" alt="Fès">
+      <div class="card-content">
+        <h3>Fès</h3>
+        <p>La plus ancienne médina du monde.</p>
+        <span class="price">Dès 320 DH</span>
+        <button onclick="openModal('fes')">Voir plus</button>
+      </div>
+    </div>
+    <div id="modal-fes" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('fes')">&times;</span>
+        <h2>Fès</h2>
+        <div class="swiper mySwiper-fes">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/Fes/fes_1.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_2.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_3.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_4.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_5.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_6.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_7.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_8.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_9.jpg"></div>
+            <div class="swiper-slide"><img src="images/Fes/fes_10.jpg"></div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+        <p>Capitale spirituelle et culturelle du Maroc, Fès abrite la plus grande et la plus ancienne médina
+          piétonne
+          du monde, Fès el-Bali. Perdez-vous dans son labyrinthe de ruelles, découvrez ses médersas aux
+          architectures
+          splendides, ses tanneries ancestrales et ses artisans au savoir-faire millénaire. Fès est un voyage
+          dans le
+          temps, une immersion profonde dans l'histoire et l'âme du Maroc, où chaque coin de rue révèle un
+          trésor
+          caché.</p>
+        <div class="travel-info">
+          <h3 class="travel-title">Comment voyager vers Fès</h3>
+          <div class="travel-cards">
+            <div class="travel-item">
+              <span>Train</span>
+              <p>Gare ONCF reliée à Casablanca, Rabat, Tanger</p>
+            </div>
+            <div class="travel-item">
+              <span>Avion</span>
+              <p>Aéroport Fès-Saïss (FEZ)</p>
+            </div>
+            <div class="travel-item">
+              <span>Voiture</span>
+              <p>Autoroute A2 depuis Rabat/Oujda</p>
+            </div>
+          </div>
+        </div>
+        <div class="activities-luxury">
+          <h3 class="section-title">Expériences à vivre à Fès</h3>
+          <ul class="activities-list">
+            <li>
+              <h4>Visite des tanneries traditionnelles</h4>
+              <p>Observez le spectacle coloré des cuves de teinture depuis les terrasses panoramiques.</p>
+            </li>
+            <li>
+              <h4>Exploration de la Médina</h4>
+              <p>Remontez le temps dans le plus grand labyrinthe piétonnier du monde, classé à l'UNESCO.</p>
+            </li>
+            <li>
+              <h4>Découverte des Médersas</h4>
+              <p>Admirez l'architecture raffinée et les zelliges des anciennes écoles coraniques comme Bou Inania.</p>
+            </li>
+            <li>
+              <h4>Atelier de céramique</h4>
+              <p>Initiez-vous à l'art ancestral de la poterie et du zellige fassi avec des maîtres artisans.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="map-section">
+    <h2>Découvrez le Maroc sur la carte</h2>
+    <div id="map"></div>
+  </section>
+  <section class="travel-form">
+    <h2>Planifiez votre voyage</h2>
+    <p class="subtitle">Dites-nous ce que vous souhaitez, on s’occupe du reste.</p>
+  
+    <form>
+      <div class="form-grid">
+  
+        <input type="text" placeholder="Nom complet" required>
+        <input type="email" placeholder="Adresse email" required>
+  
+        <input type="tel" placeholder="Téléphone / WhatsApp">
+        <input type="date">
+  
+        <select>
+          <option>Adultes</option>
+          <option>1</option><option>2</option><option>3</option><option>4+</option>
+        </select>
+  
+        <select>
+          <option>Enfants</option>
+          <option>0</option><option>1</option><option>2</option><option>3+</option>
+        </select>
+  
+      </div>
+  
+      <!-- destinations multi -->
+      <div class="destination-select">
+        <label class="dest-title">Destinations souhaitées</label>
+      
+        <div class="dest-grid">
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Marrakech">
+            <span>Marrakech</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Fès">
+            <span>Fès</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Chefchaouen">
+            <span>Chefchaouen</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Essaouira">
+            <span>Essaouira</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Merzouga">
+            <span>Merzouga</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Ouzoud">
+            <span>Ouzoud</span>
+          </label>
+        </div>
+      </div>
+      
+  
+      <textarea placeholder="Parlez-nous de votre voyage (durée, budget, préférences...)"></textarea>
+  
+      <button type="button" onclick="sendWhatsApp()">Envoyer la demande</button>
+    </form>
+  </section>
+  
+
+  
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    function openModal(city) {
+      document.getElementById('modal-' + city).style.display = 'block';
+      new Swiper('.mySwiper-' + city, {
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      });
+    }
+
+    function closeModal(city) {
+      document.getElementById('modal-' + city).style.display = 'none';
+    }
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([31.7917, -7.0926], 6);
+  
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+  
+    const cities = [
+      { name: "Marrakech", coords: [31.6295, -7.9811] },
+      { name: "Fès", coords: [34.0333, -5.0000] },
+      { name: "Chefchaouen", coords: [35.1688, -5.2636] },
+      { name: "Essaouira", coords: [31.5085, -9.7595] },
+      { name: "Merzouga", coords: [31.0994, -4.0127] },
+      { name: "Ouzoud", coords: [32.0167, -6.7167] }
+    ];
+  
+    cities.forEach(city => {
+      L.marker(city.coords)
+        .addTo(map)
+        .bindPopup(`<strong>${city.name}</strong>`);
+    });
+  </script>
+  
+
+  <script>
+    function sendWhatsApp() {
+    
+      const name = document.querySelector('input[placeholder="Nom complet"]').value;
+      const email = document.querySelector('input[placeholder="Adresse email"]').value;
+      const phone = document.querySelector('input[placeholder="Téléphone / WhatsApp"]').value;
+      const date = document.querySelector('input[type="date"]').value;
+      const adults = document.querySelectorAll('select')[0].value;
+      const children = document.querySelectorAll('select')[1].value;
+      const message = document.querySelector('textarea').value;
+    
+      const destinations = [];
+      document.querySelectorAll('input[name="destinations"]:checked')
+        .forEach(el => destinations.push(el.value));
+    
+      const whatsappMessage = `
+    Bonjour 👋
+    
+    Nouvelle demande de voyage – Hidden Morocco 🌍
+    
+    👤 Nom : ${name}
+    📧 Email : ${email}
+    📱 Téléphone : ${phone}
+    
+    📅 Date : ${date}
+    👨‍👩‍👧 Adultes : ${adults}
+    🧒 Enfants : ${children}
+    
+    📍 Destinations :
+    ${destinations.join(', ')}
+    
+    📝 Message :
+    ${message}
+    `;
+    
+      const phoneNumber = "212771663435";
+      const url = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage);
+      window.open(url, "_blank");
+    }
+    </script>
+    
+  
+</body>
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h3>Explore Morocco</h3>
+      <p>
+        Découvrez le Maroc autrement à travers des expériences uniques,
+        authentiques et inoubliables.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#">Marrakech</a></li>
+        <li><a href="#">Merzouga</a></li>
+        <li><a href="#">Chefchaouen</a></li>
+        <li><a href="#">Essaouira</a></li>
+        <li><a href="#">Ouzoud</a></li>
+        <li><a href="#">Fès</a></li>
+      </ul>
+    </div>
+
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
+      <p>Tél : +212 6 12 34 56 78</p>
+
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Hidden Morocco. Tous droits réservés. Créé avec passion pour les voyageurs.</p>
+  </div>
+</footer>
+</html>
