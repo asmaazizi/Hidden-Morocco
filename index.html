@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hidden Morocco</title>
   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="exp.css">
+
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
     rel="stylesheet">
@@ -92,33 +95,116 @@
 
             </div>
           </div>
-          <div class="activities-luxury">
-            <h3 class="section-title">Expériences à vivre à Marrakech</h3>
+<!-- ===== STYLE B : Expériences (Swiper) داخل Modal Marrakech ===== -->
+<div class="marr-exp">
+  <div class="marr-exp-head">
+    <h3 class="section-title">Nos Expériences autour de Marrakech</h3>
 
-            <ul class="activities-list">
-              <li>
-                <h4>Explorer les souks traditionnels</h4>
-                <p>Découvrez l’âme de Marrakech à travers ses ruelles animées, ses artisans et ses couleurs vibrantes.
-                </p>
-              </li>
+    <div class="marr-exp-arrows">
+      <button class="marr-exp-prev" type="button" aria-label="Précédent">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="marr-exp-next" type="button" aria-label="Suivant">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
 
-              <li>
-                <h4>Balade dans la Palmeraie</h4>
-                <p>Une escapade paisible entre palmiers et désert, idéale pour se reconnecter à la nature.</p>
-              </li>
+  <div class="swiper expSwiper-marrakech">
+    <div class="swiper-wrapper">
 
-              <li>
-                <h4>Hammam et bien-être marocain</h4>
-                <p>Offrez-vous un moment de détente absolue dans un hammam traditionnel aux rituels ancestraux.</p>
-              </li>
-
-              <li>
-                <h4>Soirée culturelle à Jemaa El-Fna</h4>
-                <p>Vivez l’effervescence nocturne entre musiciens, conteurs et gastronomie locale.</p>
-              </li>
-            </ul>
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('ourika')">
+          <div class="exp-cover">
+            <img src="images/Marrakech/ourika_1.png" alt="Vallée de l’Ourika">
+            <span class="exp-tag">1 jour</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Vallée de l’Ourika</h4>
+              <p>Atlas • Cascades • Villages</p>
+            </div>
           </div>
-          
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('ouzoud')">
+          <div class="exp-cover">
+            <img src="images/Ouzoud/ouzoud-falls.jpg" alt="Cascades d’Ouzoud">
+            <span class="exp-tag">1 jour</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Cascades d’Ouzoud</h4>
+              <p>Nature • Randonnée • Panoramas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('agafay')">
+          <div class="exp-cover">
+            <img src="images/Marrakech/agafay.jpg" alt="Désert d’Agafay">
+            <span class="exp-tag">Soirée</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Désert d’Agafay</h4>
+              <p>Quad • Chameau • Dîner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('imlil')">
+          <div class="exp-cover">
+            <img src="images/Marrakech/imlil-village.jpg" alt="Imlil & Atlas">
+            <span class="exp-tag">1 jour</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Imlil & Atlas</h4>
+              <p>Rando • Villages • Toubkal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('takerkoust')">
+          <div class="exp-cover">
+            <img src="images/Marrakech/lac-lala-takerkoust.webp" alt="Lalla Takerkoust">
+            <span class="exp-tag">Demi-journée</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Lalla Takerkoust</h4>
+              <p>Lac • Détente • Outdoor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="exp-card-slide" onclick="openExp('ballon')">
+          <div class="exp-cover">
+            <img src="images/Marrakech/montgolfiere.webp" alt="Montgolfière">
+            <span class="exp-tag">Sunrise</span>
+            <div class="exp-gradient"></div>
+            <div class="exp-title">
+              <h4>Montgolfière</h4>
+              <p>Lever du soleil • Petit-déj</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="swiper-pagination marr-exp-pagination"></div>
+  </div>
+</div>
+
+
+
         </div>
       </div>
 
@@ -595,98 +681,104 @@
   </section>
   
 
-  
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <div id="expModal" class="exp-modal">
+  <div class="exp-modal-overlay" onclick="closeExp()"></div>
 
-  <script>
-    function openModal(city) {
-      document.getElementById('modal-' + city).style.display = 'block';
-      new Swiper('.mySwiper-' + city, {
-        loop: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        }
-      });
-    }
+  <div class="exp-sheet" role="dialog" aria-modal="true">
+    <button class="exp-x" type="button" onclick="closeExp()">✕</button>
 
-    function closeModal(city) {
-      document.getElementById('modal-' + city).style.display = 'none';
-    }
-  </script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([31.7917, -7.0926], 6);
-  
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-  
-    const cities = [
-      { name: "Marrakech", coords: [31.6295, -7.9811] },
-      { name: "Fès", coords: [34.0333, -5.0000] },
-      { name: "Chefchaouen", coords: [35.1688, -5.2636] },
-      { name: "Essaouira", coords: [31.5085, -9.7595] },
-      { name: "Merzouga", coords: [31.0994, -4.0127] },
-      { name: "Ouzoud", coords: [32.0167, -6.7167] }
-    ];
-  
-    cities.forEach(city => {
-      L.marker(city.coords)
-        .addTo(map)
-        .bindPopup(`<strong>${city.name}</strong>`);
-    });
-  </script>
-  
+    <div class="exp-hero">
+      <img id="expImg" src="" alt="" />
+      <div class="exp-hero-shadow"></div>
 
-  <script>
-    function sendWhatsApp() {
-    
-      const name = document.querySelector('input[placeholder="Nom complet"]').value;
-      const email = document.querySelector('input[placeholder="Adresse email"]').value;
-      const phone = document.querySelector('input[placeholder="Téléphone / WhatsApp"]').value;
-      const date = document.querySelector('input[type="date"]').value;
-      const adults = document.querySelectorAll('select')[0].value;
-      const children = document.querySelectorAll('select')[1].value;
-      const message = document.querySelector('textarea').value;
-    
-      const destinations = [];
-      document.querySelectorAll('input[name="destinations"]:checked')
-        .forEach(el => destinations.push(el.value));
-    
-      const whatsappMessage = `
-    Bonjour 👋
-    
-    Nouvelle demande de voyage – Hidden Morocco 🌍
-    
-    👤 Nom : ${name}
-    📧 Email : ${email}
-    📱 Téléphone : ${phone}
-    
-    📅 Date : ${date}
-    👨‍👩‍👧 Adultes : ${adults}
-    🧒 Enfants : ${children}
-    
-    📍 Destinations :
-    ${destinations.join(', ')}
-    
-    📝 Message :
-    ${message}
-    `;
-    
-      const phoneNumber = "212771663435";
-      const url = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage);
-      window.open(url, "_blank");
-    }
-    </script>
-    
-  
-</body>
+      <div class="exp-hero-title">
+        <h2 id="expTitle"></h2>
+        <div class="exp-badges">
+          <span id="expDuration" class="exp-badge"></span>
+          <span id="expTiming" class="exp-badge"></span>
+          <span id="expPrice" class="exp-badge exp-badge-price"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-body">
+      <p id="expDesc" class="exp-desc"></p>
+
+      <div class="exp-panels">
+        <div class="exp-panel">
+          <h3>Programme</h3>
+          <ul id="expSchedule" class="exp-ul"></ul>
+        </div>
+
+        <div class="exp-panel">
+          <h3>Activités incluses</h3>
+          <ul id="expList" class="exp-ul"></ul>
+        </div>
+      </div>
+
+      <!-- BOOKING CARD -->
+      <div class="book-card">
+        <div class="book-top">
+          <div class="book-price">
+            <span class="book-price-label">Prix</span>
+            <strong id="bookBasePrice">—</strong>
+          </div>
+        </div>
+
+        <div class="book-title" id="bookTitleMini">—</div>
+
+        <div class="book-row">
+          <label class="book-label">Adultes</label>
+          <div class="qty">
+            <button type="button" class="qty-btn" onclick="qtyChange('adults',-1)">−</button>
+            <input id="qtyAdults" type="number" value="1" min="1" readonly>
+            <button type="button" class="qty-btn" onclick="qtyChange('adults',1)">+</button>
+          </div>
+        </div>
+
+        <div class="book-row">
+          <label class="book-label">Enfants (3–11)</label>
+          <div class="qty">
+            <button type="button" class="qty-btn" onclick="qtyChange('children',-1)">−</button>
+            <input id="qtyChildren" type="number" value="0" min="0" readonly>
+            <button type="button" class="qty-btn" onclick="qtyChange('children',1)">+</button>
+          </div>
+        </div>
+
+        <div class="book-grid">
+          <div>
+            <label class="book-label">Date</label>
+            <input id="bookDate" class="book-input" type="date">
+          </div>
+
+          <div>
+            <label class="book-label">Heure</label>
+            <select id="bookTime" class="book-input">
+              <option value="">Choisir…</option>
+              <option>08:00</option>
+              <option>08:30</option>
+              <option>09:00</option>
+              <option>10:00</option>
+              <option>15:30</option>
+              <option>16:00</option>
+              <option>17:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="book-total">
+          <span>Total</span>
+          <strong id="bookTotal">—</strong>
+        </div>
+
+        <a id="expBook" class="book-btn" href="#" target="_blank">Réserver sur WhatsApp</a>
+
+        <p class="book-note">* Confirmation via WhatsApp.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
 <footer class="footer">
   <div class="footer-container">
 
@@ -727,4 +819,13 @@
     <p>&copy; 2026 Hidden Morocco. Tous droits réservés. Créé avec passion pour les voyageurs.</p>
   </div>
 </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+
+  
+</body>
+
 </html>
