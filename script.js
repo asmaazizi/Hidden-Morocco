@@ -34,162 +34,139 @@ function lockBodyScroll(lock) {
 /* ---------- Experiences data ---------- */
 const EXPERIENCES = {
   ourika: {
-    title: "Vallée de l’Ourika (Setti Fatma)",
+    title: "Ourika Valley (Setti Fatma)",
     img: "images/Marrakech/ourika_1.png",
-    desc: "Excursion nature à 60 km de Marrakech : vallée verte, villages berbères et cascades de Setti Fatma.",
-    duration: "1 jour",
-    timing: "Départ 08:30 • Retour ~18:00",
+    desc: "Nature excursion 60 km from Marrakech: green valley, Berber villages and Setti Fatma waterfalls.",
+    duration: "1 day",
+    timing: "Departure 08:30 • Return ~18:00",
     price: "45€",
     schedule: [
-      "08:30 – Prise en charge à Marrakech",
-      "10:00 – Route panoramique + arrêt photo",
-      "11:00 – Setti Fatma & marche vers les cascades",
-      "13:30 – Déjeuner (optionnel)",
-      "16:30 – Retour vers Marrakech",
-      "18:00 – Arrivée"
+      "08:30 – Pick up in Marrakech",
+      "10:00 – Scenic drive + photo stop",
+      "11:00 – Setti Fatma & walk to waterfalls",
+      "13:30 – Lunch (optional)",
+      "16:30 – Return to Marrakech",
+      "18:00 – Arrival"
     ],
     activities: [
-      "Villages berbères",
-      "Marche vers les cascades",
-      "Photos panoramiques",
-      "Déjeuner (optionnel)"
+      "Berber villages",
+      "Walk to waterfalls",
+      "Panoramic photos",
+      "Lunch (optional)"
     ]
   },
 
   ouzoud: {
-    title: "Cascades d’Ouzoud",
+    title: "Ouzoud Waterfalls",
     img: "images/Ouzoud/ouzoud-falls.jpg",
-    desc: "Les plus belles cascades du Maroc : nature, randonnée facile et points de vue magnifiques.",
-    duration: "1 jour",
-    timing: "Départ 08:00 • Retour ~19:00",
+    desc: "The most beautiful waterfalls in Morocco: nature, easy hike and magnificent views.",
+    duration: "1 day",
+    timing: "Departure 08:00 • Return ~19:00",
     price: "250 DH",
     schedule: [
-      "08:00 – Départ de Marrakech",
-      "11:00 – Arrivée + balade",
-      "13:00 – Déjeuner (optionnel)",
-      "15:00 – Temps libre / barque (optionnel)",
-      "16:30 – Retour vers Marrakech",
-      "19:00 – Arrivée"
+      "08:00 – Departure from Marrakech",
+      "11:00 – Arrival + walk",
+      "13:00 – Lunch (optional)",
+      "15:00 – Free time / boat ride (optional)",
+      "16:30 – Return to Marrakech",
+      "19:00 – Arrival"
     ],
     activities: [
-      "Randonnée facile",
-      "Observation des macaques",
-      "Barque (optionnel)",
-      "Photos panoramiques"
+      "Easy hike",
+      "Macaque monkeys observation",
+      "Boat ride (optional)",
+      "Panoramic photos"
     ]
   },
 
   agafay: {
-    title: "Désert d’Agafay (Quad + Chameau + Dîner)",
+    title: "Agafay Desert (Quad + Camel + Dinner)",
     img: "images/Marrakech/agafay.jpg",
-    desc: "Aventure en fin d’après-midi : chameau, quad, coucher du soleil et dîner sous tente berbère.",
-    duration: "≈ 6 heures",
-    timing: "Départ 15:30 • Retour ~21:30",
+    desc: "Late afternoon adventure: camel, quad, sunset and dinner in a Berber tent.",
+    duration: "≈ 6 hours",
+    timing: "Departure 15:30 • Return ~21:30",
     price: "190€",
     schedule: [
-      "15:30 – Prise en charge à Marrakech",
-      "17:00 – Arrivée au camp + briefing",
-      "17:30 – Balade en chameau",
-      "18:15 – Quad",
-      "19:00 – Coucher du soleil",
-      "20:00 – Dîner + show",
-      "21:30 – Retour"
+      "15:30 – Pick up in Marrakech",
+      "17:00 – Arrival at camp + briefing",
+      "17:30 – Camel ride",
+      "18:15 – Quad biking",
+      "19:00 – Sunset",
+      "20:00 – Dinner + show",
+      "21:30 – Return"
     ],
     activities: [
-      "Balade en chameau",
-      "Quad",
+      "Camel ride",
+      "Quad biking",
       "Sunset",
-      "Dîner berbère"
+      "Berber dinner"
     ]
   },
 
   imlil: {
     title: "Imlil & Atlas",
     img: "images/Marrakech/imlil_1.jpg",
-    desc: "Journée montagne : randonnée, villages amazighs et panoramas sur le Toubkal.",
-    duration: "1 jour",
-    timing: "Départ 08:00 • Retour ~18:00",
-    price: "Sur demande",
+    desc: "Mountain day: hiking, Amazigh villages and panoramas of Toubkal.",
+    duration: "1 day",
+    timing: "Departure 08:00 • Return ~18:00",
+    price: "On request",
     schedule: [
-      "08:00 – Départ Marrakech",
-      "10:00 – Arrivée Imlil",
-      "Randonnée + villages",
-      "16:30 – Retour",
-      "18:00 – Arrivée"
+      "08:00 – Departure from Marrakech",
+      "10:00 – Arrival in Imlil",
+      "Hike + villages",
+      "16:30 – Return",
+      "18:00 – Arrival"
     ],
     activities: [
-      "Randonnée",
-      "Villages amazighs",
-      "Panoramas Atlas"
+      "Hiking",
+      "Amazigh villages",
+      "Atlas Panoramas"
     ]
   },
 
   takerkoust: {
-    title: "Lac Lalla Takerkoust",
+    title: "Lalla Takerkoust Lake",
     img: "images/Marrakech/lac-lala-takerkoust.webp",
-    desc: "Sortie détente : lac, nature et activités outdoor selon la formule.",
-    duration: "Demi-journée",
-    timing: "Matin ou après-midi",
-    price: "Sur demande",
+    desc: "Relaxing outing: lake, nature and outdoor activities depending on the package.",
+    duration: "Half-day",
+    timing: "Morning or afternoon",
+    price: "On request",
     schedule: [
-      "Option matin ou après-midi",
-      "Temps libre au lac",
-      "Activités selon la formule"
+      "Morning or afternoon option",
+      "Free time at the lake",
+      "Activities depending on package"
     ],
     activities: [
-      "Balade au bord du lac",
-      "Détente",
-      "Quad (optionnel)"
+      "Walk by the lake",
+      "Relaxation",
+      "Quad (optional)"
     ]
   },
 
   ballon: {
-    title: "Montgolfière au lever du soleil",
+    title: "Sunrise Hot Air Balloon",
     img: "images/Marrakech/montgolfiere.webp",
-    desc: "Vol sunrise + petit-déjeuner berbère après l’atterrissage.",
-    duration: "≈ 4–5 heures",
-    timing: "Départ ~2h avant sunrise",
+    desc: "Sunrise flight + Berber breakfast after landing.",
+    duration: "≈ 4–5 hours",
+    timing: "Departure ~2h before sunrise",
     price: "177€",
     schedule: [
-      "Pick-up (2h avant sunrise)",
-      "Préparation du ballon",
-      "Vol 40–60 min (météo)",
-      "Petit-déjeuner berbère",
-      "Retour hôtel"
+      "Pick-up (2h before sunrise)",
+      "Balloon preparation",
+      "Flight 40–60 min (weather)",
+      "Berber breakfast",
+      "Return to hotel"
     ],
     activities: [
-      "Vol",
-      "Lever du soleil",
-      "Petit-déjeuner",
-      "Certificat (selon formule)"
+      "Flight",
+      "Sunrise",
+      "Breakfast",
+      "Certificate (depending on package)"
     ]
   }
 };
 
-/* ---------- Swiper: Experiences Marrakech ---------- */
-function initExpSwiperMarrakech() {
-  const el = document.querySelector(".expSwiper-marrakech");
-  if (!el) return;
-
-  if (expSwiperMarrakech) {
-    expSwiperMarrakech.update();
-    return;
-  }
-
-  expSwiperMarrakech = new Swiper(".expSwiper-marrakech", {
-    slidesPerView: "auto",
-    spaceBetween: 16,
-    freeMode: true,
-    navigation: {
-      nextEl: ".marr-exp-next",
-      prevEl: ".marr-exp-prev"
-    },
-    pagination: {
-      el: ".marr-exp-pagination",
-      clickable: true
-    }
-  });
-}
+/* ---------- CSS Accordion Experience Marrakech (No JS required) ---------- */
 
 /* ---------- Destination Modals ---------- */
 window.openModal = function (city) {
@@ -217,9 +194,7 @@ window.openModal = function (city) {
     });
   }
 
-  if (city === "marrakech") {
-    setTimeout(initExpSwiperMarrakech, 80);
-  }
+  // removed marrakech swiper override
 };
 
 window.closeModal = function (city) {
@@ -266,9 +241,9 @@ function initMap() {
 
 /* ---------- Travel form => WhatsApp ---------- */
 window.sendWhatsApp = function () {
-  const name = document.querySelector('input[placeholder="Nom complet"]')?.value || "";
-  const email = document.querySelector('input[placeholder="Adresse email"]')?.value || "";
-  const phone = document.querySelector('input[placeholder="Téléphone / WhatsApp"]')?.value || "";
+  const name = document.querySelector('input[placeholder="Full Name"]')?.value || "";
+  const email = document.querySelector('input[placeholder="Email Address"]')?.value || "";
+  const phone = document.querySelector('input[placeholder="Phone / WhatsApp"]')?.value || "";
   const date = document.querySelector(".travel-form input[type='date']")?.value || "";
 
   const selects = document.querySelectorAll(".travel-form select");
@@ -276,19 +251,19 @@ window.sendWhatsApp = function () {
   const children = selects[1]?.value || "";
   const message = document.querySelector(".travel-form textarea")?.value || "";
 
-  const whatsappMessage = `Bonjour 👋
+  const whatsappMessage = `Hello 👋
 
-Nouvelle demande de voyage – Hidden Morocco 🌍
+New travel request – Hidden Morocco 🌍
 
-👤 Nom : ${name}
-📧 Email : ${email}
-📱 Téléphone : ${phone}
+👤 Name: ${name}
+📧 Email: ${email}
+📱 Phone: ${phone}
 
-📅 Date : ${date}
-👨‍👩‍👧 Adultes : ${adults}
-🧒 Enfants : ${children}
+📅 Date: ${date}
+👨‍👩‍👧 Adults: ${adults}
+🧒 Children: ${children}
 
-📝 Message :
+📝 Message:
 ${message}`;
 
   window.open(
@@ -337,16 +312,16 @@ window.bookNow = function () {
   const adults = document.getElementById("qtyAdults")?.value || "1";
   const children = document.getElementById("qtyChildren")?.value || "0";
 
-  const text = `Bonjour 👋
-Je souhaite réserver :
+  const text = `Hello 👋
+I would like to book:
 
-✅ Expérience : ${exp.title}
-📅 Date : ${date}
-🕒 Heure : ${time}
-👤 Adultes : ${adults}
-🧒 Enfants : ${children}
+✅ Experience: ${exp.title}
+📅 Date: ${date}
+🕒 Time: ${time}
+👤 Adults: ${adults}
+🧒 Children: ${children}
 
-Merci !`;
+Thank you!`;
 
   window.open(
     `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
@@ -452,20 +427,6 @@ document.addEventListener("click", (e) => {
 
 /* ---------- On load ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  initMap(); // يرجّع الخريطة تبان
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  // طيّ الصورة فالمودال ملي كنscrolli
-  const sheet = document.querySelector(".exp-sheet");
-  const body = document.querySelector(".exp-body");
-
-  if (sheet && body) {
-    body.addEventListener("scroll", () => {
-      if (body.scrollTop > 40) sheet.classList.add("is-scrolled");
-      else sheet.classList.remove("is-scrolled");
-    });
-  }
-
+  initMap(); 
 });
 
