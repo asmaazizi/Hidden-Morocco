@@ -422,7 +422,7 @@ window.closeExp = function () {
   lockBodyScroll(false);
 };
 
-/* ---------- Close modals with ESC ---------- */
+/* ---------- Close modals with ESC & Outside Click ---------- */
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Escape") return;
 
@@ -441,6 +441,14 @@ document.addEventListener("keydown", (e) => {
     }
   });
 });
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal")) {
+    e.target.style.display = "none";
+    lockBodyScroll(false);
+  }
+});
+
 
 /* ---------- On load ---------- */
 document.addEventListener("DOMContentLoaded", () => {

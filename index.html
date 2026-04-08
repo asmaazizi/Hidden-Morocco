@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slider.css">
     <link rel="stylesheet" href="exp.css">
-
+    <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
     rel="stylesheet">
@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
 
 </head>
 
@@ -208,6 +207,78 @@
         </div>
       </div>
 
+      <!-- Ouarzazate -->
+      <div class="card">
+        <img src="images/Ouarzazat/ouarzazat11.jpg" alt="Ouarzazate">
+        <div class="card-content">
+          <h3>Ouarzazate</h3>
+          <p>La porte du désert et du cinéma.</p>
+          <span class="price">Dès 380 DH</span>
+          <button onclick="openModal('ouarzazate')">Voir plus</button>
+        </div>
+      </div>
+      <div id="modal-ouarzazate" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('ouarzazate')">&times;</span>
+          <h2>Ouarzazate</h2>
+          <div class="swiper mySwiper-ouarzazate">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat1.jpeg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat2.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat3.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat4.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat5.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat6.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat12.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat8.jpg"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat9.webp"></div>
+              <div class="swiper-slide"><img src="images/Ouarzazat/ouarzazat10.png"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <p>Ouarzazate, surnommée la « porte du désert », est une ville envoûtante aux pieds du Haut Atlas. Connue pour ses kasbahs emblématiques comme Aït Ben Haddou (classée au patrimoine mondial de l'UNESCO), ses vastes paysages désertiques et ses plateaux de cinéma mondialement célèbres, elle est le point de départ idéal pour explorer le Sahara et la vallée du Drâa.</p>
+          <div class="travel-info">
+            <h3 class="travel-title">Comment voyager vers Ouarzazate</h3>
+            <div class="travel-cards">
+              <div class="travel-item">
+                <span>Avion</span>
+                <p>Aéroport de Ouarzazate (OZZ) – vols nationaux et internationaux</p>
+              </div>
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>CTM & Supratours depuis Marrakech via les montagnes</p>
+              </div>
+              <div class="travel-item">
+                <span>Voiture</span>
+                <p>Route panoramique via le col de Tizi n'Tichka (N9)</p>
+              </div>
+            </div>
+          </div>
+          <div class="activities-luxury">
+            <h3 class="section-title">Expériences à vivre à Ouarzazate</h3>
+            <ul class="activities-list">
+              <li>
+                <h4>Visite des studios de cinéma</h4>
+                <p>Découvrez les décors grandioses de films hollywoodiens célèbres comme Gladiator.</p>
+              </li>
+              <li>
+                <h4>Ksar d'Aït Ben Haddou</h4>
+                <p>Explorez ce joyau architectural berbère classé au patrimoine mondial de l'UNESCO.</p>
+              </li>
+              <li>
+                <h4>Oasis de Fint</h4>
+                <p>Détendez-vous dans cette vallée verdoyante nichée au cœur du paysage aride.</p>
+              </li>
+              <li>
+                <h4>Découverte de la Kasbah de Taourirt</h4>
+                <p>Plongez dans l'histoire locale en visitant l'ancienne résidence du Glaoui.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <!-- Merzouga -->
       <div class="card">
@@ -444,86 +515,7 @@
       </div>
     </div>
 
-    <!-- Ouzoud -->
-    <div class="card">
-      <img src="images/Ouzoud/ouzoud-falls.jpg" alt="Ouzoud">
-      <div class="card-content">
-        <h3>Ouzoud</h3>
-        <p>Les plus belles cascades du Maroc.</p>
-        <span class="price">Dès 250 DH</span>
-        <button onclick="openModal('ouzoud')">Voir plus</button>
-      </div>
-    </div>
-    <div id="modal-ouzoud" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('ouzoud')">&times;</span>
-        <h2>Ouzoud</h2>
-        <div class="swiper mySwiper-ouzoud">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_1.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_2.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_3.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_4.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_5.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_6.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_7.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_8.jpg"></div>
-            <div class="swiper-slide"><img src="images/Ouzoud/ouzoud_9.jpg"></div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-        <p>Les cascades d'Ouzoud, les plus hautes et les plus belles du Maroc, sont un spectacle naturel
-          époustouflant
-          au cœur du Moyen Atlas. Admirez les chutes d'eau se déverser sur plus de 100 mètres de hauteur,
-          entourées
-          d'oliviers et d'une végétation luxuriante. Randonnez sur les sentiers environnants, observez les
-          macaques de
-          Barbarie en liberté et profitez d'une baignade rafraîchissante dans les bassins naturels. Une
-          excursion
-          incontournable pour les amoureux de la nature.</p>
-        <div class="travel-info">
-          <h3 class="travel-title">Comment voyager vers Ouzoud</h3>
-          <div class="travel-cards">
-            <div class="travel-item">
-              <span>Excursion</span>
-              <p>Excursion d'une journée depuis Marrakech</p>
-            </div>
-            <div class="travel-item">
-              <span>Voiture</span>
-              <p>2h30 de route depuis Marrakech</p>
-            </div>
-            <div class="travel-item">
-              <span>Grand Taxi</span>
-              <p>Disponible depuis la gare routière</p>
-            </div>
-          </div>
-        </div>
-        <div class="activities-luxury">
-          <h3 class="section-title">Expériences à vivre à Ouzoud</h3>
-          <ul class="activities-list">
-            <li>
-              <h4>Balade en bateau</h4>
-              <p>Approchez-vous au plus près des chutes d'eau à bord de petits bateaux traditionnels.</p>
-            </li>
-            <li>
-              <h4>Rencontre avec les singes</h4>
-              <p>Observez les macaques de Barbarie qui jouent librement dans les arbres autour des chutes.</p>
-            </li>
-            <li>
-              <h4>Randonnée dans l'oliveraie</h4>
-              <p>Explorez les sentiers ombragés par des oliviers centenaires avec vue sur la vallée.</p>
-            </li>
-            <li>
-              <h4>Déjeuner avec vue panoramique</h4>
-              <p>Savourez un tajine berbère dans l'un des petits restaurants surplombant les cascades.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+  
     <!-- Fès -->
     <div class="card">
       <img src="images/Fes/Fes.jpg" alt="Fès">
@@ -644,6 +636,11 @@
           <label class="dest-card">
             <input type="checkbox" name="destinations" value="Marrakech">
             <span>Marrakech</span>
+          </label>
+      
+          <label class="dest-card">
+            <input type="checkbox" name="destinations" value="Ouarzazate">
+            <span>Ouarzazate</span>
           </label>
       
           <label class="dest-card">
