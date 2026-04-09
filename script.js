@@ -80,27 +80,67 @@ const EXPERIENCES = {
   },
 
   agafay: {
-    title: "Agafay Desert (Quad + Camel + Dinner)",
+    title: "Agafay Desert (Quad, Camel & Dinner)",
     img: "images/Marrakech/agafay.jpg",
-    desc: "Late afternoon adventure: camel, quad, sunset and dinner in a Berber tent.",
+    desc: `<strong>The Ultimate Agafay Desert Escape: Quad Biking, Camel Trek & Dinner Show</strong><br><br>
+Leave the bustling streets of Marrakech behind for an unforgettable, action-packed getaway in the mesmerizing Agafay Desert. Experience the perfect blend of high-octane adventure, relaxing pool time, and authentic Moroccan hospitality, culminating in a magical evening under the stars.
+<br><br>
+<strong>Essential Tour Details:</strong><br>
+• The Route : Direct transfer from your Marrakech accommodation to the heart of the Agafay Desert.<br>
+• Pick-up Time: 03:30 PM (Afternoon departure)<br>
+• Total Duration: Approximately 6 Hours<br><br>
+
+<strong>What’s Included in Your Package:</strong><br>
+✔️ Round-trip, door-to-door transfers in a climate-controlled 4x4 or minivan.<br>
+✔️ Accompaniment by a friendly, English-speaking guide/driver.<br>
+✔️ Fully equipped and guided ATV/Quad biking session.<br>
+✔️ Traditional camel trekking experience in nomadic attire.<br>
+✔️ Authentic Moroccan dinner accompanied by live entertainment.<br>
+✔️ Complimentary access to our refreshing desert swimming pool.<br><br>
+
+<strong>What’s Not Included:</strong><br>
+❌ Personal purchases, extra beverages, or optional gratuities.<br><br>
+
+<strong>What to Expect on Your Journey:</strong><br>
+Your adventure begins with a convenient hotel pickup at 3:30 PM, whisking you away to our desert base camp. After meeting your experienced crew and gearing up, your desert story unfolds:<br><br>
+
+<strong>The Pool & Camel Trek</strong> : Take a dip in our refreshing swimming pool to cool off. Then, embrace the rhythm of the desert with a peaceful camel ride. Feel the gentle sway of your camel as you soak in the panoramic views of the golden landscape dressed in traditional nomadic attire.<br><br>
+
+<strong>The Quad Adventure:</strong> Kick things into high gear! Hop on a robust ATV and race through Agafay’s rugged, rocky terrain. Feel the adrenaline rush as you find the ultimate vantage point to watch the sun dip below the horizon.<br><br>
+
+<strong>The Sunset & Dinner Show:</strong> As the sky lights up with vibrant sunset hues, relax around a warm fire. Finish your night seated under a traditional Berber tent, enjoying a feast of aromatic Moroccan cuisine—succulent grilled meats and rich spices—while soaking in the tranquil desert ambiance.<br><br>
+
+<strong>Tour Highlights:</strong><br>
+🏜️ Off-Road Thrills: Zoom through stunning, untamed desert landscapes on an exhilarating quad bike ride.<br>
+🐪 Cultural Immersion : Step into Moroccan culture with a memorable camel ride.<br>
+🌅 Golden Hour Magic: Witness a breathtaking desert sunset, watching the sky paint itself in vibrant colors far away from city lights.<br>
+🍲 Authentic Berber Feast: Indulge in mouthwatering traditional dishes and aromatic spices under a beautiful Berber tent.<br>
+✨ Starlit Serenity: Escape the hustle of Marrakech and find true peace in the vast, tranquil beauty of the Agafay wilderness.<br><br>
+
+<strong>Frequently Asked Questions (FAQs):</strong><br>
+<strong>Q: Do I need to be an experienced driver to ride the quads?</strong><br>
+A: Not at all! Our expert instructors will give you a full safety briefing and ensure you're totally confident on the ATV before hitting the desert trails.<br><br>
+<strong>Q: Is this excursion kid-friendly?</strong><br>
+A: Absolutely. Children are more than welcome to join the camel trek and can ride safely as passengers on the quad bikes alongside a responsible adult.<br><br>
+<strong>Q: What is the best dress code for this desert trip?</strong><br>
+A: Opt for comfortable, casual clothes and closed-toe shoes for the rides. We also highly recommend bringing sunglasses, sun protection, and a light jacket or sweater since the desert cools down quickly after sunset.<br><br>
+<strong>Q: Do I need to pay extra for the meal?</strong><br>
+A: No, your mouthwatering Berber dinner and the evening entertainment are completely covered in your booking price.<br><br>
+<strong>Q: Do you cater to vegetarians or people with specific food allergies?</strong><br>
+A: Yes, we happily accommodate special dietary needs. Just inform us when booking, and our chefs will prepare a customized, delicious menu for you.<br><br>
+<strong>Q: What is the total duration of the trip?</strong><br>
+A: Expect the entire adventure to last around 6 hours. This covers your transport, pool time, all the riding activities, and the dinner experience.<br><br>
+<strong>Q: Will there be a huge crowd on the tour?</strong><br>
+A: We deliberately keep our groups small and intimate. This ensures you get a personalized, safe, and premium experience without feeling rushed.<br><br>
+<strong>Q: How do we get to the Agafay Desert?</strong><br>
+A: We take care of all the driving! You’ll be picked up and dropped off right at your hotel or riad in a modern, comfortable vehicle.<br><br>
+<strong>Q: Do I need to be highly physically fit for this?</strong><br>
+A: This excursion is easygoing and crafted to be accessible for almost everyone. If you have any specific physical limitations, just drop us a message beforehand so we can ensure your comfort!`,
     duration: "≈ 6 hours",
-    timing: "Departure 15:30 • Return ~21:30",
-    price: "190€",
-    schedule: [
-      "15:30 – Pick up in Marrakech",
-      "17:00 – Arrival at camp + briefing",
-      "17:30 – Camel ride",
-      "18:15 – Quad biking",
-      "19:00 – Sunset",
-      "20:00 – Dinner + show",
-      "21:30 – Return"
-    ],
-    activities: [
-      "Camel ride",
-      "Quad biking",
-      "Sunset",
-      "Berber dinner"
-    ]
+    timing: "Departure 15:30",
+    price: "195 EUR",
+    schedule: [],
+    activities: []
   },
 
   imlil: {
@@ -144,25 +184,52 @@ const EXPERIENCES = {
   },
 
   ballon: {
-    title: "Sunrise Hot Air Balloon",
+    title: "Hot Air Balloon Flight",
     img: "images/Marrakech/montgolfiere.webp",
-    desc: "Sunrise flight + Berber breakfast after landing.",
-    duration: "≈ 4–5 hours",
-    timing: "Departure ~2h before sunrise",
-    price: "177€",
-    schedule: [
-      "Pick-up (2h before sunrise)",
-      "Balloon preparation",
-      "Flight 40–60 min (weather)",
-      "Berber breakfast",
-      "Return to hotel"
-    ],
-    activities: [
-      "Flight",
-      "Sunrise",
-      "Breakfast",
-      "Certificate (depending on package)"
-    ]
+    desc: `<strong>Majestic Sunrise Flight: Marrakech Hot Air Balloon & Atlas Mountains Adventure</strong><br><br>
+Elevate your Marrakech experience—literally. Rise before the sun and take to the skies for a breathtaking hot air balloon flight over the region's stunning landscapes. Float peacefully above crimson desert terrain, lush palm groves, and traditional villages, all set against the awe-inspiring backdrop of the majestic High Atlas Mountains.
+<br><br>
+<strong>Essential Tour Details:</strong><br>
+• The Route: Marrakech to the skies above the High Atlas foothills.<br>
+• Pick-up Time: Approximately 2 hours before sunrise (Exact time will be confirmed prior to your flight).<br>
+• Experience Type: Small group, premium guided flight.<br><br>
+
+<strong>What’s Included in Your Package:</strong><br>
+✔️ Seamless round-trip transportation (hotel pick-up and drop-off).<br>
+✔️ A serene, small-group hot air balloon flight with a seasoned pilot.<br>
+✔️ Live, engaging commentary during the flight.<br>
+✔️ Traditional Berber breakfast served in an authentic Moroccan tent.<br>
+✔️ Hot beverages (coffee, tea) and soft drinks.<br>
+✔️ Personalized commemorative flight certificate.<br>
+✔️ Comprehensive insurance for all passengers and their belongings.<br><br>
+
+<strong>What to Expect on Your Journey:</strong><br>
+Your morning begins with a hassle-free pickup from your accommodation in the early hours. We handle all the logistics so you can focus on the experience. Upon arriving at the launch site, watch the balloons inflate before stepping into the basket.<br><br>
+As you gently ascend, the sun will begin to rise, painting the sky in vibrant morning hues. You'll enjoy a serene, guided flight with panoramic views that showcase the striking contrast between the dusty red plains, green oases, and the towering High Atlas peaks. After a smooth landing, celebrate your adventure with a freshly prepared, traditional Berber breakfast under a nomadic tent before heading back to the city.<br><br>
+
+<strong>Tour Highlights:</strong><br>
+🎈 Sunrise Magic: Watch the world wake up from the best vantage point possible as you float gracefully into the dawn.<br>
+⛰️ Unrivaled Panoramas: Marvel at unobstructed, birds-eye views of the sprawling Marrakech landscapes and the majestic High Atlas Mountains.<br>
+🥞 Cultural Breakfast: Refuel after your flight with a delicious, authentic Berber breakfast in a traditional setting.<br>
+📜 Commemorative Keepsake: Take home a personalized flight certificate to remember your time in the Moroccan skies.<br>
+🚐 VIP Convenience : Enjoy effortless booking and comfortable, door-to-door transfers.<br><br>
+
+<strong>Logistics & Frequently Asked Questions (FAQs):</strong><br>
+<strong>Q: How do I arrange my pick-up?</strong><br>
+A: It’s effortless! Simply provide the name of your Marrakech hotel or riad when booking. If your accommodation is located in a pedestrian-only zone (like deep in the Medina), we will coordinate the nearest accessible meeting point for you.<br><br>
+<strong>Q: When exactly will I be picked up?</strong><br>
+A: Since sunrise times change throughout the year, our starting time shifts accordingly. We will contact you directly with your exact pick-up time (generally about 2 hours before dawn).<br><br>
+<strong>Q: Is it cold up there? What should I wear?</strong><br>
+A: The early morning air can be quite crisp, especially before the sun comes up. We highly recommend dressing in layers so you can stay warm before the flight and comfortably take off a jacket once the sun is shining. Closed-toe shoes are also recommended for the launch and landing sites.<br><br>
+<strong>Q: Is it scary or turbulent?</strong><br>
+A: Not at all! Hot air ballooning is incredibly peaceful and smooth. Because you move with the wind, there is virtually no sensation of movement or turbulence, making it a very serene experience.<br><br>
+<strong>Q: Are my belongings safe?</strong><br>
+A: Yes, your package includes comprehensive insurance for both you and your personal belongings, though we recommend bringing only the essentials (like your camera or phone) for the flight!`,
+    duration: "Sunrise",
+    timing: "Early Morning (2h before sunrise)",
+    price: "178 EUR",
+    schedule: [],
+    activities: []
   }
 };
 
@@ -308,7 +375,6 @@ window.bookNow = function () {
   const exp = EXPERIENCES[CURRENT_EXP_KEY];
 
   const date = document.getElementById("bookDate")?.value || "—";
-  const time = document.getElementById("bookTime")?.value || "—";
   const adults = document.getElementById("qtyAdults")?.value || "1";
   const children = document.getElementById("qtyChildren")?.value || "0";
 
@@ -317,7 +383,6 @@ I would like to book:
 
 ✅ Experience: ${exp.title}
 📅 Date: ${date}
-🕒 Time: ${time}
 👤 Adults: ${adults}
 🧒 Children: ${children}
 
@@ -337,33 +402,31 @@ window.openExp = function (key) {
 
   // Fill hero
   document.getElementById("expTitle").textContent = exp.title;
-  document.getElementById("expDesc").textContent = exp.desc;
+  document.getElementById("expDesc").innerHTML = exp.desc;
 
   const img = document.getElementById("expImg");
   img.src = exp.img;
   img.alt = exp.title;
 
   document.getElementById("expDuration").textContent = "⏱ " + exp.duration;
+
+  const expSchedule = document.getElementById("expSchedule");
+  if (exp.schedule && exp.schedule.length > 0) {
+    expSchedule.parentElement.style.display = "block";
+    expSchedule.innerHTML = exp.schedule.map((s) => `<li>${s}</li>`).join("");
+  } else {
+    expSchedule.parentElement.style.display = "none";
+  }
+
+  const expList = document.getElementById("expList");
+  if (exp.activities && exp.activities.length > 0) {
+    expList.parentElement.style.display = "block";
+    expList.innerHTML = exp.activities.map((a) => `<li>${a}</li>`).join("");
+  } else {
+    expList.parentElement.style.display = "none";
+  }
   document.getElementById("expTiming").textContent = "🕒 " + exp.timing;
   document.getElementById("expPrice").textContent = "💰 " + exp.price;
-
-  // Programme
-  const sch = document.getElementById("expSchedule");
-  sch.innerHTML = "";
-  exp.schedule.forEach((x) => {
-    const li = document.createElement("li");
-    li.textContent = x;
-    sch.appendChild(li);
-  });
-
-  // Activités
-  const ul = document.getElementById("expList");
-  ul.innerHTML = "";
-  exp.activities.forEach((x) => {
-    const li = document.createElement("li");
-    li.textContent = x;
-    ul.appendChild(li);
-  });
 
   // Booking card
   const basePriceEl = document.getElementById("bookBasePrice");
@@ -378,9 +441,7 @@ window.openExp = function (key) {
   if (qc) qc.value = 0;
 
   const bd = document.getElementById("bookDate");
-  const bt = document.getElementById("bookTime");
   if (bd) bd.value = "";
-  if (bt) bt.value = "";
 
   calcTotal();
 
