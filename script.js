@@ -425,7 +425,7 @@ const EXPERIENCES = {
     timing: "Departure 08:00 AM",
     price: "On request",
     gallery: [
-      "images/Ouarzazat/ouarzazat_1.jpg",
+      "images/Ouarzazat/ouarzazat1.jpeg",
       "images/Merzouga/merzouga_1.jpg",
       "images/Fes/fes_4.jpg",
       "images/Chfchaouen/chechaouen_1.jpg",
@@ -444,7 +444,7 @@ const EXPERIENCES = {
       {
         dot: 1,
         title: "Day 1: Marrakech › Ait Benhaddou › Ouarzazate › Valley of Roses",
-        img: "images/Ouarzazat/ouarzazat_1.jpg",
+        img: "images/Ouarzazat/ouarzazat1.jpeg",
         items: [
           "Depart from Marrakech at 8:00 AM, ascending the Tizi n'Tichka pass (2,260m) in the High Atlas Mountains",
           "Marvel at the Berber villages clinging to the hillsides before arriving at Kasbah Ait Benhaddou",
@@ -518,17 +518,23 @@ window.openModal = function (city) {
   const swiperEl = document.querySelector(selector);
 
   if (swiperEl) {
-    new Swiper(selector, {
-      loop: true,
-      navigation: {
-        nextEl: "#modal-" + city + " .swiper-button-next",
-        prevEl: "#modal-" + city + " .swiper-button-prev"
-      },
-      pagination: {
-        el: "#modal-" + city + " .swiper-pagination",
-        clickable: true
-      }
-    });
+    if (!swiperEl.swiper) {
+      new Swiper(selector, {
+        loop: true,
+        observer: true,
+        observeParents: true,
+        navigation: {
+          nextEl: "#modal-" + city + " .swiper-button-next",
+          prevEl: "#modal-" + city + " .swiper-button-prev"
+        },
+        pagination: {
+          el: "#modal-" + city + " .swiper-pagination",
+          clickable: true
+        }
+      });
+    } else {
+      swiperEl.swiper.update();
+    }
   }
 
   // removed marrakech swiper override
@@ -572,7 +578,7 @@ function initMap() {
     { name: "Essaouira", id: "essaouira", coords: [31.5085, -9.7595], img: "images/Essaouira/essaouira_1.jpg", desc: "Atlantic coastal gem with art and Gnaoua music." },
     { name: "Merzouga", id: "merzouga", coords: [31.0994, -4.0127], img: "images/Merzouga/merzouga_1.jpg", desc: "Gateway to the golden Erg Chebbi Sahara dunes." },
     { name: "Ouzoud", id: "ouzoud", coords: [32.0167, -6.7167], img: "images/Ouzoud/ouzoud-falls.jpg", desc: "Spectacular 110m waterfalls amid lush greenery." },
-    { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat_1.jpg", desc: "Hollywood of Africa, gateway to the Sahara." },
+    { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat1.jpeg", desc: "Hollywood of Africa, gateway to the Sahara." },
     { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." }
   ];
 
@@ -958,6 +964,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initMap();
   initScrollReveal();
   initStatCounters();
+
+  // Move all modals to body to prevent transform/z-index stacking context bugs
+  document.querySelectorAll('.modal, .exp-modal').forEach(modal => {
+    document.body.appendChild(modal);
+  });
 });
 
 /* ---------- Scroll Reveal Animation ---------- */

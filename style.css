@@ -750,9 +750,11 @@ body {
   }
 
   .modal-content {
-    margin: 20px;
-    padding: 25px;
+    margin: 20px auto;
+    width: 95%;
+    padding: 20px;
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   .swiper {
@@ -1576,7 +1578,7 @@ body {
 
 .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 .booking-section {
   padding: 90px 20px;
