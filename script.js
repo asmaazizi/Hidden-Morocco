@@ -82,65 +82,67 @@ const EXPERIENCES = {
   agafay: {
     title: "Agafay Desert (Quad, Camel & Dinner)",
     img: "images/Marrakech/agafay.jpg",
-    desc: `<strong>The Ultimate Agafay Desert Escape: Quad Biking, Camel Trek & Dinner Show</strong><br><br>
-Leave the bustling streets of Marrakech behind for an unforgettable, action-packed getaway in the mesmerizing Agafay Desert. Experience the perfect blend of high-octane adventure, relaxing pool time, and authentic Moroccan hospitality, culminating in a magical evening under the stars.
-<br><br>
-<strong>Essential Tour Details:</strong><br>
-• The Route : Direct transfer from your Marrakech accommodation to the heart of the Agafay Desert.<br>
-• Pick-up Time: 03:30 PM (Afternoon departure)<br>
-• Total Duration: Approximately 6 Hours<br><br>
-
-<strong>What’s Included in Your Package:</strong><br>
-✔️ Round-trip, door-to-door transfers in a climate-controlled 4x4 or minivan.<br>
-✔️ Accompaniment by a friendly, English-speaking guide/driver.<br>
-✔️ Fully equipped and guided ATV/Quad biking session.<br>
-✔️ Traditional camel trekking experience in nomadic attire.<br>
-✔️ Authentic Moroccan dinner accompanied by live entertainment.<br>
-✔️ Complimentary access to our refreshing desert swimming pool.<br><br>
-
-<strong>What’s Not Included:</strong><br>
-❌ Personal purchases, extra beverages, or optional gratuities.<br><br>
-
-<strong>What to Expect on Your Journey:</strong><br>
-Your adventure begins with a convenient hotel pickup at 3:30 PM, whisking you away to our desert base camp. After meeting your experienced crew and gearing up, your desert story unfolds:<br><br>
-
-<strong>The Pool & Camel Trek</strong> : Take a dip in our refreshing swimming pool to cool off. Then, embrace the rhythm of the desert with a peaceful camel ride. Feel the gentle sway of your camel as you soak in the panoramic views of the golden landscape dressed in traditional nomadic attire.<br><br>
-
-<strong>The Quad Adventure:</strong> Kick things into high gear! Hop on a robust ATV and race through Agafay’s rugged, rocky terrain. Feel the adrenaline rush as you find the ultimate vantage point to watch the sun dip below the horizon.<br><br>
-
-<strong>The Sunset & Dinner Show:</strong> As the sky lights up with vibrant sunset hues, relax around a warm fire. Finish your night seated under a traditional Berber tent, enjoying a feast of aromatic Moroccan cuisine—succulent grilled meats and rich spices—while soaking in the tranquil desert ambiance.<br><br>
-
-<strong>Tour Highlights:</strong><br>
-🏜️ Off-Road Thrills: Zoom through stunning, untamed desert landscapes on an exhilarating quad bike ride.<br>
-🐪 Cultural Immersion : Step into Moroccan culture with a memorable camel ride.<br>
-🌅 Golden Hour Magic: Witness a breathtaking desert sunset, watching the sky paint itself in vibrant colors far away from city lights.<br>
-🍲 Authentic Berber Feast: Indulge in mouthwatering traditional dishes and aromatic spices under a beautiful Berber tent.<br>
-✨ Starlit Serenity: Escape the hustle of Marrakech and find true peace in the vast, tranquil beauty of the Agafay wilderness.<br><br>
-
-<strong>Frequently Asked Questions (FAQs):</strong><br>
-<strong>Q: Do I need to be an experienced driver to ride the quads?</strong><br>
-A: Not at all! Our expert instructors will give you a full safety briefing and ensure you're totally confident on the ATV before hitting the desert trails.<br><br>
-<strong>Q: Is this excursion kid-friendly?</strong><br>
-A: Absolutely. Children are more than welcome to join the camel trek and can ride safely as passengers on the quad bikes alongside a responsible adult.<br><br>
-<strong>Q: What is the best dress code for this desert trip?</strong><br>
-A: Opt for comfortable, casual clothes and closed-toe shoes for the rides. We also highly recommend bringing sunglasses, sun protection, and a light jacket or sweater since the desert cools down quickly after sunset.<br><br>
-<strong>Q: Do I need to pay extra for the meal?</strong><br>
-A: No, your mouthwatering Berber dinner and the evening entertainment are completely covered in your booking price.<br><br>
-<strong>Q: Do you cater to vegetarians or people with specific food allergies?</strong><br>
-A: Yes, we happily accommodate special dietary needs. Just inform us when booking, and our chefs will prepare a customized, delicious menu for you.<br><br>
-<strong>Q: What is the total duration of the trip?</strong><br>
-A: Expect the entire adventure to last around 6 hours. This covers your transport, pool time, all the riding activities, and the dinner experience.<br><br>
-<strong>Q: Will there be a huge crowd on the tour?</strong><br>
-A: We deliberately keep our groups small and intimate. This ensures you get a personalized, safe, and premium experience without feeling rushed.<br><br>
-<strong>Q: How do we get to the Agafay Desert?</strong><br>
-A: We take care of all the driving! You’ll be picked up and dropped off right at your hotel or riad in a modern, comfortable vehicle.<br><br>
-<strong>Q: Do I need to be highly physically fit for this?</strong><br>
-A: This excursion is easygoing and crafted to be accessible for almost everyone. If you have any specific physical limitations, just drop us a message beforehand so we can ensure your comfort!`,
+    desc: "Leave the bustling streets of Marrakech behind for an unforgettable, action-packed getaway in the mesmerizing Agafay Desert. Experience the perfect blend of high-octane adventure, relaxing pool time, and authentic Moroccan hospitality, culminating in a magical evening under the stars.",
     duration: "≈ 6 hours",
     timing: "Departure 15:30",
     price: "195 EUR",
-    schedule: [],
-    activities: []
+    gallery: [
+      "images/Marrakech/agafay.jpg",
+      "images/Marrakech/marrakech_4.webp",
+      "images/Marrakech/marrakrch_9.jpg"
+    ],
+    route: { departure: "Marrakech", arrival: "Agafay Desert" },
+    highlights: [
+      { icon: "fa-solid fa-mountain-sun", title: "Off-Road Thrills", desc: "Zoom through stunning, untamed desert landscapes on an exhilarating quad bike ride." },
+      { icon: "fa-solid fa-camel", title: "Cultural Immersion", desc: "Step into Moroccan culture with a memorable camel ride across the golden dunes." },
+      { icon: "fa-solid fa-sun", title: "Golden Hour Magic", desc: "Witness a breathtaking desert sunset, watching the sky paint itself in vibrant colors far away from city lights." },
+      { icon: "fa-solid fa-bowl-food", title: "Authentic Berber Feast", desc: "Indulge in mouthwatering traditional dishes and aromatic spices under a beautiful Berber tent." },
+      { icon: "fa-solid fa-star", title: "Starlit Serenity", desc: "Escape the hustle of Marrakech and find true peace in the vast, tranquil beauty of the Agafay wilderness." }
+    ],
+    timeline: [
+      {
+        dot: 1,
+        title: "The Pool & Camel Trek",
+        img: "images/Marrakech/agafay.jpg",
+        items: ["Take a dip in our refreshing swimming pool to cool off", "Embrace the rhythm of the desert with a peaceful camel ride", "Feel the gentle sway of your camel in nomadic attire"]
+      },
+      {
+        dot: 2,
+        title: "The Quad Adventure",
+        img: "images/Marrakech/marrakech_4.webp",
+        items: ["Kick things into high gear on a robust ATV", "Race through Agafay’s rugged, rocky terrain", "Find the ultimate vantage point to watch the sunset"]
+      },
+      {
+        dot: 3,
+        title: "The Sunset & Dinner Show",
+        img: "images/Marrakech/marrakrch_9.jpg",
+        items: ["Relax around a warm fire as the sky lights up with vibrant hues", "Enjoy a feast of aromatic Moroccan cuisine under a Berber tent", "Soak in the tranquil desert ambiance with live entertainment"]
+      }
+    ],
+    included: [
+      "Round-trip, door-to-door transfers in a climate-controlled 4x4 or minivan",
+      "Accompaniment by a friendly, English-speaking guide/driver",
+      "Fully equipped and guided ATV/Quad biking session",
+      "Traditional camel trekking experience in nomadic attire",
+      "Authentic Moroccan dinner accompanied by live entertainment",
+      "Complimentary access to our refreshing desert swimming pool"
+    ],
+    excluded: [
+      "Personal purchases",
+      "Extra beverages",
+      "Optional gratuities"
+    ],
+    faqs: [
+      { q: "Do I need to be an experienced driver to ride the quads?", a: "Not at all! Our expert instructors will give you a full safety briefing and ensure you're totally confident before hitting the trails." },
+      { q: "Is this excursion kid-friendly?", a: "Absolutely. Children are more than welcome to join the camel trek and can ride safely as passengers on the quad bikes." },
+      { q: "What is the best dress code?", a: "Opt for comfortable, casual clothes and closed-toe shoes. Bring a light jacket as the desert cools down quickly after sunset." },
+      { q: "Do I need to pay extra for the meal?", a: "No, your mouthwatering Berber dinner and the evening entertainment are completely covered in your booking price." },
+      { q: "Do you cater to vegetarians or food allergies?", a: "Yes, we happily accommodate special dietary needs. Just inform us when booking, and our chefs will prepare a customized menu for you." },
+      { q: "What is the total duration of the trip?", a: "Expect the entire adventure to last around 6 hours. This covers your transport, activities, and the dinner experience." },
+      { q: "Will there be a huge crowd on the tour?", a: "We deliberately keep our groups small and intimate to ensure a personalized, safe, and premium experience." },
+      { q: "How do we get to the Agafay Desert?", a: "We take care of all the driving! You’ll be picked up and dropped off right at your hotel or riad in a modern, comfortable vehicle." },
+      { q: "Do I need to be highly physically fit?", a: "This excursion is easygoing and crafted to be accessible for almost everyone. If you have specific limitations, just let us know beforehand." }
+    ]
   },
 
   imlil: {
@@ -186,50 +188,318 @@ A: This excursion is easygoing and crafted to be accessible for almost everyone.
   ballon: {
     title: "Hot Air Balloon Flight",
     img: "images/Marrakech/montgolfiere.webp",
-    desc: `<strong>Majestic Sunrise Flight: Marrakech Hot Air Balloon & Atlas Mountains Adventure</strong><br><br>
-Elevate your Marrakech experience—literally. Rise before the sun and take to the skies for a breathtaking hot air balloon flight over the region's stunning landscapes. Float peacefully above crimson desert terrain, lush palm groves, and traditional villages, all set against the awe-inspiring backdrop of the majestic High Atlas Mountains.
-<br><br>
-<strong>Essential Tour Details:</strong><br>
-• The Route: Marrakech to the skies above the High Atlas foothills.<br>
-• Pick-up Time: Approximately 2 hours before sunrise (Exact time will be confirmed prior to your flight).<br>
-• Experience Type: Small group, premium guided flight.<br><br>
-
-<strong>What’s Included in Your Package:</strong><br>
-✔️ Seamless round-trip transportation (hotel pick-up and drop-off).<br>
-✔️ A serene, small-group hot air balloon flight with a seasoned pilot.<br>
-✔️ Live, engaging commentary during the flight.<br>
-✔️ Traditional Berber breakfast served in an authentic Moroccan tent.<br>
-✔️ Hot beverages (coffee, tea) and soft drinks.<br>
-✔️ Personalized commemorative flight certificate.<br>
-✔️ Comprehensive insurance for all passengers and their belongings.<br><br>
-
-<strong>What to Expect on Your Journey:</strong><br>
-Your morning begins with a hassle-free pickup from your accommodation in the early hours. We handle all the logistics so you can focus on the experience. Upon arriving at the launch site, watch the balloons inflate before stepping into the basket.<br><br>
-As you gently ascend, the sun will begin to rise, painting the sky in vibrant morning hues. You'll enjoy a serene, guided flight with panoramic views that showcase the striking contrast between the dusty red plains, green oases, and the towering High Atlas peaks. After a smooth landing, celebrate your adventure with a freshly prepared, traditional Berber breakfast under a nomadic tent before heading back to the city.<br><br>
-
-<strong>Tour Highlights:</strong><br>
-🎈 Sunrise Magic: Watch the world wake up from the best vantage point possible as you float gracefully into the dawn.<br>
-⛰️ Unrivaled Panoramas: Marvel at unobstructed, birds-eye views of the sprawling Marrakech landscapes and the majestic High Atlas Mountains.<br>
-🥞 Cultural Breakfast: Refuel after your flight with a delicious, authentic Berber breakfast in a traditional setting.<br>
-📜 Commemorative Keepsake: Take home a personalized flight certificate to remember your time in the Moroccan skies.<br>
-🚐 VIP Convenience : Enjoy effortless booking and comfortable, door-to-door transfers.<br><br>
-
-<strong>Logistics & Frequently Asked Questions (FAQs):</strong><br>
-<strong>Q: How do I arrange my pick-up?</strong><br>
-A: It’s effortless! Simply provide the name of your Marrakech hotel or riad when booking. If your accommodation is located in a pedestrian-only zone (like deep in the Medina), we will coordinate the nearest accessible meeting point for you.<br><br>
-<strong>Q: When exactly will I be picked up?</strong><br>
-A: Since sunrise times change throughout the year, our starting time shifts accordingly. We will contact you directly with your exact pick-up time (generally about 2 hours before dawn).<br><br>
-<strong>Q: Is it cold up there? What should I wear?</strong><br>
-A: The early morning air can be quite crisp, especially before the sun comes up. We highly recommend dressing in layers so you can stay warm before the flight and comfortably take off a jacket once the sun is shining. Closed-toe shoes are also recommended for the launch and landing sites.<br><br>
-<strong>Q: Is it scary or turbulent?</strong><br>
-A: Not at all! Hot air ballooning is incredibly peaceful and smooth. Because you move with the wind, there is virtually no sensation of movement or turbulence, making it a very serene experience.<br><br>
-<strong>Q: Are my belongings safe?</strong><br>
-A: Yes, your package includes comprehensive insurance for both you and your personal belongings, though we recommend bringing only the essentials (like your camera or phone) for the flight!`,
+    desc: "Elevate your Marrakech experience—literally. Rise before the sun and take to the skies for a breathtaking hot air balloon flight over the region's stunning landscapes. Float peacefully above crimson desert terrain, lush palm groves, and traditional villages, all set against the backdrop of the High Atlas Mountains.",
     duration: "Sunrise",
     timing: "Early Morning (2h before sunrise)",
     price: "178 EUR",
-    schedule: [],
-    activities: []
+    gallery: [
+      "images/Marrakech/montgolfiere.webp",
+      "images/Marrakech/marrakech_15.jpg",
+      "images/Marrakech/marrkech_13.jpg"
+    ],
+    route: { departure: "Marrakech", arrival: "Atlas Sky" },
+    highlights: [
+      { icon: "fa-solid fa-cloud", title: "Sunrise Magic", desc: "Watch the world wake up from the best vantage point possible as you float gracefully into the dawn." },
+      { icon: "fa-solid fa-mountain", title: "Unrivaled Panoramas", desc: "Marvel at unobstructed, birds-eye views of the sprawling Marrakech landscapes and the High Atlas Mountains." },
+      { icon: "fa-solid fa-mug-hot", title: "Cultural Breakfast", desc: "Refuel after your flight with a delicious, authentic Berber breakfast in a traditional setting." },
+      { icon: "fa-solid fa-certificate", title: "Commemorative Keepsake", desc: "Take home a personalized flight certificate to remember your time in the Moroccan skies." }
+    ],
+    timeline: [
+      {
+        dot: 1,
+        title: "The Pickup & Preparation",
+        img: "images/Marrakech/montgolfiere.webp",
+        items: ["Hassle-free pickup from your accommodation in the early hours", "Watch the balloons inflate at the launch site", "Safety briefing from your seasoned pilot"]
+      },
+      {
+        dot: 2,
+        title: "The Golden Flight",
+        img: "images/Marrakech/marrakech_15.jpg",
+        items: ["Ascend as the sun begins to rise over the horizon", "Unobstructed bird's-eye views of red plains and oases", "Enjoy live commentary during the flight"]
+      },
+      {
+        dot: 3,
+        title: "Landing & Breakfast",
+        img: "images/Marrakech/marrkech_13.jpg",
+        items: ["Smooth landing followed by a traditional Berber breakfast", "Personalized certificate ceremony", "Comfortable return transfer to your hotel"]
+      }
+    ],
+    included: [
+      "Seamless round-trip transportation (hotel pick-up and drop-off)",
+      "Serene, small-group hot air balloon flight with seasoned pilot",
+      "Live, engaging commentary during the flight",
+      "Traditional Berber breakfast in an authentic nomadic tent",
+      "Personalized commemorative flight certificate",
+      "Comprehensive insurance for all passengers"
+    ],
+    excluded: [
+      "Optional gratuities",
+      "Professional photo packages"
+    ],
+    faqs: [
+      { q: "When exactly will I be picked up?", a: "Since sunrise times change, we confirm the exact time (generally 2h before dawn) prior to your flight." },
+      { q: "Is it cold up there?", a: "The early morning air is crisp. We recommend dressing in layers so you can stay warm before the flight." },
+      { q: "Is it scary or turbulent?", a: "Not at all! Ballooning is incredibly peaceful and smooth as you move with the wind." }
+    ]
+  },
+
+  fes_sahara: {
+    title: "Grand Moroccan Traverse: 4-Day Fes to Marrakech",
+    img: "images/Merzouga/merzouga_1.jpg",
+    desc: "Transform your transit between Morocco's most iconic imperial cities into the adventure of a lifetime. Instead of a simple transfer, embark on a captivating 4-day overland journey from Fes to Marrakech, taking you deep into the heart of the Sahara Desert. This carefully curated private tour blends dramatic landscapes, ancient cultures, and spectacular off-the-beaten-path sightseeing.",
+    duration: "4 Days / 3 Nights",
+    timing: "Departure 07:30 AM",
+    price: "On request",
+    gallery: [
+      "images/Merzouga/merzouga_1.jpg",
+      "images/Fes/fes_3.jpg",
+      "images/rourge.jpg",
+      "images/dads_vally.jpg",
+      "images/merzouga_desert.jpg"
+    ],
+    route: { departure: "Fes", arrival: "Marrakech" },
+    highlights: [
+      { icon: "fa-solid fa-mountain-sun", title: "Alpine Escapes", desc: "Explore Ifrane, the 'Switzerland of Morocco,' and encounter wild macaques in the ancient cedar forests of Azrou." },
+      { icon: "fa-solid fa-sun", title: "Sahara Immersion", desc: "Trek across the golden dunes of Erg Chebbi on camelback during a breathtaking desert sunset." },
+      { icon: "fa-solid fa-star", title: "Night Under the Stars", desc: "Sleep in a traditional Berber desert camp nestled in the tranquil Saharan dunes." },
+      { icon: "fa-solid fa-water", title: "Canyon Wonders", desc: "Walk through the towering, 600-foot-high rock walls of the Todra Gorges." },
+      { icon: "fa-solid fa-landmark", title: "Cinematic History", desc: "Wander through the ancient, mud-brick alleys of Kasbah Ait Benhaddou, a UNESCO World Heritage site famous for Gladiator and Lawrence of Arabia." },
+      { icon: "fa-solid fa-road", title: "Mountain Passes", desc: "Traverse the winding, panoramic roads of the High Atlas Mountains via the famous Tizi N'Tichka pass." }
+    ],
+    timeline: [
+      {
+        dot: 1,
+        title: "Day 1: Fes › Ifrane › Azrou › Midelt › Erfoud › Merzouga",
+        img: "images/Fes/fes_3.jpg",
+        items: [
+          "8:00 AM pickup from your Fes accommodation, heading south into the Middle Atlas Mountains",
+          "Stop in Ifrane, the 'Switzerland of Morocco,' and the cedar forests of Azrou to see Barbary macaques",
+          "Descend through Midelt, then cruise the spectacular Ziz Valley with its palm groves and ancient kasbahs",
+          "Arrive in Merzouga by late afternoon — hotel check-in, relaxing dinner and overnight stay"
+        ]
+      },
+      {
+        dot: 2,
+        title: "Day 2: Merzouga › Rissani › Khamlia › Erg Chebbi Dunes",
+        img: "images/Merzouga/merzouga_1.jpg",
+        items: [
+          "Visit the historic city of Rissani, birthplace of the Alawite dynasty, with its traditional markets",
+          "Experience hypnotic Gnaoua music in the village of Khamlia",
+          "Meet your camel caravan and ride across the golden waves of Erg Chebbi at sunset",
+          "Arrive at your nomad desert camp for Berber drumming, dinner, and stargazing"
+        ]
+      },
+      {
+        dot: 3,
+        title: "Day 3: Erg Chebbi › Merzouga › Todra Gorges › Dades Valley",
+        img: "images/rourge.jpg",
+        items: [
+          "Wake early for a majestic desert sunrise painting the dunes in vibrant colors",
+          "Trek back to Merzouga edge on camelback, then depart toward Erfoud",
+          "Walk through the spectacular Todra Gorges, flanked by massive 600-foot canyon walls",
+          "Continue to Dades Valley, passing the 'Monkey Fingers' rock formations — overnight with dinner & breakfast"
+        ]
+      },
+      {
+        dot: 4,
+        title: "Day 4: Dades Valley › Skoura › Ouarzazate › Ait Benhaddou › Marrakech",
+        img: "images/dads_vally.jpg",
+        items: [
+          "Drive through the Valley of the Roses and Skoura Oasis to Ouarzazate",
+          "Explore the magnificent Kasbah Ait Benhaddou — UNESCO site and Hollywood filming location",
+          "Scenic ascent over the High Atlas via the famous Tizi N'Tichka pass",
+          "Descend into Marrakech, drop-off at your Riad or Hotel"
+        ]
+      }
+    ],
+    included: [
+      "Private, comfortable, air-conditioned 4x4 or minivan with an English-speaking driver/guide",
+      "Door-to-door pick-up from your Fes hotel/Riad and drop-off at your Marrakech hotel/Riad",
+      "3 Nights of accommodation (Hotel in Merzouga, Desert Camp in Erg Chebbi, Hotel in Dades Valley)",
+      "Half-board meals: 3 Dinners and 3 Breakfasts",
+      "Guided sunset and sunrise camel treks in the Erg Chebbi dunes",
+      "Sandboarding activity in the desert"
+    ],
+    excluded: [
+      "Mid-day lunches along the route",
+      "Additional beverages",
+      "Monument or museum entrance fees (if applicable)"
+    ],
+    pricing: [
+      { group: "2", price: "680€" },
+      { group: "3", price: "580€" },
+      { group: "4", price: "490€" },
+      { group: "5", price: "450€" },
+      { group: "6", price: "390€" },
+      { group: "7", price: "380€" },
+      { group: "8 – 10", price: "370€" },
+      { group: "11 – 13", price: "320€" },
+      { group: "14 – 17", price: "310€" }
+    ],
+    pricingUpgrade: "✨ Optional Upgrade: Elevate your Sahara experience to a Deluxe Desert Camp (ensuite tent with private bathroom) for an additional €50 per adult.",
+    faqs: [
+      { q: "Is this a private or shared tour?", a: "This is a fully private tour. Your 4x4 or minivan and driver/guide are exclusively yours for the entire 4-day journey." },
+      { q: "What time does the tour depart?", a: "The tour departs at 07:30 AM with a pick-up directly from your Fes accommodation." },
+      { q: "Can I upgrade the desert camp?", a: "Yes! You can elevate your Sahara experience to a Deluxe Desert Camp (featuring an ensuite tent with a private bathroom) for an additional €50 per adult." },
+      { q: "How long is the camel ride?", a: "The camel trek usually lasts about 1 to 1.5 hours (depending on the season and camp location)." },
+      { q: "Can I skip the camel ride?", a: "Yes, a 4x4 transfer to the camp can be arranged if preferred." },
+      { q: "Is sandboarding included?", a: "Yes, sandboarding is available at the camp and included in the experience." },
+      { q: "Are the bathrooms private at the camp?", a: "Depending on the camp category (standard or luxury), bathrooms may be shared or private." },
+      { q: "What should I bring?", a: "Comfortable clothes, sunglasses, sunscreen, scarf for the desert wind, comfortable shoes, and a small overnight bag." }
+    ]
+  },
+
+  casa_chefchaouen: {
+    title: "The Blue Pearl Escape: 2-Day Casablanca to Chefchaouen",
+    img: "images/Chfchaouen/chefchaoun.jpg",
+    desc: "Leave the hustle and bustle of Casablanca behind for a tranquil, private getaway to one of Morocco's most scenic and enchanting destinations. Nestled high in the rugged Rif Mountains, Chefchaouen—affectionately known as the 'Blue City'—offers a picture-perfect blend of serene vibes, rich history, and captivating local culture.",
+    duration: "2 Days / 1 Night",
+    timing: "Departure 08:30 AM",
+    price: "On request",
+    gallery: [
+      "images/Casablanca/casablanca.png",
+      "images/Chfchaouen/chefchaoun.jpg",
+      "images/Chfchaouen/chechaouen_1.jpg",
+      "images/Chfchaouen/chefchaouen_2.jpg"
+    ],
+    route: { departure: "Casablanca", arrival: "Chefchaouen" },
+    highlights: [
+      { icon: "fa-solid fa-palette", title: "The Blue Labyrinth", desc: "Wander through mesmerizing, winding alleys where every house, staircase, and doorway is painted in calming shades of blue and white." },
+      { icon: "fa-solid fa-fort-awesome", title: "Historic Kasbah", desc: "Explore the 15th-century fortress in the heart of the medina, featuring peaceful Andalusian-style gardens and an Ethnographic Museum." },
+      { icon: "fa-solid fa-store", title: "Artisan Souks", desc: "Mingle with friendly locals and shop for unique regional crafts, from hand-woven carpets and colorful textiles to beautiful pottery." },
+      { icon: "fa-solid fa-mountain", title: "Mountain Serenity", desc: "Breathe in the fresh mountain air at 600 meters altitude, with spectacular views and great walking opportunities." },
+      { icon: "fa-solid fa-user-check", title: "Tailored to You", desc: "Enjoy the comfort and flexibility of a private tour, allowing you to customize your itinerary and explore at your own pace." }
+    ],
+    timeline: [
+      {
+        dot: 1,
+        title: "Day 1: Casablanca to Chefchaouen (Discovering the Blue Medina)",
+        img: "images/Chfchaouen/chefchaoun.jpg",
+        items: [
+          "Morning pick-up from Casablanca, driving north toward the breathtaking Rif Mountains",
+          "Arrive in Chefchaouen — see why its Berber name means 'horns,' referencing the twin mountain peaks",
+          "Wander the vibrant medina, visit the historic Kasbah and Grand Mosque",
+          "Explore endless photography opportunities in the blue-painted alleys",
+          "Peaceful night in a traditional Riad in the heart of the Blue City (Dinner included)"
+        ]
+      },
+      {
+        dot: 2,
+        title: "Day 2: Chefchaouen to Casablanca (Morning Explorations & Return)",
+        img: "images/Chfchaouen/chechaouen_1.jpg",
+        items: [
+          "Traditional Moroccan breakfast at your Riad",
+          "Free time to soak up the atmosphere, snap final photos, or pick up souvenirs",
+          "Afternoon departure for a comfortable, scenic return journey",
+          "Arrive back in Casablanca by ~06:30 PM (Breakfast included)"
+        ]
+      }
+    ],
+    included: [
+      "Private, air-conditioned transportation (4x4 or Minibus) for the full trip",
+      "Professional and friendly English-speaking driver",
+      "1 Night accommodation in a charming, traditional Chefchaouen Riad",
+      "Meals: 1 Dinner and 1 Breakfast at your Riad",
+      "Ample free time to explore the medina and take photos",
+      "Instant booking confirmation"
+    ],
+    excluded: [
+      "Mid-day lunches",
+      "Local tour guide in Chefchaouen (optional — can be arranged upon request)",
+      "Personal expenses and gratuities"
+    ],
+    faqs: [
+      { q: "Is this a private or shared tour?", a: "This is a fully private tour. Your vehicle and driver are exclusively yours for the entire 2-day journey." },
+      { q: "What time does the tour depart?", a: "Please arrive at your pick-up point by 08:00 AM for a prompt departure at 08:30 AM." },
+      { q: "Is this tour family-friendly?", a: "Yes! This tour is suitable for families with children aged 6 and above." },
+      { q: "Can I arrange a local guide in Chefchaouen?", a: "Yes, a local guide can be arranged upon request if you'd like a deeper dive into the city's history." },
+      { q: "What should I bring?", a: "Comfortable walking shoes, a camera, sunscreen, and a light jacket as the mountain air can be cool." }
+    ]
+  },
+
+  marrakech_chefchaouen: {
+    title: "Morocco's Grand Contrast: 4-Day Marrakech to Chefchaouen",
+    img: "images/Chfchaouen/chefchaouen_2.jpg",
+    desc: "Experience the absolute best of Morocco on this epic 4-day journey that connects the red city of Marrakech to the blue pearl of Chefchaouen. This isn't just a transfer; it's a deep dive into the heart of the kingdom. Traverse the high peaks of the Atlas, ride through the golden dunes of the Sahara, and witness the ancient history of Fes before ending in the tranquility of the Rif Mountains.",
+    duration: "4 Days / 3 Nights",
+    timing: "Departure 08:00 AM",
+    price: "On request",
+    gallery: [
+      "images/Ouarzazat/ouarzazat_1.jpg",
+      "images/Merzouga/merzouga_1.jpg",
+      "images/Fes/fes_4.jpg",
+      "images/Chfchaouen/chechaouen_1.jpg",
+      "images/Chfchaouen/chefchaouen_2.jpg"
+    ],
+    route: { departure: "Marrakech", arrival: "Chefchaouen" },
+    highlights: [
+      { icon: "fa-solid fa-landmark", title: "UNESCO Wonders", desc: "Step back in time at the ancient Kasbah Ait Benhaddou, a living piece of Moroccan history." },
+      { icon: "fa-solid fa-moon", title: "Sahara Magic", desc: "Experience a sunset camel trek across the Erg Chebbi dunes and spend an unforgettable night in a nomad-style desert camp." },
+      { icon: "fa-solid fa-fire", title: "Night Under the Stars", desc: "Enjoy a traditional Berber feast and live drum music around a desert campfire." },
+      { icon: "fa-solid fa-tree", title: "Nature & Wildlife", desc: "Meet the wild Barbary macaques in the cedar forests of Azrou and explore the 'Little Switzerland' of Ifrane." },
+      { icon: "fa-solid fa-mosque", title: "Imperial History", desc: "Discover the labyrinthine streets of the Fes Medina, the world's largest car-free urban space." },
+      { icon: "fa-solid fa-droplet", title: "The Blue Pearl", desc: "Conclude your journey in the breathtakingly blue and serene streets of Chefchaouen." }
+    ],
+    timeline: [
+      {
+        dot: 1,
+        title: "Day 1: Marrakech › Ait Benhaddou › Ouarzazate › Valley of Roses",
+        img: "images/Ouarzazat/ouarzazat_1.jpg",
+        items: [
+          "Depart from Marrakech at 8:00 AM, ascending the Tizi n'Tichka pass (2,260m) in the High Atlas Mountains",
+          "Marvel at the Berber villages clinging to the hillsides before arriving at Kasbah Ait Benhaddou",
+          "Guided tour and lunch, continue through Ouarzazate—the 'Hollywood of Africa'",
+          "Follow the legendary 'Road of a Thousand Kasbahs' to the Valley of Roses. (Dinner included)"
+        ]
+      },
+      {
+        dot: 2,
+        title: "Day 2: Valley of Roses › Todra Gorges › Merzouga (Sahara)",
+        img: "images/Merzouga/merzouga_1.jpg",
+        items: [
+          "Head to the Dades Valley to admire the unique 'Monkey Toes' rock formations after breakfast",
+          "Walk beneath 300-meter-high limestone cliffs at the Todra Gorges",
+          "Lunch in Rissani, then arrive in Merzouga to meet your camel caravan",
+          "Trek into Erg Chebbi dunes for sunset, night in a traditional camp with stars and music. (Breakfast, Dinner)"
+        ]
+      },
+      {
+        dot: 3,
+        title: "Day 3: Merzouga › Ziz Valley › Azrou › Ifrane › Fes",
+        img: "images/Fes/fes_4.jpg",
+        items: [
+          "Wake up early for a spectacular desert sunrise, followed by breakfast and a shower",
+          "Begin the drive north through the lush Ziz Valley and Middle Atlas Mountains",
+          "Stop in Azrou's ancient cedar forests to see monkeys, coffee break in alpine Ifrane",
+          "Early evening arrival in the imperial city of Fes for your overnight stay. (Breakfast, Dinner)"
+        ]
+      },
+      {
+        dot: 4,
+        title: "Day 4: Fes Medina Exploration › Chefchaouen",
+        img: "images/Chfchaouen/chechaouen_1.jpg",
+        items: [
+          "Dive into the rich history of Fes with an optional guide, exploring tanneries and ancient artisan workshops",
+          "Traditional lunch in the heart of the world's oldest medina",
+          "Head north into the Rif Mountains in the afternoon",
+          "Conclude your tour arriving in the mesmerizing 'Blue City' of Chefchaouen. (Breakfast)"
+        ]
+      }
+    ],
+    included: [
+      "Private, comfortable, air-conditioned vehicle.",
+      "Professional English-speaking driver/guide.",
+      "3 Nights of accommodation in high-quality Riads, Hotels, and a Desert Camp.",
+      "Half-board meals: All Breakfasts and Dinners.",
+      "Guided sunset and sunrise camel treks in the Merzouga desert.",
+      "All transportation and logistics from Marrakech to Chefchaouen."
+    ],
+    excluded: [
+      "Mid-day lunches.",
+      "Beverages and soft drinks.",
+      "Monument entrance fees.",
+      "Optional gratuities and personal expenses."
+    ]
   }
 };
 
@@ -275,36 +545,85 @@ window.closeModal = function (city) {
 function initMap() {
   const mapEl = document.getElementById("map");
   if (!mapEl) return;
-
-  // إذا كان map كيتعاود يتحمل، منع duplicate
   if (mapEl.dataset.ready === "1") return;
   mapEl.dataset.ready = "1";
 
-  // مهم: leaflet خاصو height فـ CSS (عندك 550px، مزيان)
-  const map = L.map("map").setView([31.7917, -7.0926], 6);
+  const map = L.map("map", { scrollWheelZoom: false }).setView([32.5, -6.5], 6);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap"
+  // Premium map tile layer
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+    maxZoom: 18
   }).addTo(map);
 
+  // Custom marker icon
+  const customIcon = L.divIcon({
+    className: 'custom-map-marker',
+    html: '<div style="background:linear-gradient(135deg,#D35400,#F39C12);width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-location-dot" style="color:#fff;font-size:14px;transform:rotate(45deg);"></i></div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -34]
+  });
+
   const cities = [
-    { name: "Marrakech", coords: [31.6295, -7.9811] },
-    { name: "Fès", coords: [34.0333, -5.0] },
-    { name: "Chefchaouen", coords: [35.1688, -5.2636] },
-    { name: "Essaouira", coords: [31.5085, -9.7595] },
-    { name: "Merzouga", coords: [31.0994, -4.0127] },
-    { name: "Ouzoud", coords: [32.0167, -6.7167] }
+    { name: "Marrakech", id: "marrakech", coords: [31.6295, -7.9811], img: "images/Marrakech/Marrakech.jpg", desc: "Imperial city with unique charm and vibrant souks." },
+    { name: "Fès", id: "fes", coords: [34.0333, -5.0], img: "images/Fes/Fes.jpg", desc: "Oldest medina in the world, a UNESCO treasure." },
+    { name: "Chefchaouen", id: "chefchaouen", coords: [35.1688, -5.2636], img: "images/Chfchaouen/chefchaoun.jpg", desc: "The blue pearl of Morocco, nestled in the Rif." },
+    { name: "Essaouira", id: "essaouira", coords: [31.5085, -9.7595], img: "images/Essaouira/essaouira_1.jpg", desc: "Atlantic coastal gem with art and Gnaoua music." },
+    { name: "Merzouga", id: "merzouga", coords: [31.0994, -4.0127], img: "images/Merzouga/merzouga_1.jpg", desc: "Gateway to the golden Erg Chebbi Sahara dunes." },
+    { name: "Ouzoud", id: "ouzoud", coords: [32.0167, -6.7167], img: "images/Ouzoud/ouzoud-falls.jpg", desc: "Spectacular 110m waterfalls amid lush greenery." },
+    { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat_1.jpg", desc: "Hollywood of Africa, gateway to the Sahara." },
+    { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." }
   ];
 
   cities.forEach((c) => {
-    L.marker(c.coords)
+    const popupContent = `
+      <img src="${c.img}" class="map-popup-img" alt="${c.name}">
+      <div class="map-popup-body">
+        <strong>${c.name}</strong>
+        <p>${c.desc}</p>
+        <button class="map-popup-btn" onclick="closeMapPopupAndOpen('${c.id}')">Explore →</button>
+      </div>
+    `;
+    L.marker(c.coords, { icon: customIcon })
       .addTo(map)
-      .bindPopup(`<strong>${c.name}</strong>`);
+      .bindPopup(popupContent, { maxWidth: 250, closeButton: true });
   });
 
-  // في بعض الحالات الخريطة كتجي صغيرة حتى كتعمل invalidateSize
+  // Tour route lines
+  const routes = [
+    { // Fes → Marrakech (Grand Moroccan Traverse)
+      coords: [[34.0333, -5.0], [33.0, -4.5], [31.0994, -4.0127], [31.5, -5.5], [31.6295, -7.9811]],
+      color: "#D35400"
+    },
+    { // Casablanca → Chefchaouen (Blue Pearl Escape)
+      coords: [[33.5731, -7.5898], [34.5, -6.0], [35.1688, -5.2636]],
+      color: "#2980B9"
+    },
+    { // Marrakech → Chefchaouen (Grand Contrast)
+      coords: [[31.6295, -7.9811], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0], [35.1688, -5.2636]],
+      color: "#27AE60"
+    }
+  ];
+
+  routes.forEach(r => {
+    L.polyline(r.coords, {
+      color: r.color,
+      weight: 3,
+      opacity: 0.5,
+      dashArray: '8, 8',
+      smoothFactor: 2
+    }).addTo(map);
+  });
+
   setTimeout(() => map.invalidateSize(), 300);
 }
+
+// Helper: close map popup and open city modal
+window.closeMapPopupAndOpen = function(cityId) {
+  document.querySelector('.leaflet-popup-close-button')?.click();
+  setTimeout(() => openModal(cityId), 200);
+};
 
 /* ---------- Travel form => WhatsApp ---------- */
 window.sendWhatsApp = function () {
@@ -405,26 +724,174 @@ window.openExp = function (key) {
   document.getElementById("expDesc").innerHTML = exp.desc;
 
   const img = document.getElementById("expImg");
-  img.src = exp.img;
-  img.alt = exp.title;
+  const swiperEl = document.getElementById("expSwiper");
+  const wrapper = document.getElementById("expSwiperWrapper");
+
+  // Gallery Swiper Handle
+  if (exp.gallery && exp.gallery.length > 0) {
+    img.style.display = "none";
+    swiperEl.style.display = "block";
+    wrapper.innerHTML = exp.gallery.map(src => `
+      <div class="swiper-slide">
+        <img src="${src}" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    `).join('');
+    
+    // Quick timeout to ensure DOM is ready
+    setTimeout(() => {
+      try {
+        if (window.modalSwiper) {
+          window.modalSwiper.destroy(true, true);
+        }
+        window.modalSwiper = new Swiper("#expSwiper", {
+          loop: exp.gallery && exp.gallery.length > 1,
+          pagination: { el: "#expSwiper .swiper-pagination", clickable: true },
+          navigation: { 
+            nextEl: "#expSwiper .swiper-button-next", 
+            prevEl: "#expSwiper .swiper-button-prev" 
+          },
+          observer: true,
+          observeParents: true,
+          autoplay: exp.gallery && exp.gallery.length > 1 ? { delay: 5000, disableOnInteraction: false } : false
+        });
+      } catch (err) {
+        console.error("Swiper init error:", err);
+      }
+    }, 200);
+  } else {
+    swiperEl.style.display = "none";
+    img.style.display = "block";
+    img.src = exp.img || "";
+    img.alt = exp.title || "";
+  }
 
   document.getElementById("expDuration").textContent = "⏱ " + exp.duration;
 
-  const expSchedule = document.getElementById("expSchedule");
-  if (exp.schedule && exp.schedule.length > 0) {
-    expSchedule.parentElement.style.display = "block";
-    expSchedule.innerHTML = exp.schedule.map((s) => `<li>${s}</li>`).join("");
+  // --- STRUCTURED UI LOGIC ---
+  const oldPanelsEl = document.getElementById("expOldPanels");
+  const highlightsEl = document.getElementById("expHighlights");
+  const itineraryEl = document.getElementById("expItinerary");
+  const metaEl = document.getElementById("expMeta");
+  const faqSection = document.getElementById("expFaqSection");
+
+  if (exp.highlights || exp.timeline || exp.included || exp.faqs) {
+    oldPanelsEl.style.display = "none";
+
+    // Highlights
+    if (exp.highlights) {
+      highlightsEl.style.display = "block";
+      document.getElementById("expHighlightsGrid").innerHTML = exp.highlights.map(h => `
+        <div class="highlight-card">
+          <i class="${h.icon}"></i>
+          <div>
+            <strong>${h.title}</strong>
+            <p>${h.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      highlightsEl.style.display = "none";
+    }
+
+    // Itinerary (Timeline)
+    if (exp.timeline) {
+      itineraryEl.style.display = "block";
+      document.getElementById("expTimeline").innerHTML = exp.timeline.map(it => `
+        <div class="timeline-item">
+          <div class="timeline-dot">${it.dot}</div>
+          <div class="timeline-content">
+            <img src="${it.img}" class="timeline-img" alt="${it.title}">
+            <h4>${it.title}</h4>
+            <ul>${it.items.map(li => `<li>${li}</li>`).join('')}</ul>
+          </div>
+        </div>
+      `).join('');
+      
+      // Route Section
+      const routeEl = document.getElementById("expRoute");
+      if (exp.route) {
+        routeEl.style.display = "flex";
+        document.getElementById("expRouteDep").textContent = exp.route.departure;
+        document.getElementById("expRouteArr").textContent = exp.route.arrival;
+      } else {
+        routeEl.style.display = "none";
+      }
+    } else {
+      itineraryEl.style.display = "none";
+    }
+
+    // Meta (Included / Excluded)
+    if (exp.included) {
+      metaEl.style.display = "block";
+      document.getElementById("expIncList").innerHTML = exp.included.map(i => `<li>${i}</li>`).join('');
+      const excContainer = document.getElementById("expExcContainer");
+      if (exp.excluded && exp.excluded.length > 0) {
+        excContainer.style.display = "block";
+        document.getElementById("expExcList").innerHTML = exp.excluded.map(e => `<li>${e}</li>`).join('');
+      } else {
+        excContainer.style.display = "none";
+      }
+    } else {
+      metaEl.style.display = "none";
+    }
+
+    // Pricing Table
+    const pricingEl = document.getElementById("expPricing");
+    if (exp.pricing && exp.pricing.length > 0) {
+      pricingEl.style.display = "block";
+      document.getElementById("expPricingBody").innerHTML = exp.pricing.map(p => `
+        <tr><td>${p.group}</td><td>${p.price}</td></tr>
+      `).join('');
+      const upgradeEl = document.getElementById("expPricingUpgrade");
+      if (exp.pricingUpgrade) {
+        upgradeEl.textContent = exp.pricingUpgrade;
+        upgradeEl.style.display = "block";
+      } else {
+        upgradeEl.style.display = "none";
+      }
+    } else {
+      pricingEl.style.display = "none";
+    }
+
+    // FAQs
+    if (exp.faqs) {
+      faqSection.style.display = "block";
+      document.getElementById("expFaqList").innerHTML = exp.faqs.map(f => `
+        <div class="faq-item">
+          <h5>${f.q}</h5>
+          <p>${f.a}</p>
+        </div>
+      `).join('');
+    } else {
+      faqSection.style.display = "none";
+    }
+
   } else {
-    expSchedule.parentElement.style.display = "none";
+    // Falls back to old simple program/activities layout
+    oldPanelsEl.style.display = "flex";
+    highlightsEl.style.display = "none";
+    itineraryEl.style.display = "none";
+    metaEl.style.display = "none";
+    faqSection.style.display = "none";
+    document.getElementById("expPricing").style.display = "none";
+
+    const expSchedule = document.getElementById("expSchedule");
+    if (exp.schedule && exp.schedule.length > 0) {
+      expSchedule.parentElement.style.display = "block";
+      expSchedule.innerHTML = exp.schedule.map((s) => `<li>${s}</li>`).join("");
+    } else {
+      expSchedule.parentElement.style.display = "none";
+    }
+
+    const expList = document.getElementById("expList");
+    if (exp.activities && exp.activities.length > 0) {
+      expList.parentElement.style.display = "block";
+      expList.innerHTML = exp.activities.map((a) => `<li>${a}</li>`).join("");
+    } else {
+      expList.parentElement.style.display = "none";
+    }
   }
 
-  const expList = document.getElementById("expList");
-  if (exp.activities && exp.activities.length > 0) {
-    expList.parentElement.style.display = "block";
-    expList.innerHTML = exp.activities.map((a) => `<li>${a}</li>`).join("");
-  } else {
-    expList.parentElement.style.display = "none";
-  }
   document.getElementById("expTiming").textContent = "🕒 " + exp.timing;
   document.getElementById("expPrice").textContent = "💰 " + exp.price;
 
@@ -488,6 +955,85 @@ document.addEventListener("click", (e) => {
 
 /* ---------- On load ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  initMap(); 
+  initMap();
+  initScrollReveal();
+  initStatCounters();
 });
 
+/* ---------- Scroll Reveal Animation ---------- */
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  if (!reveals.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  const nav = document.getElementById('siteNav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+  }
+}
+
+/* ---------- Animated Stat Counters ---------- */
+function initStatCounters() {
+  const counters = document.querySelectorAll('.stat-number');
+  if (!counters.length) return;
+  let started = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        counters.forEach(counter => {
+          const target = +counter.dataset.target;
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+
+          const updateCounter = () => {
+            current += step;
+            if (current < target) {
+              counter.textContent = Math.floor(current);
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = target;
+            }
+          };
+          updateCounter();
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsSection = document.querySelector('.stats-section');
+  if (statsSection) observer.observe(statsSection);
+}
+
+/* ---------- Mobile Menu ---------- */
+window.toggleMobileMenu = function() {
+  const navLinks = document.querySelector('.nav-links');
+  if(navLinks) {
+    navLinks.classList.toggle('active');
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Close menu when a link is clicked
+  const navLinksList = document.querySelectorAll('.nav-links a');
+  const navContainer = document.querySelector('.nav-links');
+  navLinksList.forEach(link => {
+    link.addEventListener('click', () => {
+      if(navContainer) navContainer.classList.remove('active');
+    });
+  });
+});
