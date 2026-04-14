@@ -1341,7 +1341,7 @@ body {
 .map-section {
   padding: 100px 20px 80px;
   text-align: center;
-  background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+  background: linear-gradient(180deg, #fff 0%, #1a2332 100%);
   position: relative;
 }
 
@@ -1367,7 +1367,7 @@ body {
 
 .map-subtitle {
   text-align: center;
-  color: #666;
+  color: #8fa0b5;
   font-size: 1.1rem;
   margin-bottom: 40px;
   margin-top: 15px;
@@ -1404,12 +1404,71 @@ body {
   gap: 8px;
 }
 
-/* Custom Map Popup */
-.leaflet-popup-content-wrapper {
-  background: #fff;
-  color: var(--dark);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+/* Custom Glowing Marker */
+.custom-map-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker-pin {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  position: relative;
+}
+
+.marker-pin i {
+  color: #fff;
+  font-size: 14px;
+  transform: rotate(45deg);
+}
+
+.marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background: rgba(243, 156, 18, 0.4);
+  border-radius: 50%;
+  z-index: 1;
+  animation: mapPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes mapPulse {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* Animated Route Line */
+.animated-route {
+  stroke-dasharray: 10, 15;
+  animation: routeDash 30s linear infinite;
+}
+
+@keyframes routeDash {
+  to { stroke-dashoffset: -1000; }
+}
+
+/* Custom Map Popup (Glassmorphic) */
+.premium-popup .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
   padding: 0;
   overflow: hidden;
 }
@@ -1421,8 +1480,9 @@ body {
   min-width: 200px;
 }
 
-.leaflet-popup-tip {
-  background: #fff;
+.premium-popup .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .map-popup-img {

@@ -556,19 +556,19 @@ function initMap() {
 
   const map = L.map("map", { scrollWheelZoom: false }).setView([32.5, -6.5], 6);
 
-  // Premium map tile layer
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+  // Premium Night Mode map tile layer
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
     maxZoom: 18
   }).addTo(map);
 
-  // Custom marker icon
+  // Custom marker icon with glow
   const customIcon = L.divIcon({
-    className: 'custom-map-marker',
-    html: '<div style="background:linear-gradient(135deg,#D35400,#F39C12);width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-location-dot" style="color:#fff;font-size:14px;transform:rotate(45deg);"></i></div>',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -34]
+    className: 'custom-map-marker glowing',
+    html: '<div class="marker-pulse"></div><div class="marker-pin"><i class="fa-solid fa-location-dot"></i></div>',
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -22]
   });
 
   const cities = [
@@ -577,7 +577,7 @@ function initMap() {
     { name: "Chefchaouen", id: "chefchaouen", coords: [35.1688, -5.2636], img: "images/Chfchaouen/chefchaoun.jpg", desc: "The blue pearl of Morocco, nestled in the Rif." },
     { name: "Essaouira", id: "essaouira", coords: [31.5085, -9.7595], img: "images/Essaouira/essaouira_1.jpg", desc: "Atlantic coastal gem with art and Gnaoua music." },
     { name: "Merzouga", id: "merzouga", coords: [31.0994, -4.0127], img: "images/Merzouga/merzouga_1.jpg", desc: "Gateway to the golden Erg Chebbi Sahara dunes." },
-    { name: "Ouzoud", id: "ouzoud", coords: [32.0167, -6.7167], img: "images/Ouzoud/ouzoud-falls.jpg", desc: "Spectacular 110m waterfalls amid lush greenery." },
+
     { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat1.jpeg", desc: "Hollywood of Africa, gateway to the Sahara." },
     { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." }
   ];
@@ -591,9 +591,17 @@ function initMap() {
         <button class="map-popup-btn" onclick="closeMapPopupAndOpen('${c.id}')">Explore →</button>
       </div>
     `;
-    L.marker(c.coords, { icon: customIcon })
+    const marker = L.marker(c.coords, { icon: customIcon })
       .addTo(map)
-      .bindPopup(popupContent, { maxWidth: 250, closeButton: true });
+      .bindPopup(popupContent, { maxWidth: 260, closeButton: true, className: 'premium-popup' });
+      
+    marker.on('click', function() {
+      map.flyTo(c.coords, 8, {
+        animate: true,
+        duration: 1.5,
+        easeLinearity: 0.1
+      });
+    });
   });
 
   // Tour route lines
@@ -616,9 +624,9 @@ function initMap() {
     L.polyline(r.coords, {
       color: r.color,
       weight: 3,
-      opacity: 0.5,
-      dashArray: '8, 8',
-      smoothFactor: 2
+      opacity: 0.7,
+      className: 'animated-route',
+      lineJoin: 'round'
     }).addTo(map);
   });
 
