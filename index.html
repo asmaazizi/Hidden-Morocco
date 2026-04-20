@@ -64,8 +64,10 @@
         <div class="card-content">
           <h3>Marrakech</h3>
           <p>Imperial city with unique charm.</p>
-          <span class="price">From 400 DH</span>
-          <button onclick="openModal('marrakech')">See more</button>
+          <span class="city-badge">✦ The Red City</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('marrakech')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-marrakech" class="modal">
@@ -123,6 +125,7 @@
 
             </div>
           </div>
+          
           <!-- ===== MAGNIFICENT ACCORDION : Expériences Marrakech ===== -->
           <div class="marr-exp">
             <div class="marr-exp-head">
@@ -192,23 +195,20 @@
                   <p class="acc-desc">Sunrise • Breakfast</p>
                 </div>
               </div>
-
-            </div>
-          </div>
-
-
-
-        </div>
-      </div>
-
+            </div> <!-- closes marr-accordion -->
+          </div> <!-- closes marr-exp -->
+        </div> <!-- closes modal-content -->
+      </div> <!-- closes modal-marrakech -->
       <!-- Ouarzazate -->
       <div class="card">
         <img src="images/Ouarzazat/ouarzazat11.jpg" alt="Ouarzazate">
         <div class="card-content">
           <h3>Ouarzazate</h3>
           <p>The gateway to the desert and cinema.</p>
-          <span class="price">From 380 DH</span>
-          <button onclick="openModal('ouarzazate')">See more</button>
+          <span class="city-badge">✦ The Sea of Dunes</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('ouarzazate')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-ouarzazate" class="modal">
@@ -366,6 +366,11 @@
             </div>
 
           </div>
+
+          <!-- Ouarzazate Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Ouarzazate')">Book this Experience</button>
+          </div>
         </div>
       </div>
 
@@ -375,8 +380,10 @@
         <div class="card-content">
           <h3>Merzouga</h3>
           <p>The desert as far as the eye can see.</p>
-          <span class="price">From 350 DH</span>
-          <button onclick="openModal('merzouga')">See more</button>
+          <span class="city-badge">✦ The Blue Pearl</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('merzouga')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-merzouga" class="modal">
@@ -441,6 +448,11 @@
               </li>
             </ul>
           </div>
+
+          <!-- Merzouga Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Merzouga')">Book this Experience</button>
+          </div>
         </div>
       </div>
 
@@ -450,8 +462,10 @@
         <div class="card-content">
           <h3>Chefchaouen</h3>
           <p>The blue pearl of Morocco.</p>
-          <span class="price">From 300 DH</span>
-          <button onclick="openModal('chefchaouen')">See more</button>
+          <span class="city-badge">✦ The Door of the Desert</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('chefchaouen')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-chefchaouen" class="modal">
@@ -598,26 +612,10 @@
 
           </div>
 
-          <!-- ===== MAGNIFICENT ACCORDION : Expériences Chefchaouen ===== -->
-          <div class="marr-exp">
-            <div class="marr-exp-head">
-              <h3 class="section-title">Our Experiences from Chefchaouen</h3>
-              <p class="subtitle" style="font-size:0.9rem; color:#666; font-weight: 500;">Hover to explore • Click to book</p>
-            </div>
 
-            <div class="marr-accordion">
-
-              <div class="acc-item" onclick="openExp('marrakech_chefchaouen')">
-                <img src="images/Chfchaouen/chefchaouen_2.jpg" alt="Morocco's Grand Contrast">
-                <div class="acc-overlay"></div>
-                <div class="acc-content">
-                  <span class="acc-tag">4 days</span>
-                  <h4>Morocco's Grand Contrast</h4>
-                  <p class="acc-desc">Marrakech › Merzouga › Chefchaouen</p>
-                </div>
-              </div>
-
-            </div>
+          <!-- Chefchaouen Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Chefchaouen')">Book this Experience</button>
           </div>
         </div>
       </div>
@@ -628,8 +626,10 @@
         <div class="card-content">
           <h3>Essaouira</h3>
           <p>Coastal city with artistic charm.</p>
-          <span class="price">From 280 DH</span>
-          <button onclick="openModal('essaouira')">See more</button>
+          <span class="city-badge">✦ Mogador</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('essaouira')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-essaouira" class="modal">
@@ -655,10 +655,8 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
           </div>
-          <p>Formerly Mogador, Essaouira is a fortified port city with bohemian charm, swept by the Atlantic winds.
-            Stroll through its UNESCO World Heritage medina, admire its historic ramparts, and watch the ballet of blue
-            fishing boats in the harbor. Renowned for its music festivals, art galleries, and water sports, Essaouira
-            offers a refreshing cultural and seaside getaway.</p>
+          <p>Leave the bustling streets of Marrakech behind and let yourself be charmed by the refreshing Atlantic breeze of Essaouira. Affectionately known as the "City of Trade Winds," this picturesque port town promises a memorable getaway that perfectly blends rich culture, historic architecture, and breathtaking coastal scenery.</p>
+          
           <div class="travel-info">
             <h3 class="travel-title">How to travel to Essaouira</h3>
             <div class="travel-cards">
@@ -676,26 +674,109 @@
               </div>
             </div>
           </div>
+
           <div class="activities-luxury">
-            <h3 class="section-title">Experiences in Essaouira</h3>
+            <h3 class="section-title">Tour Highlights</h3>
             <ul class="activities-list">
               <li>
-                <h4>Walk on the ramparts (Skala)</h4>
-                <p>Walk facing the ocean on ancient Portuguese fortifications steeped in history.</p>
+                <h4>Coastal Charm</h4>
+                <p>Discover the soothing, laid-back atmosphere of this beautiful port city and the warm hospitality of its locals.</p>
               </li>
               <li>
-                <h4>Fresh Fish Tasting</h4>
-                <p>Choose your fish directly at the port and enjoy it grilled on the spot.</p>
+                <h4>History & Ramparts</h4>
+                <p>Stroll along the impressive 18th-century Skala ramparts and admire the historic brass cannons pointing out toward the ocean.</p>
               </li>
               <li>
-                <h4>Kite Surf Initiation</h4>
-                <p>Take advantage of the constant winds ("Alizés") to glide on the Atlantic waves.</p>
+                <h4>Art & Culture</h4>
+                <p>Explore the labyrinth of the old medina, its vibrant souks, artisan galleries, and the fascinating history of the ancient Jewish Quarter (Mellah).</p>
               </li>
               <li>
-                <h4>Discover Gnaoua Music</h4>
-                <p>Let yourself be enchanted by the spiritual rhythms during an evening or the annual festival.</p>
+                <h4>Flavors of the Sea</h4>
+                <p>Treat yourself to excellent, freshly caught seafood at the traditional restaurants lining the bustling port.</p>
+              </li>
+              <li>
+                <h4>Sand Adventure</h4>
+                <p>Enjoy an unforgettable camel ride along the sandy beach to the rhythmic sound of the Atlantic waves.</p>
               </li>
             </ul>
+          </div>
+
+          <!-- TOUR DETAILS SECTION -->
+          <div class="tour-details">
+            <h3 class="section-title">Detailed Itinerary</h3>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-van-shuttle" style="color:white; font-size:12px;"></i></div>
+                <div class="timeline-content">
+                  <img src="images/Essaouira/essaouira_1.jpg" class="timeline-img" alt="Morning">
+                  <h4>Morning: Departure & Scenic Landscapes</h4>
+                  <ul>
+                    <li>Your journey begins smoothly with a pick-up from your Marrakech accommodation between 08:00 AM and 09:00 AM.</li>
+                    <li>The drive toward the coast is an experience in itself, offering spectacular, picturesque landscapes perfect for capturing unforgettable photos.</li>
+                    <li>You will arrive in Essaouira around 11:00 AM, ready to explore this town of timeless charm.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-map-location-dot" style="color:white; font-size:12px;"></i></div>
+                <div class="timeline-content">
+                  <img src="images/Essaouira/essaouira_2.jpg" class="timeline-img" alt="Midday">
+                  <h4>Midday: Medina Exploration & Ocean Views</h4>
+                  <ul>
+                    <li>Immerse yourself in the enchanting atmosphere of the Medina, a UNESCO World Heritage site.</li>
+                    <li>Let the narrow, winding alleys guide you through a place where history is etched into every stone.</li>
+                    <li>The well-preserved architecture and numerous art galleries stand as a testament to the city's cultural wealth.</li>
+                    <li>Be sure to visit the Skala for breathtaking panoramic views of the Atlantic coast before indulging in a delicious local seafood lunch.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-house-user" style="color:white; font-size:12px;"></i></div>
+                <div class="timeline-content">
+                  <img src="images/Essaouira/essaouira_3.jpg" class="timeline-img" alt="Afternoon">
+                  <h4>Afternoon: Beach, History, and Return</h4>
+                  <ul>
+                    <li>After savoring your meal, head down to the beach for a relaxing camel ride—a delightful experience for all ages.</li>
+                    <li>Take time to wander through the ancient Jewish Quarter and visit its historic synagogues before hitting the road.</li>
+                    <li>With a mind full of beautiful memories, you will arrive back in Marrakech around 8:00 PM.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tour-meta">
+              <div class="meta-item"><i class="fa-regular fa-clock"></i> <strong>Duration:</strong> 1 Day</div>
+              <div class="meta-item"><i class="fa-solid fa-van-shuttle"></i> <strong>Pick-up Time:</strong> Between 08:00 AM and 09:00 AM</div>
+              <div class="meta-item"><i class="fa-solid fa-map-pin"></i> <strong>Return Time:</strong> Approx. 08:00 PM (20:00)</div>
+              <div class="meta-item"><i class="fa-solid fa-arrow-right-arrow-left"></i> <strong>Flexibility:</strong> Instant confirmation & free cancellation</div>
+            </div>
+
+            <div class="tour-inc-exc">
+              <div class="tour-inc">
+                <h4><span class="inc-icon">✓</span> What's Included</h4>
+                <ul>
+                  <li>Round-trip pick-up and drop-off from your hotel or Riad in Marrakech. (If your Riad is inside the medina, the meeting point will be at the closest accessible car park).</li>
+                  <li>Comfortable transportation with a professional driver.</li>
+                  <li>Free time to explore the city, its monuments, and the beach at your own pace.</li>
+                </ul>
+              </div>
+              <div class="tour-exc">
+                <h4><span class="exc-icon">✕</span> Not Included</h4>
+                <ul>
+                  <li>Lunch and beverages.</li>
+                  <li>Optional activities (such as the camel ride or hiring a private local guide).</li>
+                  <li>Personal expenses.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Essaouira Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Essaouira')">Book this Experience</button>
           </div>
         </div>
       </div>
@@ -707,8 +788,10 @@
         <div class="card-content">
           <h3>Fes</h3>
           <p>The oldest medina in the world.</p>
-          <span class="price">From 320 DH</span>
-          <button onclick="openModal('fes')">See more</button>
+          <span class="city-badge">✦ The Imperial Capital</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('fes')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-fes" class="modal">
@@ -856,37 +939,7 @@
               </div>
             </div>
 
-            <!-- Pricing Guide Table -->
-            <div class="pricing-guide">
-              <h3 class="section-title">Pricing Guide (Per Person)</h3>
-              <p style="text-align:center; color:#666; font-size:1rem; margin-bottom:30px; line-height:1.7;">
-                We offer tiered pricing based on the size of your group. The more people traveling, the better the value!
-              </p>
-              <div class="pricing-table-wrap">
-                <table class="pricing-table">
-                  <thead>
-                    <tr>
-                      <th>Group Size (Participants)</th>
-                      <th>Price Per Person (€)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>2</td><td>680€</td></tr>
-                    <tr><td>3</td><td>580€</td></tr>
-                    <tr><td>4</td><td>490€</td></tr>
-                    <tr><td>5</td><td>450€</td></tr>
-                    <tr><td>6</td><td>390€</td></tr>
-                    <tr><td>7</td><td>380€</td></tr>
-                    <tr><td>8 – 10</td><td>370€</td></tr>
-                    <tr><td>11 – 13</td><td>320€</td></tr>
-                    <tr><td>14 – 17</td><td>310€</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:16px; font-style:italic;">
-                ✨ Optional Upgrade: Elevate your Sahara experience to a Deluxe Desert Camp (ensuite tent with private bathroom) for an additional €50 per adult.
-              </p>
-            </div>
+
 
             <div class="tour-faq">
               <h3 class="section-title">Frequently Asked Questions</h3>
@@ -914,7 +967,7 @@
 
                 <div class="faq-item">
                   <h5>Can I skip the camel ride?</h5>
-                  <p>Yes, a 4x4 transfer to the camp can be arranged if preferred.</p>
+                  <p>Yes. If you prefer not to ride a camel, we will arrange for a comfortable 4x4 transfer to reach your desert camp.</p>
                 </div>
 
                 <div class="faq-item">
@@ -927,29 +980,11 @@
 
           </div>
 
-          <!-- ===== MAGNIFICENT ACCORDION : Expériences Fes ===== -->
-          <div class="marr-exp">
-            <div class="marr-exp-head">
-              <h3 class="section-title">Our Experiences from Fes</h3>
-              <p class="subtitle" style="font-size:0.9rem; color:#666; font-weight: 500;">Hover to explore • Click to
-                book</p>
-            </div>
 
-            <div class="marr-accordion">
-
-              <div class="acc-item" onclick="openExp('fes_sahara')">
-                <img src="images/Merzouga/merzouga_1.jpg" alt="Fes to Marrakech Sahara Expedition">
-                <div class="acc-overlay"></div>
-                <div class="acc-content">
-                  <span class="acc-tag">4 days</span>
-                  <h4>Grand Moroccan Traverse</h4>
-                  <p class="acc-desc">Fes › Sahara › Marrakech</p>
-                </div>
-              </div>
-
-            </div>
+          <!-- Fes Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Fes')">Book this Experience</button>
           </div>
-
         </div>
       </div>
 
@@ -959,8 +994,10 @@
         <div class="card-content">
           <h3>Casablanca</h3>
           <p>Morocco's economic capital by the sea.</p>
-          <span class="price">From 350 DH</span>
-          <button onclick="openModal('casablanca')">See more</button>
+          <span class="city-badge">✦ The White City</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('casablanca')">See more</button>
+          </div>
         </div>
       </div>
       <div id="modal-casablanca" class="modal">
@@ -1107,29 +1144,349 @@
 
           </div>
 
-          <!-- ===== MAGNIFICENT ACCORDION : Expériences Casablanca ===== -->
-          <div class="marr-exp">
-            <div class="marr-exp-head">
-              <h3 class="section-title">Our Experiences from Casablanca</h3>
-              <p class="subtitle" style="font-size:0.9rem; color:#666; font-weight: 500;">Hover to explore • Click to
-                book</p>
+
+          <!-- Casablanca Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Casablanca')">Book this Experience</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zagora -->
+      <div class="card">
+        <img src="images/Zagora/zagora_hero.png" alt="Zagora">
+        <div class="card-content">
+          <h3>Zagora</h3>
+          <p>The gateway to the immense Draa Valley.</p>
+          <span class="city-badge">✦ The Gateway to the Sahara</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('zagora')">See more</button>
+          </div>
+        </div>
+      </div>
+      <div id="modal-zagora" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('zagora')">&times;</span>
+          <h2>Zagora</h2>
+          <div class="swiper mySwiper-zagora">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Zagora/zagora_hero.png" alt="Zagora Desert"></div>
             </div>
-
-            <div class="marr-accordion">
-
-              <div class="acc-item" onclick="openExp('casa_chefchaouen')">
-                <img src="images/Chfchaouen/chefchaoun.jpg" alt="Blue Pearl Escape">
-                <div class="acc-overlay"></div>
-                <div class="acc-content">
-                  <span class="acc-tag">2 days</span>
-                  <h4>Blue Pearl Escape</h4>
-                  <p class="acc-desc">Casablanca › Chefchaouen</p>
-                </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          
+          <p>Trade the vibrant streets of Marrakech for the golden, rocky dunes of Zagora on an immersive <strong>2-day</strong> desert safari. Follow the ancient caravan routes through the High Atlas Mountains, trace the footsteps of Hollywood stars in historic kasbahs, and sleep under a blanket of Saharan stars.</p>
+          
+          <div class="travel-info">
+            <h3 class="travel-title">How to travel to Zagora</h3>
+            <div class="travel-cards">
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>CTM buses from Marrakech or Ouarzazate</p>
               </div>
-
+              <div class="travel-item">
+                <span>Flight</span>
+                <p>Zagora Airport (Ouarzazate also nearby)</p>
+              </div>
+              <div class="travel-item">
+                <span>Car</span>
+                <p>Scenic route via N9 from Marrakech (6h)</p>
+              </div>
             </div>
           </div>
 
+          <div class="activities-luxury">
+            <h3 class="section-title">Expedition Highlights</h3>
+            <ul class="activities-list">
+              <li>
+                <h4>Golden Hour Treks</h4>
+                <p>Glide across the Zagora desert on a camel during a breathtaking sunset and a serene morning sunrise.</p>
+              </li>
+              <li>
+                <h4>Night Under the Stars</h4>
+                <p>Spend the night in a traditional Berber desert camp, complete with a hearty dinner, live drum music, and campfire storytelling.</p>
+              </li>
+              <li>
+                <h4>Cinematic History</h4>
+                <p>Explore the UNESCO World Heritage site of Kasbah Aït Ben Haddou, famously featured in Gladiator and Game of Thrones.</p>
+              </li>
+              <li>
+                <h4>Oasis Landscapes</h4>
+                <p>Journey through the lush Draa Valley, home to Morocco’s largest palm oasis and ancient fortified mud-brick villages.</p>
+              </li>
+              <li>
+                <h4>Mountain Vistas</h4>
+                <p>Traverse the spectacular Tizi n'Tichka pass, the highest paved road in North Africa (2,260m).</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tour-details">
+            <h3 class="section-title">Your 2-Day Journey Itinerary</h3>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <div class="timeline-content">
+                  <img src="images/Zagora/zagora_hero.png" class="timeline-img" alt="Day 1">
+                  <h4>Day 1: High Atlas › Aït Ben Haddou › Draa Valley › Zagora Desert Camp</h4>
+                  <ul>
+                    <li>Your journey begins at 7:00 AM with a pick-up from Marrakech. We’ll ascend the High Atlas Mountains via the Tizi n’Tichka pass.</li>
+                    <li>Step into history at the iconic Kasbah Aït Ben Haddou, wandering its ancient streets before enjoying lunch at a nearby café.</li>
+                    <li>We then continue our drive to the Agdz oasis, cruising through the Draa Valley—marveling at its endless date palms and historic kasbahs.</li>
+                    <li>Upon arriving in Zagora, you will meet your camel caravan. Trek into the rocky desert as the setting sun paints the sky in vibrant hues of pink and gold.</li>
+                    <li>Settle into your private tent (Standard or Luxury) and sip on traditional mint tea. Enjoy a rich Moroccan dinner under the stars, followed by an unforgettable evening of live Berber drumming around a roaring campfire. (Meals Included: Dinner)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div class="timeline-content">
+                  <img src="images/Zagora/zagora_hero.png" class="timeline-img" alt="Day 2">
+                  <h4>Day 2: Desert Sunrise › Ouarzazate › Return to Marrakech</h4>
+                  <ul>
+                    <li>Wake up before dawn to witness a magical desert sunrise, watching the soft morning light spread across the dunes in near-total silence.</li>
+                    <li>After a traditional Moroccan breakfast at the camp, remount your camel for a scenic morning ride back to the main road.</li>
+                    <li>We’ll begin our return journey through the breathtaking Draa Valley and High Atlas Mountains, with scheduled stops for refreshments, lunch, and a brief visit to the cinematic city of Ouarzazate.</li>
+                    <li>We will cross the Tizi n'Tichka pass one last time, dropping you off safely at your Marrakech hotel or riad at approximately 6:00 PM. (Meals Included: Breakfast)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tour-meta">
+              <div class="meta-item"><i class="fa-regular fa-clock"></i> <strong>Duration:</strong> 2 Days / 1 Night</div>
+              <div class="meta-item"><i class="fa-solid fa-van-shuttle"></i> <strong>Schedule:</strong> Departs 07:00 AM (Day 1) | Returns approx 06:00 PM (Day 2)</div>
+              <div class="meta-item"><i class="fa-solid fa-map-pin"></i> <strong>Flexibility:</strong> Tour can also start from Ouarzazate upon request</div>
+            </div>
+
+            <div class="tour-inc-exc">
+              <div class="tour-inc">
+                <h4><span class="inc-icon">✓</span> What's Included</h4>
+                <ul>
+                  <li>Pick-up and drop-off at your Marrakech hotel/riad.</li>
+                  <li>Transportation in a comfortable, air-conditioned Minibus/Minivan with onboard Wi-Fi.</li>
+                  <li>Multilingual driver-guide (English, French, Spanish).</li>
+                  <li>1 Night in a private desert camp tent (Standard or Luxury).</li>
+                  <li>Guided sunset and sunrise camel treks in Zagora.</li>
+                  <li>Half-board meals: 1 Moroccan Dinner and 1 Breakfast.</li>
+                  <li>Evening campfire entertainment with live Berber music.</li>
+                  <li>Secure luggage storage in the vehicle.</li>
+                </ul>
+              </div>
+              <div class="tour-exc">
+                <h4><span class="exc-icon">✕</span> Not Included</h4>
+                <ul>
+                  <li>Mid-day lunches and extra beverages.</li>
+                  <li>Optional local guide in Aït Ben Haddou (€2 per person).</li>
+                  <li>Personal expenses and tipping.</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tour-faq">
+              <h3 class="section-title">Important Information & What to Bring</h3>
+              <div class="faq-list">
+                <div class="faq-item">
+                  <h5>Pack Smart</h5>
+                  <p>Bring comfortable walking shoes, sunglasses, a hat, and sunscreen. A photocopy of your passport is accepted and recommended.</p>
+                </div>
+                <div class="faq-item">
+                  <h5>Clothing</h5>
+                  <p>Long trousers are highly recommended for the camel ride.</p>
+                </div>
+                <div class="faq-item">
+                  <h5>Desert Climate</h5>
+                  <p>The desert has extreme temperature shifts. Expect hot days and very cold nights (Nov–Feb). Dressing in layers is the best way to stay comfortable!</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Zagora Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Zagora')">Book this Experience</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agadir -->
+      <div class="card">
+        <img src="images/Agadir/agadir_hero.png" alt="Agadir">
+        <div class="card-content">
+          <h3>Agadir</h3>
+          <p>Coastal breeze to the Capital of Culture.</p>
+          <span class="city-badge">✦ The Resort Hub</span>
+          <div class="card-btns">
+            <button class="btn-secondary" onclick="openModal('agadir')">See more</button>
+          </div>
+        </div>
+      </div>
+      <div id="modal-agadir" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('agadir')">&times;</span>
+          <h2>Agadir</h2>
+          <div class="swiper mySwiper-agadir">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="images/Agadir/agadir_hero.png" alt="Agadir to Fes"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          
+          <p>Trade the coastal breeze of Agadir for the golden dunes of the Sahara on this immersive 3-day journey, culminating in the historic, imperial city of Fes. This unforgettable overland adventure takes you through Morocco’s most striking contrasts—from towering mountain ranges and lush desert oases to ancient mud-brick kasbahs and star-lit Saharan nights.</p>
+          
+          <div class="travel-info">
+            <h3 class="travel-title">How to travel to Agadir</h3>
+            <div class="travel-cards">
+              <div class="travel-item">
+                <span>Bus</span>
+                <p>Premium CTM and Supratours available nationwide</p>
+              </div>
+              <div class="travel-item">
+                <span>Flight</span>
+                <p>Agadir Al Massira Airport (AGA)</p>
+              </div>
+              <div class="travel-item">
+                <span>Car</span>
+                <p>A3 Highway direct from Casablanca or Marrakech</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="activities-luxury">
+            <h3 class="section-title">Expedition Highlights</h3>
+            <ul class="activities-list">
+              <li>
+                <h4>Sahara Immersion</h4>
+                <p>Trek deep into the Erg Chebbi dunes on a camel and spend a magical night camping beneath a canopy of stars.</p>
+              </li>
+              <li>
+                <h4>Canyon Wonders</h4>
+                <p>Stand in awe beneath the towering, 300-meter-high limestone cliffs of the magnificent Todra Gorge.</p>
+              </li>
+              <li>
+                <h4>Verdant Valleys</h4>
+                <p>Journey through the lush date palm groves of the Draa Valley and the spectacular landscapes of the Rose and Dades Valleys.</p>
+              </li>
+              <li>
+                <h4>Cinematic History</h4>
+                <p>Explore the ancient, fortified village of Ait Ben Haddou, a UNESCO World Heritage Site famous for its appearances in Hollywood epics.</p>
+              </li>
+              <li>
+                <h4>Cultural Connection</h4>
+                <p>Experience genuine Berber hospitality with traditional campfire music, storytelling, and mouthwatering local cuisine.</p>
+              </li>
+              <li>
+                <h4>Alpine Contrasts</h4>
+                <p>Traverse the cedar forests of the Middle Atlas Mountains, keeping an eye out for wild Barbary macaques, before arriving in Fes.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tour-details">
+            <h3 class="section-title">Your 3-Day Journey Itinerary</h3>
+
+            <div class="tour-route">
+              <div class="route-item">
+                <span class="route-label">Departure</span>
+                <strong>Agadir</strong>
+              </div>
+              <div class="route-icon"><i class="fa-solid fa-arrow-right"></i></div>
+              <div class="route-item">
+                <span class="route-label">Arrival</span>
+                <strong>Fès</strong>
+              </div>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <div class="timeline-content">
+                  <img src="images/Agadir/agadir_hero.png" class="timeline-img" alt="Day 1">
+                  <h4>Day 1: Agadir › Ait Ben Haddou › Rose Valley › Tinghir</h4>
+                  <ul>
+                    <li>Your adventure kicks off with a 7:00 AM pick-up from your Agadir accommodation.</li>
+                    <li>We’ll travel inland, winding through the breathtaking, rugged scenery of the Anti-Atlas Mountains.</li>
+                    <li>Our first major stop is the iconic Kasbah of Ait Ben Haddou. After enjoying lunch and exploring this ancient UNESCO-listed fortress, we continue our drive along the legendary "Road of a Thousand Kasbahs."</li>
+                    <li>Passing through the fragrant Rose Valley and the dramatic Dades Valley, we will arrive in the town of Tinghir for a relaxing evening, complete with dinner and an overnight stay in a traditional riad or mid-range hotel. (Meals Included: Dinner)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div class="timeline-content">
+                  <img src="images/Agadir/agadir_hero.png" class="timeline-img" alt="Day 2">
+                  <h4>Day 2: Tinghir › Todra Gorge › Merzouga › Erg Chebbi Desert Camp</h4>
+                  <ul>
+                    <li>After a hearty breakfast, we dive into the scenic Todra Valley, a vibrant green ribbon of palm groves dotted with traditional Berber villages.</li>
+                    <li>You'll have time to walk through the breathtaking Todra Gorge, marveling at the sheer rock walls carved by the river.</li>
+                    <li>From there, we head toward the Sahara, passing through the fossil-rich towns of Tinjdad, Melaab, and Erfoud.</li>
+                    <li>As we reach the edge of the golden Erg Chebbi dunes in Merzouga, you'll trade your vehicle for a camel.</li>
+                    <li>Enjoy a scenic ride across the sweeping sands as the sun sets, arriving at your luxury desert camp. End the day with a feast under the stars, accompanied by the rhythmic beats of Berber drums around a roaring campfire. (Meals Included: Breakfast, Dinner)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <div class="timeline-content">
+                  <img src="images/Agadir/agadir_hero.png" class="timeline-img" alt="Day 3">
+                  <h4>Day 3: Merzouga › Ziz Valley › Middle Atlas › Fes</h4>
+                  <ul>
+                    <li>Wake up early to catch a peaceful and mesmerizing sunrise over the dunes from the back of your camel.</li>
+                    <li>After returning to the village for breakfast, we begin our journey north.</li>
+                    <li>We’ll cruise through the expansive Ziz Valley, home to the largest palm oasis in Morocco, before ascending into the Middle Atlas Mountains.</li>
+                    <li>Enjoy the changing landscapes as we pass through the town of Midelt and the lush cedar forests of the Middle Atlas—where you might spot the native Barbary macaques.</li>
+                    <li>After a quick stop in Ifrane, known as Morocco's "Little Switzerland," we will arrive in the cultural heart of Fes by early evening (around 7:00 PM), dropping you off directly at your accommodation. (Meals Included: Breakfast)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tour-meta">
+              <div class="meta-item"><i class="fa-regular fa-clock"></i> <strong>Duration:</strong> 3 Days / 2 Nights</div>
+              <div class="meta-item"><i class="fa-solid fa-van-shuttle"></i> <strong>Schedule:</strong> Daily Departures | Pick-up 07:00 AM</div>
+            </div>
+
+            <div class="tour-inc-exc">
+              <div class="tour-inc">
+                <h4><span class="inc-icon">✓</span> What's Included</h4>
+                <ul>
+                  <li>Transportation in a comfortable, modern, air-conditioned vehicle.</li>
+                  <li>Services of an experienced, professional English-speaking tour driver.</li>
+                  <li>1 Night accommodation in a charming, mid-range hotel/riad in Tinghir.</li>
+                  <li>1 Night accommodation in a beautiful Erg Chebbi desert camp.</li>
+                  <li>Meals as specified: 2 Dinners (Days 1 & 2) and 2 Breakfasts (Days 2 & 3).</li>
+                  <li>Guided camel trek into the Sahara Desert (one camel per person).</li>
+                  <li>Thrilling sandboarding experience in the Merzouga dunes.</li>
+                  <li>A dedicated local guide for your visit in Tinghir.</li>
+                </ul>
+              </div>
+              <div class="tour-exc">
+                <h4><span class="exc-icon">✕</span> Not Included</h4>
+                <ul>
+                  <li>Mid-day lunches along the route.</li>
+                  <li>Additional beverages.</li>
+                  <li>Local guide fees in Ait Ben Haddou.</li>
+                  <li>Entrance fees to specific monuments.</li>
+                  <li>Gratuities and tipping (Optional).</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Agadir Booking CTA -->
+          <div class="dest-modal-cta">
+            <button class="btn-primary" onclick="openDestBooking('Agadir')">Book this Experience</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1353,6 +1710,146 @@
     </div>
   </section>
 
+
+
+
+  <!-- Destination Booking Modal (Global Design) -->
+  <div id="destBookingModal" class="dest-booking-modal-overlay">
+    <div class="travel-form-container dest-booking-sheet">
+      <button class="dest-booking-close" onclick="closeDestBooking()">✕</button>
+      
+      <div class="travel-form-left">
+        <img id="destBookingImg" src="images/Marrakech/marrakech_11.jpg" alt="Destination" class="form-bg-img">
+        <div class="form-left-content">
+          <h2 id="destBookingTitle">Start Your Journey</h2>
+          <p>Tell us your preferences, and we will craft a tailor-made experience exclusively for you.</p>
+          <div class="form-contact-info">
+            <span><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</span>
+            <span><i class="fa-solid fa-phone"></i> +212 6 00 00 00 00</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="travel-form-right" style="overflow-y: auto; max-height: 90vh;">
+        <!-- NEW CODE: Fès promotions (hidden by default) -->
+        <div id="fesPromoBlock" style="display:none; background:#fef8f5; border:1px solid #f6e0d3; border-radius:12px; padding:20px; margin-bottom:25px;">
+           <h4 style="color:var(--primary); font-size:1.1rem; margin-bottom:15px; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-tags"></i> Fès Exclusive Pricing & Promos</h4>
+           
+           <div style="font-size:0.9rem; color:#444; margin-bottom:15px; display:grid; gap:8px;">
+             <div><span style="display:inline-block; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold; background:#ffe0b2; color:#e65100; margin-right:8px;">HOT DEAL</span> 5% OFF (Book 30+ days in advance)</div>
+             <div><span style="display:inline-block; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold; background:#e1f5fe; color:#0277bd; margin-right:8px;">EXCLUSIVE</span> Free luxury dinner for groups of 5+</div>
+             <div><span style="display:inline-block; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold; background:#e8f5e9; color:#2e7d32; margin-right:8px;">FAMILY</span> Under 8 travel free (with 3+ adults)</div>
+           </div>
+
+           <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left;">
+             <thead>
+               <tr style="border-bottom:1px solid #f6e0d3;">
+                 <th style="padding:8px 0; color:#555;">Participants</th>
+                 <th style="padding:8px 0; color:#555;">Price / Person</th>
+                 <th style="padding:8px 0; color:#555;">Participants</th>
+                 <th style="padding:8px 0; color:#555;">Price / Person</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td style="padding:6px 0;">2</td>
+                 <td style="font-weight:600; color:var(--dark);">680€</td>
+                 <td style="padding:6px 0;">7</td>
+                 <td style="font-weight:600; color:var(--dark);">380€</td>
+               </tr>
+               <tr>
+                 <td style="padding:6px 0;">3</td>
+                 <td style="font-weight:600; color:var(--dark);">580€</td>
+                 <td style="padding:6px 0;">8 – 10</td>
+                 <td style="font-weight:600; color:var(--dark);">370€</td>
+               </tr>
+               <tr>
+                 <td style="padding:6px 0;">4</td>
+                 <td style="font-weight:600; color:var(--dark);">490€</td>
+                 <td style="padding:6px 0;">11 – 13</td>
+                 <td style="font-weight:600; color:var(--dark);">320€</td>
+               </tr>
+               <tr>
+                 <td style="padding:6px 0;">5</td>
+                 <td style="font-weight:600; color:var(--dark);">450€</td>
+                 <td style="padding:6px 0;">14 – 17</td>
+                 <td style="font-weight:600; color:var(--dark);">310€</td>
+               </tr>
+               <tr>
+                 <td style="padding:6px 0;">6</td>
+                 <td style="font-weight:600; color:var(--dark);">390€</td>
+                 <td colspan="2"></td>
+               </tr>
+             </tbody>
+           </table>
+           <p style="color:#888; font-size:0.8rem; margin-top:12px; font-style:italic;">
+             ✨ Optional Upgrade: Deluxe Desert Camp for an additional €50 per adult.
+           </p>
+        </div>
+        <form id="destBookingForm">
+          <div class="form-row">
+            <div class="input-group">
+              <input type="text" id="db-name" required>
+              <label for="db-name">Full Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="db-email" required>
+              <label for="db-email">Email Address</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <input type="tel" id="db-phone" required>
+              <label for="db-phone">Phone / WhatsApp</label>
+            </div>
+            <div class="input-group">
+              <input type="date" id="db-date" required>
+              <label for="db-date">Travel Date</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group select-group">
+              <select id="db-adults" required>
+                <option value="" disabled selected></option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4+">4+</option>
+              </select>
+              <label for="db-adults">Adults (Min 2)</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+            <div class="input-group select-group">
+              <select id="db-children" required>
+                <option value="" disabled selected></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3+">3+</option>
+              </select>
+              <label for="db-children">Children</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+
+          <div class="input-group text-group">
+            <textarea id="db-message" required></textarea>
+            <label for="db-message">Tell us about your dream trip (special requests, preferences...)</label>
+          </div>
+
+          <p class="db-policy-warning" style="margin-bottom: 20px; font-size: 0.85rem; color: #888; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> Reservations are valid starting from 2 participants.
+          </p>
+
+          <button type="button" class="btn-submit" onclick="sendDestBookingWhatsApp()">
+            <span>Confirm & Send to WhatsApp</span>
+            <i class="fa-brands fa-whatsapp"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <div id="expModal" class="exp-modal">
     <div class="exp-modal-overlay" onclick="closeExp()"></div>

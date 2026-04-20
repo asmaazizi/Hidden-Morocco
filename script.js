@@ -506,12 +506,22 @@ const EXPERIENCES = {
 /* ---------- CSS Accordion Experience Marrakech (No JS required) ---------- */
 
 /* ---------- Destination Modals ---------- */
-window.openModal = function (city) {
+window.openModal = function (city, scrollToBooking = false) {
   const modal = document.getElementById("modal-" + city);
   if (!modal) return;
 
   modal.style.display = "block";
   lockBodyScroll(true);
+
+  // Scroll to booking section if requested
+  if (scrollToBooking) {
+    const bookingSection = document.getElementById("booking-" + city);
+    if (bookingSection) {
+      setTimeout(() => {
+        bookingSection.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }
 
   // init swiper in this modal
   const selector = "#modal-" + city + " .mySwiper-" + city;
@@ -556,8 +566,8 @@ function initMap() {
 
   const map = L.map("map", { scrollWheelZoom: false }).setView([32.5, -6.5], 6);
 
-  // Premium Night Mode map tile layer
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+  // Colorful and clean Voyager map tile layer
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
     attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
     maxZoom: 18
   }).addTo(map);
@@ -579,7 +589,9 @@ function initMap() {
     { name: "Merzouga", id: "merzouga", coords: [31.0994, -4.0127], img: "images/Merzouga/merzouga_1.jpg", desc: "Gateway to the golden Erg Chebbi Sahara dunes." },
 
     { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat1.jpeg", desc: "Hollywood of Africa, gateway to the Sahara." },
-    { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." }
+    { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." },
+    { name: "Agadir", id: "agadir", coords: [30.4278, -9.5981], img: "images/Agadir/agadir_hero.png", desc: "Coastal breeze to the Capital of Culture." },
+    { name: "Zagora", id: "zagora", coords: [30.3324, -5.8384], img: "images/Zagora/zagora_hero.png", desc: "The gateway to the immense Draa Valley." }
   ];
 
   cities.forEach((c) => {
@@ -617,6 +629,18 @@ function initMap() {
     { // Marrakech → Chefchaouen (Grand Contrast)
       coords: [[31.6295, -7.9811], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0], [35.1688, -5.2636]],
       color: "#27AE60"
+    },
+    { // Marrakech → Essaouira (Ocean Escape)
+      coords: [[31.6295, -7.9811], [31.5085, -9.7595]],
+      color: "#F1C40F"
+    },
+    { // Marrakech → Zagora (Desert Safari)
+      coords: [[31.6295, -7.9811], [30.9189, -6.8936], [30.3324, -5.8384]],
+      color: "#E67E22"
+    },
+    { // Agadir → Fes (Overland Expedition)
+      coords: [[30.4278, -9.5981], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0]],
+      color: "#8E44AD"
     }
   ];
 
@@ -651,6 +675,11 @@ window.sendWhatsApp = function () {
   const children = selects[1]?.value || "";
   const message = document.querySelector(".travel-form textarea")?.value || "";
 
+  if (Number(adults) < 2) {
+    alert("Please note that our tours require a minimum of 2 participants.");
+    return;
+  }
+
   const whatsappMessage = `Hello 👋
 
 New travel request – Hidden Morocco 🌍
@@ -668,6 +697,42 @@ ${message}`;
 
   window.open(
     "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(whatsappMessage),
+    "_blank"
+  );
+};
+
+// Handler for destination-specific forms
+window.sendDestinationWhatsApp = function (city) {
+  const modal = document.getElementById("modal-" + city);
+  if (!modal) return;
+
+  const name = modal.querySelector('.dest-name')?.value;
+  const date = modal.querySelector('.dest-date')?.value;
+  const adults = modal.querySelector('.dest-adults')?.value;
+  const children = modal.querySelector('.dest-children')?.value;
+
+  if (!name || !date || !adults) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  if (Number(adults) < 2) {
+    alert("Booking is valid starting from 2 people. Please adjust your participant count.");
+    return;
+  }
+
+  const text = `Hello 👋
+I would like to book a trip to ${city.toUpperCase()}:
+
+👤 Name: ${name}
+📅 Date: ${date}
+👨‍👩‍👧 Adults: ${adults}
+🧒 Children: ${children || 0}
+
+Thank you!`;
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
     "_blank"
   );
 };
@@ -696,7 +761,9 @@ window.qtyChange = function (type, delta) {
 
   let v = Number(input.value || 0) + delta;
 
-  if (type === "adults") v = Math.max(1, v);
+  // Enforce 2 participants minimum for adults
+  const minAdults = 2;
+  if (type === "adults") v = Math.max(minAdults, v);
   if (type === "children") v = Math.max(0, v);
 
   input.value = v;
@@ -707,9 +774,19 @@ window.bookNow = function () {
   if (!CURRENT_EXP_KEY) return;
   const exp = EXPERIENCES[CURRENT_EXP_KEY];
 
-  const date = document.getElementById("bookDate")?.value || "—";
-  const adults = document.getElementById("qtyAdults")?.value || "1";
+  const date = document.getElementById("bookDate")?.value || "";
+  const adults = document.getElementById("qtyAdults")?.value || "2";
   const children = document.getElementById("qtyChildren")?.value || "0";
+
+  if (!date) {
+    alert("Please select a date.");
+    return;
+  }
+
+  if (Number(adults) < 2) {
+    alert("Booking is valid starting from 2 people.");
+    return;
+  }
 
   const text = `Hello 👋
 I would like to book:
@@ -957,12 +1034,21 @@ document.addEventListener("keydown", (e) => {
       lockBodyScroll(false);
     }
   });
+
+  // close destination booking modal
+  const dbModal = document.getElementById("destBookingModal");
+  if (dbModal && dbModal.style.display === "flex") {
+    window.closeDestBooking();
+  }
 });
 
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("modal")) {
     e.target.style.display = "none";
     lockBodyScroll(false);
+  }
+  if (e.target.id === "destBookingModal") {
+    window.closeDestBooking();
   }
 });
 
@@ -974,8 +1060,17 @@ document.addEventListener("DOMContentLoaded", () => {
   initStatCounters();
 
   // Move all modals to body to prevent transform/z-index stacking context bugs
-  document.querySelectorAll('.modal, .exp-modal').forEach(modal => {
+  document.querySelectorAll('.modal, .exp-modal, .dest-booking-modal-overlay').forEach(modal => {
     document.body.appendChild(modal);
+  });
+
+  // Close mobile menu when a link is clicked
+  const navLinksList = document.querySelectorAll('.nav-links a');
+  const navContainer = document.querySelector('.nav-links');
+  navLinksList.forEach(link => {
+    link.addEventListener('click', () => {
+      if(navContainer) navContainer.classList.remove('active');
+    });
   });
 });
 
@@ -1046,13 +1141,80 @@ window.toggleMobileMenu = function() {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Close menu when a link is clicked
-  const navLinksList = document.querySelectorAll('.nav-links a');
-  const navContainer = document.querySelector('.nav-links');
-  navLinksList.forEach(link => {
-    link.addEventListener('click', () => {
-      if(navContainer) navContainer.classList.remove('active');
-    });
-  });
-});
+
+/* ---------- Global Destination Booking Logic ---------- */
+const DEST_IMAGES = {
+  "Marrakech": "images/Marrakech/Marrakech.jpg",
+  "Ouarzazate": "images/Ouarzazat/ouarzazat1.jpeg",
+  "Merzouga": "images/Merzouga/merzouga_1.jpg",
+  "Chefchaouen": "images/Chfchaouen/chefchaoun.jpg",
+  "Essaouira": "images/Essaouira/essaouira_1.jpg",
+  "Fes": "images/Fes/Fes.jpg",
+  "Casablanca": "images/Casablanca/casablanca.png",
+  "Agadir": "images/Agadir/agadir_hero.png",
+  "Zagora": "images/Zagora/zagora_hero.png"
+};
+
+window.openDestBooking = function(city) {
+  const modal = document.getElementById("destBookingModal");
+  if (!modal) return;
+  
+  // Fill content
+  document.getElementById("destBookingTitle").textContent = city + " Expedition";
+  const img = document.getElementById("destBookingImg");
+  if (img && DEST_IMAGES[city]) {
+    img.src = DEST_IMAGES[city];
+  }
+
+  // Handle Fès Special Promotions visibility
+  const fesPromo = document.getElementById("fesPromoBlock");
+  if (fesPromo) {
+    fesPromo.style.display = (city === "Fes") ? "block" : "none";
+  }
+  
+  // Reset form
+  document.getElementById("db-name").value = "";
+  document.getElementById("db-email").value = "";
+  document.getElementById("db-phone").value = "";
+  document.getElementById("db-date").value = "";
+  document.getElementById("db-adults").value = 2;
+  document.getElementById("db-children").value = 0;
+  document.getElementById("db-message").value = "";
+  
+  modal.style.display = "flex";
+  lockBodyScroll(true);
+};
+
+window.closeDestBooking = function() {
+  const modal = document.getElementById("destBookingModal");
+  if (modal) modal.style.display = "none";
+  lockBodyScroll(false);
+};
+
+
+window.sendDestBookingWhatsApp = function() {
+  const cityTitle = document.getElementById("destBookingTitle").textContent;
+  const name = document.getElementById("db-name").value;
+  const date = document.getElementById("db-date").value;
+  const adults = document.getElementById("db-adults").value;
+  const children = document.getElementById("db-children").value;
+  const message = document.getElementById("db-message").value;
+  
+  if (!name || !date) {
+    alert("Please fill in your name and preferred date.");
+    return;
+  }
+  
+  const text = `Hello 👋
+I am interested in booking:
+✅ Destination: ${cityTitle}
+👤 Name: ${name}
+📅 Date: ${date}
+👥 Adults: ${adults}
+🧒 Children: ${children}
+📝 Message: ${message || "N/A"}
+
+Thank you!`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+};
