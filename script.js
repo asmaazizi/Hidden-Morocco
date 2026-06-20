@@ -566,9 +566,9 @@ function initMap() {
 
   const map = L.map("map", { scrollWheelZoom: false }).setView([32.5, -6.5], 6);
 
-  // Colorful and clean Voyager map tile layer
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+  // Magnificent Premium Map (Esri Satellite - No political borders, just beautiful terrain)
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP',
     maxZoom: 18
   }).addTo(map);
 
@@ -608,47 +608,49 @@ function initMap() {
       .bindPopup(popupContent, { maxWidth: 260, closeButton: true, className: 'premium-popup' });
       
     marker.on('click', function() {
-      map.flyTo(c.coords, 8, {
+      // Calculate an offset so the map center is slightly above the marker, making room for the popup
+      const targetZoom = 8;
+      const targetPoint = map.project(c.coords, targetZoom);
+      targetPoint.y -= 130; // Shift center 130px UP -> Marker moves DOWN
+      const offsetLatLng = map.unproject(targetPoint, targetZoom);
+
+      map.flyTo(offsetLatLng, targetZoom, {
         animate: true,
         duration: 1.5,
         easeLinearity: 0.1
       });
     });
   });
-
-  // Tour route lines
-  const routes = [
-    { // Fes → Marrakech (Grand Moroccan Traverse)
-      coords: [[34.0333, -5.0], [33.0, -4.5], [31.0994, -4.0127], [31.5, -5.5], [31.6295, -7.9811]],
-      color: "#D35400"
-    },
-    { // Casablanca → Chefchaouen (Blue Pearl Escape)
-      coords: [[33.5731, -7.5898], [34.5, -6.0], [35.1688, -5.2636]],
-      color: "#2980B9"
-    },
-    { // Marrakech → Chefchaouen (Grand Contrast)
-      coords: [[31.6295, -7.9811], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0], [35.1688, -5.2636]],
-      color: "#27AE60"
-    },
-    { // Marrakech → Essaouira (Ocean Escape)
-      coords: [[31.6295, -7.9811], [31.5085, -9.7595]],
-      color: "#F1C40F"
-    },
-    { // Marrakech → Zagora (Desert Safari)
-      coords: [[31.6295, -7.9811], [30.9189, -6.8936], [30.3324, -5.8384]],
-      color: "#E67E22"
-    },
-    { // Agadir → Fes (Overland Expedition)
-      coords: [[30.4278, -9.5981], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0]],
-      color: "#8E44AD"
-    }
+  // Beautiful uniform tour route lines (Golden style)
+  const routeCoords = [
+    // Fes → Marrakech
+    [[34.0333, -5.0], [33.0, -4.5], [31.0994, -4.0127], [31.5, -5.5], [31.6295, -7.9811]],
+    // Casablanca → Chefchaouen
+    [[33.5731, -7.5898], [34.5, -6.0], [35.1688, -5.2636]],
+    // Marrakech → Chefchaouen
+    [[31.6295, -7.9811], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0], [35.1688, -5.2636]],
+    // Marrakech → Essaouira
+    [[31.6295, -7.9811], [31.5085, -9.7595]],
+    // Marrakech → Zagora
+    [[31.6295, -7.9811], [30.9189, -6.8936], [30.3324, -5.8384]],
+    // Agadir → Fes
+    [[30.4278, -9.5981], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0]]
   ];
 
-  routes.forEach(r => {
-    L.polyline(r.coords, {
-      color: r.color,
-      weight: 3,
-      opacity: 0.7,
+  routeCoords.forEach(coords => {
+    // Background shadow/casing line for better visibility on the map
+    L.polyline(coords, {
+      color: '#000',
+      weight: 4,
+      opacity: 0.3,
+      lineJoin: 'round'
+    }).addTo(map);
+
+    // Foreground beautiful animated dashed line
+    L.polyline(coords, {
+      color: '#F39C12', // Golden accent
+      weight: 2,
+      opacity: 0.9,
       className: 'animated-route',
       lineJoin: 'round'
     }).addTo(map);
