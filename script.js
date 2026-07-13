@@ -1069,11 +1069,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Close mobile menu when a link is clicked
-  const navLinksList = document.querySelectorAll('.nav-links a');
+  const navLinksList = document.querySelectorAll('.nav-links a, .hn-links a');
   const navContainer = document.querySelector('.nav-links');
+  const hnContainer = document.querySelector('.hn-links');
   navLinksList.forEach(link => {
     link.addEventListener('click', () => {
       if(navContainer) navContainer.classList.remove('active');
+      if(hnContainer) hnContainer.classList.remove('hn-links-open');
     });
   });
 });
@@ -1142,6 +1144,10 @@ window.toggleMobileMenu = function() {
   const navLinks = document.querySelector('.nav-links');
   if(navLinks) {
     navLinks.classList.toggle('active');
+  }
+  const hnLinks = document.querySelector('.hn-links');
+  if(hnLinks) {
+    hnLinks.classList.toggle('hn-links-open');
   }
 };
 

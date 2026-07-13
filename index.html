@@ -6,248 +6,284 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hidden Morocco – Private Tours & Authentic Experiences</title>
   <meta name="description" content="Discover Morocco's hidden gems with private guided tours. Marrakech, Merzouga desert, Chefchaouen and more. Book your tailor-made Moroccan adventure today.">
+  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="slider.css">
-  <link rel="stylesheet" href="exp.css">
-  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home-premium.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
 
-  <!-- Sticky Navbar -->
-  <nav class="site-nav" id="siteNav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="hn-nav" id="siteNav">
+    <div class="hn-nav-inner">
+      <a class="hn-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="nav-links">
+      <ul class="hn-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="map.html">Map</a></li>
         <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+        <li><a href="booking.html" class="hn-book-btn">Book Now</a></li>
       </ul>
-      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-        <i class="fa-solid fa-bars"></i>
+      <button class="hn-burger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-text">
-      <div class="hero-badge">✦ Morocco's #1 Private Tour Operator</div>
-      <h1>Hidden Morocco</h1>
-      <p>Discover unique places and unforgettable experiences.</p>
-      <div class="hero-cta-group">
-        <a href="destinations.html" class="cta-button">Explore Destinations</a>
-        <a href="map.html" class="cta-button-secondary">View Map</a>
+  <!-- ============================================================
+       HERO — Full screen cinematic
+  ============================================================ -->
+  <section class="hn-hero">
+    <!-- Slideshow backgrounds -->
+    <div class="hn-hero-slides">
+      <div class="hn-slide active" style="background-image: url('images/Merzouga/merzouga_1.jpg')"></div>
+      <div class="hn-slide" style="background-image: url('images/Chfchaouen/chefchaoun_b.jpg')"></div>
+      <div class="hn-slide" style="background-image: url('images/Marrakech/marrakech_11.jpg')"></div>
+      <div class="hn-slide" style="background-image: url('images/Ouarzazat/ouarzazat11.jpg')"></div>
+    </div>
+    <div class="hn-hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="hn-hero-content">
+      <p class="hn-hero-eyebrow">✦ Morocco's #1 Private Tour Operator</p>
+      <h1 class="hn-hero-title">
+        Uncover<br>
+        <em>Hidden Morocco</em>
+      </h1>
+      <p class="hn-hero-sub">Tailor-made journeys through imperial cities,<br>golden dunes and blue-washed mountains.</p>
+      <div class="hn-hero-btns">
+        <a href="destinations.html" class="hn-btn-primary">Explore Destinations</a>
+        <a href="booking.html" class="hn-btn-ghost">Plan My Trip</a>
       </div>
     </div>
-    <div class="hero-scroll-indicator">
+
+    <!-- Slide dots -->
+    <div class="hn-hero-dots">
+      <button class="hn-dot active" onclick="goToSlide(0)"></button>
+      <button class="hn-dot" onclick="goToSlide(1)"></button>
+      <button class="hn-dot" onclick="goToSlide(2)"></button>
+      <button class="hn-dot" onclick="goToSlide(3)"></button>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="hn-scroll-cue">
       <span>Scroll</span>
-      <div class="scroll-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+      <div class="hn-scroll-line"></div>
     </div>
-  </header>
 
-  <!-- Stats Section -->
-  <section class="stats-section reveal">
-    <div class="stats-container">
-      <div class="stat-item">
-        <i class="fa-solid fa-route"></i>
-        <span class="stat-number" data-target="50">0</span><span class="stat-suffix">+</span>
-        <p>Unique Routes</p>
+    <!-- Floating stats bar -->
+    <div class="hn-stats-bar">
+      <div class="hn-stat">
+        <strong class="stat-number" data-target="2500">0</strong><span>+</span>
+        <small>Happy Travelers</small>
       </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-users"></i>
-        <span class="stat-number" data-target="2500">0</span><span class="stat-suffix">+</span>
-        <p>Happy Travelers</p>
+      <div class="hn-stat-div"></div>
+      <div class="hn-stat">
+        <strong class="stat-number" data-target="9">0</strong>
+        <small>Destinations</small>
       </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-map-location-dot"></i>
-        <span class="stat-number" data-target="9">0</span>
-        <p>Destinations</p>
+      <div class="hn-stat-div"></div>
+      <div class="hn-stat">
+        <strong class="stat-number" data-target="50">0</strong><span>+</span>
+        <small>Unique Routes</small>
       </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-award"></i>
-        <span class="stat-number" data-target="5">0</span>
-        <p>Years of Excellence</p>
+      <div class="hn-stat-div"></div>
+      <div class="hn-stat">
+        <strong class="stat-number" data-target="5">0</strong>
+        <small>Years of Excellence</small>
       </div>
     </div>
   </section>
 
-  <!-- Destinations Preview Section -->
-  <section class="destinations reveal" id="destinations">
-    <h2>Our Destinations</h2>
-    <div class="grid">
+  <!-- ============================================================
+       INTRO STATEMENT
+  ============================================================ -->
+  <section class="hn-intro hn-reveal">
+    <div class="hn-intro-inner">
+      <p class="hn-label">Our Story</p>
+      <h2>Morocco is not just a destination.<br><em>It's a feeling.</em></h2>
+      <p class="hn-intro-text">We are a team of passionate Moroccan guides and storytellers dedicated to showing you the kingdom beyond the tourist trail — the hidden kasbahs, the silent desert mornings, the ancient medinas that still breathe history.</p>
+      <a href="destinations.html" class="hn-link-arrow">Start Exploring <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
 
-      <!-- Marrakech -->
-      <div class="card">
-        <img src="images/Marrakech/Marrakech.jpg" alt="Marrakech">
-        <div class="card-content">
+  <!-- ============================================================
+       FEATURED DESTINATIONS — Immersive cards
+  ============================================================ -->
+  <section class="hn-destinations hn-reveal">
+    <div class="hn-section-header">
+      <p class="hn-label">Where to go</p>
+      <h2>Our Destinations</h2>
+    </div>
+
+    <div class="hn-dest-grid">
+
+      <!-- Large card: Marrakech -->
+      <a href="destinations.html#marrakech" class="hn-dest-card hn-dest-large">
+        <img src="images/Marrakech/Marrakech.jpg" alt="Marrakech" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Imperial City</span>
           <h3>Marrakech</h3>
-          <p>Imperial city with unique charm and vibrant souks.</p>
-          <span class="city-badge">✦ The Red City</span>
-          <div class="card-btns">
-            <a href="destinations.html#marrakech" class="btn-secondary">See more</a>
-          </div>
+          <p>The Red City</p>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Ouarzazate -->
-      <div class="card">
-        <img src="images/Ouarzazat/ouarzazat11.jpg" alt="Ouarzazate">
-        <div class="card-content">
-          <h3>Ouarzazate</h3>
-          <p>The gateway to the desert and cinema.</p>
-          <span class="city-badge">✦ The Door of the Desert</span>
-          <div class="card-btns">
-            <a href="destinations.html#ouarzazate" class="btn-secondary">See more</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Merzouga -->
-      <div class="card">
-        <img src="images/Merzouga/merzouga.jpg" alt="Merzouga">
-        <div class="card-content">
+      <!-- Medium card: Merzouga -->
+      <a href="destinations.html#merzouga" class="hn-dest-card hn-dest-med">
+        <img src="images/Merzouga/merzouga.jpg" alt="Merzouga" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Sahara Desert</span>
           <h3>Merzouga</h3>
-          <p>The desert as far as the eye can see.</p>
-          <span class="city-badge">✦ The Sea of Dunes</span>
-          <div class="card-btns">
-            <a href="destinations.html#merzouga" class="btn-secondary">See more</a>
-          </div>
+          <p>The Sea of Dunes</p>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Chefchaouen -->
-      <div class="card">
-        <img src="images/Chfchaouen/chefchaoun_b.jpg" alt="Chefchaouen">
-        <div class="card-content">
+      <!-- Medium card: Chefchaouen -->
+      <a href="destinations.html#chefchaouen" class="hn-dest-card hn-dest-med">
+        <img src="images/Chfchaouen/chefchaoun_b.jpg" alt="Chefchaouen" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Mountain Town</span>
           <h3>Chefchaouen</h3>
-          <p>The blue pearl of Morocco.</p>
-          <span class="city-badge">✦ The Blue Pearl</span>
-          <div class="card-btns">
-            <a href="destinations.html#chefchaouen" class="btn-secondary">See more</a>
-          </div>
+          <p>The Blue Pearl</p>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Essaouira -->
-      <div class="card">
-        <img src="images/Essaouira/Essaouira.jpg" alt="Essaouira">
-        <div class="card-content">
-          <h3>Essaouira</h3>
-          <p>Coastal city with artistic charm.</p>
-          <span class="city-badge">✦ Mogador</span>
-          <div class="card-btns">
-            <a href="destinations.html#essaouira" class="btn-secondary">See more</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fes -->
-      <div class="card">
-        <img src="images/Fes/Fes.jpg" alt="Fes">
-        <div class="card-content">
+      <!-- Small cards row -->
+      <a href="destinations.html#fes" class="hn-dest-card hn-dest-small">
+        <img src="images/Fes/Fes.jpg" alt="Fes" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Imperial</span>
           <h3>Fes</h3>
-          <p>The oldest medina in the world.</p>
-          <span class="city-badge">✦ The Imperial Capital</span>
-          <div class="card-btns">
-            <a href="destinations.html#fes" class="btn-secondary">See more</a>
-          </div>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Casablanca -->
-      <div class="card">
-        <img src="images/Casablanca/casablanca.png" alt="Casablanca">
-        <div class="card-content">
-          <h3>Casablanca</h3>
-          <p>Morocco's economic capital by the sea.</p>
-          <span class="city-badge">✦ The White City</span>
-          <div class="card-btns">
-            <a href="destinations.html#casablanca" class="btn-secondary">See more</a>
-          </div>
+      <a href="destinations.html#ouarzazate" class="hn-dest-card hn-dest-small">
+        <img src="images/Ouarzazat/ouarzazat11.jpg" alt="Ouarzazate" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Cinema City</span>
+          <h3>Ouarzazate</h3>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Zagora -->
-      <div class="card">
-        <img src="images/Zagora/zagora.jpg" alt="Zagora">
-        <div class="card-content">
-          <h3>Zagora</h3>
-          <p>Gateway to the immense Draa Valley.</p>
-          <span class="city-badge">✦ Gateway to the Sahara</span>
-          <div class="card-btns">
-            <a href="destinations.html#zagora" class="btn-secondary">See more</a>
-          </div>
+      <a href="destinations.html#essaouira" class="hn-dest-card hn-dest-small">
+        <img src="images/Essaouira/Essaouira.jpg" alt="Essaouira" loading="lazy">
+        <div class="hn-dest-overlay">
+          <span class="hn-dest-tag">Coastal</span>
+          <h3>Essaouira</h3>
+          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
-      </div>
-
-      <!-- Agadir -->
-      <div class="card">
-        <img src="images/Agadir/agadir.jpg" alt="Agadir">
-        <div class="card-content">
-          <h3>Agadir</h3>
-          <p>Coastal breeze meets culture and sunshine.</p>
-          <span class="city-badge">✦ The Resort Hub</span>
-          <div class="card-btns">
-            <a href="destinations.html#agadir" class="btn-secondary">See more</a>
-          </div>
-        </div>
-      </div>
+      </a>
 
     </div>
 
-    <!-- CTA to full destinations page -->
-    <div style="text-align: center; margin-top: 40px;">
-      <a href="destinations.html" class="cta-button">Discover All Destinations →</a>
+    <div class="hn-dest-cta">
+      <a href="destinations.html" class="hn-btn-outline">View All 9 Destinations →</a>
     </div>
   </section>
 
-  <!-- Why Choose Us Section -->
-  <section class="why-section reveal">
-    <h2>Why Hidden Morocco?</h2>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
-        <h4>Private & Exclusive</h4>
-        <p>Every journey is tailor-made. No shared buses, no crowds — just you and Morocco.</p>
+  <!-- ============================================================
+       HOW IT WORKS — 3 Steps
+  ============================================================ -->
+  <section class="hn-how hn-reveal">
+    <div class="hn-how-inner">
+      <div class="hn-section-header" style="text-align:left; max-width:500px;">
+        <p class="hn-label">Simple Process</p>
+        <h2>How it works</h2>
       </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-compass"></i></div>
+      <div class="hn-steps">
+        <div class="hn-step">
+          <div class="hn-step-num">01</div>
+          <h4>Choose Your Journey</h4>
+          <p>Browse our destinations and select the experiences that call to you.</p>
+        </div>
+        <div class="hn-step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="hn-step">
+          <div class="hn-step-num">02</div>
+          <h4>Customize With Us</h4>
+          <p>Tell us your dates, group size and preferences. We'll tailor every detail.</p>
+        </div>
+        <div class="hn-step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="hn-step">
+          <div class="hn-step-num">03</div>
+          <h4>Explore Morocco</h4>
+          <p>Your private guide picks you up and your unforgettable adventure begins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE US — Feature highlights
+  ============================================================ -->
+  <section class="hn-why hn-reveal">
+    <div class="hn-section-header">
+      <p class="hn-label">Why us</p>
+      <h2>The Hidden Morocco Difference</h2>
+    </div>
+    <div class="hn-why-grid">
+      <div class="hn-why-card">
+        <div class="hn-why-icon"><i class="fa-solid fa-user-tie"></i></div>
+        <h4>100% Private Tours</h4>
+        <p>No shared buses, no crowds. Every journey is exclusively yours, on your schedule.</p>
+      </div>
+      <div class="hn-why-card">
+        <div class="hn-why-icon"><i class="fa-solid fa-compass"></i></div>
         <h4>Local Expert Guides</h4>
-        <p>Born and raised in Morocco, our guides know the hidden corners tourists never see.</p>
+        <p>Born and raised in Morocco — our guides know the hidden corners tourists never see.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-sliders"></i></div>
+      <div class="hn-why-card">
+        <div class="hn-why-icon"><i class="fa-solid fa-sliders"></i></div>
         <h4>Fully Customizable</h4>
-        <p>Want to spend an extra hour at a viewpoint? Your itinerary bends to your wishes.</p>
+        <p>Your itinerary bends to your wishes. Every detail is crafted around you.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="hn-why-card">
+        <div class="hn-why-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <h4>Safe & Reliable</h4>
         <p>Modern vehicles, experienced drivers, and 24/7 support throughout your journey.</p>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials Snippet -->
-  <section class="testimonials-section reveal">
-    <h2>What Our Travelers Say</h2>
-    <p class="testimonials-subtitle">Real stories from people who explored Morocco with us</p>
-    <div class="testimonials-grid">
+  <!-- ============================================================
+       IMMERSIVE FULL-WIDTH QUOTE BANNER
+  ============================================================ -->
+  <section class="hn-quote-banner hn-reveal" style="background-image: url('images/merzouga_desert.jpg')">
+    <div class="hn-quote-overlay"></div>
+    <div class="hn-quote-content">
+      <i class="fa-solid fa-quote-left hn-quote-icon"></i>
+      <blockquote>"Not all those who wander are lost — some are discovering Morocco."</blockquote>
+      <a href="booking.html" class="hn-btn-primary">Start Your Journey</a>
+    </div>
+  </section>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The Grand Moroccan Traverse was the highlight of our trip. Our driver was
-          incredible — he knew every hidden viewpoint and secret alley. We felt like insiders, not tourists."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JL</div>
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section class="hn-testimonials hn-reveal">
+    <div class="hn-section-header">
+      <p class="hn-label">Traveler Stories</p>
+      <h2>What Our Guests Say</h2>
+    </div>
+    <div class="hn-reviews-grid">
+
+      <div class="hn-review-card">
+        <div class="hn-review-stars">★★★★★</div>
+        <p>"The Grand Moroccan Traverse was the highlight of our trip. Our driver knew every hidden viewpoint and secret alley. We felt like insiders, not tourists."</p>
+        <div class="hn-reviewer">
+          <div class="hn-reviewer-avatar">JL</div>
           <div>
             <strong>James &amp; Laura</strong>
             <span>United Kingdom 🇬🇧</span>
@@ -255,12 +291,11 @@
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Sleeping under the stars in Merzouga was a life-changing experience. The camp, the
-          camel ride at sunset, the Berber music — nothing compares. Worth every euro!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SM</div>
+      <div class="hn-review-card hn-review-featured">
+        <div class="hn-review-stars">★★★★★</div>
+        <p>"Sleeping under the stars in Merzouga was a life-changing experience. The camp, the camel ride at sunset, the Berber music — nothing compares. Worth every euro!"</p>
+        <div class="hn-reviewer">
+          <div class="hn-reviewer-avatar">SM</div>
           <div>
             <strong>Sophie M.</strong>
             <span>France 🇫🇷</span>
@@ -268,12 +303,11 @@
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Chefchaouen is a dream. The blue streets, the relaxed atmosphere, the local food —
-          we didn't want to leave. Our private guide was so warm and knowledgeable."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">AR</div>
+      <div class="hn-review-card">
+        <div class="hn-review-stars">★★★★★</div>
+        <p>"Chefchaouen is a dream. The blue streets, the atmosphere, the local food — we didn't want to leave. Our private guide was so warm and knowledgeable."</p>
+        <div class="hn-reviewer">
+          <div class="hn-reviewer-avatar">AR</div>
           <div>
             <strong>Ahmed &amp; Rida</strong>
             <span>Canada 🇨🇦</span>
@@ -282,37 +316,51 @@
       </div>
 
     </div>
-    <div style="text-align: center; margin-top: 35px;">
-      <a href="testimonials.html" class="cta-button" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Read All Reviews →</a>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="testimonials.html" class="hn-link-arrow">Read All Reviews <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="cta-banner reveal">
-    <div class="cta-banner-content">
-      <h2>Ready to Discover Hidden Morocco?</h2>
-      <p>Let us craft your perfect Moroccan adventure — fully private, fully yours.</p>
-      <a href="booking.html" class="cta-button">Plan My Trip →</a>
+  <!-- ============================================================
+       FINAL CTA
+  ============================================================ -->
+  <section class="hn-final-cta hn-reveal">
+    <div class="hn-final-cta-inner">
+      <p class="hn-label" style="color: rgba(255,255,255,0.6)">Ready?</p>
+      <h2>Your Moroccan adventure<br>starts here.</h2>
+      <p>Fill out our quick form and receive a personalized itinerary within 24 hours — no commitment required.</p>
+      <a href="booking.html" class="hn-btn-primary hn-btn-large">Plan My Trip Now →</a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>Destinations</h4>
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="hn-footer">
+    <div class="hn-footer-inner">
+      <div class="hn-footer-brand">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" class="hn-footer-logo">
+        <p>Private tours across Morocco's most beautiful destinations — crafted with passion.</p>
+        <div class="hn-socials">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="hn-footer-col">
+        <h5>Destinations</h5>
         <ul>
           <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
           <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
           <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
           <li><a href="destinations.html#casablanca">Casablanca</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Pages</h4>
+      <div class="hn-footer-col">
+        <h5>Navigate</h5>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="destinations.html">Destinations</a></li>
@@ -321,25 +369,75 @@
           <li><a href="booking.html">Book Now</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email : contact@hiddenmorocco.com</p>
-        <p>Tél : +212 6 12 34 56 78</p>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
+      <div class="hn-footer-col">
+        <h5>Contact Us</h5>
+        <ul>
+          <li><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</li>
+          <li><i class="fa-solid fa-phone"></i> +212 6 12 34 56 78</li>
+          <li><i class="fa-brands fa-whatsapp"></i> WhatsApp Available</li>
+        </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+    <div class="hn-footer-bottom">
+      <p>&copy; 2026 Hidden Morocco. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Hero slideshow
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hn-slide');
+    const dots = document.querySelectorAll('.hn-dot');
+
+    function goToSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    setInterval(() => {
+      goToSlide((currentSlide + 1) % slides.length);
+    }, 5000);
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.hn-reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('hn-visible'); });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Stat counters
+    function animateCounters() {
+      document.querySelectorAll('.stat-number').forEach(el => {
+        const target = +el.dataset.target;
+        const step = target / 80;
+        let val = 0;
+        const timer = setInterval(() => {
+          val = Math.min(val + step, target);
+          el.textContent = Math.floor(val);
+          if (val >= target) clearInterval(timer);
+        }, 20);
+      });
+    }
+    const statsEl = document.querySelector('.hn-stats-bar');
+    if (statsEl) {
+      new IntersectionObserver((e) => { if (e[0].isIntersecting) animateCounters(); }, { threshold: 0.5 }).observe(statsEl);
+    }
+
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('siteNav').classList.toggle('hn-nav-scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile menu
+    window.toggleMobileMenu = function() {
+      document.querySelector('.hn-links').classList.toggle('hn-links-open');
+    };
+  </script>
 
 </body>
-
 </html>
