@@ -42,13 +42,6 @@
        HERO — Full screen cinematic
   ============================================================ -->
   <section class="hn-hero">
-    <!-- Slideshow backgrounds -->
-    <div class="hn-hero-slides">
-      <div class="hn-slide active" style="background-image: url('images/Merzouga/merzouga_1.jpg')"></div>
-      <div class="hn-slide" style="background-image: url('images/Chfchaouen/chefchaoun_b.jpg')"></div>
-      <div class="hn-slide" style="background-image: url('images/Marrakech/marrakech_11.jpg')"></div>
-      <div class="hn-slide" style="background-image: url('images/Ouarzazat/ouarzazat11.jpg')"></div>
-    </div>
     <div class="hn-hero-overlay"></div>
 
     <!-- Content -->
@@ -65,14 +58,6 @@
       </div>
     </div>
 
-    <!-- Slide dots -->
-    <div class="hn-hero-dots">
-      <button class="hn-dot active" onclick="goToSlide(0)"></button>
-      <button class="hn-dot" onclick="goToSlide(1)"></button>
-      <button class="hn-dot" onclick="goToSlide(2)"></button>
-      <button class="hn-dot" onclick="goToSlide(3)"></button>
-    </div>
-
     <!-- Scroll cue -->
     <div class="hn-scroll-cue">
       <span>Scroll</span>
@@ -81,24 +66,31 @@
 
     <!-- Floating stats bar -->
     <div class="hn-stats-bar">
-      <div class="hn-stat">
-        <strong class="stat-number" data-target="2500">0</strong><span>+</span>
-        <small>Happy Travelers</small>
-      </div>
-      <div class="hn-stat-div"></div>
-      <div class="hn-stat">
-        <strong class="stat-number" data-target="9">0</strong>
-        <small>Destinations</small>
-      </div>
-      <div class="hn-stat-div"></div>
-      <div class="hn-stat">
-        <strong class="stat-number" data-target="50">0</strong><span>+</span>
-        <small>Unique Routes</small>
-      </div>
-      <div class="hn-stat-div"></div>
-      <div class="hn-stat">
-        <strong class="stat-number" data-target="5">0</strong>
-        <small>Years of Excellence</small>
+      <div class="hn-stats-inner">
+        <div class="hn-stat">
+          <div class="hn-stat-val">
+            <span class="stat-number" data-target="2500">0</span>+
+          </div>
+          <small>Happy Travelers</small>
+        </div>
+        <div class="hn-stat">
+          <div class="hn-stat-val">
+            <span class="stat-number" data-target="9">0</span>
+          </div>
+          <small>Destinations</small>
+        </div>
+        <div class="hn-stat">
+          <div class="hn-stat-val">
+            <span class="stat-number" data-target="50">0</span>+
+          </div>
+          <small>Unique Routes</small>
+        </div>
+        <div class="hn-stat">
+          <div class="hn-stat-val">
+            <span class="stat-number" data-target="5">0</span>
+          </div>
+          <small>Years of Excellence</small>
+        </div>
       </div>
     </div>
   </section>
@@ -386,22 +378,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
   <script>
-    // Hero slideshow
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hn-slide');
-    const dots = document.querySelectorAll('.hn-dot');
 
-    function goToSlide(n) {
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = n;
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-    }
-
-    setInterval(() => {
-      goToSlide((currentSlide + 1) % slides.length);
-    }, 5000);
 
     // Reveal on scroll
     const revealEls = document.querySelectorAll('.hn-reveal');
