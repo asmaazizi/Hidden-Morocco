@@ -2591,3 +2591,81 @@ img[src*="mosquee hassan 2"] {
 .page-header-divider::after {
   background: linear-gradient(90deg, #d35400, transparent);
 }
+
+/* ==========================================================================
+   CTA BANNER (Homepage)
+   ========================================================================== */
+.cta-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #8b3a0f 100%);
+  padding: 90px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(211, 84, 0, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-banner-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.cta-banner-content p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  line-height: 1.7;
+}
+
+/* Clean link style for btn-secondary */
+a.btn-secondary {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Ensure hero CTA group layout */
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.cta-button-secondary {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cta-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
