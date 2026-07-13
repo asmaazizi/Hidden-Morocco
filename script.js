@@ -662,7 +662,9 @@ function initMap() {
 // Helper: close map popup and open city modal
 window.closeMapPopupAndOpen = function(cityId) {
   document.querySelector('.leaflet-popup-close-button')?.click();
-  setTimeout(() => openModal(cityId), 200);
+  setTimeout(() => {
+    window.location.href = `destinations.html#${cityId}`;
+  }, 200);
 };
 
 /* ---------- Travel form => WhatsApp ---------- */

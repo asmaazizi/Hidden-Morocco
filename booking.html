@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hidden Morocco</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="exp.css">
+  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+</head>
+
+<body>
+
+    <!-- Sticky Navbar -->
+  <nav class="site-nav scrolled" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
+        <span>Hidden Morocco</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+      </ul>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
+    <div class="hero-text" style="padding-top: 50px;">
+      <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Réservez Votre Expédition</h1>
+      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Planifiez votre voyage sur mesure avec nos spécialistes</p>
+    </div>
+  </header>
+
+<section id="contact" class="travel-form-section reveal">
+    <div class="travel-form-container">
+
+      <div class="travel-form-left">
+        <img src="images/Marrakech/marrakech_11.jpg" alt="Morocco Journey" class="form-bg-img">
+        <div class="form-left-content">
+          <h2>Start Your Journey</h2>
+          <p>Tell us what you want, and we will craft a tailor-made Moroccan experience exclusively for you.</p>
+          <div class="form-contact-info">
+            <span><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</span>
+            <span><i class="fa-solid fa-phone"></i> +212 6 00 00 00 00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-form-right">
+        <form>
+          <div class="form-row">
+            <div class="input-group">
+              <input type="text" id="fname" required>
+              <label for="fname">Full Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="femail" required>
+              <label for="femail">Email Address</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <input type="tel" id="fphone" required>
+              <label for="fphone">Phone / WhatsApp</label>
+            </div>
+            <div class="input-group">
+              <input type="date" id="fdate" required>
+              <label for="fdate">Travel Date</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group select-group">
+              <select id="fadults" required>
+                <option value="" disabled selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4+</option>
+              </select>
+              <label for="fadults">Adults</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+            <div class="input-group select-group">
+              <select id="fchildren" required>
+                <option value="" disabled selected></option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3+</option>
+              </select>
+              <label for="fchildren">Children</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+
+          <div class="destination-select">
+            <label class="dest-title">Must-See Destinations</label>
+            <div class="dest-grid">
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Marrakech">
+                <span>Marrakech</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Ouarzazate">
+                <span>Ouarzazate</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Fes">
+                <span>Fes</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Chefchaouen">
+                <span>Chefchaouen</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Essaouira">
+                <span>Essaouira</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Merzouga">
+                <span>Merzouga</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group text-group">
+            <textarea id="fmessage" required></textarea>
+            <label for="fmessage">Tell us about your dream trip (duration, budget, preferences...)</label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="sendWhatsApp()">
+            <span>Send Request</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+<footer class="footer">
+    <div class="footer-container">
+
+            <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html#marrakech">Marrakech</a></li>
+          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+          <li><a href="destinations.html#casablanca">Casablanca</a></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
+        <p>Tél : +212 6 12 34 56 78</p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+
+
+</body>
+
+</html>
