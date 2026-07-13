@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hidden Morocco</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="home-premium.css">
+  
   <link rel="stylesheet" href="slider.css">
   <link rel="stylesheet" href="exp.css">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
@@ -22,22 +22,18 @@
 
 <body>
 
-  <!-- Sticky Navbar -->
-  <nav class="hn-nav hn-nav-scrolled" id="siteNav">
-    <div class="hn-nav-inner">
-      <a class="hn-logo" href="index.html">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+    <!-- Sticky Navbar -->
+  <nav class="site-nav scrolled" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="testimonials.html" class="active">Reviews</a></li>
-        <li><a href="booking.html" class="hn-book-btn">Book Now</a></li>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="map.html">Map</a></li><li><a href="testimonials.html" class="active" style="color: var(--accent);">Reviews</a></li><li><a href="booking.html" class="nav-cta">Book Now</a></li>
       </ul>
-      <button class="hn-burger" onclick="toggleMobileMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
       </button>
     </div>
   </nav>
