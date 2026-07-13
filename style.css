@@ -2499,33 +2499,28 @@ img[src*="mosquee hassan 2"] {
    ========================================================================== */
 .page-header {
   position: relative;
-  padding: 110px 20px 60px;
+  padding: 130px 20px 70px;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 35%, #2c1810 70%, #8b3a0f 100%);
+  background:
+    linear-gradient(160deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.65) 100%),
+    url('images/hero.jpg') center/cover no-repeat;
 }
 
-/* Moroccan geometric tile pattern overlay */
 .page-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 50%, rgba(211, 84, 0, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 60% 80%, rgba(139, 58, 15, 0.2) 0%, transparent 40%);
-  pointer-events: none;
+  display: none;
 }
 
-/* Subtle shimmer line */
 .page-header::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #d35400, #f39c12, #d35400, transparent);
+  background: linear-gradient(90deg, #d4af37, #f39c12);
+  border-radius: 2px;
 }
 
 .page-header-content {
@@ -2535,61 +2530,43 @@ img[src*="mosquee hassan 2"] {
 
 .page-header-badge {
   display: inline-block;
-  background: rgba(211, 84, 0, 0.2);
-  border: 1px solid rgba(211, 84, 0, 0.5);
-  color: #f39c12;
-  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  padding: 6px 18px;
+  padding: 6px 20px;
   border-radius: 30px;
-  margin-bottom: 18px;
-  backdrop-filter: blur(8px);
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .page-header h1 {
   font-family: 'Playfair Display', serif !important;
-  font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
+  font-size: clamp(2.4rem, 5vw, 4rem) !important;
   font-weight: 700 !important;
   color: #ffffff !important;
-  margin: 0 0 14px !important;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4) !important;
+  margin: 0 0 16px !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
   line-height: 1.15 !important;
-  letter-spacing: -0.5px !important;
+  letter-spacing: 1px !important;
 }
 
 .page-header p {
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 1.05rem !important;
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
   margin: 0 auto !important;
   max-width: 560px !important;
-  line-height: 1.7 !important;
+  line-height: 1.75 !important;
   font-weight: 400 !important;
 }
 
-/* Decorative star divider */
+/* Decorative divider */
 .page-header-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 14px 0 0;
-  color: #d35400;
-  font-size: 1.1rem;
-  opacity: 0.8;
-}
-
-.page-header-divider::before,
-.page-header-divider::after {
-  content: '';
-  width: 50px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #d35400);
-}
-
-.page-header-divider::after {
-  background: linear-gradient(90deg, #d35400, transparent);
+  display: none;
 }
 
 /* ==========================================================================
