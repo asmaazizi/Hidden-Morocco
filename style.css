@@ -1,9 +1,33 @@
-/* ── All design tokens live in theme.css ─────────────────────────
-   Variables here are overrides / additions only.            */
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap');
+:root {
+  --primary: #D35400;
+  /* Orange terracotta */
+  --secondary: #2980B9;
+  /* Bleu atlas */
+  --accent: #F39C12;
+  /* Or marocain */
+  --dark: #2C3E50;
+  /* Bleu nuit */
+  --light: #ECF0F1;
+  /* Fond clair */
+  --text: #333;
+}
 
+body {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background-color: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* ===============================
    STICKY NAVBAR
@@ -21,7 +45,7 @@
 }
 
 .site-nav.scrolled {
-  background: rgba(13, 13, 26, 0.97);
+  background: rgba(44, 62, 80, 0.97);
   backdrop-filter: blur(12px);
   padding: 12px 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -59,7 +83,7 @@
   font-weight: 900;
   color: #fff;
   font-family: 'Playfair Display', serif;
-  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
   flex-shrink: 0;
 }
 
@@ -97,13 +121,13 @@
   padding: 10px 24px;
   border-radius: 25px;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.35);
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.35);
   transition: all 0.3s ease;
 }
 
 .nav-links .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.5);
+  box-shadow: 0 6px 20px rgba(211, 84, 0, 0.5);
 }
 
 .mobile-menu-btn {
@@ -127,7 +151,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(13, 13, 26, 0.98);
+    background: rgba(44, 62, 80, 0.98);
     backdrop-filter: blur(12px);
     flex-direction: column;
     padding: 20px;
@@ -212,8 +236,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 10% 20%, rgba(192, 57, 43, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 10% 20%, rgba(211, 84, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(243, 156, 18, 0.08) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -268,7 +292,7 @@
 .testimonial-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  border-color: rgba(212, 175, 55, 0.3);
+  border-color: rgba(243, 156, 18, 0.3);
 }
 
 .testimonial-stars {
@@ -369,7 +393,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, var(--hm-gold), var(--hm-gold));
+  background: linear-gradient(90deg, #d4af37, #f39c12);
   border-radius: 2px;
 }
 
@@ -520,13 +544,13 @@
 .btn-primary {
   background: var(--primary);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.2);
 }
 
 .btn-primary:hover {
   background: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.3);
+  box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);
 }
 
 .btn-secondary {
@@ -561,7 +585,7 @@
 
 .city-badge {
   display: inline-block;
-  background: linear-gradient(135deg, rgba(192, 57, 43, 0.08) 0%, rgba(212, 175, 55, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(211, 84, 0, 0.08) 0%, rgba(243, 156, 18, 0.12) 100%);
   color: var(--primary);
   font-size: 0.82rem;
   font-weight: 700;
@@ -569,7 +593,7 @@
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: 50px;
-  border: 1.5px solid rgba(192, 57, 43, 0.25);
+  border: 1.5px solid rgba(211, 84, 0, 0.25);
   margin-bottom: 14px;
   transition: all 0.3s ease;
 }
@@ -578,7 +602,7 @@
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.3);
 }
 
 .card-content button {
@@ -591,13 +615,13 @@
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+  box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
 }
 
 .card-content button:hover {
   background: linear-gradient(to right, var(--accent), var(--primary));
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 6px 15px rgba(211, 84, 0, 0.4);
 }
 
 /* Modal - Style amélioré */
@@ -1046,7 +1070,7 @@
 ================================ */
 
 .footer {
-  background: linear-gradient(135deg, var(--hm-bg-dark) 0%, var(--hm-bg-nav) 100%);
+  background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
   color: #cbd5e1;
   padding: 80px 20px 30px;
   font-family: 'Poppins', sans-serif;
@@ -1064,8 +1088,8 @@
   height: 1px;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(192, 57, 43, 0.5), 
-    rgba(212, 175, 55, 0.5), 
+    rgba(211, 84, 0, 0.5), 
+    rgba(243, 156, 18, 0.5), 
     transparent
   );
   animation: shimmer 3s ease-in-out infinite;
@@ -1085,8 +1109,8 @@
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 15% 30%, rgba(192, 57, 43, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 85% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 15% 30%, rgba(211, 84, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 70%, rgba(243, 156, 18, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, rgba(41, 128, 185, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
@@ -1121,9 +1145,9 @@
   bottom: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, var(--hm-orange), var(--hm-gold));
+  background: linear-gradient(to right, #D35400, #F39C12);
   border-radius: 3px;
-  box-shadow: 0 0 10px rgba(192, 57, 43, 0.5);
+  box-shadow: 0 0 10px rgba(211, 84, 0, 0.5);
 }
 
 .footer-col h4 {
@@ -1142,15 +1166,15 @@
 }
 
 .footer-col p a {
-  color: var(--hm-orange);
+  color: #D35400;
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 500;
 }
 
 .footer-col p a:hover {
-  color: var(--hm-gold);
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  color: #F39C12;
+  text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
 }
 
 .footer-col ul {
@@ -1169,14 +1193,14 @@
   content: '▸';
   position: absolute;
   left: 0;
-  color: var(--hm-orange);
+  color: #D35400;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
 .footer-col ul li:hover::before {
   left: 5px;
-  color: var(--hm-gold);
+  color: #F39C12;
 }
 
 .footer-col ul li:hover {
@@ -1228,7 +1252,7 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--hm-orange) 0%, var(--hm-gold) 100%);
+  background: linear-gradient(135deg, #D35400 0%, #F39C12 100%);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate(-50%, -50%);
   z-index: -1;
@@ -1238,7 +1262,7 @@
   color: white;
   border-color: transparent;
   transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 25px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 10px 25px rgba(211, 84, 0, 0.4);
 }
 
 .social-icons a:hover::before {
@@ -1311,8 +1335,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(192, 57, 43, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.10) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, rgba(211, 84, 0, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(243, 156, 18, 0.10) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -1336,7 +1360,7 @@
   color: var(--accent);
   margin-bottom: 15px;
   display: block;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+  filter: drop-shadow(0 0 10px rgba(243, 156, 18, 0.4));
 }
 
 .stat-number {
@@ -1396,8 +1420,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(192, 57, 43, 0.15) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.10) 0%, transparent 55%);
+    radial-gradient(ellipse at 20% 30%, rgba(211, 84, 0, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(243, 156, 18, 0.10) 0%, transparent 55%);
   pointer-events: none;
 }
 
@@ -1438,7 +1462,7 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 8px rgba(255, 255, 255, 0.5);
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-  border: 2px solid rgba(192, 57, 43, 0.2);
+  border: 2px solid rgba(211, 84, 0, 0.2);
   position: relative;
 }
 
@@ -1454,8 +1478,8 @@
 
 #map:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 60px rgba(192, 57, 43, 0.15), 0 0 0 8px rgba(255, 255, 255, 0.9);
-  border-color: rgba(192, 57, 43, 0.5);
+  box-shadow: 0 25px 60px rgba(211, 84, 0, 0.15), 0 0 0 8px rgba(255, 255, 255, 0.9);
+  border-color: rgba(211, 84, 0, 0.5);
 }
 
 .map-legend {
@@ -1488,7 +1512,7 @@
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   border: 2px solid #fff;
-  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1509,7 +1533,7 @@
   transform: translate(-50%, -50%);
   width: 45px;
   height: 45px;
-  background: rgba(212, 175, 55, 0.4);
+  background: rgba(243, 156, 18, 0.4);
   border-radius: 50%;
   z-index: 1;
   animation: mapPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
@@ -1842,7 +1866,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(13, 13, 26, 0.75) 0%, rgba(192, 57, 43, 0.55) 100%);
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.8) 0%, rgba(211, 84, 0, 0.7) 100%);
   z-index: 2;
 }
 
@@ -2017,16 +2041,16 @@
 }
 
 .dest-card:hover span {
-  border-color: var(--hm-orange);
-  color: var(--hm-orange);
-  background: rgba(192, 57, 43, 0.06);
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(211, 84, 0, 0.05);
 }
 
 .dest-card input:checked + span {
-  background: var(--hm-orange);
+  background: var(--primary);
   color: #fff;
-  border-color: var(--hm-orange);
-  box-shadow: 0 4px 14px rgba(192, 57, 43, 0.35);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
 }
 
 /* Submit Button */
@@ -2038,23 +2062,21 @@
   gap: 12px;
   width: 100%;
   padding: 18px;
-  background: var(--hm-orange);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
   border: none;
   border-radius: 30px;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-family: var(--hm-font-sans);
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(192, 57, 43, 0.35);
-  letter-spacing: 0.4px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.3);
 }
 
 .btn-submit:hover {
-  background: var(--hm-orange-hover);
   transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(192, 57, 43, 0.45);
+  box-shadow: 0 12px 25px rgba(211, 84, 0, 0.4);
 }
 
 .btn-submit i {
@@ -2372,7 +2394,7 @@
 }
 
 .pricing-table tbody tr:hover {
-  background: linear-gradient(135deg, rgba(192, 57, 43, 0.04), rgba(212, 175, 55, 0.04));
+  background: linear-gradient(135deg, rgba(211, 84, 0, 0.04), rgba(243, 156, 18, 0.04));
 }
 
 .pricing-table tbody td {
@@ -2399,7 +2421,7 @@
 }
 
 .pricing-table tbody tr:nth-child(even):hover {
-  background: linear-gradient(135deg, rgba(192, 57, 43, 0.06), rgba(212, 175, 55, 0.06));
+  background: linear-gradient(135deg, rgba(211, 84, 0, 0.06), rgba(243, 156, 18, 0.06));
 }
 
 @media (max-width: 600px) {
@@ -2425,7 +2447,7 @@ img[src*="mosquee hassan 2"] {
 }
 
 .site-nav.scrolled {
-  background: rgba(13, 13, 26, 0.96) !important;
+  background: rgba(44, 62, 80, 0.96) !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
@@ -2445,7 +2467,7 @@ img[src*="mosquee hassan 2"] {
 .card:hover {
   transform: translateY(-8px) !important;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
-  border-color: rgba(192, 57, 43, 0.25) !important;
+  border-color: rgba(211, 84, 0, 0.25) !important;
 }
 
 .card img {
@@ -2471,156 +2493,3 @@ img[src*="mosquee hassan 2"] {
 .hero h1 {
   text-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
 }
-
-/* ==========================================================================
-   PREMIUM PAGE HEADER (Sub-pages: Destinations, Map, Reviews, Booking)
-   ========================================================================== */
-.page-header {
-  position: relative;
-  padding: 130px 20px 70px;
-  text-align: center;
-  overflow: hidden;
-  background:
-    linear-gradient(160deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 60%, rgba(0, 0, 0, 0.65) 100%),
-    url('images/hero.jpg') center/cover no-repeat;
-}
-
-.page-header::before {
-  display: none;
-}
-
-.page-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--hm-gold), var(--hm-gold));
-  border-radius: 2px;
-}
-
-.page-header-content {
-  position: relative;
-  z-index: 2;
-}
-
-.page-header-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  padding: 6px 20px;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
-}
-
-.page-header h1 {
-  font-family: 'Playfair Display', serif !important;
-  font-size: clamp(2.4rem, 5vw, 4rem) !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  margin: 0 0 16px !important;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
-  line-height: 1.15 !important;
-  letter-spacing: 1px !important;
-}
-
-.page-header p {
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 1.05rem !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  margin: 0 auto !important;
-  max-width: 560px !important;
-  line-height: 1.75 !important;
-  font-weight: 400 !important;
-}
-
-/* Decorative divider */
-.page-header-divider {
-  display: none;
-}
-
-/* ==========================================================================
-   CTA BANNER (Homepage)
-   ========================================================================== */
-.cta-banner {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #8b3a0f 100%);
-  padding: 90px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(192, 57, 43, 0.15) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.cta-banner-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.cta-banner-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  color: #ffffff;
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.cta-banner-content p {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 1.1rem;
-  margin-bottom: 35px;
-  line-height: 1.7;
-}
-
-/* Clean link style for btn-secondary */
-a.btn-secondary {
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-}
-
-/* Ensure hero CTA group layout */
-.hero-cta-group {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.cta-button-secondary {
-  display: inline-block;
-  padding: 14px 32px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  color: #fff;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.cta-button-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #fff;
-  transform: translateY(-2px);
-}
-

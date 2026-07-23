@@ -502,6 +502,71 @@ window.openDestinationModal = function(id) {
           `).join('')}
         </div>
 
+        ${dest.id === 'marrakech' ? `
+          <div class="marr-exp" style="margin: 30px 0 34px; border-top: 1px solid var(--hm-border); padding-top: 26px;">
+            <div class="marr-exp-head" style="text-align: left; margin-bottom: 20px;">
+              <h4 style="font-size: 1.3rem; font-family: var(--hm-font-serif); margin-bottom: 6px;">Our Experiences around Marrakech</h4>
+              <p style="font-size: 0.85rem; color: var(--hm-text-muted);">Hover to explore • Click to view experience itinerary</p>
+            </div>
+            <div class="marr-accordion" style="height: 360px;">
+              <div class="acc-item" onclick="openExp('ourika')">
+                <img src="images/Marrakech/ourika_1.png" alt="Ourika Valley">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">1 day</span>
+                  <h4>Ourika Valley</h4>
+                  <p class="acc-desc">Atlas • Waterfalls • Villages</p>
+                </div>
+              </div>
+              <div class="acc-item" onclick="openExp('ouzoud')">
+                <img src="images/Ouzoud/ouzoud-falls.jpg" alt="Ouzoud Waterfalls">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">1 day</span>
+                  <h4>Ouzoud Waterfalls</h4>
+                  <p class="acc-desc">Nature • Hiking • Views</p>
+                </div>
+              </div>
+              <div class="acc-item" onclick="openExp('agafay')">
+                <img src="images/Marrakech/agafay.jpg" alt="Agafay Desert">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">Evening</span>
+                  <h4>Agafay Desert</h4>
+                  <p class="acc-desc">Quad • Camel • Dinner</p>
+                </div>
+              </div>
+              <div class="acc-item" onclick="openExp('imlil')">
+                <img src="images/Marrakech/imlil-village.jpg" alt="Imlil & Atlas">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">1 day</span>
+                  <h4>Imlil & Atlas</h4>
+                  <p class="acc-desc">Hiking • Villages • Toubkal</p>
+                </div>
+              </div>
+              <div class="acc-item" onclick="openExp('takerkoust')">
+                <img src="images/Marrakech/lac-lala-takerkoust.webp" alt="Lalla Takerkoust">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">Half-day</span>
+                  <h4>Lalla Takerkoust Lake</h4>
+                  <p class="acc-desc">Lake • Outdoor</p>
+                </div>
+              </div>
+              <div class="acc-item" onclick="openExp('ballon')">
+                <img src="images/Marrakech/montgolfiere.webp" alt="Hot Air Balloon">
+                <div class="acc-overlay"></div>
+                <div class="acc-content">
+                  <span class="acc-tag">Sunrise</span>
+                  <h4>Hot Air Balloon</h4>
+                  <p class="acc-desc">Sunrise • Breakfast</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hm-border); padding-top: 24px;">
           <div>
             <span style="font-size: 0.85rem; color: var(--hm-text-muted);">Price per person</span>
@@ -649,3 +714,295 @@ function initBookingWizard() {
     }, 1500);
   });
 }
+
+// ── Original Marrakech Experiences Engine ───────────────────────────────────
+// ── In-City Marrakech Experiences Engine ───────────────────────────────────
+const EXPERIENCES = {
+  ourika: {
+    title: "Ourika Valley (Setti Fatma)",
+    img: "images/Marrakech/ourika_1.png",
+    desc: "Nature excursion 60 km from Marrakech: green valley, Berber villages and Setti Fatma waterfalls.",
+    duration: "1 day",
+    timing: "Departure 08:30 • Return ~18:00",
+    price: "45€",
+    schedule: ["08:30 – Pick up in Marrakech", "10:00 – Scenic drive + photo stop", "11:00 – Setti Fatma & walk to waterfalls", "13:30 – Lunch (optional)", "16:30 – Return", "18:00 – Arrival"],
+    activities: ["Berber villages", "Walk to waterfalls", "Panoramic photos", "Lunch (optional)"]
+  },
+  ouzoud: {
+    title: "Ouzoud Waterfalls",
+    img: "images/Ouzoud/ouzoud-falls.jpg",
+    desc: "The most beautiful waterfalls in Morocco: nature, easy hike and magnificent views.",
+    duration: "1 day",
+    timing: "Departure 08:00 • Return ~19:00",
+    price: "250 DH",
+    schedule: ["08:00 – Departure", "11:00 – Arrival + walk", "13:00 – Lunch", "15:00 – Boat ride", "19:00 – Return"],
+    activities: ["Easy hike", "Macaque monkeys observation", "Boat ride", "Panoramic photos"]
+  },
+  agafay: {
+    title: "Agafay Desert (Quad + Camel + Dinner)",
+    img: "images/Marrakech/agafay.jpg",
+    desc: "Late afternoon adventure: camel, quad, sunset and dinner in a Berber tent.",
+    duration: "≈ 6 hours",
+    timing: "Departure 15:30 • Return ~21:30",
+    price: "190€",
+    schedule: ["15:30 – Pick up", "17:30 – Camel ride", "18:15 – Quad biking", "19:00 – Sunset", "20:00 – Dinner + show"],
+    activities: ["Camel ride", "Quad biking", "Sunset", "Berber dinner"]
+  },
+  imlil: {
+    title: "Imlil & Atlas Mountains",
+    img: "images/Marrakech/imlil_1.jpg",
+    desc: "Mountain day: hiking, Amazigh villages and panoramas of Toubkal.",
+    duration: "1 day",
+    timing: "Departure 08:00 • Return ~18:00",
+    price: "75€",
+    schedule: ["08:00 – Departure", "10:00 – Arrival in Imlil", "11:00 – Guided village hike", "13:30 – Berber lunch"],
+    activities: ["Guided Hiking", "Amazigh villages", "Atlas Panoramas"]
+  },
+  takerkoust: {
+    title: "Lalla Takerkoust Lake",
+    img: "images/Marrakech/lac-lala-takerkoust.webp",
+    desc: "Relaxing outing: lake, nature and outdoor activities depending on the package.",
+    duration: "Half-day",
+    timing: "Morning or afternoon departure",
+    price: "50€",
+    schedule: ["Pick-up", "Scenic drive to Lake", "Free time & optional quad", "Tea break overlooking water"],
+    activities: ["Walk by the lake", "Relaxation", "Outdoor Activities"]
+  },
+  ballon: {
+    title: "Sunrise Hot Air Balloon",
+    img: "images/Marrakech/montgolfiere.webp",
+    desc: "Sunrise flight + Berber breakfast after landing.",
+    duration: "≈ 4–5 hours",
+    timing: "Departure ~2h before sunrise",
+    price: "177€",
+    schedule: ["Pick-up", "Balloon preparation", "Flight 40–60 min over Atlas", "Berber breakfast"],
+    activities: ["Sunrise Flight", "Atlas Views", "Berber Breakfast"]
+  },
+  souks: {
+    title: "Jemaa el-Fnaa & Medina Souks Tour",
+    img: "images/Marrakech/souk-of-Marrakech.webp",
+    desc: "Guided street food exploration through Jemaa el-Fnaa square, ancient spice souks, and hidden artisan workshops inside the Medina.",
+    duration: "3 hours",
+    timing: "Evening • 17:30 to 20:30",
+    price: "35€",
+    schedule: ["17:30 – Meet guide at Medina entrance gate", "18:00 – Spice market & artisan workshops walk", "19:30 – Jemaa el-Fnaa food stalls tasting", "20:30 – Rooftop sunset tea"],
+    activities: ["Street Food Tasting", "Spice Market Walk", "Artisan Workshops", "Rooftop Sunset Tea"]
+  },
+  palaces: {
+    title: "Bahia Palace & Le Jardin Secret",
+    img: "images/Marrakech/marrakech_11.jpg",
+    desc: "Discover the architectural wonders of 19th-century Grand Viziers, ornate zellij tilework, Saadian Tombs, and quiet Islamic botanical gardens.",
+    duration: "Half-day",
+    timing: "Morning • 09:30 to 13:00",
+    price: "45€",
+    schedule: ["09:30 – Guided walking tour of Bahia Palace", "11:00 – Saadian Tombs & Jewish Quarter (Mellah)", "12:30 – Le Jardin Secret botanical garden"],
+    activities: ["Zellij Tilework", "Royal Palaces", "Botanical Gardens", "Historical Guide"]
+  },
+  hammam: {
+    title: "Traditional Royal Hammam & Spa",
+    img: "images/Marrakech/marrakech_4.webp",
+    desc: "Indulge in an authentic Moroccan wellness ritual: black soap scrub with eucalyptus, natural rhassoul clay mask, and argan oil massage inside a luxury Riad.",
+    duration: "2 hours",
+    timing: "Flexible daily timeslots",
+    price: "60€",
+    schedule: ["Welcome herbal tea at historic Riad Spa", "Eucalyptus black soap steam room", "Exfoliating glove scrub & rhassoul clay wrap", "Full body argan oil massage"],
+    activities: ["Eucalyptus Steam", "Black Soap Scrub", "Argan Oil Massage", "Riad Relaxation"]
+  },
+  palmeraie: {
+    title: "Palmeraie Sunset Quad & Camel Walk",
+    img: "images/Marrakech/agafay.jpg",
+    desc: "Ride through thousands of historic palm trees in the Marrakech Palmeraie on quad bikes and camels during golden hour sunset.",
+    duration: "3 hours",
+    timing: "Late Afternoon • 16:30 to 19:30",
+    price: "55€",
+    schedule: ["16:30 – Pick up from your Medina Riad", "17:00 – Quad bike adventure through palm groves", "18:00 – Sunset camel walk", "19:00 – Fresh mint tea break"],
+    activities: ["Quad Biking", "Sunset Camel Walk", "Palmeraie Groves", "Berber Tea"]
+  },
+  cooking: {
+    title: "Moroccan Tagine Culinary Masterclass",
+    img: "images/Marrakech/marrakech_1.jpg",
+    desc: "Shop for fresh herbs and spices in the local market, then learn to cook authentic lamb tagine and pastilla with a master chef in an open-air Riad patio.",
+    duration: "Half-day",
+    timing: "Morning • 09:30 to 13:30",
+    price: "50€",
+    schedule: ["09:30 – Souk market shopping for fresh spices", "10:30 – Hands-on cooking workshop in Riad patio", "12:30 – Enjoy your self-cooked 3-course lunch"],
+    activities: ["Market Shopping", "Tagine Masterclass", "Spices Workshop", "3-Course Lunch"]
+  },
+  majorelle: {
+    title: "Majorelle Garden & YSL Museum",
+    img: "images/Marrakech/marrakech_12.jpg",
+    desc: "Walk through Jacques Majorelle’s iconic cobalt blue botanical haven, Berber Museum artifacts, and high-fashion exhibits at the Yves Saint Laurent Museum.",
+    duration: "Half-day",
+    timing: "Morning or Afternoon",
+    price: "40€",
+    schedule: ["Priority entry to Jardin Majorelle", "Pierre Bergé Museum of Berber Arts", "Yves Saint Laurent Fashion gallery", "Garden courtyard café"],
+    activities: ["Cobalt Blue Villa", "Botanical Palms", "Berber Art Collection", "YSL Couture Exhibit"]
+  }
+};
+
+window.openExp = function(key) {
+  const exp = EXPERIENCES[key];
+  if (!exp) return;
+
+  let modal = document.getElementById('destModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'destModal';
+    modal.style.cssText = `
+      position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(17, 17, 30, 0.75); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    `;
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="glass-panel" style="width: min(850px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: #FFFFFF;">
+      <button onclick="closeDestinationModal()" style="position: absolute; top: 20px; right: 20px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(0,0,0,0.5); color: #fff; cursor: pointer; font-size: 1.2rem;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="position: relative; height: 320px;">
+        <img src="${exp.img}" alt="${exp.title}" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(26,26,46,0.85) 100%);"></div>
+        <div style="position: absolute; bottom: 24px; left: 30px; right: 30px; color: #fff;">
+          <span class="badge badge-terracotta" style="margin-bottom: 8px; background: var(--hm-terracotta); color: #fff;">${exp.duration}</span>
+          <h2 style="font-size: 2.2rem; color: #fff; font-family: var(--hm-font-serif);">${exp.title}</h2>
+          <p style="opacity: 0.9; font-size: 0.95rem;"><i class="fa-regular fa-clock"></i> ${exp.timing}</p>
+        </div>
+      </div>
+
+      <div style="padding: 34px;">
+        <p style="font-size: 1.05rem; line-height: 1.75; color: var(--hm-text-body); margin-bottom: 28px;">${exp.desc}</p>
+
+        <h4 style="font-size: 1.15rem; margin-bottom: 14px; font-family: var(--hm-font-serif);">Schedule & Itinerary</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+          ${exp.schedule.map(step => `
+            <div style="padding: 12px 16px; border-left: 3px solid var(--hm-terracotta); background: var(--hm-bg-main); border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0; font-size: 0.95rem; font-weight: 600;">
+              ${step}
+            </div>
+          `).join('')}
+        </div>
+
+        <h4 style="font-size: 1.15rem; margin-bottom: 14px; font-family: var(--hm-font-serif);">Included Activities</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px;">
+          ${exp.activities.map(act => `
+            <span class="badge badge-gold" style="font-size: 0.85rem;"><i class="fa-solid fa-check"></i> ${act}</span>
+          `).join('')}
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hm-border); padding-top: 24px;">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--hm-text-muted);">Price per person</span>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--hm-text-heading);">${exp.price}</div>
+          </div>
+          <a href="booking.html" class="btn-primary" style="padding: 12px 30px;">Book this Experience</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+  });
+};
+
+// ── Legacy Classic Modal System (for original destinations.html) ─────────────
+
+function lockBodyScroll(lock) {
+  document.body.style.overflow = lock ? 'hidden' : '';
+}
+
+window.openModal = function(city, scrollToBooking = false) {
+  const modal = document.getElementById('modal-' + city);
+  if (!modal) return;
+
+  modal.style.display = 'block';
+  lockBodyScroll(true);
+
+  if (scrollToBooking) {
+    const bookingSection = document.getElementById('booking-' + city);
+    if (bookingSection) {
+      setTimeout(() => bookingSection.scrollIntoView({ behavior: 'smooth' }), 300);
+    }
+  }
+
+  const selector = '#modal-' + city + ' .mySwiper-' + city;
+  const swiperEl = document.querySelector(selector);
+  if (swiperEl && typeof Swiper !== 'undefined') {
+    if (!swiperEl.swiper) {
+      new Swiper(selector, {
+        loop: true,
+        observer: true,
+        observeParents: true,
+        navigation: {
+          nextEl: '#modal-' + city + ' .swiper-button-next',
+          prevEl: '#modal-' + city + ' .swiper-button-prev'
+        },
+        pagination: {
+          el: '#modal-' + city + ' .swiper-pagination',
+          clickable: true
+        }
+      });
+    } else {
+      swiperEl.swiper.update();
+    }
+  }
+};
+
+window.closeModal = function(city) {
+  const modal = document.getElementById('modal-' + city);
+  if (!modal) return;
+  modal.style.display = 'none';
+  lockBodyScroll(false);
+};
+
+const DEST_IMAGES = {
+  'Marrakech':   'images/Marrakech/Marrakech.jpg',
+  'Ouarzazate':  'images/Ouarzazat/ouarzazat1.jpeg',
+  'Merzouga':    'images/Merzouga/merzouga_1.jpg',
+  'Chefchaouen': 'images/Chfchaouen/chefchaoun.jpg',
+  'Essaouira':   'images/Essaouira/essaouira_1.jpg',
+  'Fes':         'images/Fes/Fes.jpg',
+  'Casablanca':  'images/Casablanca/casablanca.png',
+  'Agadir':      'images/Agadir/agadir_hero.png',
+  'Zagora':      'images/Zagora/zagora_hero.png'
+};
+
+window.openDestBooking = function(city) {
+  const modal = document.getElementById('destBookingModal');
+  if (!modal) return;
+  document.getElementById('destBookingTitle').textContent = city + ' Expedition';
+  const img = document.getElementById('destBookingImg');
+  if (img && DEST_IMAGES[city]) img.src = DEST_IMAGES[city];
+  const fesPromo = document.getElementById('fesPromoBlock');
+  if (fesPromo) fesPromo.style.display = (city === 'Fes') ? 'block' : 'none';
+  document.getElementById('db-name').value = '';
+  document.getElementById('db-email').value = '';
+  document.getElementById('db-phone').value = '';
+  document.getElementById('db-date').value = '';
+  document.getElementById('db-adults').value = 2;
+  document.getElementById('db-children').value = 0;
+  document.getElementById('db-message').value = '';
+  modal.style.display = 'flex';
+  lockBodyScroll(true);
+};
+
+window.closeDestBooking = function() {
+  const modal = document.getElementById('destBookingModal');
+  if (modal) modal.style.display = 'none';
+  lockBodyScroll(false);
+};
+
+window.sendDestBookingWhatsApp = function() {
+  const WHATSAPP_NUMBER = '212771663435';
+  const cityTitle = document.getElementById('destBookingTitle').textContent;
+  const name     = document.getElementById('db-name').value;
+  const date     = document.getElementById('db-date').value;
+  const adults   = document.getElementById('db-adults').value;
+  const children = document.getElementById('db-children').value;
+  const message  = document.getElementById('db-message').value;
+  if (!name || !date) { alert('Please fill in your name and preferred date.'); return; }
+  const text = `Hello 👋\nI am interested in booking:\n✅ Destination: ${cityTitle}\n👤 Name: ${name}\n📅 Date: ${date}\n👥 Adults: ${adults}\n🧒 Children: ${children}\n📝 Message: ${message || 'N/A'}\n\nThank you!`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+};

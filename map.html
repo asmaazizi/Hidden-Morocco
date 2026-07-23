@@ -1,61 +1,104 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interactive Travel Map — Hidden Morocco</title>
+  <title>Hidden Morocco</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="exp.css">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-</head>
-<body style="display: flex; flex-direction: column; min-height: 100vh;">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <!-- Navigation -->
-  <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
-    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: var(--hm-text-heading);">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
+</head>
+
+<body>
+
+    <!-- Sticky Navbar -->
+  <nav class="site-nav scrolled" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
-        <li><a href="index.html" style="font-weight: 600;">Home</a></li>
-        <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
-        <li><a href="map.html" style="font-weight: 700; color: var(--hm-terracotta);">Interactive Map</a></li>
-        <li><a href="about.html" style="font-weight: 600;">About</a></li>
-        <li><a href="testimonials.html" style="font-weight: 600;">Reviews</a></li>
-        <li><a href="contact.html" style="font-weight: 600;">Contact</a></li>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
       </ul>
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
-          <i class="fa-regular fa-heart"></i>
-          <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
-        </a>
-        <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
-        <a href="dashboard.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hm-text-heading);" title="User Dashboard">
-          <i class="fa-regular fa-user"></i>
-        </a>
-      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </nav>
 
-  <!-- Main Map Split View -->
-  <main style="flex: 1; margin-top: 80px; position: relative; height: calc(100vh - 80px); display: flex;">
-    <div id="interactiveMap" style="width: 100%; height: 100%; z-index: 1;"></div>
-    
-    <!-- Floating Info Panel -->
-    <div class="glass-panel" style="position: absolute; bottom: 30px; left: 30px; z-index: 500; padding: 20px 28px; border-radius: var(--hm-radius-lg); max-width: 360px;">
-      <span class="badge badge-terracotta" style="margin-bottom: 8px;">Spatial Guide</span>
-      <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Interactive Route Map</h3>
-      <p style="font-size: 0.85rem; color: var(--hm-text-muted); margin-bottom: 12px;">Click any pin across Morocco to preview highlights, prices, and direct booking options.</p>
-      <div style="display: flex; gap: 10px;">
-        <a href="destinations.html" class="btn-ghost" style="padding: 8px 16px; font-size: 0.8rem; width: 100%;">View List Mode</a>
+  <!-- Hero Section -->
+  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
+    <div class="hero-text" style="padding-top: 50px;">
+      <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Carte Interactive</h1>
+      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Découvrez les itinéraires de nos circuits</p>
+    </div>
+  </header>
+
+<section class="map-section reveal">
+    <h2>Discover Morocco on the Map</h2>
+    <p class="map-subtitle">Explore our destinations across the kingdom — click any marker to learn more</p>
+    <div id="map"></div>
+    <div class="map-legend">
+      <span><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Our Destinations</span>
+      <span><i class="fa-solid fa-road" style="color: var(--secondary);"></i> Tour Routes</span>
+    </div>
+  </section>
+<footer class="footer">
+    <div class="footer-container">
+
+            <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html#marrakech">Marrakech</a></li>
+          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+          <li><a href="destinations.html#casablanca">Casablanca</a></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
+        <p>Tél : +212 6 12 34 56 78</p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
       </div>
     </div>
-  </main>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+    </div>
+  </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
+
+
+
 </body>
+
 </html>

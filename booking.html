@@ -1,142 +1,203 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Book Your Expedition — Hidden Morocco</title>
+  <title>Hidden Morocco</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="exp.css">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 </head>
+
 <body>
 
-  <!-- Navigation -->
-  <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
-    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: var(--hm-text-heading);">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
+    <!-- Sticky Navbar -->
+  <nav class="site-nav scrolled" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
-        <li><a href="index.html" style="font-weight: 600;">Home</a></li>
-        <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
-        <li><a href="map.html" style="font-weight: 600;">Interactive Map</a></li>
-        <li><a href="about.html" style="font-weight: 600;">About</a></li>
-        <li><a href="testimonials.html" style="font-weight: 600;">Reviews</a></li>
-        <li><a href="contact.html" style="font-weight: 600;">Contact</a></li>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
       </ul>
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
-          <i class="fa-regular fa-heart"></i>
-          <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
-        </a>
-        <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
-        <a href="dashboard.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hm-text-heading);" title="User Dashboard">
-          <i class="fa-regular fa-user"></i>
-        </a>
-      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <section style="position: relative; padding: 140px 20px 70px; text-align: center; background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.9) 100%), url('images/hero.jpg') center/cover no-repeat;">
-    <div style="max-width: 800px; margin: 0 auto; color: #fff;">
-      <span class="badge badge-terracotta" style="margin-bottom: 16px;">Bespoke Booking Engine</span>
-      <h1 style="font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 16px; color: #fff;">Reserve Your Moroccan Journey</h1>
-      <p style="font-size: 1.1rem; opacity: 0.85;">Select your dates, custom add-ons, and secure your place with our instant reservation system.</p>
+  <!-- Hero Section -->
+  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
+    <div class="hero-text" style="padding-top: 50px;">
+      <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Réservez Votre Expédition</h1>
+      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Planifiez votre voyage sur mesure avec nos spécialistes</p>
     </div>
-  </section>
+  </header>
 
-  <!-- Booking Container -->
-  <section style="padding: 80px 20px 120px;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      
-      <form id="bookingFormWizard" class="glass-panel" style="border-radius: var(--hm-radius-lg); padding: 48px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px;">
-        <!-- Left Steps -->
-        <div>
-          <h3 style="font-size: 1.6rem; margin-bottom: 24px; font-family: var(--hm-font-serif);">1. Experience & Dates</h3>
-          
-          <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px;">
-            <div>
-              <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Select Destination</label>
-              <select id="bookingDestSelect" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none; font-weight: 600; cursor: pointer;">
-                <option value="marrakech">Marrakech Medina & Palaces (€180/person)</option>
-                <option value="chefchaouen">Chefchaouen - The Blue Pearl (€140/person)</option>
-                <option value="merzouga">Merzouga Sahara Erg Chebbi (€260/person)</option>
-                <option value="fes">Fes El Bali - Cultural Capital (€165/person)</option>
-                <option value="essaouira">Essaouira Atlantic Coastal Citadel (€130/person)</option>
-                <option value="ouarzazate">Ouarzazate & Ait Benhaddou (€150/person)</option>
-                <option value="dades">Dades Valley & Todra Gorges (€175/person)</option>
-                <option value="agadir">Agadir & Taghazout Surf Coast (€145/person)</option>
-                <option value="casablanca">Casablanca Modern Majesty (€120/person)</option>
+<section id="contact" class="travel-form-section reveal">
+    <div class="travel-form-container">
+
+      <div class="travel-form-left">
+        <img src="images/Marrakech/marrakech_11.jpg" alt="Morocco Journey" class="form-bg-img">
+        <div class="form-left-content">
+          <h2>Start Your Journey</h2>
+          <p>Tell us what you want, and we will craft a tailor-made Moroccan experience exclusively for you.</p>
+          <div class="form-contact-info">
+            <span><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</span>
+            <span><i class="fa-solid fa-phone"></i> +212 6 00 00 00 00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-form-right">
+        <form>
+          <div class="form-row">
+            <div class="input-group">
+              <input type="text" id="fname" required>
+              <label for="fname">Full Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="femail" required>
+              <label for="femail">Email Address</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <input type="tel" id="fphone" required>
+              <label for="fphone">Phone / WhatsApp</label>
+            </div>
+            <div class="input-group">
+              <input type="date" id="fdate" required>
+              <label for="fdate">Travel Date</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group select-group">
+              <select id="fadults" required>
+                <option value="" disabled selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4+</option>
               </select>
+              <label for="fadults">Adults</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
             </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Departure Date</label>
-                <input type="date" required style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
-              </div>
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Number of Guests</label>
-                <input type="number" id="bookingGuests" min="1" max="15" value="2" required style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none; font-weight: 700;">
-              </div>
-            </div>
-          </div>
-
-          <h3 style="font-size: 1.6rem; margin-bottom: 24px; font-family: var(--hm-font-serif);">2. Guest Contact</h3>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px;">
-            <div>
-              <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Full Name</label>
-              <input type="text" required placeholder="John Doe" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
-            </div>
-            <div>
-              <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Email Address</label>
-              <input type="email" required placeholder="john@example.com" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+            <div class="input-group select-group">
+              <select id="fchildren" required>
+                <option value="" disabled selected></option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3+</option>
+              </select>
+              <label for="fchildren">Children</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
             </div>
           </div>
 
-          <button type="submit" class="btn-primary" style="padding: 16px; font-size: 1.05rem; width: 100%;">
-            Confirm & Complete Reservation <i class="fa-solid fa-check-circle"></i>
+          <div class="destination-select">
+            <label class="dest-title">Must-See Destinations</label>
+            <div class="dest-grid">
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Marrakech">
+                <span>Marrakech</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Ouarzazate">
+                <span>Ouarzazate</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Fes">
+                <span>Fes</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Chefchaouen">
+                <span>Chefchaouen</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Essaouira">
+                <span>Essaouira</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Merzouga">
+                <span>Merzouga</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group text-group">
+            <textarea id="fmessage" required></textarea>
+            <label for="fmessage">Tell us about your dream trip (duration, budget, preferences...)</label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="sendWhatsApp()">
+            <span>Send Request</span>
+            <i class="fa-solid fa-paper-plane"></i>
           </button>
-        </div>
+        </form>
+      </div>
 
-        <!-- Right Summary Card -->
-        <div style="background: var(--hm-bg-main); padding: 32px; border-radius: var(--hm-radius-lg); border: 1px solid var(--hm-border); height: fit-content;">
-          <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Reservation Summary</h4>
-          
-          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; font-size: 0.95rem;">
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--hm-border); padding-bottom: 10px;">
-              <span style="color: var(--hm-text-muted);">Private Guide & 4x4</span>
-              <span style="font-weight: 600; color: var(--hm-emerald);">Included</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--hm-border); padding-bottom: 10px;">
-              <span style="color: var(--hm-text-muted);">Hotel/Airport Transfer</span>
-              <span style="font-weight: 600; color: var(--hm-emerald);">Included</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--hm-border); padding-bottom: 10px;">
-              <span style="color: var(--hm-text-muted);">Free Cancellation</span>
-              <span style="font-weight: 600;">Up to 48h</span>
-            </div>
-          </div>
-
-          <div style="border-top: 2px solid var(--hm-border); padding-top: 20px; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-size: 1rem; font-weight: 700;">Total Estimated</span>
-            <span id="bookingTotalPrice" style="font-size: 2.2rem; font-weight: 800; color: var(--hm-terracotta);">€360</span>
-          </div>
-        </div>
-      </form>
     </div>
   </section>
+<footer class="footer">
+    <div class="footer-container">
 
-  <!-- Footer -->
-  <footer style="background: var(--hm-bg-footer); color: #94A3B8; padding: 80px 20px 40px; border-top: 1px solid var(--hm-border);">
-    <div style="max-width: 1300px; margin: 0 auto; text-align: center; font-size: 0.85rem;">
-      <p>&copy; 2026 Hidden Morocco. All Rights Reserved.</p>
+            <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html#marrakech">Marrakech</a></li>
+          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+          <li><a href="destinations.html#casablanca">Casablanca</a></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
+        <p>Tél : +212 6 12 34 56 78</p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
+
+
+
 </body>
+
 </html>
