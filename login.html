@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign In / Register — Hidden Morocco</title>
+  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(15,23,42,0.75) 0%, rgba(15,23,42,0.92) 100%), url('images/hero.jpg') center/cover no-repeat;">
+
+  <!-- Navigation Header -->
+  <nav class="hn-nav" id="siteNav" style="padding: 20px 40px;">
+    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: #fff;">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
+        <span>Hidden Morocco</span>
+      </a>
+      <a href="index.html" style="color: #fff; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-xmark" style="font-size: 1.2rem;"></i> Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- Login Card Centered -->
+  <main style="padding: 60px 20px; display: flex; align-items: center; justify-content: center;">
+    <div class="glass-panel" style="width: min(460px, 94vw); padding: 40px; border-radius: var(--hm-radius-lg); background: rgba(255,255,255,0.85); backdrop-filter: blur(24px); box-shadow: var(--hm-shadow-lg);">
+      
+      <!-- Tab Controls -->
+      <div style="display: flex; border-bottom: 2px solid var(--hm-border); margin-bottom: 30px;">
+        <button id="tabSignIn" onclick="switchAuthTab('signin')" style="flex: 1; padding: 12px; border: none; background: transparent; font-weight: 700; font-size: 1rem; color: var(--hm-turquoise); border-bottom: 3px solid var(--hm-turquoise); cursor: pointer;">Sign In</button>
+        <button id="tabRegister" onclick="switchAuthTab('register')" style="flex: 1; padding: 12px; border: none; background: transparent; font-weight: 700; font-size: 1rem; color: var(--hm-text-muted); cursor: pointer;">Register</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="formSignIn" onsubmit="event.preventDefault(); showToast('Welcome back, Youssef!'); setTimeout(() => window.location.href='dashboard.html', 1000);" style="display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Email Address</label>
+          <input type="email" required placeholder="youssef@example.com" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Password</label>
+          <input type="password" required placeholder="••••••••" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+        </div>
+
+        <button type="submit" class="btn-primary" style="padding: 14px; font-size: 1rem; width: 100%;">
+          Sign In To Account <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="formRegister" onsubmit="event.preventDefault(); showToast('Account created successfully!'); setTimeout(() => window.location.href='dashboard.html', 1000);" style="display: none; flex-direction: column; gap: 20px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Full Name</label>
+          <input type="text" required placeholder="Youssef Alami" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Email Address</label>
+          <input type="email" required placeholder="youssef@example.com" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Create Password</label>
+          <input type="password" required placeholder="••••••••" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+        </div>
+
+        <button type="submit" class="btn-primary" style="padding: 14px; font-size: 1rem; width: 100%;">
+          Create VIP Account <i class="fa-solid fa-user-plus"></i>
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <footer style="padding: 20px; text-align: center; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
+    &copy; 2026 Hidden Morocco. Secure 256-bit Encrypted Portal.
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function switchAuthTab(tab) {
+      const signInBtn = document.getElementById('tabSignIn');
+      const registerBtn = document.getElementById('tabRegister');
+      const signInForm = document.getElementById('formSignIn');
+      const registerForm = document.getElementById('formRegister');
+
+      if (tab === 'signin') {
+        signInBtn.style.color = 'var(--hm-turquoise)';
+        signInBtn.style.borderBottom = '3px solid var(--hm-turquoise)';
+        registerBtn.style.color = 'var(--hm-text-muted)';
+        registerBtn.style.borderBottom = 'none';
+        signInForm.style.display = 'flex';
+        registerForm.style.display = 'none';
+      } else {
+        registerBtn.style.color = 'var(--hm-turquoise)';
+        registerBtn.style.borderBottom = '3px solid var(--hm-turquoise)';
+        signInBtn.style.color = 'var(--hm-text-muted)';
+        signInBtn.style.borderBottom = 'none';
+        registerForm.style.display = 'flex';
+        signInForm.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

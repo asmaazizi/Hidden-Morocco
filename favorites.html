@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interactive Travel Map — Hidden Morocco</title>
+  <title>Saved Favorites — Hidden Morocco</title>
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
-<body style="display: flex; flex-direction: column; min-height: 100vh;">
+<body>
 
   <!-- Navigation -->
   <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
@@ -21,15 +20,15 @@
       <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
         <li><a href="index.html" style="font-weight: 600;">Home</a></li>
         <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
-        <li><a href="map.html" style="font-weight: 700; color: var(--hm-turquoise);">Interactive Map</a></li>
+        <li><a href="map.html" style="font-weight: 600;">Interactive Map</a></li>
         <li><a href="about.html" style="font-weight: 600;">About</a></li>
         <li><a href="testimonials.html" style="font-weight: 600;">Reviews</a></li>
         <li><a href="contact.html" style="font-weight: 600;">Contact</a></li>
       </ul>
       <div style="display: flex; align-items: center; gap: 14px;">
         <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
-          <i class="fa-regular fa-heart"></i>
+        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-turquoise); border-color: var(--hm-turquoise);">
+          <i class="fa-solid fa-heart" style="color: #EF4444;"></i>
           <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
         </a>
         <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
@@ -40,22 +39,31 @@
     </div>
   </nav>
 
-  <!-- Main Map Split View -->
-  <main style="flex: 1; margin-top: 80px; position: relative; height: calc(100vh - 80px); display: flex;">
-    <div id="interactiveMap" style="width: 100%; height: 100%; z-index: 1;"></div>
-    
-    <!-- Floating Info Panel -->
-    <div class="glass-panel" style="position: absolute; bottom: 30px; left: 30px; z-index: 500; padding: 20px 28px; border-radius: var(--hm-radius-lg); max-width: 360px;">
-      <span class="badge badge-turquoise" style="margin-bottom: 8px;">Spatial Guide</span>
-      <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Interactive Route Map</h3>
-      <p style="font-size: 0.85rem; color: var(--hm-text-muted); margin-bottom: 12px;">Click any pin across Morocco to preview highlights, prices, and direct booking options.</p>
-      <div style="display: flex; gap: 10px;">
-        <a href="destinations.html" class="btn-ghost" style="padding: 8px 16px; font-size: 0.8rem; width: 100%;">View List Mode</a>
+  <!-- Page Header -->
+  <section style="position: relative; padding: 140px 20px 70px; text-align: center; background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.9) 100%), url('images/hero.jpg') center/cover no-repeat;">
+    <div style="max-width: 800px; margin: 0 auto; color: #fff;">
+      <span class="badge badge-turquoise" style="margin-bottom: 16px;">Personal Wishlist</span>
+      <h1 style="font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 16px; color: #fff;">Your Saved Experiences</h1>
+      <p style="font-size: 1.1rem; opacity: 0.85;">Bookmark your favorite Moroccan destinations and plan your dream trip whenever you are ready.</p>
+    </div>
+  </section>
+
+  <!-- Saved Cards Grid -->
+  <section style="padding: 80px 20px 120px;">
+    <div style="max-width: 1300px; margin: 0 auto;">
+      <div id="favoritesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px;">
+        <!-- Injected via script.js -->
       </div>
     </div>
-  </main>
+  </section>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Footer -->
+  <footer style="background: var(--hm-bg-footer); color: #94A3B8; padding: 80px 20px 40px; border-top: 1px solid var(--hm-border);">
+    <div style="max-width: 1300px; margin: 0 auto; text-align: center; font-size: 0.85rem;">
+      <p>&copy; 2026 Hidden Morocco. All Rights Reserved.</p>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,110 +1,311 @@
 /* ==========================================================================
-   HIDDEN MOROCCO — DESIGN SYSTEM  (theme.css)
-   Single source of truth for all colours, typography & spacing.
-   Load this FIRST on every page, before any other stylesheet.
+   HIDDEN MOROCCO — WORLD-CLASS DESIGN SYSTEM (theme.css)
+   Clean, responsive, dark-mode ready design tokens & utility library
    ========================================================================== */
 
-:root {
-  /* ── Brand colours ─────────────────────────────────────────── */
-  --hm-gold:          #d4af37;   /* Moroccan gold – primary accent */
-  --hm-gold-light:    #f0c040;   /* lighter hover shade            */
-  --hm-orange:        #c0392b;   /* warm terracotta CTA            */
-  --hm-orange-hover:  #a93226;   /* CTA hover                      */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
 
-  /* ── Backgrounds ────────────────────────────────────────────── */
-  --hm-bg-dark:       #0d0d1a;   /* deepest navy – hero, footer     */
-  --hm-bg-nav:        #11111e;   /* navbar & stats bar              */
-  --hm-bg-section:    #13131f;   /* alternating dark sections       */
-  --hm-bg-card:       #1c1c30;   /* card / modal background         */
-  --hm-bg-light:      #f5f2ed;   /* light cream page background     */
-  --hm-bg-white:      #ffffff;
+:root, [data-theme="light"] {
+  /* Color Tokens - Modern Ocean & Sunset Palette */
+  --hm-turquoise:        #06B6D4;
+  --hm-turquoise-hover:  #0891B2;
+  --hm-turquoise-light:  rgba(6, 182, 212, 0.12);
+  --hm-gold:             #F59E0B;
+  --hm-gold-hover:       #D97706;
+  --hm-gold-light:       rgba(245, 158, 11, 0.15);
+  --hm-emerald:          #10B981;
+  
+  /* Theme Backgrounds */
+  --hm-bg-main:          #F8FAFC;
+  --hm-bg-card:          #FFFFFF;
+  --hm-bg-card-hover:    #F1F5F9;
+  --hm-bg-nav:           rgba(255, 255, 255, 0.85);
+  --hm-bg-hero-overlay:  linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.85) 100%);
+  --hm-bg-footer:        #0F172A;
+  
+  /* Text Colors */
+  --hm-text-heading:     #0F172A;
+  --hm-text-body:        #334155;
+  --hm-text-muted:       #64748B;
+  --hm-text-inverse:     #FFFFFF;
+  
+  /* Borders & Dividers */
+  --hm-border:           #E2E8F0;
+  --hm-border-subtle:    rgba(226, 232, 240, 0.6);
+  --hm-border-focus:     #06B6D4;
+  
+  /* Glassmorphism */
+  --hm-glass-bg:         rgba(255, 255, 255, 0.75);
+  --hm-glass-border:     rgba(255, 255, 255, 0.8);
+  --hm-glass-shadow:     0 20px 40px rgba(15, 23, 42, 0.08);
 
-  /* ── Text ───────────────────────────────────────────────────── */
-  --hm-text-primary:   #ffffff;
-  --hm-text-secondary: rgba(255, 255, 255, 0.72);
-  --hm-text-muted:     rgba(255, 255, 255, 0.45);
-  --hm-text-dark:      #12121e;
-  --hm-text-body:      #3d3d55;
+  /* Shadows */
+  --hm-shadow-sm:        0 2px 8px rgba(15, 23, 42, 0.04);
+  --hm-shadow-md:        0 8px 24px -4px rgba(15, 23, 42, 0.08);
+  --hm-shadow-lg:        0 20px 45px -10px rgba(15, 23, 42, 0.12);
+  --hm-shadow-glow:      0 12px 30px rgba(6, 182, 212, 0.3);
+  
+  /* Typography */
+  --hm-font-sans:        'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --hm-font-serif:       'Playfair Display', Georgia, serif;
+  
+  /* Border Radius */
+  --hm-radius-sm:        8px;
+  --hm-radius-md:        14px;
+  --hm-radius-lg:        24px;
+  --hm-radius-full:      9999px;
 
-  /* ── Borders / Dividers ──────────────────────────────────────── */
-  --hm-border:         rgba(255, 255, 255, 0.10);
-  --hm-border-gold:    rgba(212, 175, 55, 0.35);
-
-  /* ── Typography ─────────────────────────────────────────────── */
-  --hm-font-serif:    'Playfair Display', Georgia, serif;
-  --hm-font-sans:     'Montserrat', 'Inter', 'Segoe UI', sans-serif;
-
-  /* ── Radius & Shadows ────────────────────────────────────────── */
-  --hm-radius-sm:  8px;
-  --hm-radius-md:  16px;
-  --hm-radius-lg:  28px;
-  --hm-shadow-md:  0 8px 32px rgba(0, 0, 0, 0.25);
-  --hm-shadow-lg:  0 20px 60px rgba(0, 0, 0, 0.45);
-
-  /* ── Legacy aliases (kept so old classes still work) ─────────── */
-  --primary:   var(--hm-orange);
-  --secondary: #2980B9;
-  --accent:    var(--hm-gold);
-  --dark:      var(--hm-bg-dark);
-  --light:     var(--hm-bg-light);
-  --text:      var(--hm-text-body);
+  /* Skeleton Loading */
+  --hm-skeleton-bg:      #E2E8F0;
+  --hm-skeleton-wave:    linear-gradient(90deg, #E2E8F0 0%, #F1F5F9 50%, #E2E8F0 100%);
 }
 
-/* ── Global resets ───────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[data-theme="dark"] {
+  /* Dark Mode Overrides */
+  --hm-bg-main:          #0B1120;
+  --hm-bg-card:          #1E293B;
+  --hm-bg-card-hover:    #243347;
+  --hm-bg-nav:           rgba(15, 23, 42, 0.88);
+  --hm-bg-hero-overlay:  linear-gradient(180deg, rgba(11, 17, 32, 0.7) 0%, rgba(11, 17, 32, 0.95) 100%);
+  --hm-bg-footer:        #070B14;
+  
+  --hm-text-heading:     #F8FAFC;
+  --hm-text-body:        #CBD5E1;
+  --hm-text-muted:       #94A3B8;
+  --hm-text-inverse:     #0F172A;
+  
+  --hm-border:           #334155;
+  --hm-border-subtle:    rgba(51, 65, 85, 0.5);
+  
+  --hm-glass-bg:         rgba(30, 41, 59, 0.75);
+  --hm-glass-border:     rgba(255, 255, 255, 0.08);
+  --hm-glass-shadow:     0 20px 40px rgba(0, 0, 0, 0.4);
 
-html { scroll-behavior: smooth; }
+  --hm-shadow-sm:        0 2px 8px rgba(0, 0, 0, 0.2);
+  --hm-shadow-md:        0 8px 24px -4px rgba(0, 0, 0, 0.35);
+  --hm-shadow-lg:        0 20px 45px -10px rgba(0, 0, 0, 0.5);
+  --hm-shadow-glow:      0 12px 30px rgba(6, 182, 212, 0.4);
+
+  --hm-skeleton-bg:      #334155;
+  --hm-skeleton-wave:    linear-gradient(90deg, #334155 0%, #475569 50%, #334155 100%);
+}
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
   font-family: var(--hm-font-sans);
-  background-color: var(--hm-bg-light);
+  background-color: var(--hm-bg-main);
   color: var(--hm-text-body);
-  line-height: 1.65;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
-a   { text-decoration: none; }
+h1, h2, h3, h4, h5, h6 {
+  color: var(--hm-text-heading);
+  font-weight: 700;
+  line-height: 1.25;
+}
 
-/* ── Shared utility: gold underline decoration ────────────────────── */
-.hm-gold-line {
+.font-serif {
+  font-family: var(--hm-font-serif);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
   display: block;
-  width: 56px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--hm-gold), var(--hm-gold-light));
-  border-radius: 2px;
-  margin: 0 auto;
 }
 
-/* ── Shared CTA button ────────────────────────────────────────────── */
-.hm-btn {
-  display: inline-block;
-  font-family: var(--hm-font-sans);
-  font-weight: 600;
-  font-size: 0.9rem;
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--hm-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--hm-glass-border);
+  box-shadow: var(--hm-glass-shadow);
+}
+
+.glass-nav {
+  background: var(--hm-bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--hm-border);
+}
+
+/* Hover Lift Animation */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background-color 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--hm-shadow-lg);
+}
+
+/* Skeleton Loading Animation */
+.skeleton {
+  background: var(--hm-skeleton-bg);
+  background-image: var(--hm-skeleton-wave);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite linear;
+  border-radius: var(--hm-radius-md);
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Custom Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--hm-radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  padding: 13px 32px;
-  border-radius: 40px;
-  border: 2px solid transparent;
+  text-transform: uppercase;
+}
+
+.badge-turquoise {
+  background: var(--hm-turquoise-light);
+  color: var(--hm-turquoise);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.badge-gold {
+  background: var(--hm-gold-light);
+  color: var(--hm-gold);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--hm-turquoise) 0%, var(--hm-turquoise-hover) 100%);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 28px;
+  border-radius: var(--hm-radius-full);
+  border: none;
   cursor: pointer;
-  transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: var(--hm-shadow-glow);
+  transition: all 0.3s ease;
 }
-.hm-btn-primary {
-  background: var(--hm-orange);
-  color: #fff;
-  border-color: var(--hm-orange);
-}
-.hm-btn-primary:hover {
-  background: var(--hm-orange-hover);
-  border-color: var(--hm-orange-hover);
+
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 16px 36px rgba(6, 182, 212, 0.45);
 }
-.hm-btn-ghost {
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: transparent;
-  color: #fff;
-  border-color: rgba(255,255,255,0.45);
+  color: var(--hm-text-heading);
+  border: 1px solid var(--hm-border);
+  padding: 12px 24px;
+  border-radius: var(--hm-radius-full);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
-.hm-btn-ghost:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: #fff;
+
+.btn-ghost:hover {
+  background: var(--hm-bg-card-hover);
+  border-color: var(--hm-turquoise);
+  color: var(--hm-turquoise);
+}
+
+/* Favorite Heart Toggle */
+.fav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fav-btn:hover {
+  transform: scale(1.12);
+  color: #EF4444;
+}
+
+.fav-btn.is-active {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+/* Dark Mode Switcher Button */
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--hm-bg-card);
+  border: 1px solid var(--hm-border);
+  color: var(--hm-text-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--hm-turquoise);
+  color: var(--hm-turquoise);
+  transform: rotate(15deg);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--hm-bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hm-border);
+  border-radius: var(--hm-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hm-turquoise);
 }

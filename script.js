@@ -1,1230 +1,726 @@
-/* =========================
-   Hidden Morocco - app.js
-   ========================= */
+/* ==========================================================================
+   HIDDEN MOROCCO — PLATFORM CORE ENGINE (script.js)
+   Dark mode, Favorites, Interactive Maps, Search & Filters, Modal & Booking
+   ========================================================================== */
 
-/* ---------- Helpers ---------- */
-const WHATSAPP_NUMBER = "212771663435";
-let CURRENT_EXP_KEY = null;
-let expSwiperMarrakech = null;
-
-// استخراج رقم من "45€" أو "250 DH"
-function getPriceNumber(priceStr) {
-  const m = (priceStr || "").match(/(\d+(?:[.,]\d+)?)/);
-  return m ? Number(m[1].replace(",", ".")) : null;
-}
-
-function getCurrency(priceStr) {
-  if (!priceStr) return "";
-  if (priceStr.includes("€")) return "€";
-  if (priceStr.toUpperCase().includes("DH")) return "DH";
-  return "";
-}
-
-function formatTotal(value, currency) {
-  if (value == null) return "—";
-  if (currency === "€") return `${value.toFixed(0)}€`;
-  if (currency === "DH") return `${value.toFixed(0)} DH`;
-  return `${value.toFixed(0)}`;
-}
-
-function lockBodyScroll(lock) {
-  document.body.style.overflow = lock ? "hidden" : "";
-}
-
-/* ---------- Experiences data ---------- */
-const EXPERIENCES = {
-  ourika: {
-    title: "Ourika Valley (Setti Fatma)",
-    img: "images/Marrakech/ourika_1.png",
-    desc: "Nature excursion 60 km from Marrakech: green valley, Berber villages and Setti Fatma waterfalls.",
-    duration: "1 day",
-    timing: "Departure 08:30 • Return ~18:00",
-    price: "45€",
-    schedule: [
-      "08:30 – Pick up in Marrakech",
-      "10:00 – Scenic drive + photo stop",
-      "11:00 – Setti Fatma & walk to waterfalls",
-      "13:30 – Lunch (optional)",
-      "16:30 – Return to Marrakech",
-      "18:00 – Arrival"
-    ],
-    activities: [
-      "Berber villages",
-      "Walk to waterfalls",
-      "Panoramic photos",
-      "Lunch (optional)"
+// ── Destination Database ──────────────────────────────────────────────────
+const DESTINATIONS_DB = [
+  {
+    id: "marrakech",
+    title: "Marrakech Medina & Palaces",
+    region: "Marrakech-Safi",
+    category: "medina",
+    price: 180,
+    currency: "EUR",
+    rating: 4.9,
+    reviewsCount: 340,
+    img: "images/Marrakech/marrakech_11.jpg",
+    badge: "Popular",
+    desc: "Step into the heartbeat of Morocco. Explore bustling souks, hidden riads, Jemaa el-Fnaa square, and the Majorelle Garden.",
+    lat: 31.6295,
+    lng: -7.9811,
+    highlights: ["Jemaa el-Fnaa Square", "Majorelle Garden & YSL Museum", "Bahia Palace & Saadian Tombs", "Traditional Hamam Experience"],
+    itinerary: [
+      { day: "Day 1", text: "Arrival & Welcome Mint Tea at Riad, Evening street food tour at Jemaa el-Fnaa." },
+      { day: "Day 2", text: "Guided Medina Walking Tour, Bahia Palace, Secret Garden lunch." },
+      { day: "Day 3", text: "Sunset Camel & Quad adventure in Agafay Desert with Berber dinner." }
     ]
   },
-
-  ouzoud: {
-    title: "Ouzoud Waterfalls",
-    img: "images/Ouzoud/ouzoud-falls.jpg",
-    desc: "The most beautiful waterfalls in Morocco: nature, easy hike and magnificent views.",
-    duration: "1 day",
-    timing: "Departure 08:00 • Return ~19:00",
-    price: "250 DH",
-    schedule: [
-      "08:00 – Departure from Marrakech",
-      "11:00 – Arrival + walk",
-      "13:00 – Lunch (optional)",
-      "15:00 – Free time / boat ride (optional)",
-      "16:30 – Return to Marrakech",
-      "19:00 – Arrival"
-    ],
-    activities: [
-      "Easy hike",
-      "Macaque monkeys observation",
-      "Boat ride (optional)",
-      "Panoramic photos"
+  {
+    id: "chefchaouen",
+    title: "Chefchaouen - The Blue Pearl",
+    region: "Tangier-Tetouan",
+    category: "mountains",
+    price: 140,
+    currency: "EUR",
+    rating: 4.95,
+    reviewsCount: 412,
+    img: "images/Chfchaouen/chefchaouen-staircase.jpg",
+    badge: "Top Rated",
+    desc: "A fairytale town nestled in the Rif Mountains, famous for its surreal blue-washed alleyways, serene mountain air, and rich artisan culture.",
+    lat: 35.1716,
+    lng: -5.2697,
+    highlights: ["Outa el-Hammam Square", "Spanish Mosque Viewpoint", "Ras El Maa Waterfall", "Artisan Weaving Workshops"],
+    itinerary: [
+      { day: "Day 1", text: "Scenic mountain drive, arrival in the Blue Medina, sunset hike to Spanish Mosque." },
+      { day: "Day 2", text: "Guided photography walking tour through blue alleyways & Akchour waterfalls day trip." }
     ]
   },
-
-  agafay: {
-    title: "Agafay Desert (Quad, Camel & Dinner)",
-    img: "images/Marrakech/agafay.jpg",
-    desc: "Leave the bustling streets of Marrakech behind for an unforgettable, action-packed getaway in the mesmerizing Agafay Desert. Experience the perfect blend of high-octane adventure, relaxing pool time, and authentic Moroccan hospitality, culminating in a magical evening under the stars.",
-    duration: "≈ 6 hours",
-    timing: "Departure 15:30",
-    price: "195 EUR",
-    gallery: [
-      "images/Marrakech/agafay.jpg",
-      "images/Marrakech/marrakech_4.webp",
-      "images/Marrakech/marrakrch_9.jpg"
-    ],
-    route: { departure: "Marrakech", arrival: "Agafay Desert" },
-    highlights: [
-      { icon: "fa-solid fa-mountain-sun", title: "Off-Road Thrills", desc: "Zoom through stunning, untamed desert landscapes on an exhilarating quad bike ride." },
-      { icon: "fa-solid fa-camel", title: "Cultural Immersion", desc: "Step into Moroccan culture with a memorable camel ride across the golden dunes." },
-      { icon: "fa-solid fa-sun", title: "Golden Hour Magic", desc: "Witness a breathtaking desert sunset, watching the sky paint itself in vibrant colors far away from city lights." },
-      { icon: "fa-solid fa-bowl-food", title: "Authentic Berber Feast", desc: "Indulge in mouthwatering traditional dishes and aromatic spices under a beautiful Berber tent." },
-      { icon: "fa-solid fa-star", title: "Starlit Serenity", desc: "Escape the hustle of Marrakech and find true peace in the vast, tranquil beauty of the Agafay wilderness." }
-    ],
-    timeline: [
-      {
-        dot: 1,
-        title: "The Pool & Camel Trek",
-        img: "images/Marrakech/agafay.jpg",
-        items: ["Take a dip in our refreshing swimming pool to cool off", "Embrace the rhythm of the desert with a peaceful camel ride", "Feel the gentle sway of your camel in nomadic attire"]
-      },
-      {
-        dot: 2,
-        title: "The Quad Adventure",
-        img: "images/Marrakech/marrakech_4.webp",
-        items: ["Kick things into high gear on a robust ATV", "Race through Agafay’s rugged, rocky terrain", "Find the ultimate vantage point to watch the sunset"]
-      },
-      {
-        dot: 3,
-        title: "The Sunset & Dinner Show",
-        img: "images/Marrakech/marrakrch_9.jpg",
-        items: ["Relax around a warm fire as the sky lights up with vibrant hues", "Enjoy a feast of aromatic Moroccan cuisine under a Berber tent", "Soak in the tranquil desert ambiance with live entertainment"]
-      }
-    ],
-    included: [
-      "Round-trip, door-to-door transfers in a climate-controlled 4x4 or minivan",
-      "Accompaniment by a friendly, English-speaking guide/driver",
-      "Fully equipped and guided ATV/Quad biking session",
-      "Traditional camel trekking experience in nomadic attire",
-      "Authentic Moroccan dinner accompanied by live entertainment",
-      "Complimentary access to our refreshing desert swimming pool"
-    ],
-    excluded: [
-      "Personal purchases",
-      "Extra beverages",
-      "Optional gratuities"
-    ],
-    faqs: [
-      { q: "Do I need to be an experienced driver to ride the quads?", a: "Not at all! Our expert instructors will give you a full safety briefing and ensure you're totally confident before hitting the trails." },
-      { q: "Is this excursion kid-friendly?", a: "Absolutely. Children are more than welcome to join the camel trek and can ride safely as passengers on the quad bikes." },
-      { q: "What is the best dress code?", a: "Opt for comfortable, casual clothes and closed-toe shoes. Bring a light jacket as the desert cools down quickly after sunset." },
-      { q: "Do I need to pay extra for the meal?", a: "No, your mouthwatering Berber dinner and the evening entertainment are completely covered in your booking price." },
-      { q: "Do you cater to vegetarians or food allergies?", a: "Yes, we happily accommodate special dietary needs. Just inform us when booking, and our chefs will prepare a customized menu for you." },
-      { q: "What is the total duration of the trip?", a: "Expect the entire adventure to last around 6 hours. This covers your transport, activities, and the dinner experience." },
-      { q: "Will there be a huge crowd on the tour?", a: "We deliberately keep our groups small and intimate to ensure a personalized, safe, and premium experience." },
-      { q: "How do we get to the Agafay Desert?", a: "We take care of all the driving! You’ll be picked up and dropped off right at your hotel or riad in a modern, comfortable vehicle." },
-      { q: "Do I need to be highly physically fit?", a: "This excursion is easygoing and crafted to be accessible for almost everyone. If you have specific limitations, just let us know beforehand." }
-    ]
-  },
-
-  imlil: {
-    title: "Imlil & Atlas",
-    img: "images/Marrakech/imlil_1.jpg",
-    desc: "Mountain day: hiking, Amazigh villages and panoramas of Toubkal.",
-    duration: "1 day",
-    timing: "Departure 08:00 • Return ~18:00",
-    price: "On request",
-    schedule: [
-      "08:00 – Departure from Marrakech",
-      "10:00 – Arrival in Imlil",
-      "Hike + villages",
-      "16:30 – Return",
-      "18:00 – Arrival"
-    ],
-    activities: [
-      "Hiking",
-      "Amazigh villages",
-      "Atlas Panoramas"
-    ]
-  },
-
-  takerkoust: {
-    title: "Lalla Takerkoust Lake",
-    img: "images/Marrakech/lac-lala-takerkoust.webp",
-    desc: "Relaxing outing: lake, nature and outdoor activities depending on the package.",
-    duration: "Half-day",
-    timing: "Morning or afternoon",
-    price: "On request",
-    schedule: [
-      "Morning or afternoon option",
-      "Free time at the lake",
-      "Activities depending on package"
-    ],
-    activities: [
-      "Walk by the lake",
-      "Relaxation",
-      "Quad (optional)"
-    ]
-  },
-
-  ballon: {
-    title: "Hot Air Balloon Flight",
-    img: "images/Marrakech/montgolfiere.webp",
-    desc: "Elevate your Marrakech experience—literally. Rise before the sun and take to the skies for a breathtaking hot air balloon flight over the region's stunning landscapes. Float peacefully above crimson desert terrain, lush palm groves, and traditional villages, all set against the backdrop of the High Atlas Mountains.",
-    duration: "Sunrise",
-    timing: "Early Morning (2h before sunrise)",
-    price: "178 EUR",
-    gallery: [
-      "images/Marrakech/montgolfiere.webp",
-      "images/Marrakech/marrakech_15.jpg",
-      "images/Marrakech/marrkech_13.jpg"
-    ],
-    route: { departure: "Marrakech", arrival: "Atlas Sky" },
-    highlights: [
-      { icon: "fa-solid fa-cloud", title: "Sunrise Magic", desc: "Watch the world wake up from the best vantage point possible as you float gracefully into the dawn." },
-      { icon: "fa-solid fa-mountain", title: "Unrivaled Panoramas", desc: "Marvel at unobstructed, birds-eye views of the sprawling Marrakech landscapes and the High Atlas Mountains." },
-      { icon: "fa-solid fa-mug-hot", title: "Cultural Breakfast", desc: "Refuel after your flight with a delicious, authentic Berber breakfast in a traditional setting." },
-      { icon: "fa-solid fa-certificate", title: "Commemorative Keepsake", desc: "Take home a personalized flight certificate to remember your time in the Moroccan skies." }
-    ],
-    timeline: [
-      {
-        dot: 1,
-        title: "The Pickup & Preparation",
-        img: "images/Marrakech/montgolfiere.webp",
-        items: ["Hassle-free pickup from your accommodation in the early hours", "Watch the balloons inflate at the launch site", "Safety briefing from your seasoned pilot"]
-      },
-      {
-        dot: 2,
-        title: "The Golden Flight",
-        img: "images/Marrakech/marrakech_15.jpg",
-        items: ["Ascend as the sun begins to rise over the horizon", "Unobstructed bird's-eye views of red plains and oases", "Enjoy live commentary during the flight"]
-      },
-      {
-        dot: 3,
-        title: "Landing & Breakfast",
-        img: "images/Marrakech/marrkech_13.jpg",
-        items: ["Smooth landing followed by a traditional Berber breakfast", "Personalized certificate ceremony", "Comfortable return transfer to your hotel"]
-      }
-    ],
-    included: [
-      "Seamless round-trip transportation (hotel pick-up and drop-off)",
-      "Serene, small-group hot air balloon flight with seasoned pilot",
-      "Live, engaging commentary during the flight",
-      "Traditional Berber breakfast in an authentic nomadic tent",
-      "Personalized commemorative flight certificate",
-      "Comprehensive insurance for all passengers"
-    ],
-    excluded: [
-      "Optional gratuities",
-      "Professional photo packages"
-    ],
-    faqs: [
-      { q: "When exactly will I be picked up?", a: "Since sunrise times change, we confirm the exact time (generally 2h before dawn) prior to your flight." },
-      { q: "Is it cold up there?", a: "The early morning air is crisp. We recommend dressing in layers so you can stay warm before the flight." },
-      { q: "Is it scary or turbulent?", a: "Not at all! Ballooning is incredibly peaceful and smooth as you move with the wind." }
-    ]
-  },
-
-  fes_sahara: {
-    title: "Grand Moroccan Traverse: 4-Day Fes to Marrakech",
+  {
+    id: "merzouga",
+    title: "Merzouga Sahara Erg Chebbi",
+    region: "Draâ-Tafilalet",
+    category: "desert",
+    price: 260,
+    currency: "EUR",
+    rating: 5.0,
+    reviewsCount: 520,
     img: "images/Merzouga/merzouga_1.jpg",
-    desc: "Transform your transit between Morocco's most iconic imperial cities into the adventure of a lifetime. Instead of a simple transfer, embark on a captivating 4-day overland journey from Fes to Marrakech, taking you deep into the heart of the Sahara Desert. This carefully curated private tour blends dramatic landscapes, ancient cultures, and spectacular off-the-beaten-path sightseeing.",
-    duration: "4 Days / 3 Nights",
-    timing: "Departure 07:30 AM",
-    price: "On request",
-    gallery: [
-      "images/Merzouga/merzouga_1.jpg",
-      "images/Fes/fes_3.jpg",
-      "images/rourge.jpg",
-      "images/dads_vally.jpg",
-      "images/merzouga_desert.jpg"
-    ],
-    route: { departure: "Fes", arrival: "Marrakech" },
-    highlights: [
-      { icon: "fa-solid fa-mountain-sun", title: "Alpine Escapes", desc: "Explore Ifrane, the 'Switzerland of Morocco,' and encounter wild macaques in the ancient cedar forests of Azrou." },
-      { icon: "fa-solid fa-sun", title: "Sahara Immersion", desc: "Trek across the golden dunes of Erg Chebbi on camelback during a breathtaking desert sunset." },
-      { icon: "fa-solid fa-star", title: "Night Under the Stars", desc: "Sleep in a traditional Berber desert camp nestled in the tranquil Saharan dunes." },
-      { icon: "fa-solid fa-water", title: "Canyon Wonders", desc: "Walk through the towering, 600-foot-high rock walls of the Todra Gorges." },
-      { icon: "fa-solid fa-landmark", title: "Cinematic History", desc: "Wander through the ancient, mud-brick alleys of Kasbah Ait Benhaddou, a UNESCO World Heritage site famous for Gladiator and Lawrence of Arabia." },
-      { icon: "fa-solid fa-road", title: "Mountain Passes", desc: "Traverse the winding, panoramic roads of the High Atlas Mountains via the famous Tizi N'Tichka pass." }
-    ],
-    timeline: [
-      {
-        dot: 1,
-        title: "Day 1: Fes › Ifrane › Azrou › Midelt › Erfoud › Merzouga",
-        img: "images/Fes/fes_3.jpg",
-        items: [
-          "8:00 AM pickup from your Fes accommodation, heading south into the Middle Atlas Mountains",
-          "Stop in Ifrane, the 'Switzerland of Morocco,' and the cedar forests of Azrou to see Barbary macaques",
-          "Descend through Midelt, then cruise the spectacular Ziz Valley with its palm groves and ancient kasbahs",
-          "Arrive in Merzouga by late afternoon — hotel check-in, relaxing dinner and overnight stay"
-        ]
-      },
-      {
-        dot: 2,
-        title: "Day 2: Merzouga › Rissani › Khamlia › Erg Chebbi Dunes",
-        img: "images/Merzouga/merzouga_1.jpg",
-        items: [
-          "Visit the historic city of Rissani, birthplace of the Alawite dynasty, with its traditional markets",
-          "Experience hypnotic Gnaoua music in the village of Khamlia",
-          "Meet your camel caravan and ride across the golden waves of Erg Chebbi at sunset",
-          "Arrive at your nomad desert camp for Berber drumming, dinner, and stargazing"
-        ]
-      },
-      {
-        dot: 3,
-        title: "Day 3: Erg Chebbi › Merzouga › Todra Gorges › Dades Valley",
-        img: "images/rourge.jpg",
-        items: [
-          "Wake early for a majestic desert sunrise painting the dunes in vibrant colors",
-          "Trek back to Merzouga edge on camelback, then depart toward Erfoud",
-          "Walk through the spectacular Todra Gorges, flanked by massive 600-foot canyon walls",
-          "Continue to Dades Valley, passing the 'Monkey Fingers' rock formations — overnight with dinner & breakfast"
-        ]
-      },
-      {
-        dot: 4,
-        title: "Day 4: Dades Valley › Skoura › Ouarzazate › Ait Benhaddou › Marrakech",
-        img: "images/dads_vally.jpg",
-        items: [
-          "Drive through the Valley of the Roses and Skoura Oasis to Ouarzazate",
-          "Explore the magnificent Kasbah Ait Benhaddou — UNESCO site and Hollywood filming location",
-          "Scenic ascent over the High Atlas via the famous Tizi N'Tichka pass",
-          "Descend into Marrakech, drop-off at your Riad or Hotel"
-        ]
-      }
-    ],
-    included: [
-      "Private, comfortable, air-conditioned 4x4 or minivan with an English-speaking driver/guide",
-      "Door-to-door pick-up from your Fes hotel/Riad and drop-off at your Marrakech hotel/Riad",
-      "3 Nights of accommodation (Hotel in Merzouga, Desert Camp in Erg Chebbi, Hotel in Dades Valley)",
-      "Half-board meals: 3 Dinners and 3 Breakfasts",
-      "Guided sunset and sunrise camel treks in the Erg Chebbi dunes",
-      "Sandboarding activity in the desert"
-    ],
-    excluded: [
-      "Mid-day lunches along the route",
-      "Additional beverages",
-      "Monument or museum entrance fees (if applicable)"
-    ],
-    pricing: [
-      { group: "2", price: "680€" },
-      { group: "3", price: "580€" },
-      { group: "4", price: "490€" },
-      { group: "5", price: "450€" },
-      { group: "6", price: "390€" },
-      { group: "7", price: "380€" },
-      { group: "8 – 10", price: "370€" },
-      { group: "11 – 13", price: "320€" },
-      { group: "14 – 17", price: "310€" }
-    ],
-    pricingUpgrade: "✨ Optional Upgrade: Elevate your Sahara experience to a Deluxe Desert Camp (ensuite tent with private bathroom) for an additional €50 per adult.",
-    faqs: [
-      { q: "Is this a private or shared tour?", a: "This is a fully private tour. Your 4x4 or minivan and driver/guide are exclusively yours for the entire 4-day journey." },
-      { q: "What time does the tour depart?", a: "The tour departs at 07:30 AM with a pick-up directly from your Fes accommodation." },
-      { q: "Can I upgrade the desert camp?", a: "Yes! You can elevate your Sahara experience to a Deluxe Desert Camp (featuring an ensuite tent with a private bathroom) for an additional €50 per adult." },
-      { q: "How long is the camel ride?", a: "The camel trek usually lasts about 1 to 1.5 hours (depending on the season and camp location)." },
-      { q: "Can I skip the camel ride?", a: "Yes, a 4x4 transfer to the camp can be arranged if preferred." },
-      { q: "Is sandboarding included?", a: "Yes, sandboarding is available at the camp and included in the experience." },
-      { q: "Are the bathrooms private at the camp?", a: "Depending on the camp category (standard or luxury), bathrooms may be shared or private." },
-      { q: "What should I bring?", a: "Comfortable clothes, sunglasses, sunscreen, scarf for the desert wind, comfortable shoes, and a small overnight bag." }
+    badge: "Bucket List",
+    desc: "Ride camels into the golden dunes of Erg Chebbi, sleep under endless starry skies in luxury desert camps, and listen to Gnawa music.",
+    lat: 31.0994,
+    lng: -4.0102,
+    highlights: ["Golden Dune Camel Trek", "Stargazing Luxury Camp", "Gnawa Music in Khamlia", "Quad Biking on Erg Chebbi"],
+    itinerary: [
+      { day: "Day 1", text: "Journey through Ziz Valley, sunset camel trek across giant dunes to luxury desert bivouac." },
+      { day: "Day 2", text: "Sunrise over Sahara, Berber breakfast, 4x4 desert safari & Khamlia village music." },
+      { day: "Day 3", text: "Sandboarding & farewell morning tea before departure." }
     ]
   },
-
-  casa_chefchaouen: {
-    title: "The Blue Pearl Escape: 2-Day Casablanca to Chefchaouen",
-    img: "images/Chfchaouen/chefchaoun.jpg",
-    desc: "Leave the hustle and bustle of Casablanca behind for a tranquil, private getaway to one of Morocco's most scenic and enchanting destinations. Nestled high in the rugged Rif Mountains, Chefchaouen—affectionately known as the 'Blue City'—offers a picture-perfect blend of serene vibes, rich history, and captivating local culture.",
-    duration: "2 Days / 1 Night",
-    timing: "Departure 08:30 AM",
-    price: "On request",
-    gallery: [
-      "images/Casablanca/casablanca.png",
-      "images/Chfchaouen/chefchaoun.jpg",
-      "images/Chfchaouen/chechaouen_1.jpg",
-      "images/Chfchaouen/chefchaouen_2.jpg"
-    ],
-    route: { departure: "Casablanca", arrival: "Chefchaouen" },
-    highlights: [
-      { icon: "fa-solid fa-palette", title: "The Blue Labyrinth", desc: "Wander through mesmerizing, winding alleys where every house, staircase, and doorway is painted in calming shades of blue and white." },
-      { icon: "fa-solid fa-fort-awesome", title: "Historic Kasbah", desc: "Explore the 15th-century fortress in the heart of the medina, featuring peaceful Andalusian-style gardens and an Ethnographic Museum." },
-      { icon: "fa-solid fa-store", title: "Artisan Souks", desc: "Mingle with friendly locals and shop for unique regional crafts, from hand-woven carpets and colorful textiles to beautiful pottery." },
-      { icon: "fa-solid fa-mountain", title: "Mountain Serenity", desc: "Breathe in the fresh mountain air at 600 meters altitude, with spectacular views and great walking opportunities." },
-      { icon: "fa-solid fa-user-check", title: "Tailored to You", desc: "Enjoy the comfort and flexibility of a private tour, allowing you to customize your itinerary and explore at your own pace." }
-    ],
-    timeline: [
-      {
-        dot: 1,
-        title: "Day 1: Casablanca to Chefchaouen (Discovering the Blue Medina)",
-        img: "images/Chfchaouen/chefchaoun.jpg",
-        items: [
-          "Morning pick-up from Casablanca, driving north toward the breathtaking Rif Mountains",
-          "Arrive in Chefchaouen — see why its Berber name means 'horns,' referencing the twin mountain peaks",
-          "Wander the vibrant medina, visit the historic Kasbah and Grand Mosque",
-          "Explore endless photography opportunities in the blue-painted alleys",
-          "Peaceful night in a traditional Riad in the heart of the Blue City (Dinner included)"
-        ]
-      },
-      {
-        dot: 2,
-        title: "Day 2: Chefchaouen to Casablanca (Morning Explorations & Return)",
-        img: "images/Chfchaouen/chechaouen_1.jpg",
-        items: [
-          "Traditional Moroccan breakfast at your Riad",
-          "Free time to soak up the atmosphere, snap final photos, or pick up souvenirs",
-          "Afternoon departure for a comfortable, scenic return journey",
-          "Arrive back in Casablanca by ~06:30 PM (Breakfast included)"
-        ]
-      }
-    ],
-    included: [
-      "Private, air-conditioned transportation (4x4 or Minibus) for the full trip",
-      "Professional and friendly English-speaking driver",
-      "1 Night accommodation in a charming, traditional Chefchaouen Riad",
-      "Meals: 1 Dinner and 1 Breakfast at your Riad",
-      "Ample free time to explore the medina and take photos",
-      "Instant booking confirmation"
-    ],
-    excluded: [
-      "Mid-day lunches",
-      "Local tour guide in Chefchaouen (optional — can be arranged upon request)",
-      "Personal expenses and gratuities"
-    ],
-    faqs: [
-      { q: "Is this a private or shared tour?", a: "This is a fully private tour. Your vehicle and driver are exclusively yours for the entire 2-day journey." },
-      { q: "What time does the tour depart?", a: "Please arrive at your pick-up point by 08:00 AM for a prompt departure at 08:30 AM." },
-      { q: "Is this tour family-friendly?", a: "Yes! This tour is suitable for families with children aged 6 and above." },
-      { q: "Can I arrange a local guide in Chefchaouen?", a: "Yes, a local guide can be arranged upon request if you'd like a deeper dive into the city's history." },
-      { q: "What should I bring?", a: "Comfortable walking shoes, a camera, sunscreen, and a light jacket as the mountain air can be cool." }
+  {
+    id: "fes",
+    title: "Fes El Bali - Ancient Cultural Capital",
+    region: "Fès-Meknès",
+    category: "medina",
+    price: 165,
+    currency: "EUR",
+    rating: 4.85,
+    reviewsCount: 289,
+    img: "images/Fes/fes_medina.jpg",
+    badge: "Heritage",
+    desc: "The world's largest car-free urban area. Discover Chouara Tannery, Al-Qarawiyyin University, and centuries-old craft workshops.",
+    lat: 34.0333,
+    lng: -5.0000,
+    highlights: ["Chouara Leather Tannery", "Al-Qarawiyyin University", "Bab Bou Jeloud (Blue Gate)", "Brass & Ceramics Workshops"],
+    itinerary: [
+      { day: "Day 1", text: "Enter through Bab Bou Jeloud, private historian-guided walk through medieval tanneries & copper souks." },
+      { day: "Day 2", text: "Royal Palace gates, Marinid Tombs panoramic sunset view." }
     ]
   },
-
-  marrakech_chefchaouen: {
-    title: "Morocco's Grand Contrast: 4-Day Marrakech to Chefchaouen",
-    img: "images/Chfchaouen/chefchaouen_2.jpg",
-    desc: "Experience the absolute best of Morocco on this epic 4-day journey that connects the red city of Marrakech to the blue pearl of Chefchaouen. This isn't just a transfer; it's a deep dive into the heart of the kingdom. Traverse the high peaks of the Atlas, ride through the golden dunes of the Sahara, and witness the ancient history of Fes before ending in the tranquility of the Rif Mountains.",
-    duration: "4 Days / 3 Nights",
-    timing: "Departure 08:00 AM",
-    price: "On request",
-    gallery: [
-      "images/Ouarzazat/ouarzazat1.jpeg",
-      "images/Merzouga/merzouga_1.jpg",
-      "images/Fes/fes_4.jpg",
-      "images/Chfchaouen/chechaouen_1.jpg",
-      "images/Chfchaouen/chefchaouen_2.jpg"
-    ],
-    route: { departure: "Marrakech", arrival: "Chefchaouen" },
-    highlights: [
-      { icon: "fa-solid fa-landmark", title: "UNESCO Wonders", desc: "Step back in time at the ancient Kasbah Ait Benhaddou, a living piece of Moroccan history." },
-      { icon: "fa-solid fa-moon", title: "Sahara Magic", desc: "Experience a sunset camel trek across the Erg Chebbi dunes and spend an unforgettable night in a nomad-style desert camp." },
-      { icon: "fa-solid fa-fire", title: "Night Under the Stars", desc: "Enjoy a traditional Berber feast and live drum music around a desert campfire." },
-      { icon: "fa-solid fa-tree", title: "Nature & Wildlife", desc: "Meet the wild Barbary macaques in the cedar forests of Azrou and explore the 'Little Switzerland' of Ifrane." },
-      { icon: "fa-solid fa-mosque", title: "Imperial History", desc: "Discover the labyrinthine streets of the Fes Medina, the world's largest car-free urban space." },
-      { icon: "fa-solid fa-droplet", title: "The Blue Pearl", desc: "Conclude your journey in the breathtakingly blue and serene streets of Chefchaouen." }
-    ],
-    timeline: [
-      {
-        dot: 1,
-        title: "Day 1: Marrakech › Ait Benhaddou › Ouarzazate › Valley of Roses",
-        img: "images/Ouarzazat/ouarzazat1.jpeg",
-        items: [
-          "Depart from Marrakech at 8:00 AM, ascending the Tizi n'Tichka pass (2,260m) in the High Atlas Mountains",
-          "Marvel at the Berber villages clinging to the hillsides before arriving at Kasbah Ait Benhaddou",
-          "Guided tour and lunch, continue through Ouarzazate—the 'Hollywood of Africa'",
-          "Follow the legendary 'Road of a Thousand Kasbahs' to the Valley of Roses. (Dinner included)"
-        ]
-      },
-      {
-        dot: 2,
-        title: "Day 2: Valley of Roses › Todra Gorges › Merzouga (Sahara)",
-        img: "images/Merzouga/merzouga_1.jpg",
-        items: [
-          "Head to the Dades Valley to admire the unique 'Monkey Toes' rock formations after breakfast",
-          "Walk beneath 300-meter-high limestone cliffs at the Todra Gorges",
-          "Lunch in Rissani, then arrive in Merzouga to meet your camel caravan",
-          "Trek into Erg Chebbi dunes for sunset, night in a traditional camp with stars and music. (Breakfast, Dinner)"
-        ]
-      },
-      {
-        dot: 3,
-        title: "Day 3: Merzouga › Ziz Valley › Azrou › Ifrane › Fes",
-        img: "images/Fes/fes_4.jpg",
-        items: [
-          "Wake up early for a spectacular desert sunrise, followed by breakfast and a shower",
-          "Begin the drive north through the lush Ziz Valley and Middle Atlas Mountains",
-          "Stop in Azrou's ancient cedar forests to see monkeys, coffee break in alpine Ifrane",
-          "Early evening arrival in the imperial city of Fes for your overnight stay. (Breakfast, Dinner)"
-        ]
-      },
-      {
-        dot: 4,
-        title: "Day 4: Fes Medina Exploration › Chefchaouen",
-        img: "images/Chfchaouen/chechaouen_1.jpg",
-        items: [
-          "Dive into the rich history of Fes with an optional guide, exploring tanneries and ancient artisan workshops",
-          "Traditional lunch in the heart of the world's oldest medina",
-          "Head north into the Rif Mountains in the afternoon",
-          "Conclude your tour arriving in the mesmerizing 'Blue City' of Chefchaouen. (Breakfast)"
-        ]
-      }
-    ],
-    included: [
-      "Private, comfortable, air-conditioned vehicle.",
-      "Professional English-speaking driver/guide.",
-      "3 Nights of accommodation in high-quality Riads, Hotels, and a Desert Camp.",
-      "Half-board meals: All Breakfasts and Dinners.",
-      "Guided sunset and sunrise camel treks in the Merzouga desert.",
-      "All transportation and logistics from Marrakech to Chefchaouen."
-    ],
-    excluded: [
-      "Mid-day lunches.",
-      "Beverages and soft drinks.",
-      "Monument entrance fees.",
-      "Optional gratuities and personal expenses."
+  {
+    id: "essaouira",
+    title: "Essaouira Atlantic Coastal Citadel",
+    region: "Marrakech-Safi",
+    category: "coastal",
+    price: 130,
+    currency: "EUR",
+    rating: 4.88,
+    reviewsCount: 310,
+    img: "images/Essaouira/essaouira_1.webp",
+    badge: "Coastal Escape",
+    desc: "A breezy coastal haven where historic ramparts, sea salt air, fresh seafood, windsurfing, and vibrant art galleries meet.",
+    lat: 31.5085,
+    lng: -9.7595,
+    highlights: ["Skala de la Ville Fortifications", "Fresh Seafood Port Market", "Sidi Kaouki Kitesurfing", "Gnaoua World Music Vibe"],
+    itinerary: [
+      { day: "Day 1", text: "Argan oil cooperative visit en route, ramparts walk, fresh grilled fish at the port." },
+      { day: "Day 2", text: "Beach horseback riding or kite surfing session, sunset dinner overlooking Atlantic waves." }
+    ]
+  },
+  {
+    id: "ouarzazate",
+    title: "Ouarzazate & Ait Benhaddou Kasbah",
+    region: "Draâ-Tafilalet",
+    category: "heritage",
+    price: 150,
+    currency: "EUR",
+    rating: 4.92,
+    reviewsCount: 245,
+    img: "images/Ouarzazat/ait_benhaddou.jpg",
+    badge: "UNESCO",
+    desc: "The Gateway to the Sahara. Marvel at the UNESCO earthen fortress of Ait Benhaddou, backdrop of Gladiator and Game of Thrones.",
+    lat: 30.9333,
+    lng: -6.9167,
+    highlights: ["Ait Benhaddou Ksar", "Atlas Film Studios", "Taourirt Kasbah", "Ounila Valley Scenic Road"],
+    itinerary: [
+      { day: "Day 1", text: "Cross Tizi n'Tichka pass through High Atlas, explore Ait Benhaddou with a local Berber guide." },
+      { day: "Day 2", text: "Visit Atlas Film Studios and historic Taourirt Kasbah." }
+    ]
+  },
+  {
+    id: "dades",
+    title: "Dades Valley & Todra Gorges",
+    region: "Draâ-Tafilalet",
+    category: "mountains",
+    price: 175,
+    currency: "EUR",
+    rating: 4.9,
+    reviewsCount: 198,
+    img: "images/Dades-Gorgdes.jpg",
+    badge: "Scenic Wonder",
+    desc: "Jaw-dropping serpentine hairpin turns, soaring 300-meter red limestone canyon walls, and lush palm oases in the Valley of Roses.",
+    lat: 31.4167,
+    lng: -5.9833,
+    highlights: ["Todra Gorge Vertical Canyon", "Monkey Fingers Rock Formation", "Dades Hairpin Switchbacks", "Valley of Roses Bivouac"],
+    itinerary: [
+      { day: "Day 1", text: "Drive through Skoura Oasis, photo stop at Dades winding pass, overnight in traditional Kasbah hotel." },
+      { day: "Day 2", text: "Morning canyon walk along Todra River, tea with nomadic family in rock caves." }
+    ]
+  },
+  {
+    id: "agadir",
+    title: "Agadir & Taghazout Surf Coast",
+    region: "Souss-Massa",
+    category: "coastal",
+    price: 145,
+    currency: "EUR",
+    rating: 4.8,
+    reviewsCount: 270,
+    img: "images/Agadir/agadir_1.jpg",
+    badge: "Surf & Sun",
+    desc: "Golden sandy beaches, world-renowned surf breaks in Taghazout, year-round sunshine, and modern promenade luxury.",
+    lat: 30.4278,
+    lng: -9.5981,
+    highlights: ["Taghazout Bay Surfing", "Paradise Valley Rock Pools", "Agadir Oufella Kasbah Ruins", "Souk El Had Shopping"],
+    itinerary: [
+      { day: "Day 1", text: "Relax on Agadir beach, cable car ride up to Agadir Oufella sunset." },
+      { day: "Day 2", text: "Surf lesson in Taghazout followed by natural pool swimming in Paradise Valley." }
+    ]
+  },
+  {
+    id: "casablanca",
+    title: "Casablanca Modern Majesty",
+    region: "Casablanca-Settat",
+    category: "heritage",
+    price: 120,
+    currency: "EUR",
+    rating: 4.75,
+    reviewsCount: 215,
+    img: "images/Casablanca/casablanca_1.jpg",
+    badge: "Oceanic Icon",
+    desc: "Morocco's cosmopolitan powerhouse. Stand in awe of the towering Hassan II Mosque perched over the Atlantic ocean.",
+    lat: 33.5731,
+    lng: -7.5898,
+    highlights: ["Hassan II Grand Mosque", "La Corniche Beachfront", "Habous Quarter Mauresque Architecture", "Rick's Café Experience"],
+    itinerary: [
+      { day: "Day 1", text: "Guided tour inside Hassan II Mosque, stroll along La Corniche, dinner at iconic Rick's Café." }
     ]
   }
+];
+
+// ── App State Engine ──────────────────────────────────────────────────────
+const AppState = {
+  theme: localStorage.getItem('hm-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+  favorites: JSON.parse(localStorage.getItem('hm-favorites') || '[]'),
+  mapInstance: null,
+  mapMarkers: []
 };
 
-/* ---------- CSS Accordion Experience Marrakech (No JS required) ---------- */
+// ── Initialization Engine ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initNavbarScroll();
+  initFavoritesCounter();
+  initGlobalEvents();
 
-/* ---------- Destination Modals ---------- */
-window.openModal = function (city, scrollToBooking = false) {
-  const modal = document.getElementById("modal-" + city);
-  if (!modal) return;
+  // Page-specific initializers
+  if (document.getElementById('destinationsGrid')) {
+    initDestinationsPage();
+  }
+  if (document.getElementById('interactiveMap')) {
+    initMapPage();
+  }
+  if (document.getElementById('homeMapPreview')) {
+    initHomeMapPreview();
+  }
+  if (document.getElementById('favoritesGrid')) {
+    initFavoritesPage();
+  }
+  if (document.getElementById('statCounters')) {
+    initStatsObserver();
+  }
+  if (document.getElementById('bookingFormWizard')) {
+    initBookingWizard();
+  }
+});
 
-  modal.style.display = "block";
-  lockBodyScroll(true);
+// ── Theme Engine ───────────────────────────────────────────────────────────
+function initTheme() {
+  document.documentElement.setAttribute('data-theme', AppState.theme);
+  updateThemeIcons();
+}
 
-  // Scroll to booking section if requested
-  if (scrollToBooking) {
-    const bookingSection = document.getElementById("booking-" + city);
-    if (bookingSection) {
-      setTimeout(() => {
-        bookingSection.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    }
+function toggleTheme() {
+  AppState.theme = AppState.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('hm-theme', AppState.theme);
+  document.documentElement.setAttribute('data-theme', AppState.theme);
+  updateThemeIcons();
+  showToast(`Switched to ${AppState.theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}`);
+
+  // Re-tile Leaflet map if present
+  if (AppState.mapInstance) {
+    updateMapTileLayer();
+  }
+}
+
+function updateThemeIcons() {
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.innerHTML = AppState.theme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    btn.setAttribute('aria-label', `Switch to ${AppState.theme === 'dark' ? 'Light' : 'Dark'} mode`);
+  });
+}
+
+// ── Favorites Engine ───────────────────────────────────────────────────────
+function isFavorite(id) {
+  return AppState.favorites.includes(id);
+}
+
+function toggleFavorite(id, e) {
+  if (e) e.stopPropagation();
+  
+  if (isFavorite(id)) {
+    AppState.favorites = AppState.favorites.filter(favId => favId !== id);
+    showToast("Removed from your Favorites");
+  } else {
+    AppState.favorites.push(id);
+    showToast("❤️ Saved to your Favorites!");
   }
 
-  // init swiper in this modal
-  const selector = "#modal-" + city + " .mySwiper-" + city;
-  const swiperEl = document.querySelector(selector);
+  localStorage.setItem('hm-favorites', JSON.stringify(AppState.favorites));
+  initFavoritesCounter();
 
-  if (swiperEl) {
-    if (!swiperEl.swiper) {
-      new Swiper(selector, {
-        loop: true,
-        observer: true,
-        observeParents: true,
-        navigation: {
-          nextEl: "#modal-" + city + " .swiper-button-next",
-          prevEl: "#modal-" + city + " .swiper-button-prev"
-        },
-        pagination: {
-          el: "#modal-" + city + " .swiper-pagination",
-          clickable: true
-        }
-      });
-    } else {
-      swiperEl.swiper.update();
-    }
-  }
-
-  // removed marrakech swiper override
-};
-
-window.closeModal = function (city) {
-  const modal = document.getElementById("modal-" + city);
-  if (!modal) return;
-  modal.style.display = "none";
-  lockBodyScroll(false);
-};
-
-/* ---------- Leaflet Map ---------- */
-function initMap() {
-  const mapEl = document.getElementById("map");
-  if (!mapEl) return;
-  if (mapEl.dataset.ready === "1") return;
-  mapEl.dataset.ready = "1";
-
-  const map = L.map("map", { scrollWheelZoom: false }).setView([32.5, -6.5], 6);
-
-  // Magnificent Premium Map (Esri Satellite - No political borders, just beautiful terrain)
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP',
-    maxZoom: 18
-  }).addTo(map);
-
-  // Custom marker icon with glow
-  const customIcon = L.divIcon({
-    className: 'custom-map-marker glowing',
-    html: '<div class="marker-pulse"></div><div class="marker-pin"><i class="fa-solid fa-location-dot"></i></div>',
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
-    popupAnchor: [0, -22]
+  // Update UI heart buttons
+  document.querySelectorAll(`.fav-btn[data-id="${id}"]`).forEach(btn => {
+    btn.classList.toggle('is-active', isFavorite(id));
+    btn.innerHTML = isFavorite(id) ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
   });
 
-  const cities = [
-    { name: "Marrakech", id: "marrakech", coords: [31.6295, -7.9811], img: "images/Marrakech/Marrakech.jpg", desc: "Imperial city with unique charm and vibrant souks." },
-    { name: "Fès", id: "fes", coords: [34.0333, -5.0], img: "images/Fes/Fes.jpg", desc: "Oldest medina in the world, a UNESCO treasure." },
-    { name: "Chefchaouen", id: "chefchaouen", coords: [35.1688, -5.2636], img: "images/Chfchaouen/chefchaoun.jpg", desc: "The blue pearl of Morocco, nestled in the Rif." },
-    { name: "Essaouira", id: "essaouira", coords: [31.5085, -9.7595], img: "images/Essaouira/essaouira_1.jpg", desc: "Atlantic coastal gem with art and Gnaoua music." },
-    { name: "Merzouga", id: "merzouga", coords: [31.0994, -4.0127], img: "images/Merzouga/merzouga_1.jpg", desc: "Gateway to the golden Erg Chebbi Sahara dunes." },
+  // Re-render favorites page if active
+  if (document.getElementById('favoritesGrid')) {
+    initFavoritesPage();
+  }
+}
 
-    { name: "Ouarzazate", id: "ouarzazate", coords: [30.9189, -6.8936], img: "images/Ouarzazat/ouarzazat1.jpeg", desc: "Hollywood of Africa, gateway to the Sahara." },
-    { name: "Casablanca", id: "casablanca", coords: [33.5731, -7.5898], img: "images/Casablanca/casablanca.png", desc: "Morocco's economic capital with the iconic Hassan II Mosque." },
-    { name: "Agadir", id: "agadir", coords: [30.4278, -9.5981], img: "images/Agadir/agadir_hero.png", desc: "Coastal breeze to the Capital of Culture." },
-    { name: "Zagora", id: "zagora", coords: [30.3324, -5.8384], img: "images/Zagora/zagora_hero.png", desc: "The gateway to the immense Draa Valley." }
-  ];
+function initFavoritesCounter() {
+  const count = AppState.favorites.length;
+  document.querySelectorAll('.fav-count-badge').forEach(badge => {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+  });
+}
 
-  cities.forEach((c) => {
-    const popupContent = `
-      <img src="${c.img}" class="map-popup-img" alt="${c.name}">
-      <div class="map-popup-body">
-        <strong>${c.name}</strong>
-        <p>${c.desc}</p>
-        <button class="map-popup-btn" onclick="closeMapPopupAndOpen('${c.id}')">Explore →</button>
+// ── Sticky Navbar Engine ───────────────────────────────────────────────────
+function initNavbarScroll() {
+  const nav = document.getElementById('siteNav');
+  if (!nav) return;
+
+  const handleScroll = () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('glass-nav');
+      nav.style.padding = '12px 40px';
+    } else {
+      nav.classList.remove('glass-nav');
+      nav.style.padding = '20px 40px';
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+}
+
+window.toggleMobileMenu = function() {
+  const menu = document.querySelector('.hn-links');
+  if (menu) {
+    menu.classList.toggle('hn-links-open');
+  }
+};
+
+// ── Toast System ───────────────────────────────────────────────────────────
+function showToast(message) {
+  let toastContainer = document.getElementById('toastContainer');
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toastContainer';
+    toastContainer.style.cssText = `
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    `;
+    document.body.appendChild(toastContainer);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'glass-panel';
+  toast.style.cssText = `
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--hm-text-heading);
+    box-shadow: var(--hm-shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
+  `;
+  toast.innerHTML = message;
+  toastContainer.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+  });
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2800);
+}
+
+// ── Destination Cards & Filter Engine ──────────────────────────────────────
+function createCardHTML(dest) {
+  const favActive = isFavorite(dest.id);
+  return `
+    <div class="glass-panel hover-lift dest-card-item" style="border-radius: var(--hm-radius-lg); overflow: hidden; position: relative;">
+      <div style="position: relative; height: 240px; overflow: hidden;">
+        <img src="${dest.img}" alt="${dest.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;" class="card-img">
+        <span class="badge badge-turquoise" style="position: absolute; top: 16px; left: 16px; backdrop-filter: blur(10px);">${dest.badge}</span>
+        <button class="fav-btn ${favActive ? 'is-active' : ''}" data-id="${dest.id}" onclick="toggleFavorite('${dest.id}', event)" style="position: absolute; top: 16px; right: 16px;">
+          <i class="fa-${favActive ? 'solid' : 'regular'} fa-heart"></i>
+        </button>
+      </div>
+      <div style="padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--hm-turquoise); text-transform: uppercase; letter-spacing: 1px;">
+            <i class="fa-solid fa-location-dot"></i> ${dest.region}
+          </span>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--hm-gold);">
+            <i class="fa-solid fa-star"></i> ${dest.rating} (${dest.reviewsCount})
+          </span>
+        </div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 10px; line-height: 1.3;">${dest.title}</h3>
+        <p style="font-size: 0.9rem; color: var(--hm-text-muted); margin-bottom: 20px; line-clamp: 2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+          ${dest.desc}
+        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hm-border); padding-top: 16px;">
+          <div>
+            <span style="font-size: 0.75rem; color: var(--hm-text-muted); display: block;">Starting from</span>
+            <span style="font-size: 1.4rem; font-weight: 800; color: var(--hm-text-heading);">${dest.price} ${dest.currency}</span>
+          </div>
+          <button onclick="openDestinationModal('${dest.id}')" class="btn-primary" style="padding: 9px 20px; font-size: 0.85rem;">
+            Explore <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderSkeletonGrid(container, count = 6) {
+  container.innerHTML = Array(count).fill(0).map(() => `
+    <div style="border-radius: var(--hm-radius-lg); overflow: hidden; background: var(--hm-bg-card); border: 1px solid var(--hm-border); padding: 16px;">
+      <div class="skeleton" style="height: 200px; width: 100%; border-radius: var(--hm-radius-md); margin-bottom: 16px;"></div>
+      <div class="skeleton" style="height: 20px; width: 40%; margin-bottom: 12px;"></div>
+      <div class="skeleton" style="height: 28px; width: 80%; margin-bottom: 12px;"></div>
+      <div class="skeleton" style="height: 16px; width: 100%; margin-bottom: 20px;"></div>
+      <div style="display: flex; justify-content: space-between;">
+        <div class="skeleton" style="height: 36px; width: 30%;"></div>
+        <div class="skeleton" style="height: 36px; width: 35%; border-radius: 99px;"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function initDestinationsPage() {
+  const container = document.getElementById('destinationsGrid');
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const regionFilter = document.getElementById('regionFilter');
+  const priceSlider = document.getElementById('priceSlider');
+  const priceDisplay = document.getElementById('priceDisplay');
+
+  function filterAndRender() {
+    renderSkeletonGrid(container, 6);
+
+    setTimeout(() => {
+      const query = (searchInput ? searchInput.value : '').toLowerCase();
+      const category = categoryFilter ? categoryFilter.value : 'all';
+      const region = regionFilter ? regionFilter.value : 'all';
+      const maxPrice = priceSlider ? Number(priceSlider.value) : 1000;
+
+      if (priceDisplay && priceSlider) {
+        priceDisplay.textContent = `€${priceSlider.value}`;
+      }
+
+      const filtered = DESTINATIONS_DB.filter(d => {
+        const matchesQuery = d.title.toLowerCase().includes(query) || d.desc.toLowerCase().includes(query) || d.region.toLowerCase().includes(query);
+        const matchesCategory = category === 'all' || d.category === category;
+        const matchesRegion = region === 'all' || d.region === region;
+        const matchesPrice = d.price <= maxPrice;
+        return matchesQuery && matchesCategory && matchesRegion && matchesPrice;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+            <i class="fa-solid fa-compass-slash" style="font-size: 3rem; color: var(--hm-turquoise); margin-bottom: 16px;"></i>
+            <h3 style="font-size: 1.5rem; margin-bottom: 8px;">No Destinations Found</h3>
+            <p style="color: var(--hm-text-muted);">Try adjusting your search filters or resetting options.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = filtered.map(createCardHTML).join('');
+      }
+    }, 300);
+  }
+
+  if (searchInput) searchInput.addEventListener('input', filterAndRender);
+  if (categoryFilter) categoryFilter.addEventListener('change', filterAndRender);
+  if (regionFilter) regionFilter.addEventListener('change', filterAndRender);
+  if (priceSlider) priceSlider.addEventListener('input', filterAndRender);
+
+  filterAndRender();
+}
+
+// ── Favorites Page Engine ─────────────────────────────────────────────────
+function initFavoritesPage() {
+  const container = document.getElementById('favoritesGrid');
+  if (!container) return;
+
+  const saved = DESTINATIONS_DB.filter(d => isFavorite(d.id));
+
+  if (saved.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 80px 20px;">
+        <i class="fa-regular fa-heart" style="font-size: 4rem; color: var(--hm-text-muted); margin-bottom: 20px;"></i>
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px;">Your Wishlist is Empty</h2>
+        <p style="color: var(--hm-text-muted); max-width: 460px; margin: 0 auto 24px;">Explore our handcrafted Moroccan experiences and click the heart icon to save your dream destinations.</p>
+        <a href="destinations.html" class="btn-primary">Explore Destinations <i class="fa-solid fa-compass"></i></a>
       </div>
     `;
-    const marker = L.marker(c.coords, { icon: customIcon })
-      .addTo(map)
-      .bindPopup(popupContent, { maxWidth: 260, closeButton: true, className: 'premium-popup' });
-      
-    marker.on('click', function() {
-      // Calculate an offset so the map center is slightly above the marker, making room for the popup
-      const targetZoom = 8;
-      const targetPoint = map.project(c.coords, targetZoom);
-      targetPoint.y -= 130; // Shift center 130px UP -> Marker moves DOWN
-      const offsetLatLng = map.unproject(targetPoint, targetZoom);
-
-      map.flyTo(offsetLatLng, targetZoom, {
-        animate: true,
-        duration: 1.5,
-        easeLinearity: 0.1
-      });
-    });
-  });
-  // Beautiful uniform tour route lines (Golden style)
-  const routeCoords = [
-    // Fes → Marrakech
-    [[34.0333, -5.0], [33.0, -4.5], [31.0994, -4.0127], [31.5, -5.5], [31.6295, -7.9811]],
-    // Casablanca → Chefchaouen
-    [[33.5731, -7.5898], [34.5, -6.0], [35.1688, -5.2636]],
-    // Marrakech → Chefchaouen
-    [[31.6295, -7.9811], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0], [35.1688, -5.2636]],
-    // Marrakech → Essaouira
-    [[31.6295, -7.9811], [31.5085, -9.7595]],
-    // Marrakech → Zagora
-    [[31.6295, -7.9811], [30.9189, -6.8936], [30.3324, -5.8384]],
-    // Agadir → Fes
-    [[30.4278, -9.5981], [30.9189, -6.8936], [31.0994, -4.0127], [34.0333, -5.0]]
-  ];
-
-  routeCoords.forEach(coords => {
-    // Background shadow/casing line for better visibility on the map
-    L.polyline(coords, {
-      color: '#000',
-      weight: 4,
-      opacity: 0.3,
-      lineJoin: 'round'
-    }).addTo(map);
-
-    // Foreground beautiful animated dashed line
-    L.polyline(coords, {
-      color: '#F39C12', // Golden accent
-      weight: 2,
-      opacity: 0.9,
-      className: 'animated-route',
-      lineJoin: 'round'
-    }).addTo(map);
-  });
-
-  setTimeout(() => map.invalidateSize(), 300);
+  } else {
+    container.innerHTML = saved.map(createCardHTML).join('');
+  }
 }
 
-// Helper: close map popup and open city modal
-window.closeMapPopupAndOpen = function(cityId) {
-  document.querySelector('.leaflet-popup-close-button')?.click();
-  setTimeout(() => {
-    window.location.href = `destinations.html#${cityId}`;
-  }, 200);
-};
-
-/* ---------- Travel form => WhatsApp ---------- */
-window.sendWhatsApp = function () {
-  const name = document.querySelector('input[placeholder="Full Name"]')?.value || "";
-  const email = document.querySelector('input[placeholder="Email Address"]')?.value || "";
-  const phone = document.querySelector('input[placeholder="Phone / WhatsApp"]')?.value || "";
-  const date = document.querySelector(".travel-form input[type='date']")?.value || "";
-
-  const selects = document.querySelectorAll(".travel-form select");
-  const adults = selects[0]?.value || "";
-  const children = selects[1]?.value || "";
-  const message = document.querySelector(".travel-form textarea")?.value || "";
-
-  if (Number(adults) < 2) {
-    alert("Please note that our tours require a minimum of 2 participants.");
-    return;
-  }
-
-  const whatsappMessage = `Hello 👋
-
-New travel request – Hidden Morocco 🌍
-
-👤 Name: ${name}
-📧 Email: ${email}
-📱 Phone: ${phone}
-
-📅 Date: ${date}
-👨‍👩‍👧 Adults: ${adults}
-🧒 Children: ${children}
-
-📝 Message:
-${message}`;
-
-  window.open(
-    "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(whatsappMessage),
-    "_blank"
-  );
-};
-
-// Handler for destination-specific forms
-window.sendDestinationWhatsApp = function (city) {
-  const modal = document.getElementById("modal-" + city);
-  if (!modal) return;
-
-  const name = modal.querySelector('.dest-name')?.value;
-  const date = modal.querySelector('.dest-date')?.value;
-  const adults = modal.querySelector('.dest-adults')?.value;
-  const children = modal.querySelector('.dest-children')?.value;
-
-  if (!name || !date || !adults) {
-    alert("Please fill in all required fields.");
-    return;
-  }
-
-  if (Number(adults) < 2) {
-    alert("Booking is valid starting from 2 people. Please adjust your participant count.");
-    return;
-  }
-
-  const text = `Hello 👋
-I would like to book a trip to ${city.toUpperCase()}:
-
-👤 Name: ${name}
-📅 Date: ${date}
-👨‍👩‍👧 Adults: ${adults}
-🧒 Children: ${children || 0}
-
-Thank you!`;
-
-  window.open(
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
-    "_blank"
-  );
-};
-
-/* ---------- Experience Modal + Booking ---------- */
-function calcTotal() {
-  if (!CURRENT_EXP_KEY) return;
-
-  const exp = EXPERIENCES[CURRENT_EXP_KEY];
-  const adults = Number(document.getElementById("qtyAdults")?.value || 1);
-  const children = Number(document.getElementById("qtyChildren")?.value || 0);
-
-  const base = getPriceNumber(exp.price);
-  const currency = getCurrency(exp.price);
-
-  // الأطفال بنصف الثمن (قدري تبدليه)
-  const total = base == null ? null : adults * base + children * base * 0.5;
-
-  const totalEl = document.getElementById("bookTotal");
-  if (totalEl) totalEl.textContent = formatTotal(total, currency);
-}
-
-window.qtyChange = function (type, delta) {
-  const input = document.getElementById(type === "adults" ? "qtyAdults" : "qtyChildren");
-  if (!input) return;
-
-  let v = Number(input.value || 0) + delta;
-
-  // Enforce 2 participants minimum for adults
-  const minAdults = 2;
-  if (type === "adults") v = Math.max(minAdults, v);
-  if (type === "children") v = Math.max(0, v);
-
-  input.value = v;
-  calcTotal();
-};
-
-window.bookNow = function () {
-  if (!CURRENT_EXP_KEY) return;
-  const exp = EXPERIENCES[CURRENT_EXP_KEY];
-
-  const date = document.getElementById("bookDate")?.value || "";
-  const adults = document.getElementById("qtyAdults")?.value || "2";
-  const children = document.getElementById("qtyChildren")?.value || "0";
-
-  if (!date) {
-    alert("Please select a date.");
-    return;
-  }
-
-  if (Number(adults) < 2) {
-    alert("Booking is valid starting from 2 people.");
-    return;
-  }
-
-  const text = `Hello 👋
-I would like to book:
-
-✅ Experience: ${exp.title}
-📅 Date: ${date}
-👤 Adults: ${adults}
-🧒 Children: ${children}
-
-Thank you!`;
-
-  window.open(
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
-    "_blank"
-  );
-};
-
-window.openExp = function (key) {
-  const exp = EXPERIENCES[key];
-  if (!exp) return;
-
-  CURRENT_EXP_KEY = key;
-
-  // Fill hero
-  document.getElementById("expTitle").textContent = exp.title;
-  document.getElementById("expDesc").innerHTML = exp.desc;
-
-  const img = document.getElementById("expImg");
-  const swiperEl = document.getElementById("expSwiper");
-  const wrapper = document.getElementById("expSwiperWrapper");
-
-  // Gallery Swiper Handle
-  if (exp.gallery && exp.gallery.length > 0) {
-    img.style.display = "none";
-    swiperEl.style.display = "block";
-    wrapper.innerHTML = exp.gallery.map(src => `
-      <div class="swiper-slide">
-        <img src="${src}" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-    `).join('');
-    
-    // Quick timeout to ensure DOM is ready
-    setTimeout(() => {
-      try {
-        if (window.modalSwiper) {
-          window.modalSwiper.destroy(true, true);
-        }
-        window.modalSwiper = new Swiper("#expSwiper", {
-          loop: exp.gallery && exp.gallery.length > 1,
-          pagination: { el: "#expSwiper .swiper-pagination", clickable: true },
-          navigation: { 
-            nextEl: "#expSwiper .swiper-button-next", 
-            prevEl: "#expSwiper .swiper-button-prev" 
-          },
-          observer: true,
-          observeParents: true,
-          autoplay: exp.gallery && exp.gallery.length > 1 ? { delay: 5000, disableOnInteraction: false } : false
-        });
-      } catch (err) {
-        console.error("Swiper init error:", err);
-      }
-    }, 200);
-  } else {
-    swiperEl.style.display = "none";
-    img.style.display = "block";
-    img.src = exp.img || "";
-    img.alt = exp.title || "";
-  }
-
-  document.getElementById("expDuration").textContent = "⏱ " + exp.duration;
-
-  // --- STRUCTURED UI LOGIC ---
-  const oldPanelsEl = document.getElementById("expOldPanels");
-  const highlightsEl = document.getElementById("expHighlights");
-  const itineraryEl = document.getElementById("expItinerary");
-  const metaEl = document.getElementById("expMeta");
-  const faqSection = document.getElementById("expFaqSection");
-
-  if (exp.highlights || exp.timeline || exp.included || exp.faqs) {
-    oldPanelsEl.style.display = "none";
-
-    // Highlights
-    if (exp.highlights) {
-      highlightsEl.style.display = "block";
-      document.getElementById("expHighlightsGrid").innerHTML = exp.highlights.map(h => `
-        <div class="highlight-card">
-          <i class="${h.icon}"></i>
-          <div>
-            <strong>${h.title}</strong>
-            <p>${h.desc}</p>
-          </div>
-        </div>
-      `).join('');
-    } else {
-      highlightsEl.style.display = "none";
-    }
-
-    // Itinerary (Timeline)
-    if (exp.timeline) {
-      itineraryEl.style.display = "block";
-      document.getElementById("expTimeline").innerHTML = exp.timeline.map(it => `
-        <div class="timeline-item">
-          <div class="timeline-dot">${it.dot}</div>
-          <div class="timeline-content">
-            <img src="${it.img}" class="timeline-img" alt="${it.title}">
-            <h4>${it.title}</h4>
-            <ul>${it.items.map(li => `<li>${li}</li>`).join('')}</ul>
-          </div>
-        </div>
-      `).join('');
-      
-      // Route Section
-      const routeEl = document.getElementById("expRoute");
-      if (exp.route) {
-        routeEl.style.display = "flex";
-        document.getElementById("expRouteDep").textContent = exp.route.departure;
-        document.getElementById("expRouteArr").textContent = exp.route.arrival;
-      } else {
-        routeEl.style.display = "none";
-      }
-    } else {
-      itineraryEl.style.display = "none";
-    }
-
-    // Meta (Included / Excluded)
-    if (exp.included) {
-      metaEl.style.display = "block";
-      document.getElementById("expIncList").innerHTML = exp.included.map(i => `<li>${i}</li>`).join('');
-      const excContainer = document.getElementById("expExcContainer");
-      if (exp.excluded && exp.excluded.length > 0) {
-        excContainer.style.display = "block";
-        document.getElementById("expExcList").innerHTML = exp.excluded.map(e => `<li>${e}</li>`).join('');
-      } else {
-        excContainer.style.display = "none";
-      }
-    } else {
-      metaEl.style.display = "none";
-    }
-
-    // Pricing Table
-    const pricingEl = document.getElementById("expPricing");
-    if (exp.pricing && exp.pricing.length > 0) {
-      pricingEl.style.display = "block";
-      document.getElementById("expPricingBody").innerHTML = exp.pricing.map(p => `
-        <tr><td>${p.group}</td><td>${p.price}</td></tr>
-      `).join('');
-      const upgradeEl = document.getElementById("expPricingUpgrade");
-      if (exp.pricingUpgrade) {
-        upgradeEl.textContent = exp.pricingUpgrade;
-        upgradeEl.style.display = "block";
-      } else {
-        upgradeEl.style.display = "none";
-      }
-    } else {
-      pricingEl.style.display = "none";
-    }
-
-    // FAQs
-    if (exp.faqs) {
-      faqSection.style.display = "block";
-      document.getElementById("expFaqList").innerHTML = exp.faqs.map(f => `
-        <div class="faq-item">
-          <h5>${f.q}</h5>
-          <p>${f.a}</p>
-        </div>
-      `).join('');
-    } else {
-      faqSection.style.display = "none";
-    }
-
-  } else {
-    // Falls back to old simple program/activities layout
-    oldPanelsEl.style.display = "flex";
-    highlightsEl.style.display = "none";
-    itineraryEl.style.display = "none";
-    metaEl.style.display = "none";
-    faqSection.style.display = "none";
-    document.getElementById("expPricing").style.display = "none";
-
-    const expSchedule = document.getElementById("expSchedule");
-    if (exp.schedule && exp.schedule.length > 0) {
-      expSchedule.parentElement.style.display = "block";
-      expSchedule.innerHTML = exp.schedule.map((s) => `<li>${s}</li>`).join("");
-    } else {
-      expSchedule.parentElement.style.display = "none";
-    }
-
-    const expList = document.getElementById("expList");
-    if (exp.activities && exp.activities.length > 0) {
-      expList.parentElement.style.display = "block";
-      expList.innerHTML = exp.activities.map((a) => `<li>${a}</li>`).join("");
-    } else {
-      expList.parentElement.style.display = "none";
-    }
-  }
-
-  document.getElementById("expTiming").textContent = "🕒 " + exp.timing;
-  document.getElementById("expPrice").textContent = "💰 " + exp.price;
-
-  // Booking card
-  const basePriceEl = document.getElementById("bookBasePrice");
-  const titleMiniEl = document.getElementById("bookTitleMini");
-  if (basePriceEl) basePriceEl.textContent = exp.price || "—";
-  if (titleMiniEl) titleMiniEl.textContent = exp.title || "—";
-
-  // reset booking inputs
-  const qa = document.getElementById("qtyAdults");
-  const qc = document.getElementById("qtyChildren");
-  if (qa) qa.value = 1;
-  if (qc) qc.value = 0;
-
-  const bd = document.getElementById("bookDate");
-  if (bd) bd.value = "";
-
-  calcTotal();
-
-  // open modal
-  const modal = document.getElementById("expModal");
-  modal.style.display = "flex";
-  lockBodyScroll(true);
-};
-
-window.closeExp = function () {
-  const modal = document.getElementById("expModal");
-  if (!modal) return;
-  modal.style.display = "none";
-  lockBodyScroll(false);
-};
-
-/* ---------- Close modals with ESC & Outside Click ---------- */
-document.addEventListener("keydown", (e) => {
-  if (e.key !== "Escape") return;
-
-  // close exp modal if open
-  const expModal = document.getElementById("expModal");
-  if (expModal && expModal.style.display === "flex") {
-    window.closeExp();
-    return;
-  }
-
-  // close any city modal open
-  document.querySelectorAll(".modal").forEach((m) => {
-    if (getComputedStyle(m).display !== "none") {
-      m.style.display = "none";
-      lockBodyScroll(false);
-    }
-  });
-
-  // close destination booking modal
-  const dbModal = document.getElementById("destBookingModal");
-  if (dbModal && dbModal.style.display === "flex") {
-    window.closeDestBooking();
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("modal")) {
-    e.target.style.display = "none";
-    lockBodyScroll(false);
-  }
-  if (e.target.id === "destBookingModal") {
-    window.closeDestBooking();
-  }
-});
-
-
-/* ---------- On load ---------- */
-document.addEventListener("DOMContentLoaded", () => {
-  initMap();
-  initScrollReveal();
-  initStatCounters();
-
-  // Move all modals to body to prevent transform/z-index stacking context bugs
-  document.querySelectorAll('.modal, .exp-modal, .dest-booking-modal-overlay').forEach(modal => {
+// ── Interactive Destination Modal ──────────────────────────────────────────
+window.openDestinationModal = function(id) {
+  const dest = DESTINATIONS_DB.find(d => d.id === id);
+  if (!dest) return;
+
+  let modal = document.getElementById('destModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'destModal';
+    modal.style.cssText = `
+      position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    `;
     document.body.appendChild(modal);
-  });
-
-  // Close mobile menu when a link is clicked
-  const navLinksList = document.querySelectorAll('.nav-links a, .hn-links a');
-  const navContainer = document.querySelector('.nav-links');
-  const hnContainer = document.querySelector('.hn-links');
-  navLinksList.forEach(link => {
-    link.addEventListener('click', () => {
-      if(navContainer) navContainer.classList.remove('active');
-      if(hnContainer) hnContainer.classList.remove('hn-links-open');
-    });
-  });
-});
-
-/* ---------- Scroll Reveal Animation ---------- */
-function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  if (!reveals.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
-    });
-  }, { threshold: 0.12 });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Navbar scroll effect
-  const nav = document.getElementById('siteNav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 80);
-    }, { passive: true });
   }
+
+  const favActive = isFavorite(dest.id);
+
+  modal.innerHTML = `
+    <div class="glass-panel" style="width: min(900px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: var(--hm-bg-card);">
+      <button onclick="closeDestinationModal()" style="position: absolute; top: 20px; right: 20px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(0,0,0,0.5); color: #fff; cursor: pointer; font-size: 1.2rem;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="position: relative; height: 340px;">
+        <img src="${dest.img}" alt="${dest.title}" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);"></div>
+        <div style="position: absolute; bottom: 24px; left: 30px; right: 30px; color: #fff;">
+          <span class="badge badge-turquoise" style="margin-bottom: 8px;">${dest.badge}</span>
+          <h2 style="font-size: 2.2rem; color: #fff; font-family: var(--hm-font-serif);">${dest.title}</h2>
+          <p style="opacity: 0.85; font-size: 0.95rem;"><i class="fa-solid fa-location-dot"></i> ${dest.region} • <i class="fa-solid fa-star" style="color: var(--hm-gold);"></i> ${dest.rating} (${dest.reviewsCount} reviews)</p>
+        </div>
+      </div>
+
+      <div style="padding: 34px;">
+        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--hm-text-body); margin-bottom: 28px;">${dest.desc}</p>
+        
+        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">Highlights</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 30px;">
+          ${dest.highlights.map(h => `
+            <div style="display: flex; align-items: center; gap: 10px; background: var(--hm-bg-main); padding: 12px 16px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border);">
+              <i class="fa-solid fa-circle-check" style="color: var(--hm-turquoise);"></i>
+              <span style="font-size: 0.9rem; font-weight: 600;">${h}</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">Sample Itinerary</h4>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px;">
+          ${dest.itinerary.map(item => `
+            <div style="padding: 16px; border-left: 3px solid var(--hm-turquoise); background: var(--hm-bg-main); border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0;">
+              <strong style="color: var(--hm-turquoise); display: block; font-size: 0.85rem;">${item.day}</strong>
+              <span style="font-size: 0.95rem;">${item.text}</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hm-border); padding-top: 24px;">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--hm-text-muted);">Price per person</span>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--hm-text-heading);">${dest.price} ${dest.currency}</div>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button class="fav-btn ${favActive ? 'is-active' : ''}" data-id="${dest.id}" onclick="toggleFavorite('${dest.id}', event)">
+              <i class="fa-${favActive ? 'solid' : 'regular'} fa-heart"></i>
+            </button>
+            <a href="booking.html?dest=${dest.id}" class="btn-primary" style="padding: 12px 30px;">Book Experience</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+  });
+};
+
+window.closeDestinationModal = function() {
+  const modal = document.getElementById('destModal');
+  if (modal) {
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+  }
+};
+
+// ── Interactive Leaflet Map Engine ─────────────────────────────────────────
+function updateMapTileLayer() {
+  if (!AppState.mapInstance) return;
+  
+  if (AppState.mapTileLayer) {
+    AppState.mapInstance.removeLayer(AppState.mapTileLayer);
+  }
+
+  const isDark = AppState.theme === 'dark';
+  const tileUrl = isDark
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+  AppState.mapTileLayer = L.tileLayer(tileUrl, {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    maxZoom: 18
+  }).addTo(AppState.mapInstance);
 }
 
-/* ---------- Animated Stat Counters ---------- */
-function initStatCounters() {
-  const counters = document.querySelectorAll('.stat-number');
-  if (!counters.length) return;
-  let started = false;
+function initMapPage() {
+  const mapElement = document.getElementById('interactiveMap');
+  if (!mapElement || typeof L === 'undefined') return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !started) {
-        started = true;
-        counters.forEach(counter => {
-          const target = +counter.dataset.target;
-          const duration = 2000;
-          const step = target / (duration / 16);
-          let current = 0;
+  AppState.mapInstance = L.map('interactiveMap').setView([31.7917, -7.0926], 6);
+  updateMapTileLayer();
 
-          const updateCounter = () => {
-            current += step;
-            if (current < target) {
-              counter.textContent = Math.floor(current);
-              requestAnimationFrame(updateCounter);
-            } else {
-              counter.textContent = target;
-            }
-          };
-          updateCounter();
-        });
-      }
-    });
-  }, { threshold: 0.5 });
+  // Custom marker icon
+  const customIcon = L.divIcon({
+    className: 'custom-map-pin',
+    html: `<div style="background: var(--hm-turquoise); width: 28px; height: 28px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(6,182,212,0.6); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px;"><i class="fa-solid fa-location-dot"></i></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
+  });
 
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) observer.observe(statsSection);
+  DESTINATIONS_DB.forEach(dest => {
+    const marker = L.marker([dest.lat, dest.lng], { icon: customIcon }).addTo(AppState.mapInstance);
+    
+    marker.bindPopup(`
+      <div style="padding: 6px; font-family: var(--hm-font-sans);">
+        <img src="${dest.img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
+        <h4 style="margin: 0 0 4px; font-size: 1rem;">${dest.title}</h4>
+        <p style="margin: 0 0 8px; font-size: 0.8rem; color: #64748B;">${dest.region} • €${dest.price}</p>
+        <button onclick="openDestinationModal('${dest.id}')" style="background: var(--hm-turquoise); color: #fff; border: none; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; width: 100%;">View Experience</button>
+      </div>
+    `, { maxWidth: 220 });
+
+    AppState.mapMarkers.push(marker);
+  });
 }
 
-/* ---------- Mobile Menu ---------- */
-window.toggleMobileMenu = function() {
-  const navLinks = document.querySelector('.nav-links');
-  if(navLinks) {
-    navLinks.classList.toggle('active');
+function initHomeMapPreview() {
+  const mapElement = document.getElementById('homeMapPreview');
+  if (!mapElement || typeof L === 'undefined') return;
+
+  const miniMap = L.map('homeMapPreview', { zoomControl: false, dragging: false, scrollWheelZoom: false }).setView([31.7917, -7.0926], 6);
+  L.tileLayer(AppState.theme === 'dark' ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(miniMap);
+
+  DESTINATIONS_DB.forEach(dest => {
+    L.circleMarker([dest.lat, dest.lng], {
+      radius: 7,
+      fillColor: '#06B6D4',
+      color: '#FFFFFF',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.9
+    }).addTo(miniMap);
+  });
+}
+
+// ── Stats Counter Observer ─────────────────────────────────────────────────
+function initStatsObserver() {
+  const section = document.getElementById('statCounters');
+  if (!section) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const target = Number(el.getAttribute('data-target'));
+        let count = 0;
+        const step = Math.max(1, Math.ceil(target / 60));
+        const timer = setInterval(() => {
+          count = Math.min(count + step, target);
+          el.textContent = count.toLocaleString();
+          if (count >= target) clearInterval(timer);
+        }, 25);
+      });
+      observer.disconnect();
+    }
+  }, { threshold: 0.3 });
+
+  observer.observe(section);
+}
+
+// ── Booking Wizard ─────────────────────────────────────────────────────────
+function initBookingWizard() {
+  const form = document.getElementById('bookingFormWizard');
+  if (!form) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedDestId = urlParams.get('dest');
+  const destSelect = document.getElementById('bookingDestSelect');
+
+  if (selectedDestId && destSelect) {
+    destSelect.value = selectedDestId;
   }
-  const hnLinks = document.querySelector('.hn-links');
-  if(hnLinks) {
-    hnLinks.classList.toggle('hn-links-open');
-  }
-};
 
+  const guestsInput = document.getElementById('bookingGuests');
+  const totalDisplay = document.getElementById('bookingTotalPrice');
 
-/* ---------- Global Destination Booking Logic ---------- */
-const DEST_IMAGES = {
-  "Marrakech": "images/Marrakech/Marrakech.jpg",
-  "Ouarzazate": "images/Ouarzazat/ouarzazat1.jpeg",
-  "Merzouga": "images/Merzouga/merzouga_1.jpg",
-  "Chefchaouen": "images/Chfchaouen/chefchaoun.jpg",
-  "Essaouira": "images/Essaouira/essaouira_1.jpg",
-  "Fes": "images/Fes/Fes.jpg",
-  "Casablanca": "images/Casablanca/casablanca.png",
-  "Agadir": "images/Agadir/agadir_hero.png",
-  "Zagora": "images/Zagora/zagora_hero.png"
-};
+  function calculatePrice() {
+    const destId = destSelect ? destSelect.value : 'marrakech';
+    const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
+    const guests = guestsInput ? Number(guestsInput.value || 1) : 1;
+    const total = dest.price * guests;
 
-window.openDestBooking = function(city) {
-  const modal = document.getElementById("destBookingModal");
-  if (!modal) return;
-  
-  // Fill content
-  document.getElementById("destBookingTitle").textContent = city + " Expedition";
-  const img = document.getElementById("destBookingImg");
-  if (img && DEST_IMAGES[city]) {
-    img.src = DEST_IMAGES[city];
+    if (totalDisplay) {
+      totalDisplay.textContent = `€${total}`;
+    }
   }
 
-  // Handle Fès Special Promotions visibility
-  const fesPromo = document.getElementById("fesPromoBlock");
-  if (fesPromo) {
-    fesPromo.style.display = (city === "Fes") ? "block" : "none";
-  }
-  
-  // Reset form
-  document.getElementById("db-name").value = "";
-  document.getElementById("db-email").value = "";
-  document.getElementById("db-phone").value = "";
-  document.getElementById("db-date").value = "";
-  document.getElementById("db-adults").value = 2;
-  document.getElementById("db-children").value = 0;
-  document.getElementById("db-message").value = "";
-  
-  modal.style.display = "flex";
-  lockBodyScroll(true);
-};
+  if (destSelect) destSelect.addEventListener('change', calculatePrice);
+  if (guestsInput) guestsInput.addEventListener('input', calculatePrice);
+  calculatePrice();
 
-window.closeDestBooking = function() {
-  const modal = document.getElementById("destBookingModal");
-  if (modal) modal.style.display = "none";
-  lockBodyScroll(false);
-};
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast("🎉 Booking Submitted! Our travel team will contact you via email.");
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 1500);
+  });
+}
 
+// ── Global Event Bindings ──────────────────────────────────────────────────
+function initGlobalEvents() {
+  // Bind all theme toggles
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', toggleTheme);
+  });
 
-window.sendDestBookingWhatsApp = function() {
-  const cityTitle = document.getElementById("destBookingTitle").textContent;
-  const name = document.getElementById("db-name").value;
-  const date = document.getElementById("db-date").value;
-  const adults = document.getElementById("db-adults").value;
-  const children = document.getElementById("db-children").value;
-  const message = document.getElementById("db-message").value;
-  
-  if (!name || !date) {
-    alert("Please fill in your name and preferred date.");
-    return;
-  }
-  
-  const text = `Hello 👋
-I am interested in booking:
-✅ Destination: ${cityTitle}
-👤 Name: ${name}
-📅 Date: ${date}
-👥 Adults: ${adults}
-🧒 Children: ${children}
-📝 Message: ${message || "N/A"}
-
-Thank you!`;
-
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
-};
+  // Close modals on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDestinationModal();
+  });
+}

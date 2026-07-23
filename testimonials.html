@@ -1,146 +1,136 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hidden Morocco</title>
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="home-premium.css">
-  <link rel="stylesheet" href="slider.css">
-  <link rel="stylesheet" href="exp.css">
+  <title>Traveler Reviews — Hidden Morocco</title>
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
-    rel="stylesheet">
-  <!-- Swiper CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-  <!-- Sticky Navbar -->
-  <nav class="hn-nav hn-nav-scrolled" id="siteNav">
-    <div class="hn-nav-inner">
-      <a class="hn-logo" href="index.html">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+  <!-- Navigation -->
+  <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
+    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: var(--hm-text-heading);">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="testimonials.html" class="active">Reviews</a></li>
-        <li><a href="booking.html" class="hn-book-btn">Book Now</a></li>
+      <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
+        <li><a href="index.html" style="font-weight: 600;">Home</a></li>
+        <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
+        <li><a href="map.html" style="font-weight: 600;">Interactive Map</a></li>
+        <li><a href="about.html" style="font-weight: 600;">About</a></li>
+        <li><a href="testimonials.html" style="font-weight: 700; color: var(--hm-turquoise);">Reviews</a></li>
+        <li><a href="contact.html" style="font-weight: 600;">Contact</a></li>
       </ul>
-      <button class="hn-burger" onclick="toggleMobileMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
+        </a>
+        <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
+        <a href="dashboard.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hm-text-heading);" title="User Dashboard">
+          <i class="fa-regular fa-user"></i>
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- Page Header -->
-  <div class="page-header">
-    <div class="page-header-content">
-      <span class="page-header-badge">✦ Hidden Morocco</span>
-      <h1>Avis de Voyageurs</h1>
-      <p>Des histoires vraies de gens qui ont exploré le Maroc avec nous</p>
-      <div class="page-header-divider">✦</div>
-    </div>
-  </div>
-
-
-<section id="testimonials" class="testimonials-section reveal">
-    <h2>What Our Travelers Say</h2>
-    <p class="testimonials-subtitle">Real stories from people who explored Morocco with us</p>
-    <div class="testimonials-grid">
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The Grand Moroccan Traverse was the highlight of our trip. Our driver was
-          incredible — he knew every hidden viewpoint and secret alley. We felt like insiders, not tourists."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JL</div>
-          <div>
-            <strong>James & Laura</strong>
-            <span>United Kingdom 🇬🇧</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Sleeping under the stars in Merzouga was a life-changing experience. The camp, the
-          camel ride at sunset, the Berber music — nothing compares. Worth every euro!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SM</div>
-          <div>
-            <strong>Sophie M.</strong>
-            <span>France 🇫🇷</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Chefchaouen is a dream. The blue streets, the relaxed atmosphere, the local food —
-          we didn't want to leave. Our private guide was so warm and knowledgeable."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">AR</div>
-          <div>
-            <strong>Ahmed & Rida</strong>
-            <span>Canada 🇨🇦</span>
-          </div>
-        </div>
-      </div>
-
+  <section style="position: relative; padding: 140px 20px 70px; text-align: center; background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.9) 100%), url('images/hero.jpg') center/cover no-repeat;">
+    <div style="max-width: 800px; margin: 0 auto; color: #fff;">
+      <span class="badge badge-gold" style="margin-bottom: 16px;"><i class="fa-solid fa-star"></i> 4.95 / 5.0 Rating</span>
+      <h1 style="font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 16px; color: #fff;">Real Stories From Real Travelers</h1>
+      <p style="font-size: 1.1rem; opacity: 0.85;">Read verified experiences from guests who explored Morocco with our native guides.</p>
     </div>
   </section>
-<footer class="footer">
-    <div class="footer-container">
 
-            <div class="footer-col">
-        <h4>Destinations</h4>
-        <ul>
-          <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga</a></li>
-          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-          <li><a href="destinations.html#casablanca">Casablanca</a></li>
-        </ul>
+  <!-- Metric Summary & Reviews Grid -->
+  <section style="padding: 80px 20px 120px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      
+      <!-- Top Aggregate Metric -->
+      <div class="glass-panel" style="padding: 36px; border-radius: var(--hm-radius-lg); margin-bottom: 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+        <div style="display: flex; align-items: center; gap: 24px;">
+          <div style="font-size: 3.8rem; font-weight: 800; color: var(--hm-gold); font-family: var(--hm-font-serif); line-height: 1;">4.95</div>
+          <div>
+            <div style="color: var(--hm-gold); font-size: 1.2rem; margin-bottom: 4px;">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--hm-text-muted);">Based on 2,500+ verified customer reviews</p>
+          </div>
+        </div>
+
+        <button onclick="showToast('Thank you! Review form submitted for moderation.')" class="btn-primary" style="padding: 12px 28px;">
+          Leave A Review <i class="fa-solid fa-pen-to-square"></i>
+        </button>
       </div>
 
-
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
-        <p>Tél : +212 6 12 34 56 78</p>
-
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <!-- Reviews Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px;">
+        
+        <div class="glass-panel hover-lift" style="padding: 32px; border-radius: var(--hm-radius-lg);">
+          <div style="color: var(--hm-gold); margin-bottom: 16px;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--hm-text-body); margin-bottom: 24px; font-style: italic;">
+            "Our Merzouga desert trek was hands down the best experience of our lives! The luxury tents, Gnawa music by the campfire, and sunset camel rides were pure magic."
+          </p>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--hm-turquoise); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;">EM</div>
+            <div>
+              <h4 style="font-size: 1rem;">Elena & Marcus</h4>
+              <span style="font-size: 0.8rem; color: var(--hm-text-muted);">United Kingdom • Traveled Sep 2025</span>
+            </div>
+          </div>
         </div>
+
+        <div class="glass-panel hover-lift" style="padding: 32px; border-radius: var(--hm-radius-lg);">
+          <div style="color: var(--hm-gold); margin-bottom: 16px;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--hm-text-body); margin-bottom: 24px; font-style: italic;">
+            "Chefchaouen took my breath away. Hidden Morocco arranged a local photographer guide who showed us hidden blue alleyways away from the crowds!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--hm-gold); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;">SK</div>
+            <div>
+              <h4 style="font-size: 1rem;">Sarah K.</h4>
+              <span style="font-size: 0.8rem; color: var(--hm-text-muted);">Canada • Traveled May 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel hover-lift" style="padding: 32px; border-radius: var(--hm-radius-lg);">
+          <div style="color: var(--hm-gold); margin-bottom: 16px;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--hm-text-body); margin-bottom: 24px; font-style: italic;">
+            "Extremely professional private 4x4 transport. Our driver Hassan felt like family by the end of our trip. Highly recommend!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--hm-emerald); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;">JP</div>
+            <div>
+              <h4 style="font-size: 1rem;">Jean-Pierre D.</h4>
+              <span style="font-size: 0.8rem; color: var(--hm-text-muted);">France • Traveled Nov 2025</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--hm-bg-footer); color: #94A3B8; padding: 80px 20px 40px; border-top: 1px solid var(--hm-border);">
+    <div style="max-width: 1300px; margin: 0 auto; text-align: center; font-size: 0.85rem;">
+      <p>&copy; 2026 Hidden Morocco. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
-
-
-
 </body>
-
 </html>

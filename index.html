@@ -1,419 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hidden Morocco – Private Tours & Authentic Experiences</title>
-  <meta name="description" content="Discover Morocco's hidden gems with private guided tours. Marrakech, Merzouga desert, Chefchaouen and more. Book your tailor-made Moroccan adventure today.">
+  <title>Hidden Morocco — Discover Extraordinary Authentic Journeys</title>
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="slider.css">
-  <link rel="stylesheet" href="home-premium.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
-
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
-  <nav class="hn-nav" id="siteNav">
-    <div class="hn-nav-inner">
-      <a class="hn-logo" href="index.html">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+  <!-- Navigation -->
+  <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
+    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: var(--hm-text-heading);">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
         <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="booking.html" class="hn-book-btn">Book Now</a></li>
+      <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
+        <li><a href="index.html" style="font-weight: 700; color: var(--hm-turquoise);">Home</a></li>
+        <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
+        <li><a href="map.html" style="font-weight: 600;">Interactive Map</a></li>
+        <li><a href="about.html" style="font-weight: 600;">About</a></li>
+        <li><a href="testimonials.html" style="font-weight: 600;">Reviews</a></li>
+        <li><a href="contact.html" style="font-weight: 600;">Contact</a></li>
       </ul>
-      <button class="hn-burger" onclick="toggleMobileMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
+        </a>
+        <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
+        <a href="dashboard.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hm-text-heading);" title="User Dashboard">
+          <i class="fa-regular fa-user"></i>
+        </a>
+      </div>
     </div>
   </nav>
 
-  <!-- ============================================================
-       HERO — Full screen cinematic
-  ============================================================ -->
-  <section class="hn-hero">
-    <div class="hn-hero-overlay"></div>
-
-    <!-- Content -->
-    <div class="hn-hero-content">
-      <p class="hn-hero-eyebrow">✦ Morocco's #1 Private Tour Operator</p>
-      <h1 class="hn-hero-title">Hidden Morocco</h1>
-      <p class="hn-hero-sub">Discover unique places and unforgettable experiences.</p>
-      <div class="hn-hero-btns">
-        <a href="destinations.html" class="hn-btn-primary">Explore Destinations</a>
-        <a href="booking.html" class="hn-btn-ghost">Plan My Trip</a>
-      </div>
+  <!-- Hero Section -->
+  <section style="position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 120px 20px 60px;">
+    <div style="position: absolute; inset: 0; z-index: 1;">
+      <img src="images/hero.jpg" alt="Morocco Desert Kasbah" style="width: 100%; height: 100%; object-fit: cover;">
+      <div style="position: absolute; inset: 0; background: var(--hm-bg-hero-overlay);"></div>
     </div>
 
-    <!-- Scroll cue -->
-    <div class="hn-scroll-cue">
-      <span>Scroll</span>
-      <div class="hn-scroll-line"></div>
-    </div>
+    <div style="position: relative; z-index: 2; max-width: 1100px; text-align: center; color: #FFFFFF;">
+      <span class="badge badge-turquoise" style="margin-bottom: 20px; background: rgba(6,182,212,0.2); border-color: rgba(6,182,212,0.5); color: #E0F2FE;">
+        ✦ Boutique Moroccan Travel Agency
+      </span>
+      <h1 style="font-family: var(--hm-font-serif); font-size: clamp(2.8rem, 6vw, 4.8rem); margin-bottom: 20px; color: #FFFFFF; text-shadow: 0 4px 30px rgba(0,0,0,0.5);">
+        Morocco Is Not Just A Destination.<br><em style="font-style: italic; color: var(--hm-gold);">It's A Feeling.</em>
+      </h1>
+      <p style="font-size: 1.2rem; max-width: 680px; margin: 0 auto 40px; color: rgba(255,255,255,0.85); line-height: 1.7;">
+        Discover hidden kasbahs, silent desert mornings under starry skies, and ancient medinas crafted by local storytellers.
+      </p>
 
-  </section>
-
-  <!-- Stats Section -->
-  <section class="hn-stats-section hn-reveal">
-    <div class="hn-stats-inner">
-      <div class="hn-stat">
-        <div class="hn-stat-val">
-          <span class="stat-number" data-target="2500">0</span>+
+      <!-- Glassmorphic Search Bar -->
+      <div class="glass-panel" style="max-width: 960px; margin: 0 auto; border-radius: 99px; padding: 12px 16px 12px 28px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; align-items: center; background: rgba(255,255,255,0.15); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.3);">
+        <div style="text-align: left;">
+          <label style="display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px;">Where to</label>
+          <input type="text" placeholder="e.g. Sahara, Chefchaouen" style="width: 100%; background: transparent; border: none; outline: none; color: #fff; font-size: 0.95rem; font-weight: 600;">
         </div>
-        <small>Happy Travelers</small>
-      </div>
-      <div class="hn-stat">
-        <div class="hn-stat-val">
-          <span class="stat-number" data-target="9">0</span>
+        <div style="text-align: left; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 16px;">
+          <label style="display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px;">Experience Type</label>
+          <select style="width: 100%; background: transparent; border: none; outline: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
+            <option value="all" style="color: #000;">All Experiences</option>
+            <option value="desert" style="color: #000;">Sahara Desert</option>
+            <option value="medina" style="color: #000;">Imperial Medinas</option>
+            <option value="mountains" style="color: #000;">Atlas Mountains</option>
+            <option value="coastal" style="color: #000;">Atlantic Coast</option>
+          </select>
         </div>
-        <small>Destinations</small>
-      </div>
-      <div class="hn-stat">
-        <div class="hn-stat-val">
-          <span class="stat-number" data-target="50">0</span>+
+        <div style="text-align: left; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 16px;">
+          <label style="display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px;">Travel Date</label>
+          <input type="date" style="width: 100%; background: transparent; border: none; outline: none; color: #fff; font-size: 0.95rem; font-weight: 600;">
         </div>
-        <small>Unique Routes</small>
-      </div>
-      <div class="hn-stat">
-        <div class="hn-stat-val">
-          <span class="stat-number" data-target="5">0</span>
-        </div>
-        <small>Years of Excellence</small>
+        <a href="destinations.html" class="btn-primary" style="padding: 14px 28px; font-size: 1rem;">
+          <i class="fa-solid fa-magnifying-glass"></i> Explore
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       INTRO STATEMENT
-  ============================================================ -->
-  <section class="hn-intro hn-reveal">
-    <div class="hn-intro-inner">
-      <p class="hn-label">Our Story</p>
-      <h2>Morocco is not just a destination.<br><em>It's a feeling.</em></h2>
-      <p class="hn-intro-text">We are a team of passionate Moroccan guides and storytellers dedicated to showing you the kingdom beyond the tourist trail — the hidden kasbahs, the silent desert mornings, the ancient medinas that still breathe history.</p>
-      <a href="destinations.html" class="hn-link-arrow">Start Exploring <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FEATURED DESTINATIONS — Immersive cards
-  ============================================================ -->
-  <section class="hn-destinations hn-reveal">
-    <div class="hn-section-header">
-      <p class="hn-label">Where to go</p>
-      <h2>Our Destinations</h2>
-    </div>
-
-    <div class="hn-dest-grid">
-
-      <!-- Large card: Marrakech -->
-      <a href="destinations.html#marrakech" class="hn-dest-card hn-dest-large">
-        <img src="images/Marrakech/Marrakech.jpg" alt="Marrakech" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Imperial City</span>
-          <h3>Marrakech</h3>
-          <p>The Red City</p>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+  <!-- Statistics Counter Section -->
+  <section id="statCounters" style="padding: 60px 20px; background: var(--hm-bg-card); border-bottom: 1px solid var(--hm-border);">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+      <div>
+        <div style="font-family: var(--hm-font-serif); font-size: 2.8rem; font-weight: 700; color: var(--hm-turquoise); line-height: 1;">
+          <span class="stat-num" data-target="2500">0</span>+
         </div>
-      </a>
-
-      <!-- Medium card: Merzouga -->
-      <a href="destinations.html#merzouga" class="hn-dest-card hn-dest-med">
-        <img src="images/Merzouga/merzouga.jpg" alt="Merzouga" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Sahara Desert</span>
-          <h3>Merzouga</h3>
-          <p>The Sea of Dunes</p>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <!-- Medium card: Chefchaouen -->
-      <a href="destinations.html#chefchaouen" class="hn-dest-card hn-dest-med">
-        <img src="images/Chfchaouen/chefchaoun_b.jpg" alt="Chefchaouen" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Mountain Town</span>
-          <h3>Chefchaouen</h3>
-          <p>The Blue Pearl</p>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <!-- Small cards row -->
-      <a href="destinations.html#fes" class="hn-dest-card hn-dest-small">
-        <img src="images/Fes/Fes.jpg" alt="Fes" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Imperial</span>
-          <h3>Fes</h3>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a href="destinations.html#ouarzazate" class="hn-dest-card hn-dest-small">
-        <img src="images/Ouarzazat/ouarzazat11.jpg" alt="Ouarzazate" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Cinema City</span>
-          <h3>Ouarzazate</h3>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a href="destinations.html#essaouira" class="hn-dest-card hn-dest-small">
-        <img src="images/Essaouira/Essaouira.jpg" alt="Essaouira" loading="lazy">
-        <div class="hn-dest-overlay">
-          <span class="hn-dest-tag">Coastal</span>
-          <h3>Essaouira</h3>
-          <span class="hn-dest-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-    </div>
-
-    <div class="hn-dest-cta">
-      <a href="destinations.html" class="hn-btn-outline">View All 9 Destinations →</a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       HOW IT WORKS — 3 Steps
-  ============================================================ -->
-  <section class="hn-how hn-reveal">
-    <div class="hn-how-inner">
-      <div class="hn-section-header" style="text-align:left; max-width:500px;">
-        <p class="hn-label">Simple Process</p>
-        <h2>How it works</h2>
+        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--hm-text-muted);">Happy Travelers</span>
       </div>
-      <div class="hn-steps">
-        <div class="hn-step">
-          <div class="hn-step-num">01</div>
-          <h4>Choose Your Journey</h4>
-          <p>Browse our destinations and select the experiences that call to you.</p>
+      <div>
+        <div style="font-family: var(--hm-font-serif); font-size: 2.8rem; font-weight: 700; color: var(--hm-gold); line-height: 1;">
+          <span class="stat-num" data-target="9">0</span>
         </div>
-        <div class="hn-step-connector"><i class="fa-solid fa-arrow-right"></i></div>
-        <div class="hn-step">
-          <div class="hn-step-num">02</div>
-          <h4>Customize With Us</h4>
-          <p>Tell us your dates, group size and preferences. We'll tailor every detail.</p>
+        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--hm-text-muted);">Iconic Destinations</span>
+      </div>
+      <div>
+        <div style="font-family: var(--hm-font-serif); font-size: 2.8rem; font-weight: 700; color: var(--hm-turquoise); line-height: 1;">
+          <span class="stat-num" data-target="50">0</span>+
         </div>
-        <div class="hn-step-connector"><i class="fa-solid fa-arrow-right"></i></div>
-        <div class="hn-step">
-          <div class="hn-step-num">03</div>
-          <h4>Explore Morocco</h4>
-          <p>Your private guide picks you up and your unforgettable adventure begins.</p>
+        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--hm-text-muted);">Custom Routes</span>
+      </div>
+      <div>
+        <div style="font-family: var(--hm-font-serif); font-size: 2.8rem; font-weight: 700; color: var(--hm-gold); line-height: 1;">
+          <span class="stat-num" data-target="99">0</span>%
         </div>
+        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--hm-text-muted);">Satisfaction Rate</span>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       WHY CHOOSE US — Feature highlights
-  ============================================================ -->
-  <section class="hn-why hn-reveal">
-    <div class="hn-section-header">
-      <p class="hn-label">Why us</p>
-      <h2>The Hidden Morocco Difference</h2>
-    </div>
-    <div class="hn-why-grid">
-      <div class="hn-why-card">
-        <div class="hn-why-icon"><i class="fa-solid fa-user-tie"></i></div>
-        <h4>100% Private Tours</h4>
-        <p>No shared buses, no crowds. Every journey is exclusively yours, on your schedule.</p>
+  <!-- Trending Destinations Preview -->
+  <section style="padding: 100px 20px;">
+    <div style="max-width: 1300px; margin: 0 auto;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
+        <div>
+          <span class="badge badge-turquoise" style="margin-bottom: 12px;">Handpicked Expeditions</span>
+          <h2 style="font-family: var(--hm-font-serif); font-size: 2.8rem;">Trending Experiences</h2>
+        </div>
+        <a href="destinations.html" class="btn-ghost">View All Destinations <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="hn-why-card">
-        <div class="hn-why-icon"><i class="fa-solid fa-compass"></i></div>
-        <h4>Local Expert Guides</h4>
-        <p>Born and raised in Morocco — our guides know the hidden corners tourists never see.</p>
-      </div>
-      <div class="hn-why-card">
-        <div class="hn-why-icon"><i class="fa-solid fa-sliders"></i></div>
-        <h4>Fully Customizable</h4>
-        <p>Your itinerary bends to your wishes. Every detail is crafted around you.</p>
-      </div>
-      <div class="hn-why-card">
-        <div class="hn-why-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h4>Safe & Reliable</h4>
-        <p>Modern vehicles, experienced drivers, and 24/7 support throughout your journey.</p>
+
+      <div id="destinationsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px;">
+        <!-- Dynamically rendered via script.js -->
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       IMMERSIVE FULL-WIDTH QUOTE BANNER
-  ============================================================ -->
-  <section class="hn-quote-banner hn-reveal" style="background-image: url('images/merzouga_desert.jpg')">
-    <div class="hn-quote-overlay"></div>
-    <div class="hn-quote-content">
-      <i class="fa-solid fa-quote-left hn-quote-icon"></i>
-      <blockquote>"Not all those who wander are lost — some are discovering Morocco."</blockquote>
-      <a href="booking.html" class="hn-btn-primary">Start Your Journey</a>
+  <!-- Interactive Map Preview Banner -->
+  <section style="padding: 80px 20px; background: var(--hm-bg-card); border-top: 1px solid var(--hm-border); border-bottom: 1px solid var(--hm-border);">
+    <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <span class="badge badge-gold" style="margin-bottom: 16px;">Interactive Exploration</span>
+        <h2 style="font-family: var(--hm-font-serif); font-size: 2.6rem; margin-bottom: 20px;">Explore Morocco On An Interactive Map</h2>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--hm-text-muted); margin-bottom: 30px;">
+          Plan your route effortlessly. Locate imperial palaces, Sahara dunes, and coastal hideaways on our custom spatial map.
+        </p>
+        <a href="map.html" class="btn-primary">Open Fullscreen Map <i class="fa-solid fa-map"></i></a>
+      </div>
+      <div id="homeMapPreview" style="height: 380px; border-radius: var(--hm-radius-lg); overflow: hidden; border: 1px solid var(--hm-border); box-shadow: var(--hm-shadow-lg);"></div>
     </div>
   </section>
 
-  <!-- ============================================================
-       TESTIMONIALS
-  ============================================================ -->
-  <section class="hn-testimonials hn-reveal">
-    <div class="hn-section-header">
-      <p class="hn-label">Traveler Stories</p>
-      <h2>What Our Guests Say</h2>
-    </div>
-    <div class="hn-reviews-grid">
-
-      <div class="hn-review-card">
-        <div class="hn-review-stars">★★★★★</div>
-        <p>"The Grand Moroccan Traverse was the highlight of our trip. Our driver knew every hidden viewpoint and secret alley. We felt like insiders, not tourists."</p>
-        <div class="hn-reviewer">
-          <div class="hn-reviewer-avatar">JL</div>
-          <div>
-            <strong>James &amp; Laura</strong>
-            <span>United Kingdom 🇬🇧</span>
-          </div>
+  <!-- Footer -->
+  <footer style="background: var(--hm-bg-footer); color: #94A3B8; padding: 80px 20px 40px; border-top: 1px solid var(--hm-border);">
+    <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; margin-bottom: 60px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+          <img src="hidden-removebg-preview.png" style="height: 38px;">
+          <span style="font-family: var(--hm-font-serif); font-size: 1.4rem; color: #fff; font-weight: 700;">Hidden Morocco</span>
         </div>
+        <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">Boutique travel agency crafting unforgettable journeys across imperial cities, Sahara dunes, and Atlas mountains.</p>
       </div>
-
-      <div class="hn-review-card hn-review-featured">
-        <div class="hn-review-stars">★★★★★</div>
-        <p>"Sleeping under the stars in Merzouga was a life-changing experience. The camp, the camel ride at sunset, the Berber music — nothing compares. Worth every euro!"</p>
-        <div class="hn-reviewer">
-          <div class="hn-reviewer-avatar">SM</div>
-          <div>
-            <strong>Sophie M.</strong>
-            <span>France 🇫🇷</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hn-review-card">
-        <div class="hn-review-stars">★★★★★</div>
-        <p>"Chefchaouen is a dream. The blue streets, the atmosphere, the local food — we didn't want to leave. Our private guide was so warm and knowledgeable."</p>
-        <div class="hn-reviewer">
-          <div class="hn-reviewer-avatar">AR</div>
-          <div>
-            <strong>Ahmed &amp; Rida</strong>
-            <span>Canada 🇨🇦</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div style="text-align:center; margin-top:40px;">
-      <a href="testimonials.html" class="hn-link-arrow">Read All Reviews <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FINAL CTA
-  ============================================================ -->
-  <section class="hn-final-cta hn-reveal">
-    <div class="hn-final-cta-inner">
-      <p class="hn-label" style="color: rgba(255,255,255,0.6)">Ready?</p>
-      <h2>Your Moroccan adventure<br>starts here.</h2>
-      <p>Fill out our quick form and receive a personalized itinerary within 24 hours — no commitment required.</p>
-      <a href="booking.html" class="hn-btn-primary hn-btn-large">Plan My Trip Now →</a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer class="hn-footer">
-    <div class="hn-footer-inner">
-      <div class="hn-footer-brand">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" class="hn-footer-logo">
-        <p>Private tours across Morocco's most beautiful destinations — crafted with passion.</p>
-        <div class="hn-socials">
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      <div class="hn-footer-col">
-        <h5>Destinations</h5>
-        <ul>
-          <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-          <li><a href="destinations.html#casablanca">Casablanca</a></li>
-        </ul>
-      </div>
-      <div class="hn-footer-col">
-        <h5>Navigate</h5>
-        <ul>
-          <li><a href="index.html">Home</a></li>
+      <div>
+        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 20px;">Quick Links</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
           <li><a href="destinations.html">Destinations</a></li>
           <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="about.html">About Us</a></li>
           <li><a href="testimonials.html">Reviews</a></li>
-          <li><a href="booking.html">Book Now</a></li>
+          <li><a href="booking.html">Book Expedition</a></li>
         </ul>
       </div>
-      <div class="hn-footer-col">
-        <h5>Contact Us</h5>
-        <ul>
-          <li><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</li>
-          <li><i class="fa-solid fa-phone"></i> +212 6 12 34 56 78</li>
-          <li><i class="fa-brands fa-whatsapp"></i> WhatsApp Available</li>
+      <div>
+        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 20px;">Popular Experiences</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+          <li><a href="destinations.html">Sahara Luxury Bivouac</a></li>
+          <li><a href="destinations.html">Chefchaouen Blue Walk</a></li>
+          <li><a href="destinations.html">Marrakech Souks & Palaces</a></li>
+          <li><a href="destinations.html">Essaouira Coastal Escape</a></li>
         </ul>
+      </div>
+      <div>
+        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 20px;">Marrakech HQ</h4>
+        <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px;"><i class="fa-solid fa-location-dot" style="color: var(--hm-turquoise);"></i> Rue Riad Zitoun el Kedim, Medina, Marrakech</p>
+        <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px;"><i class="fa-solid fa-envelope" style="color: var(--hm-turquoise);"></i> contact@hiddenmorocco.com</p>
       </div>
     </div>
-    <div class="hn-footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved.</p>
+    <div style="border-top: 1px solid var(--hm-border); padding-top: 30px; text-align: center; font-size: 0.85rem;">
+      <p>&copy; 2026 Hidden Morocco. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
-  <script>
-
-
-    // Reveal on scroll
-    const revealEls = document.querySelectorAll('.hn-reveal');
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('hn-visible'); });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => revealObs.observe(el));
-
-    // Stat counters
-    function animateCounters() {
-      document.querySelectorAll('.stat-number').forEach(el => {
-        const target = +el.dataset.target;
-        const step = target / 80;
-        let val = 0;
-        const timer = setInterval(() => {
-          val = Math.min(val + step, target);
-          el.textContent = Math.floor(val);
-          if (val >= target) clearInterval(timer);
-        }, 20);
-      });
-    }
-    const statsEl = document.querySelector('.hn-stats-section');
-    if (statsEl) {
-      new IntersectionObserver((e) => { if (e[0].isIntersecting) animateCounters(); }, { threshold: 0.5 }).observe(statsEl);
-    }
-
-    // Navbar scroll
-    window.addEventListener('scroll', () => {
-      document.getElementById('siteNav').classList.toggle('hn-nav-scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    // Mobile menu
-    window.toggleMobileMenu = function() {
-      document.querySelector('.hn-links').classList.toggle('hn-links-open');
-    };
-  </script>
-
 </body>
 </html>
