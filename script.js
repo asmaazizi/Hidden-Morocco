@@ -1,9 +1,9 @@
 /* ==========================================================================
    HIDDEN MOROCCO — PLATFORM CORE ENGINE (script.js)
-   Dark mode, Favorites, Interactive Maps, Search & Filters, Modal & Booking
+   Terracotta & Sahara Gold Theme Engine, Wishlist, Maps, Search & Filters
    ========================================================================== */
 
-// ── Destination Database ──────────────────────────────────────────────────
+// ── Destination Database (Verified Image Paths) ──────────────────────────
 const DESTINATIONS_DB = [
   {
     id: "marrakech",
@@ -35,7 +35,7 @@ const DESTINATIONS_DB = [
     currency: "EUR",
     rating: 4.95,
     reviewsCount: 412,
-    img: "images/Chfchaouen/chefchaouen-staircase.jpg",
+    img: "images/Chfchaouen/chefchaoun.jpg",
     badge: "Top Rated",
     desc: "A fairytale town nestled in the Rif Mountains, famous for its surreal blue-washed alleyways, serene mountain air, and rich artisan culture.",
     lat: 35.1716,
@@ -76,7 +76,7 @@ const DESTINATIONS_DB = [
     currency: "EUR",
     rating: 4.85,
     reviewsCount: 289,
-    img: "images/Fes/fes_medina.jpg",
+    img: "images/Fes/fes_1.jpg",
     badge: "Heritage",
     desc: "The world's largest car-free urban area. Discover Chouara Tannery, Al-Qarawiyyin University, and centuries-old craft workshops.",
     lat: 34.0333,
@@ -96,7 +96,7 @@ const DESTINATIONS_DB = [
     currency: "EUR",
     rating: 4.88,
     reviewsCount: 310,
-    img: "images/Essaouira/essaouira_1.webp",
+    img: "images/Essaouira/essaouira_1.jpg",
     badge: "Coastal Escape",
     desc: "A breezy coastal haven where historic ramparts, sea salt air, fresh seafood, windsurfing, and vibrant art galleries meet.",
     lat: 31.5085,
@@ -116,7 +116,7 @@ const DESTINATIONS_DB = [
     currency: "EUR",
     rating: 4.92,
     reviewsCount: 245,
-    img: "images/Ouarzazat/ait_benhaddou.jpg",
+    img: "images/Ouarzazat/ouarzazat1.jpeg",
     badge: "UNESCO",
     desc: "The Gateway to the Sahara. Marvel at the UNESCO earthen fortress of Ait Benhaddou, backdrop of Gladiator and Game of Thrones.",
     lat: 30.9333,
@@ -190,7 +190,6 @@ const DESTINATIONS_DB = [
 
 // ── App State Engine ──────────────────────────────────────────────────────
 const AppState = {
-  theme: localStorage.getItem('hm-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
   favorites: JSON.parse(localStorage.getItem('hm-favorites') || '[]'),
   mapInstance: null,
   mapMarkers: []
@@ -198,12 +197,9 @@ const AppState = {
 
 // ── Initialization Engine ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
   initNavbarScroll();
   initFavoritesCounter();
-  initGlobalEvents();
 
-  // Page-specific initializers
   if (document.getElementById('destinationsGrid')) {
     initDestinationsPage();
   }
@@ -224,32 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ── Theme Engine ───────────────────────────────────────────────────────────
-function initTheme() {
-  document.documentElement.setAttribute('data-theme', AppState.theme);
-  updateThemeIcons();
-}
-
-function toggleTheme() {
-  AppState.theme = AppState.theme === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('hm-theme', AppState.theme);
-  document.documentElement.setAttribute('data-theme', AppState.theme);
-  updateThemeIcons();
-  showToast(`Switched to ${AppState.theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}`);
-
-  // Re-tile Leaflet map if present
-  if (AppState.mapInstance) {
-    updateMapTileLayer();
-  }
-}
-
-function updateThemeIcons() {
-  document.querySelectorAll('.theme-toggle').forEach(btn => {
-    btn.innerHTML = AppState.theme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    btn.setAttribute('aria-label', `Switch to ${AppState.theme === 'dark' ? 'Light' : 'Dark'} mode`);
-  });
-}
-
 // ── Favorites Engine ───────────────────────────────────────────────────────
 function isFavorite(id) {
   return AppState.favorites.includes(id);
@@ -269,13 +239,11 @@ function toggleFavorite(id, e) {
   localStorage.setItem('hm-favorites', JSON.stringify(AppState.favorites));
   initFavoritesCounter();
 
-  // Update UI heart buttons
   document.querySelectorAll(`.fav-btn[data-id="${id}"]`).forEach(btn => {
     btn.classList.toggle('is-active', isFavorite(id));
     btn.innerHTML = isFavorite(id) ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
   });
 
-  // Re-render favorites page if active
   if (document.getElementById('favoritesGrid')) {
     initFavoritesPage();
   }
@@ -322,14 +290,8 @@ function showToast(message) {
     toastContainer = document.createElement('div');
     toastContainer.id = 'toastContainer';
     toastContainer.style.cssText = `
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: none;
+      position: fixed; bottom: 30px; right: 30px; z-index: 99999;
+      display: flex; flex-direction: column; gap: 10px; pointer-events: none;
     `;
     document.body.appendChild(toastContainer);
   }
@@ -337,19 +299,10 @@ function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'glass-panel';
   toast.style.cssText = `
-    padding: 12px 24px;
-    border-radius: 99px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--hm-text-heading);
-    box-shadow: var(--hm-shadow-lg);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: auto;
+    padding: 12px 24px; border-radius: 99px; font-weight: 600; font-size: 0.9rem;
+    color: var(--hm-text-heading); box-shadow: var(--hm-shadow-lg); border: 1px solid var(--hm-gold);
+    display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: auto;
   `;
   toast.innerHTML = message;
   toastContainer.appendChild(toast);
@@ -370,24 +323,24 @@ function showToast(message) {
 function createCardHTML(dest) {
   const favActive = isFavorite(dest.id);
   return `
-    <div class="glass-panel hover-lift dest-card-item" style="border-radius: var(--hm-radius-lg); overflow: hidden; position: relative;">
+    <div class="glass-panel hover-lift dest-card-item" style="border-radius: var(--hm-radius-lg); overflow: hidden; position: relative; background: #FFFFFF; border: 1px solid var(--hm-border);">
       <div style="position: relative; height: 240px; overflow: hidden;">
         <img src="${dest.img}" alt="${dest.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;" class="card-img">
-        <span class="badge badge-turquoise" style="position: absolute; top: 16px; left: 16px; backdrop-filter: blur(10px);">${dest.badge}</span>
+        <span class="badge badge-terracotta" style="position: absolute; top: 16px; left: 16px; backdrop-filter: blur(10px);">${dest.badge}</span>
         <button class="fav-btn ${favActive ? 'is-active' : ''}" data-id="${dest.id}" onclick="toggleFavorite('${dest.id}', event)" style="position: absolute; top: 16px; right: 16px;">
           <i class="fa-${favActive ? 'solid' : 'regular'} fa-heart"></i>
         </button>
       </div>
       <div style="padding: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="font-size: 0.8rem; font-weight: 700; color: var(--hm-turquoise); text-transform: uppercase; letter-spacing: 1px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--hm-terracotta); text-transform: uppercase; letter-spacing: 1px;">
             <i class="fa-solid fa-location-dot"></i> ${dest.region}
           </span>
           <span style="font-size: 0.85rem; font-weight: 700; color: var(--hm-gold);">
             <i class="fa-solid fa-star"></i> ${dest.rating} (${dest.reviewsCount})
           </span>
         </div>
-        <h3 style="font-size: 1.3rem; margin-bottom: 10px; line-height: 1.3;">${dest.title}</h3>
+        <h3 style="font-size: 1.3rem; margin-bottom: 10px; line-height: 1.3; font-family: var(--hm-font-serif);">${dest.title}</h3>
         <p style="font-size: 0.9rem; color: var(--hm-text-muted); margin-bottom: 20px; line-clamp: 2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
           ${dest.desc}
         </p>
@@ -407,7 +360,7 @@ function createCardHTML(dest) {
 
 function renderSkeletonGrid(container, count = 6) {
   container.innerHTML = Array(count).fill(0).map(() => `
-    <div style="border-radius: var(--hm-radius-lg); overflow: hidden; background: var(--hm-bg-card); border: 1px solid var(--hm-border); padding: 16px;">
+    <div style="border-radius: var(--hm-radius-lg); overflow: hidden; background: #FFFFFF; border: 1px solid var(--hm-border); padding: 16px;">
       <div class="skeleton" style="height: 200px; width: 100%; border-radius: var(--hm-radius-md); margin-bottom: 16px;"></div>
       <div class="skeleton" style="height: 20px; width: 40%; margin-bottom: 12px;"></div>
       <div class="skeleton" style="height: 28px; width: 80%; margin-bottom: 12px;"></div>
@@ -452,7 +405,7 @@ function initDestinationsPage() {
       if (filtered.length === 0) {
         container.innerHTML = `
           <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-            <i class="fa-solid fa-compass-slash" style="font-size: 3rem; color: var(--hm-turquoise); margin-bottom: 16px;"></i>
+            <i class="fa-solid fa-compass-slash" style="font-size: 3rem; color: var(--hm-terracotta); margin-bottom: 16px;"></i>
             <h3 style="font-size: 1.5rem; margin-bottom: 8px;">No Destinations Found</h3>
             <p style="color: var(--hm-text-muted);">Try adjusting your search filters or resetting options.</p>
           </div>
@@ -482,7 +435,7 @@ function initFavoritesPage() {
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 80px 20px;">
         <i class="fa-regular fa-heart" style="font-size: 4rem; color: var(--hm-text-muted); margin-bottom: 20px;"></i>
-        <h2 style="font-size: 1.8rem; margin-bottom: 12px;">Your Wishlist is Empty</h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px; font-family: var(--hm-font-serif);">Your Wishlist is Empty</h2>
         <p style="color: var(--hm-text-muted); max-width: 460px; margin: 0 auto 24px;">Explore our handcrafted Moroccan experiences and click the heart icon to save your dream destinations.</p>
         <a href="destinations.html" class="btn-primary">Explore Destinations <i class="fa-solid fa-compass"></i></a>
       </div>
@@ -503,7 +456,7 @@ window.openDestinationModal = function(id) {
     modal.id = 'destModal';
     modal.style.cssText = `
       position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      padding: 20px; background: rgba(17, 17, 30, 0.75); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     `;
     document.body.appendChild(modal);
   }
@@ -511,39 +464,39 @@ window.openDestinationModal = function(id) {
   const favActive = isFavorite(dest.id);
 
   modal.innerHTML = `
-    <div class="glass-panel" style="width: min(900px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: var(--hm-bg-card);">
+    <div class="glass-panel" style="width: min(900px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: #FFFFFF;">
       <button onclick="closeDestinationModal()" style="position: absolute; top: 20px; right: 20px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(0,0,0,0.5); color: #fff; cursor: pointer; font-size: 1.2rem;">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <div style="position: relative; height: 340px;">
         <img src="${dest.img}" alt="${dest.title}" style="width: 100%; height: 100%; object-fit: cover;">
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(26,26,46,0.85) 100%);"></div>
         <div style="position: absolute; bottom: 24px; left: 30px; right: 30px; color: #fff;">
-          <span class="badge badge-turquoise" style="margin-bottom: 8px;">${dest.badge}</span>
+          <span class="badge badge-terracotta" style="margin-bottom: 8px; background: rgba(192,57,43,0.8); color: #fff;">${dest.badge}</span>
           <h2 style="font-size: 2.2rem; color: #fff; font-family: var(--hm-font-serif);">${dest.title}</h2>
-          <p style="opacity: 0.85; font-size: 0.95rem;"><i class="fa-solid fa-location-dot"></i> ${dest.region} • <i class="fa-solid fa-star" style="color: var(--hm-gold);"></i> ${dest.rating} (${dest.reviewsCount} reviews)</p>
+          <p style="opacity: 0.9; font-size: 0.95rem;"><i class="fa-solid fa-location-dot"></i> ${dest.region} • <i class="fa-solid fa-star" style="color: var(--hm-gold);"></i> ${dest.rating} (${dest.reviewsCount} reviews)</p>
         </div>
       </div>
 
       <div style="padding: 34px;">
-        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--hm-text-body); margin-bottom: 28px;">${dest.desc}</p>
+        <p style="font-size: 1.05rem; line-height: 1.75; color: var(--hm-text-body); margin-bottom: 28px;">${dest.desc}</p>
         
-        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">Highlights</h4>
+        <h4 style="font-size: 1.15rem; margin-bottom: 14px; font-family: var(--hm-font-serif);">Highlights</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 30px;">
           ${dest.highlights.map(h => `
             <div style="display: flex; align-items: center; gap: 10px; background: var(--hm-bg-main); padding: 12px 16px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border);">
-              <i class="fa-solid fa-circle-check" style="color: var(--hm-turquoise);"></i>
+              <i class="fa-solid fa-circle-check" style="color: var(--hm-terracotta);"></i>
               <span style="font-size: 0.9rem; font-weight: 600;">${h}</span>
             </div>
           `).join('')}
         </div>
 
-        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">Sample Itinerary</h4>
+        <h4 style="font-size: 1.15rem; margin-bottom: 14px; font-family: var(--hm-font-serif);">Sample Itinerary</h4>
         <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px;">
           ${dest.itinerary.map(item => `
-            <div style="padding: 16px; border-left: 3px solid var(--hm-turquoise); background: var(--hm-bg-main); border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0;">
-              <strong style="color: var(--hm-turquoise); display: block; font-size: 0.85rem;">${item.day}</strong>
+            <div style="padding: 16px; border-left: 3px solid var(--hm-terracotta); background: var(--hm-bg-main); border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0;">
+              <strong style="color: var(--hm-terracotta); display: block; font-size: 0.85rem;">${item.day}</strong>
               <span style="font-size: 0.95rem;">${item.text}</span>
             </div>
           `).join('')}
@@ -580,35 +533,20 @@ window.closeDestinationModal = function() {
 };
 
 // ── Interactive Leaflet Map Engine ─────────────────────────────────────────
-function updateMapTileLayer() {
-  if (!AppState.mapInstance) return;
-  
-  if (AppState.mapTileLayer) {
-    AppState.mapInstance.removeLayer(AppState.mapTileLayer);
-  }
-
-  const isDark = AppState.theme === 'dark';
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-
-  AppState.mapTileLayer = L.tileLayer(tileUrl, {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    maxZoom: 18
-  }).addTo(AppState.mapInstance);
-}
-
 function initMapPage() {
   const mapElement = document.getElementById('interactiveMap');
   if (!mapElement || typeof L === 'undefined') return;
 
   AppState.mapInstance = L.map('interactiveMap').setView([31.7917, -7.0926], 6);
-  updateMapTileLayer();
 
-  // Custom marker icon
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    maxZoom: 18
+  }).addTo(AppState.mapInstance);
+
   const customIcon = L.divIcon({
     className: 'custom-map-pin',
-    html: `<div style="background: var(--hm-turquoise); width: 28px; height: 28px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(6,182,212,0.6); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px;"><i class="fa-solid fa-location-dot"></i></div>`,
+    html: `<div style="background: var(--hm-terracotta); width: 28px; height: 28px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(192,57,43,0.5); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px;"><i class="fa-solid fa-location-dot"></i></div>`,
     iconSize: [28, 28],
     iconAnchor: [14, 14]
   });
@@ -619,9 +557,9 @@ function initMapPage() {
     marker.bindPopup(`
       <div style="padding: 6px; font-family: var(--hm-font-sans);">
         <img src="${dest.img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-        <h4 style="margin: 0 0 4px; font-size: 1rem;">${dest.title}</h4>
+        <h4 style="margin: 0 0 4px; font-size: 1rem; font-family: var(--hm-font-serif);">${dest.title}</h4>
         <p style="margin: 0 0 8px; font-size: 0.8rem; color: #64748B;">${dest.region} • €${dest.price}</p>
-        <button onclick="openDestinationModal('${dest.id}')" style="background: var(--hm-turquoise); color: #fff; border: none; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; width: 100%;">View Experience</button>
+        <button onclick="openDestinationModal('${dest.id}')" style="background: var(--hm-terracotta); color: #fff; border: none; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; width: 100%;">View Experience</button>
       </div>
     `, { maxWidth: 220 });
 
@@ -634,12 +572,12 @@ function initHomeMapPreview() {
   if (!mapElement || typeof L === 'undefined') return;
 
   const miniMap = L.map('homeMapPreview', { zoomControl: false, dragging: false, scrollWheelZoom: false }).setView([31.7917, -7.0926], 6);
-  L.tileLayer(AppState.theme === 'dark' ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(miniMap);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(miniMap);
 
   DESTINATIONS_DB.forEach(dest => {
     L.circleMarker([dest.lat, dest.lng], {
       radius: 7,
-      fillColor: '#06B6D4',
+      fillColor: '#C0392B',
       color: '#FFFFFF',
       weight: 2,
       opacity: 1,
@@ -709,18 +647,5 @@ function initBookingWizard() {
     setTimeout(() => {
       window.location.href = 'dashboard.html';
     }, 1500);
-  });
-}
-
-// ── Global Event Bindings ──────────────────────────────────────────────────
-function initGlobalEvents() {
-  // Bind all theme toggles
-  document.querySelectorAll('.theme-toggle').forEach(btn => {
-    btn.addEventListener('click', toggleTheme);
-  });
-
-  // Close modals on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDestinationModal();
   });
 }

@@ -27,7 +27,7 @@
       
       <!-- Tab Controls -->
       <div style="display: flex; border-bottom: 2px solid var(--hm-border); margin-bottom: 30px;">
-        <button id="tabSignIn" onclick="switchAuthTab('signin')" style="flex: 1; padding: 12px; border: none; background: transparent; font-weight: 700; font-size: 1rem; color: var(--hm-turquoise); border-bottom: 3px solid var(--hm-turquoise); cursor: pointer;">Sign In</button>
+        <button id="tabSignIn" onclick="switchAuthTab('signin')" style="flex: 1; padding: 12px; border: none; background: transparent; font-weight: 700; font-size: 1rem; color: var(--hm-terracotta); border-bottom: 3px solid var(--hm-terracotta); cursor: pointer;">Sign In</button>
         <button id="tabRegister" onclick="switchAuthTab('register')" style="flex: 1; padding: 12px; border: none; background: transparent; font-weight: 700; font-size: 1rem; color: var(--hm-text-muted); cursor: pointer;">Register</button>
       </div>
 
@@ -86,15 +86,15 @@
       const registerForm = document.getElementById('formRegister');
 
       if (tab === 'signin') {
-        signInBtn.style.color = 'var(--hm-turquoise)';
-        signInBtn.style.borderBottom = '3px solid var(--hm-turquoise)';
+        signInBtn.style.color = 'var(--hm-terracotta)';
+        signInBtn.style.borderBottom = '3px solid var(--hm-terracotta)';
         registerBtn.style.color = 'var(--hm-text-muted)';
         registerBtn.style.borderBottom = 'none';
         signInForm.style.display = 'flex';
         registerForm.style.display = 'none';
       } else {
-        registerBtn.style.color = 'var(--hm-turquoise)';
-        registerBtn.style.borderBottom = '3px solid var(--hm-turquoise)';
+        registerBtn.style.color = 'var(--hm-terracotta)';
+        registerBtn.style.borderBottom = '3px solid var(--hm-terracotta)';
         signInBtn.style.color = 'var(--hm-text-muted)';
         signInBtn.style.borderBottom = 'none';
         registerForm.style.display = 'flex';
