@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyNav();
   initSearchEngine();
   initCounters();
+  initScrollReveal();
 
   if (document.getElementById('interactiveMap')) {
     initMapPage();
@@ -801,3 +802,20 @@ window.closeDestinationModal = function() {
     modal.style.pointerEvents = 'none';
   }
 };
+
+// ── Scroll Reveal Engine ────────────────────────────────────────────────────
+function initScrollReveal() {
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length === 0) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+}
