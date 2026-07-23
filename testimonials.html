@@ -1,141 +1,173 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hidden Morocco</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="slider.css">
-  <link rel="stylesheet" href="exp.css">
+  <title>Traveler Reviews — Hidden Morocco</title>
+  <meta name="description" content="Read real reviews from travelers who explored Morocco with Hidden Morocco boutique travel agency.">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
-    rel="stylesheet">
-  <!-- Swiper CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hm-border); }
+    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .hn-logo img { height: 36px; }
+    .hn-logo-text { font-family: var(--hm-font-serif); font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
+    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
+    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
+    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
+    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
+    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
+    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta); color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .hn-nav { padding: 12px 18px; } .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
+      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; } .hamburger { display: flex; }
+    }
 
+    body { background: var(--hm-bg-main); }
+    .page-hero { padding: 160px 24px 80px; text-align: center; }
+    .page-hero h1 { font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 18px; }
+    .page-hero p { font-size: 1.1rem; color: var(--hm-text-muted); max-width: 580px; margin: 0 auto; line-height: 1.75; }
+
+    /* Rating Summary */
+    .rating-summary { background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg); padding: 40px 36px; max-width: 900px; margin: 0 auto 64px; display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: center; }
+    .rating-big { text-align: center; }
+    .rating-big .big-num { font-family: var(--hm-font-serif); font-size: 5rem; font-weight: 800; color: var(--hm-text-heading); line-height: 1; }
+    .rating-big .big-stars { color: var(--hm-gold); font-size: 1.6rem; margin: 8px 0; letter-spacing: 2px; }
+    .rating-big p { font-size: 0.85rem; color: var(--hm-text-muted); font-weight: 700; }
+    .rating-bars { display: flex; flex-direction: column; gap: 10px; }
+    .rating-bar-row { display: flex; align-items: center; gap: 14px; font-size: 0.9rem; }
+    .rating-bar-row span:first-child { width: 40px; text-align: right; font-weight: 700; flex-shrink: 0; }
+    .rating-bar-track { flex: 1; height: 8px; background: var(--hm-bg-main); border-radius: 99px; overflow: hidden; }
+    .rating-bar-fill { height: 100%; background: var(--hm-gold); border-radius: 99px; }
+    .rating-bar-row span:last-child { width: 36px; font-size: 0.82rem; color: var(--hm-text-muted); }
+
+    /* Reviews Grid */
+    .reviews-section { padding: 0 24px 96px; }
+    .reviews-container { max-width: 1200px; margin: 0 auto; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+    .review-card { background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg); padding: 34px 28px; transition: all 0.3s; }
+    .review-card:hover { box-shadow: var(--hm-shadow-md); transform: translateY(-4px); }
+    .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+    .review-stars { color: var(--hm-gold); font-size: 0.95rem; letter-spacing: 2px; }
+    .review-verified { display: flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 700; color: #10B981; }
+    .review-text { font-size: 0.97rem; line-height: 1.75; color: var(--hm-text-body); font-style: italic; margin-bottom: 24px; }
+    .review-author { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--hm-border); padding-top: 20px; }
+    .review-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--hm-terracotta), var(--hm-gold)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 0.9rem; flex-shrink: 0; }
+    .review-author-info strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+    .review-author-info span { font-size: 0.82rem; color: var(--hm-text-muted); }
+
+    .cta-strip { background: linear-gradient(135deg, var(--hm-terracotta), #A0261A); padding: 72px 24px; text-align: center; }
+    .cta-strip h2 { font-family: var(--hm-font-serif); font-size: 2.2rem; color: #fff; margin-bottom: 14px; }
+    .cta-strip p { color: rgba(255,255,255,0.82); font-size: 1rem; margin-bottom: 30px; }
+    .btn-white { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: var(--hm-terracotta) !important; padding: 14px 36px; border-radius: 99px; font-weight: 700; box-shadow: 0 12px 30px rgba(0,0,0,0.2); transition: all 0.3s; text-decoration: none; }
+    .btn-white:hover { transform: translateY(-3px); }
+    .footer { background: var(--hm-bg-footer); color: #94A3B8; padding: 40px 24px; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; }
+    .footer-links a { color: #94A3B8; text-decoration: none; font-size: 0.85rem; transition: color 0.25s; }
+    .footer-links a:hover { color: var(--hm-gold); }
+    @media (max-width: 768px) { .rating-summary { grid-template-columns: 1fr; gap: 30px; text-align: center; } }
+  </style>
 </head>
-
 <body>
 
-    <!-- Sticky Navbar -->
-  <nav class="site-nav scrolled" id="siteNav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
-        <span>Hidden Morocco</span>
-      </a>
-      <ul class="nav-links">
+  <nav class="hn-nav" id="siteNav">
+    <div class="hn-nav-inner">
+      <a href="index.html" class="hn-logo"><img src="hidden-removebg-preview.png" alt="Hidden Morocco"><span class="hn-logo-text">Hidden Morocco</span></a>
+      <ul class="hn-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="testimonials.html" class="active">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      <div class="hn-nav-actions">
+        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
+        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="nav-icon-btn"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
+        <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
-    <div class="hero-text" style="padding-top: 50px;">
-      <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Avis de Voyageurs</h1>
-      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Ce que nos clients racontent de leurs aventures</p>
-    </div>
+  <header class="page-hero">
+    <span class="badge badge-gold" style="margin-bottom: 20px;">★ Verified Reviews</span>
+    <h1>Voices of Our Travelers</h1>
+    <p>Over 2,500 travelers have shared their Hidden Morocco journeys. Here are some of their stories.</p>
   </header>
 
-<section id="testimonials" class="testimonials-section reveal">
-    <h2>What Our Travelers Say</h2>
-    <p class="testimonials-subtitle">Real stories from people who explored Morocco with us</p>
-    <div class="testimonials-grid">
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The Grand Moroccan Traverse was the highlight of our trip. Our driver was
-          incredible — he knew every hidden viewpoint and secret alley. We felt like insiders, not tourists."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JL</div>
-          <div>
-            <strong>James & Laura</strong>
-            <span>United Kingdom 🇬🇧</span>
-          </div>
+  <section class="reviews-section">
+    <div class="reviews-container">
+      <div class="rating-summary">
+        <div class="rating-big">
+          <div class="big-num">4.9</div>
+          <div class="big-stars">★★★★★</div>
+          <p>Based on 340+ reviews</p>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5★</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:88%"></div></div><span>88%</span></div>
+          <div class="rating-bar-row"><span>4★</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:9%"></div></div><span>9%</span></div>
+          <div class="rating-bar-row"><span>3★</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:2%"></div></div><span>2%</span></div>
+          <div class="rating-bar-row"><span>2★</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+          <div class="rating-bar-row"><span>1★</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:0%"></div></div><span>0%</span></div>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Sleeping under the stars in Merzouga was a life-changing experience. The camp, the
-          camel ride at sunset, the Berber music — nothing compares. Worth every euro!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SM</div>
-          <div>
-            <strong>Sophie M.</strong>
-            <span>France 🇫🇷</span>
-          </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"The Sahara night was life-changing. Sleeping under millions of stars in Merzouga with a private Berber camp, watching sunrise paint the dunes gold. Youssef made every moment perfect."</p>
+          <div class="review-author"><div class="review-avatar">JL</div><div class="review-author-info"><strong>James & Laura</strong><span>🇬🇧 United Kingdom · Merzouga Expedition</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"Chefchaouen stole our hearts completely. The blue medina, the mountain hike at sunset, the small local restaurant Karim recommended — we didn't want to leave. Already planning to return!"</p>
+          <div class="review-author"><div class="review-avatar">SM</div><div class="review-author-info"><strong>Sophie M.</strong><span>🇫🇷 France · Chefchaouen Blue Walk</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"The Marrakech immersion exceeded all expectations. The Bahia Palace private tour, hammam, rooftop dinner — all seamlessly arranged. Hidden Morocco knows how to deliver real luxury."</p>
+          <div class="review-author"><div class="review-avatar">AR</div><div class="review-author-info"><strong>Ahmed & Rida</strong><span>🇨🇦 Canada · Marrakech Deep Dive</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"The Fes medina is overwhelming in the best possible way. Our guide Mohammed navigated us through thousands of alleyways and brought us to the most breathtaking tannery viewpoints."</p>
+          <div class="review-author"><div class="review-avatar">TC</div><div class="review-author-info"><strong>Thomas C.</strong><span>🇩🇪 Germany · Fes Heritage Tour</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"Essaouira in the evening light is simply magical. Fresh grilled fish on the harbour, Atlantic sea breezes, walking the old ramparts at sunset — a perfect day trip from Marrakech."</p>
+          <div class="review-author"><div class="review-avatar">ML</div><div class="review-author-info"><strong>Marie-Lise D.</strong><span>🇧🇪 Belgium · Essaouira Coastal Day</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-header"><div class="review-stars">★★★★★</div><div class="review-verified"><i class="fa-solid fa-circle-check"></i> Verified</div></div>
+          <p class="review-text">"The Ait Benhaddou Kasbah was absolutely stunning — even more beautiful in real life than in the photos. Ouarzazate deserves far more attention than it gets. Hidden Morocco showed us why."</p>
+          <div class="review-author"><div class="review-avatar">RS</div><div class="review-author-info"><strong>Rafael S.</strong><span>🇪🇸 Spain · Ouarzazate & Desert Tour</span></div></div>
         </div>
       </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Chefchaouen is a dream. The blue streets, the relaxed atmosphere, the local food —
-          we didn't want to leave. Our private guide was so warm and knowledgeable."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">AR</div>
-          <div>
-            <strong>Ahmed & Rida</strong>
-            <span>Canada 🇨🇦</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
-<footer class="footer">
-    <div class="footer-container">
 
-            <div class="footer-col">
-        <h4>Destinations</h4>
-        <ul>
-          <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga</a></li>
-          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-          <li><a href="destinations.html#casablanca">Casablanca</a></li>
-        </ul>
-      </div>
+  <section class="cta-strip">
+    <h2>Ready to Write Your Story?</h2>
+    <p>Join 2,500+ travelers who discovered the real Morocco with us.</p>
+    <a href="booking.html" class="btn-white"><i class="fa-solid fa-paper-plane"></i> Plan My Journey</a>
+  </section>
 
-
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
-        <p>Tél : +212 6 12 34 56 78</p>
-
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+  <footer class="footer">
+    <p>© 2026 Hidden Morocco. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="contact.html">Contact</a><a href="booking.html">Book Now</a>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
-
-
-
 </body>
-
 </html>

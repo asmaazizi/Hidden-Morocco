@@ -1,137 +1,233 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact Us — Hidden Morocco</title>
+  <meta name="description" content="Get in touch with Hidden Morocco. We'll help you plan your dream Moroccan adventure.">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hm-border); }
+    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .hn-logo img { height: 36px; }
+    .hn-logo-text { font-family: var(--hm-font-serif); font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
+    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
+    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
+    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
+    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
+    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
+    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta); color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
+    @media (max-width: 768px) { .hn-nav { padding: 12px 18px; } .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; } .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; } .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; } .hamburger { display: flex; } }
+
+    body { background: var(--hm-bg-main); }
+    .page-hero { padding: 160px 24px 80px; text-align: center; }
+    .page-hero h1 { font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 18px; }
+    .page-hero p { font-size: 1.1rem; color: var(--hm-text-muted); max-width: 540px; margin: 0 auto; line-height: 1.75; }
+
+    .contact-section { padding: 0 24px 96px; }
+    .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+
+    /* Form */
+    .contact-form-card { background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg); padding: 48px 40px; }
+    .contact-form-card h2 { font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; }
+    .contact-form-card p { color: var(--hm-text-muted); margin-bottom: 32px; font-size: 0.95rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--hm-text-heading); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--hm-border);
+      border-radius: var(--hm-radius-md); background: var(--hm-bg-main);
+      color: var(--hm-text-heading); font-family: var(--hm-font-sans); font-size: 0.95rem;
+      transition: border-color 0.25s, box-shadow 0.25s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--hm-terracotta); box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-submit { width: 100%; padding: 15px; font-size: 1rem; justify-content: center; }
+
+    /* Info Column */
+    .contact-info { display: flex; flex-direction: column; gap: 22px; }
+    .contact-info-card { background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg); padding: 28px 24px; }
+    .contact-info-icon { width: 48px; height: 48px; border-radius: var(--hm-radius-md); background: var(--hm-terracotta-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--hm-terracotta); margin-bottom: 14px; }
+    .contact-info-card h4 { font-size: 1rem; margin-bottom: 8px; }
+    .contact-info-card p, .contact-info-card a { color: var(--hm-text-muted); font-size: 0.92rem; line-height: 1.65; text-decoration: none; transition: color 0.25s; }
+    .contact-info-card a:hover { color: var(--hm-terracotta); }
+    .wa-btn { display: flex; align-items: center; gap: 10px; background: #25D366; color: #fff !important; padding: 12px 20px; border-radius: 99px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; margin-top: 10px; justify-content: center; }
+    .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.4); }
+
+    /* FAQ */
+    .faq-section { padding: 0 24px 96px; }
+    .faq-inner { max-width: 840px; margin: 0 auto; }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-header h2 { font-family: var(--hm-font-serif); font-size: 2.2rem; margin-bottom: 12px; }
+    .faq-item { border: 1px solid var(--hm-border); border-radius: var(--hm-radius-md); margin-bottom: 12px; overflow: hidden; }
+    .faq-q { width: 100%; background: var(--hm-bg-card); border: none; padding: 20px 24px; text-align: left; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--hm-text-heading); cursor: pointer; font-family: var(--hm-font-sans); transition: background 0.2s; }
+    .faq-q:hover { background: var(--hm-bg-card-hover); }
+    .faq-q i { transition: transform 0.3s; font-size: 0.9rem; color: var(--hm-terracotta); }
+    .faq-q.open i { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--hm-bg-card); }
+    .faq-a-inner { padding: 0 24px 20px; color: var(--hm-text-muted); font-size: 0.95rem; line-height: 1.75; }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .footer { background: var(--hm-bg-footer); color: #94A3B8; padding: 40px 24px; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; }
+    .footer-links a { color: #94A3B8; text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--hm-gold); }
+
+    @media (max-width: 768px) { .contact-inner { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .contact-form-card { padding: 28px 22px; } }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="hn-nav" id="siteNav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.3s ease;">
-    <div style="max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px; font-family: var(--hm-font-serif); font-size: 1.4rem; font-weight: 700; color: var(--hm-text-heading);">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco" style="height: 38px; width: auto;">
-        <span>Hidden Morocco</span>
-      </a>
-      <ul class="hn-links" style="display: flex; align-items: center; gap: 28px; list-style: none;">
-        <li><a href="index.html" style="font-weight: 600;">Home</a></li>
-        <li><a href="destinations.html" style="font-weight: 600;">Destinations</a></li>
-        <li><a href="map.html" style="font-weight: 600;">Interactive Map</a></li>
-        <li><a href="about.html" style="font-weight: 600;">About</a></li>
-        <li><a href="testimonials.html" style="font-weight: 600;">Reviews</a></li>
-        <li><a href="contact.html" style="font-weight: 700; color: var(--hm-terracotta);">Contact</a></li>
+  <nav class="hn-nav" id="siteNav">
+    <div class="hn-nav-inner">
+      <a href="index.html" class="hn-logo"><img src="hidden-removebg-preview.png" alt=""><span class="hn-logo-text">Hidden Morocco</span></a>
+      <ul class="hn-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; color: var(--hm-text-heading);">
-          <i class="fa-regular fa-heart"></i>
-          <span class="fav-count-badge" style="position: absolute; top: -4px; right: -4px; background: #EF4444; color: #fff; font-size: 0.7rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center;">0</span>
-        </a>
-        <a href="booking.html" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Book Now</a>
-        <a href="dashboard.html" class="glass-panel" style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hm-text-heading);" title="User Dashboard">
-          <i class="fa-regular fa-user"></i>
-        </a>
+      <div class="hn-nav-actions">
+        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
+        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="nav-icon-btn"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
+        <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
       </div>
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <section style="position: relative; padding: 150px 20px 80px; text-align: center; background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.9) 100%), url('images/hero.jpg') center/cover no-repeat;">
-    <div style="max-width: 800px; margin: 0 auto; color: #fff;">
-      <span class="badge badge-terracotta" style="margin-bottom: 16px;">We're Here to Help</span>
-      <h1 style="font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 16px; color: #fff;">Let's Plan Your Moroccan Adventure</h1>
-      <p style="font-size: 1.1rem; opacity: 0.85;">Have questions or need a custom private itinerary? Our travel specialists respond within 2 hours.</p>
-    </div>
-  </section>
+  <header class="page-hero">
+    <span class="badge badge-terracotta" style="margin-bottom: 20px;">Get in Touch</span>
+    <h1>We'd Love to Hear From You</h1>
+    <p>Have a question or ready to plan your dream Moroccan adventure? Our team responds within 24 hours.</p>
+  </header>
 
-  <!-- Contact Grid & Form -->
-  <section style="padding: 90px 20px;">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px;">
-      <!-- Left Info -->
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        <div class="glass-panel" style="padding: 30px; border-radius: var(--hm-radius-lg); display: flex; gap: 20px; align-items: center;">
-          <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--hm-turquoise-light); color: var(--hm-terracotta); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-            <i class="fa-solid fa-location-dot"></i>
+  <section class="contact-section">
+    <div class="contact-inner">
+      <div class="contact-form-card">
+        <h2>Send Us a Message</h2>
+        <p>Tell us about your dream trip and we'll craft a personalized proposal for you.</p>
+        <form onsubmit="handleContactForm(event)">
+          <div class="form-row">
+            <div class="form-group"><label for="c-name">Full Name *</label><input type="text" id="c-name" placeholder="Your name" required></div>
+            <div class="form-group"><label for="c-email">Email Address *</label><input type="email" id="c-email" placeholder="your@email.com" required></div>
           </div>
-          <div>
-            <h4 style="font-size: 1.1rem; margin-bottom: 4px;">Marrakech HQ Office</h4>
-            <p style="font-size: 0.9rem; color: var(--hm-text-muted);">Rue Riad Zitoun el Kedim, Medina, Marrakech 40000</p>
-          </div>
-        </div>
-
-        <div class="glass-panel" style="padding: 30px; border-radius: var(--hm-radius-lg); display: flex; gap: 20px; align-items: center;">
-          <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--hm-gold-light); color: var(--hm-gold); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-            <i class="fa-brands fa-whatsapp"></i>
-          </div>
-          <div>
-            <h4 style="font-size: 1.1rem; margin-bottom: 4px;">WhatsApp & Phone</h4>
-            <p style="font-size: 0.9rem; color: var(--hm-text-muted);">+212 6 00 00 00 00 (Available 24/7)</p>
-          </div>
-        </div>
-
-        <div class="glass-panel" style="padding: 30px; border-radius: var(--hm-radius-lg); display: flex; gap: 20px; align-items: center;">
-          <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(16,185,129,0.12); color: var(--hm-emerald); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-            <i class="fa-solid fa-envelope"></i>
-          </div>
-          <div>
-            <h4 style="font-size: 1.1rem; margin-bottom: 4px;">Email Us Directly</h4>
-            <p style="font-size: 0.9rem; color: var(--hm-text-muted);">contact@hiddenmorocco.com</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Form -->
-      <div class="glass-panel" style="padding: 40px; border-radius: var(--hm-radius-lg);">
-        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Send Us A Message</h3>
-        <p style="font-size: 0.95rem; color: var(--hm-text-muted); margin-bottom: 30px;">Fill out the form below and we will tailor a bespoke journey just for you.</p>
-
-        <form onsubmit="event.preventDefault(); showToast('✨ Message received! We will email you shortly.'); this.reset();" style="display: flex; flex-direction: column; gap: 20px;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div>
-              <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Your Full Name</label>
-              <input type="text" required placeholder="John Doe" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
-            </div>
-            <div>
-              <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Email Address</label>
-              <input type="email" required placeholder="john@example.com" style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none;">
+          <div class="form-row">
+            <div class="form-group"><label for="c-phone">WhatsApp / Phone</label><input type="tel" id="c-phone" placeholder="+1 234 567 890"></div>
+            <div class="form-group">
+              <label for="c-trip">Trip Type</label>
+              <select id="c-trip">
+                <option value="">Select a category</option>
+                <option>Sahara Desert Expedition</option>
+                <option>Imperial Cities Tour</option>
+                <option>Mountain & Atlas Trek</option>
+                <option>Coastal Escape</option>
+                <option>Honeymoon & Romance</option>
+                <option>Family Adventure</option>
+                <option>Custom Itinerary</option>
+              </select>
             </div>
           </div>
-
-          <div>
-            <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Interested Destination / Route</label>
-            <select style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none; cursor: pointer;">
-              <option value="custom">Custom Private Itinerary</option>
-              <option value="merzouga">Merzouga Sahara Desert Camp</option>
-              <option value="chefchaouen">Chefchaouen Blue Pearl</option>
-              <option value="marrakech">Marrakech Medina & Palaces</option>
-              <option value="essaouira">Essaouira Atlantic Coast</option>
-            </select>
-          </div>
-
-          <div>
-            <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Your Message / Travel Dates</label>
-            <textarea rows="4" required placeholder="Tell us how many travelers, preferred dates, and any special requests..." style="width: 100%; padding: 14px 18px; border-radius: var(--hm-radius-md); border: 1px solid var(--hm-border); background: var(--hm-bg-main); color: var(--hm-text-heading); outline: none; resize: vertical;"></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary" style="padding: 14px; font-size: 1rem; width: 100%;">
-            Send Inquiry <i class="fa-solid fa-paper-plane"></i>
-          </button>
+          <div class="form-group"><label for="c-message">Your Message *</label><textarea id="c-message" placeholder="Tell us about your dream journey — dates, group size, special requests..." required></textarea></div>
+          <button type="submit" class="btn-primary form-submit">Send Message &nbsp;<i class="fa-solid fa-paper-plane"></i></button>
         </form>
       </div>
+
+      <div class="contact-info">
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <h4>Marrakech HQ</h4>
+          <p>Rue Riad Zitoun el Kedim<br>Medina, Marrakech 40000<br>Morocco</p>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+          <h4>WhatsApp Direct</h4>
+          <p>Available 7 days a week<br>08:00 – 21:00 (GMT+1)</p>
+          <a href="https://wa.me/212771663435" target="_blank" class="wa-btn">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <h4>Email Us</h4>
+          <a href="mailto:contact@hiddenmorocco.com">contact@hiddenmorocco.com</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+          <h4>Response Time</h4>
+          <p>We typically reply within <strong style="color: var(--hm-terracotta);">6–12 hours</strong>. For urgent enquiries, WhatsApp is fastest.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="background: var(--hm-bg-footer); color: #94A3B8; padding: 80px 20px 40px; border-top: 1px solid var(--hm-border);">
-    <div style="max-width: 1300px; margin: 0 auto; text-align: center; font-size: 0.85rem;">
-      <p>&copy; 2026 Hidden Morocco. All Rights Reserved.</p>
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <span class="badge badge-gold" style="margin-bottom: 14px;">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions about booking with Hidden Morocco.</p>
+      </div>
+
+      <div class="faq-item" id="faq1">
+        <button class="faq-q" onclick="toggleFaq('faq1')">How do I book a tour? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Simply fill out the contact form above or message us on WhatsApp. We'll reply within 6–12 hours with a personalized proposal and itinerary tailored to your preferences and budget.</div></div>
+      </div>
+      <div class="faq-item" id="faq2">
+        <button class="faq-q" onclick="toggleFaq('faq2')">Are all tours private? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, 100%. All Hidden Morocco experiences are exclusively private. Your vehicle, guide, and itinerary are reserved only for your group — no strangers, no shared buses.</div></div>
+      </div>
+      <div class="faq-item" id="faq3">
+        <button class="faq-q" onclick="toggleFaq('faq3')">What is the cancellation policy? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Cancellations made 7+ days before departure receive a full refund. Cancellations within 48 hours of departure are non-refundable. We strongly recommend travel insurance for peace of mind.</div></div>
+      </div>
+      <div class="faq-item" id="faq4">
+        <button class="faq-q" onclick="toggleFaq('faq4')">Can I customize the itinerary? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Every single detail — from daily routes, to restaurant choices, accommodation styles, and activity pacing — can be adjusted to your wishes. We create journeys, not packages.</div></div>
+      </div>
+      <div class="faq-item" id="faq5">
+        <button class="faq-q" onclick="toggleFaq('faq5')">Do you offer airport transfers? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, airport transfers are included in all our multi-day expedition packages. We track your flight and our driver will be ready at arrivals with a name sign.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Hidden Morocco. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="about.html">About</a><a href="booking.html">Book Now</a>
     </div>
   </footer>
 
+  <script>
+    function toggleFaq(id) {
+      const item = document.getElementById(id);
+      const btn = item.querySelector('.faq-q');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(f => { f.classList.remove('open'); f.querySelector('.faq-q').classList.remove('open'); });
+      if (!isOpen) { item.classList.add('open'); btn.classList.add('open'); }
+    }
+
+    function handleContactForm(e) {
+      e.preventDefault();
+      const name = document.getElementById('c-name').value;
+      const email = document.getElementById('c-email').value;
+      const trip = document.getElementById('c-trip').value;
+      const message = document.getElementById('c-message').value;
+      const text = `Hello Hidden Morocco 👋\n\n👤 Name: ${name}\n📧 Email: ${email}\n🧳 Trip Type: ${trip || 'N/A'}\n📝 Message: ${message}\n\nThank you!`;
+      window.open(`https://wa.me/212771663435?text=${encodeURIComponent(text)}`, '_blank');
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

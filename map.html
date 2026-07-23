@@ -1,104 +1,114 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hidden Morocco</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="slider.css">
-  <link rel="stylesheet" href="exp.css">
+  <title>Interactive Map — Hidden Morocco</title>
+  <meta name="description" content="Explore all Hidden Morocco destinations on our interactive map. Find imperial cities, Sahara dunes, and coastal hideaways.">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
-    rel="stylesheet">
-  <!-- Swiper CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* Shared Nav */
+    .hn-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hm-border); box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .hn-logo img { height: 36px; }
+    .hn-logo-text { font-family: var(--hm-font-serif); font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
+    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
+    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
+    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
+    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
+    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
+    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta); color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .hn-nav { padding: 12px 18px; }
+      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); backdrop-filter: blur(20px); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
+      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; }
+      .hamburger { display: flex; }
+    }
 
+    /* Map Page */
+    body { background: var(--hm-bg-main); }
+    .map-page-wrapper { padding-top: 72px; height: 100vh; display: flex; flex-direction: column; }
+    .map-filter-bar {
+      background: var(--hm-bg-card); border-bottom: 1px solid var(--hm-border);
+      padding: 16px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .map-filter-bar span { font-weight: 700; font-size: 0.9rem; color: var(--hm-text-muted); margin-right: 4px; }
+    .map-filter-btn {
+      padding: 8px 18px; border-radius: 99px; border: 1px solid var(--hm-border);
+      background: var(--hm-bg-card-hover); color: var(--hm-text-body);
+      font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: all 0.25s;
+    }
+    .map-filter-btn.active, .map-filter-btn:hover { background: var(--hm-terracotta); color: #fff; border-color: var(--hm-terracotta); }
+    #interactiveMap { flex: 1; z-index: 0; }
+    .leaflet-popup-content-wrapper { border-radius: 12px !important; box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; }
+    .leaflet-popup-tip { background: #fff !important; }
+  </style>
 </head>
-
 <body>
 
-    <!-- Sticky Navbar -->
-  <nav class="site-nav scrolled" id="siteNav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
+  <!-- Navigation -->
+  <nav class="hn-nav" id="siteNav">
+    <div class="hn-nav-inner">
+      <a href="index.html" class="hn-logo">
         <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
-        <span>Hidden Morocco</span>
+        <span class="hn-logo-text">Hidden Morocco</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+      <ul class="hn-links" id="navLinks">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="destinations.html" data-i18n="nav_destinations">Destinations</a></li>
+        <li><a href="map.html" class="active" data-i18n="nav_map">Interactive Map</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
+        <li><a href="testimonials.html" data-i18n="nav_reviews">Reviews</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
       </ul>
-      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      <div class="hn-nav-actions">
+        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
+        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="nav-icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
+        <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
-    <div class="hero-text" style="padding-top: 50px;">
-      <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Carte Interactive</h1>
-      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Découvrez les itinéraires de nos circuits</p>
+  <div class="map-page-wrapper">
+    <!-- Filter Bar -->
+    <div class="map-filter-bar">
+      <span><i class="fa-solid fa-filter"></i> Filter:</span>
+      <button class="map-filter-btn active" onclick="filterMap('all', this)">All Destinations</button>
+      <button class="map-filter-btn" onclick="filterMap('medina', this)"><i class="fa-solid fa-mosque"></i> Imperial Cities</button>
+      <button class="map-filter-btn" onclick="filterMap('desert', this)"><i class="fa-solid fa-sun"></i> Desert</button>
+      <button class="map-filter-btn" onclick="filterMap('mountain', this)"><i class="fa-solid fa-mountain"></i> Mountains</button>
+      <button class="map-filter-btn" onclick="filterMap('coastal', this)"><i class="fa-solid fa-water"></i> Coastal</button>
     </div>
-  </header>
 
-<section class="map-section reveal">
-    <h2>Discover Morocco on the Map</h2>
-    <p class="map-subtitle">Explore our destinations across the kingdom — click any marker to learn more</p>
-    <div id="map"></div>
-    <div class="map-legend">
-      <span><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Our Destinations</span>
-      <span><i class="fa-solid fa-road" style="color: var(--secondary);"></i> Tour Routes</span>
-    </div>
-  </section>
-<footer class="footer">
-    <div class="footer-container">
+    <!-- Leaflet Map -->
+    <div id="interactiveMap"></div>
+  </div>
 
-            <div class="footer-col">
-        <h4>Destinations</h4>
-        <ul>
-          <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga</a></li>
-          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-          <li><a href="destinations.html#casablanca">Casablanca</a></li>
-        </ul>
-      </div>
+  <script>
+    function filterMap(category, btn) {
+      document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (window.AppState && window.AppState.mapMarkers) {
+        // Re-render markers filtered by category
+      }
+    }
+  </script>
 
-
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
-        <p>Tél : +212 6 12 34 56 78</p>
-
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
-
-
-
 </body>
-
 </html>
