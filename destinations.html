@@ -21,25 +21,57 @@
 
 <body>
 
-    <!-- Sticky Navbar -->
-  <nav class="site-nav scrolled" id="siteNav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
+  <!-- Premium Navigation -->
+  <style>
+    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hm-border); }
+    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .hn-logo img { height: 36px; }
+    .hn-logo-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
+    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
+    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
+    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
+    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
+    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
+    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: #C0392B; color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    .hamburger-new { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
+    .hamburger-new span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .hn-nav { padding: 12px 18px; }
+      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); backdrop-filter: blur(20px); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
+      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; }
+      .hamburger-new { display: flex; }
+    }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+
+  <nav class="hn-nav" id="siteNav">
+    <div class="hn-nav-inner">
+      <a href="index.html" class="hn-logo">
         <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
-        <span>Hidden Morocco</span>
+        <span class="hn-logo-text">Hidden Morocco</span>
       </a>
-      <ul class="nav-links">
+      <ul class="hn-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Map</a></li>
+        <li><a href="destinations.html" class="active">Destinations</a></li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="about.html">About Us</a></li>
         <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      <div class="hn-nav-actions">
+        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
+        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="nav-icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
+        <a href="booking.html" class="btn-primary" style="padding: 9px 20px; font-size: 0.85rem; text-decoration: none;">Book Expedition</a>
+        <button class="hamburger-new" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </nav>
+
 
   <!-- Hero Section -->
   <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
