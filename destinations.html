@@ -23,38 +23,244 @@
 
   <!-- Premium Navigation -->
   <style>
-    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hm-border); }
+    /* Override old style.css nav rules for this page */
+    .site-nav, .nav-inner, .nav-logo, .nav-links, .mobile-menu-btn { all: unset !important; display: none !important; }
+    /* New premium nav */
+    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9000; padding: 14px 36px; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #E2E8F0; box-sizing: border-box; }
     .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .hn-logo img { height: 36px; }
-    .hn-logo-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
-    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
-    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
-    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
-    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
-    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
-    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: #C0392B; color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
-    .hamburger-new { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
-    .hamburger-new span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
+    .hn-logo { display: flex !important; align-items: center; gap: 11px; text-decoration: none; }
+    .hn-logo img { height: 36px !important; width: auto !important; border-radius: 0 !important; display: block !important; }
+    .hn-logo-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: #1A1A2E; }
+    .hn-links { display: flex !important; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+    .hn-links li { margin: 0; padding: 0; }
+    .hn-links a { padding: 7px 12px !important; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: #4A5568 !important; text-decoration: none !important; transition: all 0.25s; display: inline-block !important; }
+    .hn-links a:hover, .hn-links a.active { background: #F5F3EF !important; color: #C0392B !important; }
+    .hn-nav-actions { display: flex !important; align-items: center; gap: 10px; }
+    .lang-sw { background: #F5F3EF; border: 1px solid #E2E8F0; color: #4A5568; padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
+    .nav-icon-btn2 { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #E2E8F0; background: #F5F3EF; color: #1A1A2E; font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; flex-shrink: 0; }
+    .nav-icon-btn2:hover { border-color: #C0392B; color: #C0392B; }
+    .fav-badge2 { position: absolute; top: -4px; right: -4px; background: #C0392B; color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    .book-btn2 { padding: 9px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C0392B, #A93226); color: #fff !important; border-radius: 99px; font-weight: 700; text-decoration: none; transition: all 0.3s; flex-shrink: 0; }
+    .book-btn2:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(192,57,43,0.4); }
+    .hburg { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; gap: 5px; }
+    .hburg span { display: block; width: 22px; height: 2px; background: #1A1A2E; border-radius: 2px; }
     @media (max-width: 768px) {
       .hn-nav { padding: 12px 18px; }
-      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); backdrop-filter: blur(20px); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
-      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; }
-      .hamburger-new { display: flex; }
+      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: rgba(255,255,255,0.97); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid #E2E8F0; transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
+      .hn-links.open { transform: translateY(0) !important; opacity: 1 !important; pointer-events: auto !important; }
+      .hn-links a { width: 100%; padding: 12px 16px !important; border-radius: 8px; }
+      .hburg { display: flex !important; }
+      .book-btn2 { display: none; }
+    }
+
+    /* Destination Booking Modal Styling */
+    .dest-booking-modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(17, 17, 30, 0.75);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .dest-booking-sheet {
+      position: relative;
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 920px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    }
+    .dest-booking-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .dest-booking-close:hover { background: #C0392B; }
+
+    .travel-form-left {
+      flex: 1;
+      position: relative;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 30px;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    .form-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .travel-form-left::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+      z-index: 2;
+    }
+    .form-left-content {
+      position: relative;
+      z-index: 3;
+    }
+    .form-left-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .form-left-content p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .form-contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .travel-form-right {
+      flex: 1.2;
+      padding: 40px 32px;
+      overflow-y: auto;
+      max-height: 90vh;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+    .travel-form-right .form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .travel-form-right .input-group {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column-reverse;
+      margin-bottom: 16px;
+    }
+    .travel-form-right input[type="text"],
+    .travel-form-right input[type="email"],
+    .travel-form-right input[type="tel"],
+    .travel-form-right input[type="date"],
+    .travel-form-right select,
+    .travel-form-right textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #1A1A2E;
+      background: #FAF9F6;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .travel-form-right textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+    .travel-form-right input:focus,
+    .travel-form-right select:focus,
+    .travel-form-right textarea:focus {
+      border-color: #C0392B;
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+      background: #ffffff;
+    }
+    .travel-form-right .input-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4A5568;
+      margin-bottom: 6px;
+    }
+    .travel-form-right .select-group {
+      position: relative;
+    }
+    .travel-form-right .select-icon {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      pointer-events: none;
+      color: #718096;
+      font-size: 0.85rem;
+    }
+    .travel-form-right .btn-submit {
+      width: 100%;
+      padding: 15px 24px;
+      border: none;
+      border-radius: 99px;
+      background: #25D366;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(37,211,102,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .travel-form-right .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(37,211,102,0.5);
+    }
+    @media (max-width: 768px) {
+      .dest-booking-sheet {
+        flex-direction: column;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+      .travel-form-left {
+        min-height: 200px;
+        padding: 24px;
+      }
+      .travel-form-right {
+        padding: 24px 20px;
+      }
+      .travel-form-right .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
     }
   </style>
+
   <link rel="stylesheet" href="theme.css">
 
-  <nav class="hn-nav" id="siteNav">
+  <nav class="hn-nav">
     <div class="hn-nav-inner">
       <a href="index.html" class="hn-logo">
         <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
         <span class="hn-logo-text">Hidden Morocco</span>
       </a>
-      <ul class="hn-links" id="navLinks">
+      <ul class="hn-links" id="premNavLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="destinations.html" class="active">Destinations</a></li>
         <li><a href="map.html">Interactive Map</a></li>
@@ -63,25 +269,36 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="hn-nav-actions">
-        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
-        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="nav-icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
-        <a href="booking.html" class="btn-primary" style="padding: 9px 20px; font-size: 0.85rem; text-decoration: none;">Book Expedition</a>
-        <button class="hamburger-new" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+        <select class="lang-sw" id="langSwitcher">
+          <option value="en">🌐 EN</option>
+          <option value="fr">🌐 FR</option>
+          <option value="es">🌐 ES</option>
+        </select>
+        <button class="nav-icon-btn2 theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="favorites.html" class="nav-icon-btn2" aria-label="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge2 fav-count-badge">0</span>
+        </a>
+        <a href="booking.html" class="book-btn2">Book Expedition</a>
+        <button class="hburg" onclick="document.getElementById('premNavLinks').classList.toggle('open')">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
 
 
   <!-- Hero Section -->
-  <header class="hero" style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
+  <header class="hero"
+    style="height: 35vh; min-height: 250px; background: linear-gradient(160deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%), url('images/hero.jpg') center/cover no-repeat;">
     <div class="hero-text" style="padding-top: 50px;">
       <h1 style="font-size: 3rem; margin-bottom: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Nos Destinations</h1>
-      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Explorez les villes impériales et les paysages désertiques du Maroc</p>
+      <p style="font-size: 1.1rem; margin-top: 10px; color: rgba(255,255,255,0.9);">Explorez les villes impériales et
+        les paysages désertiques du Maroc</p>
     </div>
   </header>
 
-<!-- Destinations Section -->
+  <!-- Destinations Section -->
   <section id="destinations" class="destinations reveal">
     <h2>Our Destinations</h2>
     <div class="grid">
@@ -1760,7 +1977,7 @@
       </div>
     </div>
   </section>
-<!-- Destination Booking Modal (Global Design) -->
+  <!-- Destination Booking Modal (Global Design) -->
   <div id="destBookingModal" class="dest-booking-modal-overlay">
     <div class="travel-form-container dest-booking-sheet">
       <button class="dest-booking-close" onclick="closeDestBooking()">✕</button>
@@ -2062,7 +2279,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <!-- Hash Navigation Popup Auto-Open -->
   <script>
@@ -2083,10 +2300,10 @@
     });
   </script>
 
-<footer class="footer">
+  <footer class="footer">
     <div class="footer-container">
 
-            <div class="footer-col">
+      <div class="footer-col">
         <h4>Destinations</h4>
         <ul>
           <li><a href="destinations.html#marrakech">Marrakech</a></li>
