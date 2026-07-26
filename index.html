@@ -75,9 +75,7 @@
       position: relative; min-height: 100vh; display: flex; align-items: center;
       justify-content: center; overflow: hidden;
     }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
     .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -157,22 +155,68 @@
     }
     .stat-item p { font-size: 0.82rem; font-weight: 700; color: var(--hm-text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
 
+    /* ── Welcome Section ───────────────────────────────────────── */
+    .welcome-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
+    }
+    .welcome-img-box {
+      position: relative; border-radius: var(--hm-radius-lg); overflow: hidden;
+      box-shadow: var(--hm-shadow-lg);
+    }
+    .welcome-img { width: 100%; height: 480px; object-fit: cover; }
+    .welcome-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: var(--hm-terracotta); color: #fff; padding: 12px 22px;
+      border-radius: var(--hm-radius-md); font-weight: 800; font-size: 0.95rem;
+      box-shadow: 0 8px 24px rgba(192,57,43,0.4); display: flex; align-items: center; gap: 8px;
+    }
+    .welcome-text h2 { font-family: var(--hm-font-serif); font-size: clamp(2rem, 3.5vw, 2.7rem); margin-bottom: 18px; }
+    .welcome-text p { color: var(--hm-text-muted); font-size: 1.02rem; line-height: 1.75; margin-bottom: 18px; }
+    .welcome-features { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+    .wf-item { display: flex; align-items: flex-start; gap: 14px; }
+    .wf-item i {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--hm-terracotta-light);
+      color: var(--hm-terracotta); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
+    }
+    .wf-item strong { display: block; font-size: 0.98rem; color: var(--hm-text-heading); margin-bottom: 2px; }
+    .wf-item span { font-size: 0.88rem; color: var(--hm-text-muted); }
+
+    /* ── Experience Categories Grid ───────────────────────────── */
+    .exp-cat-grid {
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px;
+    }
+    .exp-cat-card {
+      background: var(--hm-bg-card); border: 1px solid var(--hm-border);
+      border-radius: var(--hm-radius-lg); overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      display: flex; flex-direction: column;
+    }
+    .exp-cat-card:hover {
+      transform: translateY(-6px); box-shadow: var(--hm-shadow-lg); border-color: var(--hm-terracotta);
+    }
+    .exp-cat-img { position: relative; height: 210px; overflow: hidden; }
+    .exp-cat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .exp-cat-card:hover .exp-cat-img img { transform: scale(1.06); }
+    .exp-cat-badge { position: absolute; top: 16px; left: 16px; backdrop-filter: blur(8px); }
+    .exp-cat-body { padding: 26px 22px; display: flex; flex-direction: column; flex: 1; }
+    .exp-cat-body h3 { font-family: var(--hm-font-serif); font-size: 1.3rem; margin-bottom: 10px; }
+    .exp-cat-body p { font-size: 0.9rem; color: var(--hm-text-muted); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+    .exp-cat-link {
+      font-size: 0.88rem; font-weight: 700; color: var(--hm-terracotta);
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .exp-cat-link:hover { gap: 12px; }
+
     /* ── Section Shared Styles ─────────────────────────────────── */
     .section { padding: 96px 24px; }
     .section-alt { background: var(--hm-bg-card); }
     .section-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
     .section-header h2 { font-family: var(--hm-font-serif); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
     .section-header p { color: var(--hm-text-muted); font-size: 1.05rem; line-height: 1.7; }
-
-    /* ── Destinations Grid ─────────────────────────────────────── */
-    .dest-container { max-width: 1340px; margin: 0 auto; }
-    .dest-header {
-      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px;
-    }
-    .dest-header h2 { font-family: var(--hm-font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
-    #destinationsGrid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px;
-    }
 
     /* ── Map Preview Section ────────────────────────────────────── */
     .map-section { padding: 96px 24px; background: var(--hm-bg-card); }
@@ -288,6 +332,10 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
     }
+    @media (max-width: 900px) {
+      .welcome-inner { grid-template-columns: 1fr; gap: 40px; }
+      .welcome-img { height: 340px; }
+    }
     @media (max-width: 768px) {
       .hn-nav { padding: 14px 20px; }
       .hn-links {
@@ -304,8 +352,6 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item { border-right: none; border-bottom: 1px solid var(--hm-border); }
       .stat-item:last-child { border-bottom: none; }
-      .dest-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      #destinationsGrid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .hero-search { flex-direction: column; border-radius: var(--hm-radius-lg); padding: 16px; }
@@ -390,9 +436,53 @@
       </div>
     </div>
 
-    <div class="scroll-indicator" onclick="document.getElementById('statsSection').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-indicator" onclick="document.getElementById('welcomeSection').scrollIntoView({behavior:'smooth'})">
       <span>Discover</span>
       <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Welcome Introduction Section -->
+  <section class="section section-alt" id="welcomeSection" style="padding: 96px 24px;">
+    <div class="welcome-inner">
+      <div class="welcome-img-box">
+        <img src="images/Marrakech/Marrakech.jpg" alt="Moroccan Riad & Architecture" class="welcome-img">
+        <div class="welcome-badge">
+          <i class="fa-solid fa-gem"></i> 100% Private Expeditions
+        </div>
+      </div>
+      <div class="welcome-text">
+        <span class="badge badge-terracotta" style="margin-bottom: 16px;">✦ Welcome to Hidden Morocco</span>
+        <h2>Crafting Unforgettable Private Journeys</h2>
+        <p>We are a boutique travel agency born in the heart of Marrakech. We believe travel should be personal, authentic, and inspiring — far removed from mass group tours and rigid schedules.</p>
+        <p>Whether you dream of watching the sunset over Sahara dunes, wandering through centuries-old medinas with local storytellers, or breathing in coastal ocean breezes, we design every detail around your rhythm.</p>
+        <div class="welcome-features">
+          <div class="wf-item">
+            <i class="fa-solid fa-user-shield"></i>
+            <div>
+              <strong>100% Private Tours</strong>
+              <span>Just you and your loved ones. No shared buses.</span>
+            </div>
+          </div>
+          <div class="wf-item">
+            <i class="fa-solid fa-compass"></i>
+            <div>
+              <strong>Local Berber Guides</strong>
+              <span>Native experts unlocking secret spots off the map.</span>
+            </div>
+          </div>
+          <div class="wf-item">
+            <i class="fa-solid fa-sliders"></i>
+            <div>
+              <strong>Fully Tailor-Made</strong>
+              <span>Flexible pacing, custom accommodation &amp; activities.</span>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="btn-primary" style="margin-top: 10px;">
+          Discover Our Story &nbsp;<i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -422,21 +512,72 @@
     </div>
   </section>
 
-  <!-- Featured Destinations -->
-  <section class="section" id="destinations" style="padding-top: 96px;">
-    <div class="dest-container">
-      <div class="dest-header">
-        <div>
-          <span class="badge badge-terracotta" style="margin-bottom: 12px;">✦ Handpicked Expeditions</span>
-          <h2>Trending Moroccan Experiences</h2>
+  <!-- Featured Experience Categories Overview -->
+  <section class="section" style="padding: 96px 24px; background: var(--hm-bg-main);">
+    <div class="section-header">
+      <span class="badge badge-gold" style="margin-bottom: 14px;">✦ Experience Categories</span>
+      <h2>Ways to Experience Morocco</h2>
+      <p>From silent desert dunes to vibrant imperial medinas, discover the diverse experiences waiting for you.</p>
+    </div>
+
+    <div class="exp-cat-grid">
+      <!-- Category 1: Sahara Desert -->
+      <div class="exp-cat-card">
+        <div class="exp-cat-img">
+          <img src="images/Merzouga/merzouga_1.jpg" alt="Sahara Desert Expedition">
+          <span class="badge badge-gold exp-cat-badge">Desert &amp; Dunes</span>
         </div>
-        <a href="destinations.html" class="btn-ghost" style="flex-shrink: 0;">
-          View All <i class="fa-solid fa-arrow-right"></i>
-        </a>
+        <div class="exp-cat-body">
+          <h3>Sahara Desert Expeditions</h3>
+          <p>Sunset camel treks, stargazing at luxury Berber camps, sandboarding, and campfire drumming in Merzouga &amp; Zagora.</p>
+          <a href="destinations.html#merzouga" class="exp-cat-link">Explore Desert Tours <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
       </div>
-      <div id="destinationsGrid">
-        <!-- Dynamically rendered by script.js -->
+
+      <!-- Category 2: Imperial Medinas -->
+      <div class="exp-cat-card">
+        <div class="exp-cat-img">
+          <img src="images/Marrakech/marrakech_11.jpg" alt="Imperial Medinas &amp; Culture">
+          <span class="badge badge-terracotta exp-cat-badge">Cultural Heritage</span>
+        </div>
+        <div class="exp-cat-body">
+          <h3>Imperial Medinas &amp; Palaces</h3>
+          <p>Labyrinthine souks, historic palaces, ancient tanneries, and secret riads across Marrakech, Fès, and Chefchaouen.</p>
+          <a href="destinations.html#marrakech" class="exp-cat-link">Explore Medina Tours <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
       </div>
+
+      <!-- Category 3: Atlas Mountains -->
+      <div class="exp-cat-card">
+        <div class="exp-cat-img">
+          <img src="images/Marrakech/imlil_1.jpg" alt="Atlas Mountains &amp; Treks">
+          <span class="badge badge-gold exp-cat-badge">Mountain Treks</span>
+        </div>
+        <div class="exp-cat-body">
+          <h3>Atlas Mountains &amp; Valleys</h3>
+          <p>Guided village hikes, Toubkal panoramas, lush green valleys, and authentic Berber tea ceremonies in Imlil &amp; Ourika.</p>
+          <a href="destinations.html#marrakech" class="exp-cat-link">Explore Mountain Treks <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Category 4: Coastal Escapes -->
+      <div class="exp-cat-card">
+        <div class="exp-cat-img">
+          <img src="images/Essaouira/essaouira_1.jpg" alt="Atlantic Coastal Escapes">
+          <span class="badge badge-terracotta exp-cat-badge">Coastal Escape</span>
+        </div>
+        <div class="exp-cat-body">
+          <h3>Atlantic Coastal Escapes</h3>
+          <p>Historic sea ramparts, fresh grilled harbour seafood, argan forest visits, and ocean breezes in Essaouira.</p>
+          <a href="destinations.html#essaouira" class="exp-cat-link">Explore Coastal Escapes <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="destinations.html" class="btn-primary" style="padding: 14px 36px; font-size: 1rem;">
+        View Full Destinations Catalog &nbsp;<i class="fa-solid fa-compass"></i>
+      </a>
     </div>
   </section>
 
@@ -465,7 +606,7 @@
     <div class="why-grid">
       <div class="why-card">
         <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
-        <h4>Private & Exclusive</h4>
+        <h4>Private &amp; Exclusive</h4>
         <p>Every journey is tailor-made for you alone. No shared buses, no crowds — just you and the real Morocco.</p>
       </div>
       <div class="why-card">
@@ -480,7 +621,7 @@
       </div>
       <div class="why-card">
         <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h4>Safe & Reliable</h4>
+        <h4>Safe &amp; Reliable</h4>
         <p>Modern vehicles, licensed drivers, and 24/7 real-time support throughout your entire journey.</p>
       </div>
     </div>
@@ -500,7 +641,7 @@
         <div class="review-author">
           <div class="review-avatar">JL</div>
           <div>
-            <strong>James & Laura</strong>
+            <strong>James &amp; Laura</strong>
             <span>United Kingdom 🇬🇧 &nbsp;·&nbsp; Merzouga Expedition</span>
           </div>
         </div>
@@ -522,7 +663,7 @@
         <div class="review-author">
           <div class="review-avatar">AR</div>
           <div>
-            <strong>Ahmed & Rida</strong>
+            <strong>Ahmed &amp; Rida</strong>
             <span>Canada 🇨🇦 &nbsp;·&nbsp; Marrakech Deep Dive</span>
           </div>
         </div>
