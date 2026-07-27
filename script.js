@@ -135,6 +135,66 @@ const DESTINATIONS_DB = [
       { day: "Day 1", text: "Tanneries Tour & Ancient Souk Exploration" },
       { day: "Day 2", text: "Bab Boujeloud Gate & Pottery Crafting" }
     ]
+  },
+  {
+    id: "casablanca",
+    title: "Casablanca Ocean Hub & Mosque",
+    region: "Casablanca-Settat",
+    category: "coastal",
+    price: 140,
+    currency: "EUR",
+    rating: 4.7,
+    reviewsCount: 160,
+    img: "images/Casablanca/casablanca_hero.png",
+    badge: "Modern Hub",
+    desc: "Morocco's vibrant economic capital featuring the architectural masterpiece Hassan II Mosque perched directly over the Atlantic ocean.",
+    lat: 33.5731,
+    lng: -7.5898,
+    highlights: ["Hassan II Mosque Ocean View", "Corniche Promenade", "Habous Quarter Architectural Tour", "Rick's Café Experience"],
+    itinerary: [
+      { day: "Day 1", text: "Hassan II Mosque Guided Visit & Corniche Walk" },
+      { day: "Day 2", text: "Habous Craft Market & Culinary Tasting" }
+    ]
+  },
+  {
+    id: "zagora",
+    title: "Zagora Draa Oasis & Desert",
+    region: "Draâ-Tafilalet",
+    category: "desert",
+    price: 220,
+    currency: "EUR",
+    rating: 4.8,
+    reviewsCount: 190,
+    img: "images/Zagora/zagora_hero.png",
+    badge: "Sahara Gateway",
+    desc: "Gateway to the Draa Valley. Palm groves, ancient earthen kasbahs, and authentic desert stargazing.",
+    lat: 30.3336,
+    lng: -5.8264,
+    highlights: ["Draa Valley Palm Groves", "Tamegroute Ancient Library", "Sunset Camel Trek", "Traditional Berber Music"],
+    itinerary: [
+      { day: "Day 1", text: "Draa Oasis Drive & Sunset Desert Camp" },
+      { day: "Day 2", text: "Tamegroute Underground Kasbah Visit" }
+    ]
+  },
+  {
+    id: "agadir",
+    title: "Agadir Sun & Sea Resort",
+    region: "Souss-Massa",
+    category: "coastal",
+    price: 130,
+    currency: "EUR",
+    rating: 4.7,
+    reviewsCount: 140,
+    img: "images/Agadir/agadir_hero.png",
+    badge: "Ocean Resort",
+    desc: "Coastal breeze, golden sandy beaches, year-round sunshine, sea promenade, and Atlantic waters.",
+    lat: 30.4278,
+    lng: -9.5981,
+    highlights: ["Agadir Kasbah Panoramic View", "Souk El Had Shopping", "Marina Promenade Dining", "Taghazout Bay Surfing"],
+    itinerary: [
+      { day: "Day 1", text: "Kasbah Hill View & Beach Promenade Sunset" },
+      { day: "Day 2", text: "Taghazout Coastal Trip & Argan Valley Tour" }
+    ]
   }
 ];
 
@@ -211,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyNav();
   initSearchEngine();
   initCounters();
-  initScrollReveal();
 
   if (document.getElementById('interactiveMap')) {
     initMapPage();
@@ -245,8 +304,8 @@ function initTheme() {
 
 function updateThemeIcon() {
   document.querySelectorAll('.theme-toggle').forEach(btn => {
-    btn.innerHTML = AppState.theme === 'dark' 
-      ? '<i class="fa-solid fa-sun" style="color: var(--hm-gold);"></i>' 
+    btn.innerHTML = AppState.theme === 'dark'
+      ? '<i class="fa-solid fa-sun" style="color: var(--hm-gold);"></i>'
       : '<i class="fa-solid fa-moon"></i>';
   });
 }
@@ -362,7 +421,7 @@ function initStickyNav() {
   handleScroll();
 }
 
-window.toggleMobileMenu = function() {
+window.toggleMobileMenu = function () {
   const menu = document.querySelector('.hn-links, .nav-links');
   if (menu) {
     menu.classList.toggle('hn-links-open');
@@ -381,8 +440,8 @@ function initSearchEngine() {
       renderDestinationsGrid();
       return;
     }
-    const filtered = DESTINATIONS_DB.filter(d => 
-      d.title.toLowerCase().includes(query) || 
+    const filtered = DESTINATIONS_DB.filter(d =>
+      d.title.toLowerCase().includes(query) ||
       d.desc.toLowerCase().includes(query) ||
       d.region.toLowerCase().includes(query)
     );
@@ -489,82 +548,475 @@ function showToast(message) {
     toastContainer = document.createElement('div');
     toastContainer.id = 'toastContainer';
     toastContainer.style.cssText = `
-      position: fixed; bottom: 30px; right: 30px; z-index: 99999;
+      position: fixed; bottom: 30px; right: 30px; z-index: 999999;
       display: flex; flex-direction: column; gap: 10px; pointer-events: none;
     `;
     document.body.appendChild(toastContainer);
   }
 
   const toast = document.createElement('div');
-  toast.className = 'glass-panel';
   toast.style.cssText = `
-    padding: 14px 22px; border-radius: var(--hm-radius-md); font-weight: 600;
-    font-size: 0.9rem; color: var(--hm-text-heading); box-shadow: var(--hm-shadow-lg);
-    border-left: 4px solid var(--hm-terracotta); pointer-events: auto; animation: toast-in 0.35s ease;
+    padding: 14px 22px; border-radius: 12px; font-weight: 600;
+    font-size: 0.9rem; color: #0F172A; background: #FFFFFF; box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+    border-left: 4px solid #C85A32; pointer-events: auto; transition: all 0.35s ease;
+    transform: translateY(20px); opacity: 0; display: flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(15,23,42,0.08);
   `;
-  toast.textContent = message;
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#C85A32;"></i> <span>${message}</span>`;
   toastContainer.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateY(0)';
+    toast.style.opacity = '1';
+  });
 
   setTimeout(() => {
     toast.style.opacity = '0';
     toast.style.transform = 'translateY(10px)';
-    toast.style.transition = 'all 0.3s ease';
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
+    setTimeout(() => toast.remove(), 350);
+  }, 3200);
 }
+
+// ── Global Interactive Quick Booking Modal Engine ────────────────────────
+window.openQuickBooking = function (destId = 'marrakech') {
+  let modal = document.getElementById('globalQuickBookModal');
+  const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
+
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'globalQuickBookModal';
+    modal.style.cssText = `
+      position: fixed; inset: 0; z-index: 999999; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(14px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    `;
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div style="
+      background: #FFFFFF; border: 1px solid rgba(15,23,42,0.08); border-radius: 24px;
+      width: min(580px, 95vw); max-height: 90vh; overflow-y: auto; padding: 32px;
+      box-shadow: 0 25px 60px rgba(15,23,42,0.2); position: relative; color: #0F172A;
+    ">
+      <button onclick="window.closeQuickBooking()" style="
+        position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%;
+        border: 1px solid rgba(15,23,42,0.08); background: #FAF7F2; color: #0F172A;
+        font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s;
+      ">&times;</button>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
+        <span style="background: rgba(200,90,50,0.12); color:#C85A32; padding:6px 14px; border-radius:99px; font-size:0.78rem; font-weight:700; text-transform:uppercase;">✦ Instant Booking</span>
+      </div>
+
+      <h3 style="font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; color: #0F172A;">Plan Your Moroccan Expedition</h3>
+      <p style="color: #64748B; font-size: 0.92rem; margin-bottom: 24px; line-height: 1.6;">Customize your trip details below. Live pricing updates automatically.</p>
+
+      <form id="quickBookingForm" onsubmit="window.handleQuickBookSubmit(event)">
+        <div style="margin-bottom: 18px;">
+          <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Select Destination</label>
+          <select id="qb-dest" onchange="window.updateQuickBookPrice()" style="
+            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+            background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit;
+          ">
+            ${DESTINATIONS_DB.map(d => `<option value="${d.id}" ${d.id === dest.id ? 'selected' : ''}>${d.title} (€${d.price}/person)</option>`).join('')}
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+          <div>
+            <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travel Date</label>
+            <input type="date" id="qb-date" required style="
+              width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+              background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
+            ">
+          </div>
+          <div>
+            <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travelers</label>
+            <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid rgba(15,23,42,0.12); border-radius:12px; overflow:hidden;">
+              <button type="button" onclick="window.changeTravelers(-1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">-</button>
+              <input type="number" id="qb-travelers" value="2" min="1" max="20" readonly style="width:100%; text-align:center; border:none; background:transparent; color:#0F172A; font-size:1rem; font-weight:700;">
+              <button type="button" onclick="window.changeTravelers(1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 22px;">
+          <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Full Name</label>
+          <input type="text" id="qb-name" placeholder="e.g. Sarah Jenkins" required style="
+            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+            background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
+          ">
+        </div>
+
+        <div style="
+          background: #FAF7F2; border: 1px dashed rgba(200,90,50,0.3);
+          border-radius: 16px; padding: 18px 20px; margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center;
+        ">
+          <div>
+            <span style="font-size:0.8rem; color:#9CA3AF; display:block;">Estimated Total Price</span>
+            <span style="font-size:0.78rem; color:#FBBF24;">100% Private Expedition</span>
+          </div>
+          <div id="qb-total-price" style="font-size: 1.6rem; font-weight: 800; color: #F59E0B;">€360</div>
+        </div>
+
+        <button type="submit" style="
+          width:100%; padding:15px; border-radius:99px; border:none;
+          background: linear-gradient(135deg, #F59E0B, #D97706); color:#FFFFFF; font-weight:700;
+          font-size:1rem; cursor:pointer; box-shadow:0 8px 24px rgba(245,158,11,0.35); transition:all 0.3s;
+          display:flex; align-items:center; justify-content:center; gap:8px;
+        ">
+          Confirm Expedition Request &nbsp;<i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  `;
+
+  // Set default tomorrow date
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dateInput = document.getElementById('qb-date');
+  if (dateInput) dateInput.value = tomorrow.toISOString().split('T')[0];
+
+  window.updateQuickBookPrice();
+
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+  });
+};
+
+window.closeQuickBooking = function () {
+  const modal = document.getElementById('globalQuickBookModal');
+  if (modal) {
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+  }
+};
+
+window.changeTravelers = function (delta) {
+  const input = document.getElementById('qb-travelers');
+  if (!input) return;
+  let val = parseInt(input.value, 10) + delta;
+  if (val < 1) val = 1;
+  if (val > 20) val = 20;
+  input.value = val;
+  window.updateQuickBookPrice();
+};
+
+window.updateQuickBookPrice = function () {
+  const destId = document.getElementById('qb-dest')?.value || 'marrakech';
+  const count = parseInt(document.getElementById('qb-travelers')?.value || '2', 10);
+  const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
+  const priceDisplay = document.getElementById('qb-total-price');
+  if (priceDisplay && dest) {
+    priceDisplay.textContent = `€${dest.price * count}`;
+  }
+};
+
+window.handleQuickBookSubmit = function (e) {
+  e.preventDefault();
+  const name = document.getElementById('qb-name').value;
+  const destId = document.getElementById('qb-dest').value;
+  const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
+
+  window.closeQuickBooking();
+  showToast(`Thank you ${name}! Your booking request for ${dest.title} has been submitted.`);
+};
+
+// Wire up all Book Expedition buttons automatically across all pages
+document.addEventListener('click', function (e) {
+  const bookBtn = e.target.closest('.book-btn-nav, .hn-nav-book, [data-i18n="nav_book"], a[href="booking.html"]');
+  if (bookBtn && !window.location.pathname.endsWith('booking.html')) {
+    e.preventDefault();
+    window.openQuickBooking('marrakech');
+  }
+});
+
+// ── Interactive Hero Search & URL Filtering ────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Hero Search Input handler
+  const heroInput = document.getElementById('heroSearchInput');
+  const heroBtn = document.querySelector('.hero-search-btn');
+
+  if (heroInput && heroBtn) {
+    const executeSearch = (e) => {
+      e.preventDefault();
+      const query = heroInput.value.trim();
+      window.location.href = query ? `destinations.html?search=${encodeURIComponent(query)}` : 'destinations.html';
+    };
+
+    heroBtn.addEventListener('click', executeSearch);
+    heroInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') executeSearch(e);
+    });
+  }
+
+  // Handle ?search= query on destinations.html
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('search');
+  if (searchQuery) {
+    const destSearchInput = document.getElementById('destSearchInput');
+    if (destSearchInput) {
+      destSearchInput.value = searchQuery;
+      if (typeof filterDestinations === 'function') {
+        filterDestinations();
+      }
+    }
+  }
+});
 
 // ── Interactive Leaflet Map Engine ─────────────────────────────────────────
 function initMapPage() {
   const mapElement = document.getElementById('interactiveMap');
   if (!mapElement || typeof L === 'undefined') return;
 
-  AppState.mapInstance = L.map('interactiveMap').setView([31.7917, -7.0926], 6);
+  // Clear existing state if re-initialized
+  AppState.mapMarkers = [];
+  if (AppState.mapInstance) {
+    AppState.mapInstance.remove();
+    AppState.mapInstance = null;
+  }
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    maxZoom: 18
+  // Create Map centered on Morocco
+  AppState.mapInstance = L.map('interactiveMap', {
+    zoomControl: false
+  }).setView([31.7917, -7.0926], 6);
+
+  // Add zoom control at top-left
+  L.control.zoom({ position: 'topleft' }).addTo(AppState.mapInstance);
+
+  // ESRI World Imagery satellite tiles (matches reference design)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP',
+    maxZoom: 18,
+    minZoom: 5
   }).addTo(AppState.mapInstance);
 
-  const customIcon = L.divIcon({
-    className: 'custom-map-pin',
-    html: `<div style="background: var(--hm-terracotta); width: 28px; height: 28px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(192,57,43,0.5); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px;"><i class="fa-solid fa-location-dot"></i></div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14]
+  // Teardrop-style orange pin icon matching reference design
+  const createPinIcon = (isActive = false) => L.divIcon({
+    className: 'custom-map-pin-icon',
+    html: `<div class="map-pin-marker ${isActive ? 'is-active' : ''}">
+      <div class="pin-inner"></div>
+    </div>`,
+    iconSize: [32, 40],
+    iconAnchor: [16, 40],
+    popupAnchor: [0, -40]
   });
 
   DESTINATIONS_DB.forEach(dest => {
-    const marker = L.marker([dest.lat, dest.lng], { icon: customIcon }).addTo(AppState.mapInstance);
-    
-    marker.bindPopup(`
-      <div style="padding: 6px; font-family: var(--hm-font-sans);">
-        <img src="${dest.img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-        <h4 style="margin: 0 0 4px; font-size: 1rem; font-family: var(--hm-font-serif);">${dest.title}</h4>
-        <p style="margin: 0 0 8px; font-size: 0.8rem; color: #64748B;">${dest.region} • €${dest.price}</p>
-        <a href="destinations.html#${dest.id}" style="background: var(--hm-terracotta); color: #fff; text-decoration: none; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; display: block; text-align: center;">View Experience</a>
+    const marker = L.marker([dest.lat, dest.lng], { icon: createPinIcon(false) }).addTo(AppState.mapInstance);
+    marker.destData = dest;
+
+    // Popup HTML
+    const popupContent = `
+      <div class="map-popup-card">
+        <div class="map-popup-img-wrap">
+          <img src="${dest.img}" alt="${dest.title}">
+          <span class="map-popup-badge">${dest.badge || 'Popular'}</span>
+        </div>
+        <div class="map-popup-body">
+          <div class="map-popup-meta">${dest.region} • ★ ${dest.rating}</div>
+          <h4>${dest.title}</h4>
+          <p>${dest.desc.substring(0, 85)}...</p>
+          <div class="map-popup-footer">
+            <div class="map-popup-price">From <strong>€${dest.price}</strong></div>
+            <a href="destinations.html#${dest.id}" class="map-popup-btn">Explore <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
       </div>
-    `, { maxWidth: 220 });
+    `;
+
+    marker.bindPopup(popupContent, { maxWidth: 260, className: 'hm-custom-leaflet-popup' });
+
+    marker.on('click', () => {
+      window.showMapDestCard(dest);
+    });
 
     AppState.mapMarkers.push(marker);
   });
+
+  // Polyline coordinates connecting major routes
+  const routeCoords = [
+    [35.1716, -5.2697],   // Chefchaouen
+    [34.0333, -5.0000],   // Fes
+    [33.5731, -7.5898],   // Casablanca
+    [31.6295, -7.9811],   // Marrakech
+    [31.5125, -9.7700],   // Essaouira
+    [30.4278, -9.5981],   // Agadir
+    [30.9189, -6.8934],   // Ouarzazate
+    [30.3336, -5.8264],   // Zagora
+    [31.0992, -4.0116],   // Merzouga
+  ];
+
+  AppState.routePolyline = L.polyline(routeCoords, {
+    color: '#D4AF37',
+    weight: 2,
+    opacity: 0.85,
+    dashArray: '8, 10',
+    lineJoin: 'round'
+  }).addTo(AppState.mapInstance);
 }
+
+// ── Map Filtering Engine ───────────────────────────────────────────────────
+window.filterMapCategory = function (category, btnElement) {
+  if (!AppState.mapInstance || !AppState.mapMarkers) return;
+
+  // Update active tab buttons
+  const buttons = document.querySelectorAll('.map-filter-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  if (btnElement) btnElement.classList.add('active');
+
+  const visibleMarkers = [];
+
+  AppState.mapMarkers.forEach(marker => {
+    const dest = marker.destData;
+    const isMatch = (category === 'all' || dest.category === category);
+
+    if (isMatch) {
+      if (!AppState.mapInstance.hasLayer(marker)) {
+        marker.addTo(AppState.mapInstance);
+      }
+      visibleMarkers.push(marker);
+    } else {
+      if (AppState.mapInstance.hasLayer(marker)) {
+        AppState.mapInstance.removeLayer(marker);
+      }
+    }
+  });
+
+  // Fit bounds if specific category selected
+  if (category !== 'all' && visibleMarkers.length > 0) {
+    const group = L.featureGroup(visibleMarkers);
+    AppState.mapInstance.fitBounds(group.getBounds().pad(0.25));
+  } else {
+    AppState.mapInstance.setView([31.7917, -7.0926], 6);
+  }
+};
+
+// ── Search Map Function ────────────────────────────────────────────────────
+window.searchMapQuery = function (query) {
+  if (!AppState.mapInstance || !AppState.mapMarkers) return;
+  const q = query.toLowerCase().trim();
+
+  AppState.mapMarkers.forEach(marker => {
+    const dest = marker.destData;
+    const isMatch = !q || dest.title.toLowerCase().includes(q) || dest.region.toLowerCase().includes(q) || dest.id.toLowerCase().includes(q);
+
+    if (isMatch) {
+      if (!AppState.mapInstance.hasLayer(marker)) marker.addTo(AppState.mapInstance);
+    } else {
+      if (AppState.mapInstance.hasLayer(marker)) AppState.mapInstance.removeLayer(marker);
+    }
+  });
+};
+
+// ── Display Map Destination Card Panel ────────────────────────────────────
+window.showMapDestCard = function (dest) {
+  const panel = document.getElementById('mapDetailPanel');
+  if (!panel) return;
+
+  // Center map on marker location
+  if (AppState.mapInstance) {
+    AppState.mapInstance.flyTo([dest.lat, dest.lng], 8, { duration: 1.2 });
+  }
+
+  // Populate Panel Content
+  panel.innerHTML = `
+    <div class="map-side-card">
+      <button class="map-card-close" onclick="window.closeMapDestCard()">&times;</button>
+      <div class="map-side-img">
+        <img src="${dest.img}" alt="${dest.title}">
+        <span class="map-card-badge">${dest.badge || 'Featured'}</span>
+      </div>
+      <div class="map-side-content">
+        <div class="map-card-meta">
+          <span><i class="fa-solid fa-location-dot"></i> ${dest.region}</span>
+          <span class="map-card-rating"><i class="fa-solid fa-star"></i> ${dest.rating} (${dest.reviewsCount || 100}+ reviews)</span>
+        </div>
+        <h3>${dest.title}</h3>
+        <p>${dest.desc}</p>
+        
+        <div class="map-card-highlights">
+          <h5><i class="fa-solid fa-sparkles"></i> Highlights</h5>
+          <ul>
+            ${(dest.highlights || []).slice(0, 3).map(h => `<li><i class="fa-solid fa-check"></i> ${h}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="map-card-footer">
+          <div class="map-card-price-box">
+            <span class="price-lbl">Starting from</span>
+            <span class="price-val">€${dest.price} <small>/ person</small></span>
+          </div>
+          <a href="destinations.html#${dest.id}" class="btn-primary map-card-action-btn">
+            View Experience &nbsp;<i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  panel.classList.add('is-open');
+};
+
+window.closeMapDestCard = function () {
+  const panel = document.getElementById('mapDetailPanel');
+  if (panel) panel.classList.remove('is-open');
+};
 
 function initHomeMapPreview() {
   const mapElement = document.getElementById('homeMapPreview');
   if (!mapElement || typeof L === 'undefined') return;
 
   const miniMap = L.map('homeMapPreview', { zoomControl: false, dragging: false, scrollWheelZoom: false }).setView([31.7917, -7.0926], 6);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(miniMap);
+
+  // ESRI satellite tiles for home map preview
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri'
+  }).addTo(miniMap);
 
   DESTINATIONS_DB.forEach(dest => {
-    L.circleMarker([dest.lat, dest.lng], {
-      radius: 7,
-      fillColor: '#C0392B',
-      color: '#FFFFFF',
-      weight: 2,
-      opacity: 1,
-      fillOpacity: 0.9
-    }).addTo(miniMap);
+    const pinIcon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width: 22px; height: 28px;
+        background: #E8622A;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(232,98,42,0.6);
+        position: relative;
+      "><div style="
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        width: 7px; height: 7px;
+        background: #fff; border-radius: 50%;
+      "></div></div>`,
+      iconSize: [22, 28],
+      iconAnchor: [11, 28]
+    });
+    L.marker([dest.lat, dest.lng], { icon: pinIcon }).addTo(miniMap);
   });
+
+  // Dashed golden route lines
+  const routeCoords = [
+    [35.1716, -5.2697],
+    [34.0333, -5.0000],
+    [31.6295, -7.9811],
+    [31.5125, -9.7700],
+    [30.4278, -9.5981],
+    [30.9189, -6.8934],
+    [30.3336, -5.8264],
+    [31.0992, -4.0116],
+  ];
+  L.polyline(routeCoords, {
+    color: '#D4AF37',
+    weight: 1.5,
+    opacity: 0.8,
+    dashArray: '6, 8'
+  }).addTo(miniMap);
 }
 
 // ── Legacy Modal Helpers (Preserved for Untouched destinations.html) ───────
@@ -572,7 +1024,7 @@ function lockBodyScroll(lock) {
   document.body.style.overflow = lock ? 'hidden' : '';
 }
 
-window.openModal = function(city, scrollToBooking = false) {
+window.openModal = function (city, scrollToBooking = false) {
   const modal = document.getElementById('modal-' + city);
   if (!modal) return;
   modal.style.display = 'block';
@@ -608,7 +1060,7 @@ window.openModal = function(city, scrollToBooking = false) {
   }
 };
 
-window.closeModal = function(city) {
+window.closeModal = function (city) {
   const modal = document.getElementById('modal-' + city);
   if (!modal) return;
   modal.style.display = 'none';
@@ -616,18 +1068,18 @@ window.closeModal = function(city) {
 };
 
 const DEST_IMAGES = {
-  'Marrakech':   'images/Marrakech/Marrakech.jpg',
-  'Ouarzazate':  'images/Ouarzazat/ouarzazat1.jpeg',
-  'Merzouga':    'images/Merzouga/merzouga_1.jpg',
+  'Marrakech': 'images/Marrakech/Marrakech.jpg',
+  'Ouarzazate': 'images/Ouarzazat/ouarzazat1.jpeg',
+  'Merzouga': 'images/Merzouga/merzouga_1.jpg',
   'Chefchaouen': 'images/Chfchaouen/chefchaoun.jpg',
-  'Essaouira':   'images/Essaouira/essaouira_1.jpg',
-  'Fes':         'images/Fes/Fes.jpg',
-  'Casablanca':  'images/Casablanca/casablanca.png',
-  'Agadir':      'images/Agadir/agadir_hero.png',
-  'Zagora':      'images/Zagora/zagora_hero.png'
+  'Essaouira': 'images/Essaouira/essaouira_1.jpg',
+  'Fes': 'images/Fes/Fes.jpg',
+  'Casablanca': 'images/Casablanca/casablanca.png',
+  'Agadir': 'images/Agadir/agadir_hero.png',
+  'Zagora': 'images/Zagora/zagora_hero.png'
 };
 
-window.openDestBooking = function(city) {
+window.openDestBooking = function (city) {
   const modal = document.getElementById('destBookingModal');
   if (!modal) return;
   document.getElementById('destBookingTitle').textContent = city + ' Expedition';
@@ -646,20 +1098,20 @@ window.openDestBooking = function(city) {
   lockBodyScroll(true);
 };
 
-window.closeDestBooking = function() {
+window.closeDestBooking = function () {
   const modal = document.getElementById('destBookingModal');
   if (modal) modal.style.display = 'none';
   lockBodyScroll(false);
 };
 
-window.sendDestBookingWhatsApp = function() {
+window.sendDestBookingWhatsApp = function () {
   const WHATSAPP_NUMBER = '212771663435';
   const cityTitle = document.getElementById('destBookingTitle').textContent;
-  const name     = document.getElementById('db-name').value;
-  const date     = document.getElementById('db-date').value;
-  const adults   = document.getElementById('db-adults').value;
+  const name = document.getElementById('db-name').value;
+  const date = document.getElementById('db-date').value;
+  const adults = document.getElementById('db-adults').value;
   const children = document.getElementById('db-children').value;
-  const message  = document.getElementById('db-message').value;
+  const message = document.getElementById('db-message').value;
   if (!name || !date) { alert('Please fill in your name and preferred date.'); return; }
   const text = `Hello 👋\nI am interested in booking:\n✅ Destination: ${cityTitle}\n👤 Name: ${name}\n📅 Date: ${date}\n👥 Adults: ${adults}\n🧒 Children: ${children}\n📝 Message: ${message || 'N/A'}\n\nThank you!`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
@@ -728,7 +1180,7 @@ const EXPERIENCES = {
   }
 };
 
-window.openExp = function(key) {
+window.openExp = function (key) {
   const exp = EXPERIENCES[key];
   if (!exp) return;
 
@@ -795,27 +1247,10 @@ window.openExp = function(key) {
   });
 };
 
-window.closeDestinationModal = function() {
+window.closeDestinationModal = function () {
   const modal = document.getElementById('destModal');
   if (modal) {
     modal.style.opacity = '0';
     modal.style.pointerEvents = 'none';
   }
 };
-
-// ── Scroll Reveal Engine ────────────────────────────────────────────────────
-function initScrollReveal() {
-  const revealEls = document.querySelectorAll('.reveal');
-  if (revealEls.length === 0) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  revealEls.forEach(el => observer.observe(el));
-}

@@ -1,71 +1,833 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Interactive Map — Hidden Morocco</title>
-  <meta name="description" content="Explore all Hidden Morocco destinations on our interactive map. Find imperial cities, Sahara dunes, and coastal hideaways.">
+  <meta name="description"
+    content="Explore all Hidden Morocco destinations on our interactive satellite map. Discover imperial cities, Sahara dunes, and coastal hideaways.">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
-    /* Shared Nav */
+    /* ── Navigation ─────────────────────────────────────────────── */
     .hn-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--hm-border); box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
-    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .hn-logo img { height: 36px; }
-    .hn-logo-text { font-family: var(--hm-font-serif); font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
-    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
-    .hn-links a:hover, .hn-links a.active { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
-    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
-    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
-    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
-    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta); color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
-    @media (max-width: 768px) {
-      .hn-nav { padding: 12px 18px; }
-      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); backdrop-filter: blur(20px); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
-      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; }
-      .hamburger { display: flex; }
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9000;
+      padding: 14px 36px;
+      background: var(--hm-bg-nav);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hm-border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s;
     }
 
-    /* Map Page */
-    body { background: var(--hm-bg-main); }
-    .map-page-wrapper { padding-top: 72px; height: 100vh; display: flex; flex-direction: column; }
-    .map-filter-bar {
-      background: var(--hm-bg-card); border-bottom: 1px solid var(--hm-border);
-      padding: 16px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    .hn-nav-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
-    .map-filter-bar span { font-weight: 700; font-size: 0.9rem; color: var(--hm-text-muted); margin-right: 4px; }
+
+    .hn-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+
+    .hn-logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .hn-logo-text {
+      font-family: var(--hm-font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--hm-text-heading);
+    }
+
+    .hn-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hn-links a {
+      padding: 7px 12px;
+      border-radius: 99px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--hm-text-body);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .hn-links a:hover,
+    .hn-links a.active {
+      background: var(--hm-bg-card-hover);
+      color: var(--hm-terracotta);
+    }
+
+    .hn-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      background: var(--hm-bg-card-hover);
+      border: 1px solid var(--hm-border);
+      color: var(--hm-text-body);
+      padding: 7px 10px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .nav-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--hm-border);
+      background: var(--hm-bg-card-hover);
+      color: var(--hm-text-heading);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      position: relative;
+    }
+
+    .nav-icon-btn:hover {
+      border-color: var(--hm-terracotta);
+      color: var(--hm-terracotta);
+    }
+
+    .fav-count-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--hm-terracotta);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+    }
+
+    .book-btn-nav {
+      padding: 9px 20px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #E8622A, #C0392B);
+      color: #fff !important;
+      border-radius: 99px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .book-btn-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(232, 98, 42, 0.4);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--hm-text-heading);
+      border-radius: 2px;
+    }
+
+    /* ── Map Header Hero ───────────────────────────────────────── */
+    .map-hero {
+      padding: 130px 24px 36px;
+      background: #0F172A;
+      background-image: radial-gradient(circle at 50% 30%, rgba(200, 90, 50, 0.15) 0%, transparent 70%);
+      text-align: center;
+      position: relative;
+    }
+
+    .map-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 160, 23, 0.14);
+      border: 1px solid rgba(212, 160, 23, 0.35);
+      color: #D4A017;
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .map-hero h1 {
+      font-family: var(--hm-font-serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 14px;
+    }
+
+    .map-hero h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 70px; height: 3px;
+      background: #C85A32;
+      border-radius: 99px;
+    }
+
+    .map-hero p {
+      font-size: 1.05rem;
+      color: #FAF7F2;
+      line-height: 1.65;
+      max-width: 620px;
+      margin: 12px auto 0;
+    }
+
+    /* ── Map Dashboard Layout ──────────────────────────────────── */
+    .map-dashboard-container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Control Toolbar */
+    .map-toolbar {
+      background: var(--hm-bg-card);
+      border: 1px solid var(--hm-border);
+      border-radius: 20px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .map-search-box {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+    }
+
+    .map-search-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--hm-text-muted);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    .map-search-box input {
+      width: 100%;
+      padding: 11px 16px 11px 44px;
+      border-radius: 99px;
+      border: 1.5px solid var(--hm-border);
+      background: var(--hm-bg-main);
+      color: var(--hm-text-heading);
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      box-sizing: border-box;
+    }
+
+    .map-search-box input:focus {
+      border-color: var(--hm-terracotta);
+      box-shadow: 0 0 0 3px rgba(232, 98, 42, 0.15);
+    }
+
+    .map-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .map-filter-btn {
-      padding: 8px 18px; border-radius: 99px; border: 1px solid var(--hm-border);
-      background: var(--hm-bg-card-hover); color: var(--hm-text-body);
-      font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: all 0.25s;
+      padding: 9px 18px;
+      border-radius: 99px;
+      border: 1px solid var(--hm-border);
+      background: var(--hm-bg-card-hover);
+      color: var(--hm-text-body);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .map-filter-btn.active, .map-filter-btn:hover { background: var(--hm-terracotta); color: #fff; border-color: var(--hm-terracotta); }
-    #interactiveMap { flex: 1; z-index: 0; }
-    .leaflet-popup-content-wrapper { border-radius: 12px !important; box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; }
-    .leaflet-popup-tip { background: #fff !important; }
+
+    .map-filter-btn i {
+      font-size: 0.85rem;
+      color: var(--hm-terracotta);
+    }
+
+    .map-filter-btn.active,
+    .map-filter-btn:hover {
+      background: var(--hm-terracotta);
+      color: #fff;
+      border-color: var(--hm-terracotta);
+    }
+
+    .map-filter-btn.active i,
+    .map-filter-btn:hover i {
+      color: #fff;
+    }
+
+    .map-recenter-btn {
+      padding: 9px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--hm-border);
+      background: var(--hm-bg-card);
+      color: var(--hm-text-muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .map-recenter-btn:hover {
+      color: var(--hm-terracotta);
+      border-color: var(--hm-terracotta);
+    }
+
+    /* Main Map & Drawer Area */
+    .map-frame-wrapper {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--hm-border);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.18);
+      height: 680px;
+      width: 100%;
+    }
+
+    #interactiveMap {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: #0c1821;
+    }
+
+    /* Custom Leaflet Controls & Popups */
+    .leaflet-control-zoom {
+      border: none !important;
+      margin-top: 20px !important;
+      margin-left: 20px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+      border-radius: 12px !important;
+      overflow: hidden;
+    }
+
+    .leaflet-control-zoom a {
+      background: var(--hm-bg-card) !important;
+      color: var(--hm-text-heading) !important;
+      border-bottom: 1px solid var(--hm-border) !important;
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      font-size: 1.1rem !important;
+      transition: background 0.2s;
+    }
+
+    .leaflet-control-zoom a:hover {
+      background: var(--hm-terracotta) !important;
+      color: #fff !important;
+    }
+
+    .map-pin-marker {
+      width: 32px;
+      height: 40px;
+      background: #E8622A;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 14px rgba(232, 98, 42, 0.6);
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .map-pin-marker:hover,
+    .map-pin-marker.is-active {
+      transform: rotate(-45deg) scale(1.15);
+      background: #C0392B;
+      box-shadow: 0 6px 20px rgba(192, 57, 43, 0.8);
+    }
+
+    .map-pin-marker .pin-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    /* Custom Popup Box */
+    .hm-custom-leaflet-popup .leaflet-popup-content-wrapper {
+      background: var(--hm-bg-card) !important;
+      color: var(--hm-text-body) !important;
+      border-radius: 16px !important;
+      padding: 0 !important;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+      overflow: hidden;
+      border: 1px solid var(--hm-border);
+    }
+
+    .hm-custom-leaflet-popup .leaflet-popup-content {
+      margin: 0 !important;
+    }
+
+    .hm-custom-leaflet-popup .leaflet-popup-tip {
+      background: var(--hm-bg-card) !important;
+    }
+
+    .map-popup-card {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+    }
+
+    .map-popup-img-wrap {
+      position: relative;
+      height: 115px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .map-popup-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-popup-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #F5D87A;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      backdrop-filter: blur(4px);
+      text-transform: uppercase;
+    }
+
+    .map-popup-body {
+      padding: 14px 16px;
+    }
+
+    .map-popup-meta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--hm-terracotta);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .map-popup-body h4 {
+      font-family: var(--hm-font-serif);
+      font-size: 1.05rem;
+      margin: 0 0 6px;
+      color: var(--hm-text-heading);
+      font-weight: 700;
+    }
+
+    .map-popup-body p {
+      font-size: 0.8rem;
+      color: var(--hm-text-muted);
+      margin: 0 0 12px;
+      line-height: 1.5;
+    }
+
+    .map-popup-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--hm-border);
+      padding-top: 10px;
+    }
+
+    .map-popup-price {
+      font-size: 0.76rem;
+      color: var(--hm-text-muted);
+    }
+
+    .map-popup-price strong {
+      font-size: 0.98rem;
+      color: var(--hm-text-heading);
+    }
+
+    .map-popup-btn {
+      background: var(--hm-terracotta);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .map-popup-btn:hover {
+      background: #A93226;
+    }
+
+    /* Side Destination Details Panel */
+    .map-detail-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      width: 380px;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .map-detail-panel.is-open {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .map-side-card {
+      background: var(--hm-bg-card);
+      border: 1px solid var(--hm-border);
+      border-radius: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-card-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .map-card-close:hover {
+      background: var(--hm-terracotta);
+    }
+
+    .map-side-img {
+      position: relative;
+      height: 200px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .map-side-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-card-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      background: var(--hm-terracotta);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 99px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .map-side-content {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .map-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--hm-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .map-card-meta i {
+      color: var(--hm-terracotta);
+    }
+
+    .map-card-rating {
+      font-weight: 700;
+      color: var(--hm-text-heading);
+    }
+
+    .map-card-rating i {
+      color: var(--hm-gold);
+    }
+
+    .map-side-content h3 {
+      font-family: var(--hm-font-serif);
+      font-size: 1.45rem;
+      color: var(--hm-text-heading);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .map-side-content p {
+      font-size: 0.9rem;
+      color: var(--hm-text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .map-card-highlights h5 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--hm-text-heading);
+      margin-bottom: 10px;
+    }
+
+    .map-card-highlights ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+
+    .map-card-highlights li {
+      font-size: 0.85rem;
+      color: var(--hm-text-body);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-card-highlights li i {
+      color: #27AE60;
+      font-size: 0.8rem;
+    }
+
+    .map-card-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--hm-border);
+      padding-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price-lbl {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--hm-text-muted);
+    }
+
+    .price-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--hm-text-heading);
+    }
+
+    .price-val small {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--hm-text-muted);
+    }
+
+    .map-card-action-btn {
+      padding: 11px 22px;
+      font-size: 0.88rem;
+      text-decoration: none;
+      border-radius: 99px;
+    }
+
+    /* ── Responsive Styling ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .map-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .map-search-box {
+        max-width: 100%;
+      }
+
+      .map-filter-group {
+        overflow-x: auto;
+        padding-bottom: 6px;
+        flex-wrap: nowrap;
+      }
+
+      .map-filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .map-detail-panel {
+        top: auto;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+        height: 320px;
+        transform: translateY(40px);
+      }
+
+      .map-detail-panel.is-open {
+        transform: translateY(0);
+      }
+
+      .map-frame-wrapper {
+        height: 580px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hn-nav {
+        padding: 12px 18px;
+      }
+
+      .hn-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--hm-bg-nav);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 16px;
+        gap: 4px;
+        border-bottom: 1px solid var(--hm-border);
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+      }
+
+      .hn-links.hn-links-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hn-links a {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .book-btn-nav {
+        display: none;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation Bar -->
   <nav class="hn-nav" id="siteNav">
     <div class="hn-nav-inner">
       <a href="index.html" class="hn-logo">
         <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
         <span class="hn-logo-text">Hidden Morocco</span>
       </a>
+
       <ul class="hn-links" id="navLinks">
         <li><a href="index.html" data-i18n="nav_home">Home</a></li>
         <li><a href="destinations.html" data-i18n="nav_destinations">Destinations</a></li>
@@ -74,41 +836,155 @@
         <li><a href="testimonials.html" data-i18n="nav_reviews">Reviews</a></li>
         <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
       </ul>
+
       <div class="hn-nav-actions">
-        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
-        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="nav-icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
-        <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+        <select class="lang-switcher" id="langSwitcher" aria-label="Language">
+          <option value="en">🌐 EN</option>
+          <option value="fr">🌐 FR</option>
+          <option value="es">🌐 ES</option>
+        </select>
+
+        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <a href="favorites.html" class="nav-icon-btn" aria-label="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-count-badge">0</span>
+        </a>
+
+        <a href="booking.html" class="book-btn-nav" data-i18n="nav_book">Book Expedition</a>
+
+        <button class="hamburger" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <div class="map-page-wrapper">
-    <!-- Filter Bar -->
-    <div class="map-filter-bar">
-      <span><i class="fa-solid fa-filter"></i> Filter:</span>
-      <button class="map-filter-btn active" onclick="filterMap('all', this)">All Destinations</button>
-      <button class="map-filter-btn" onclick="filterMap('medina', this)"><i class="fa-solid fa-mosque"></i> Imperial Cities</button>
-      <button class="map-filter-btn" onclick="filterMap('desert', this)"><i class="fa-solid fa-sun"></i> Desert</button>
-      <button class="map-filter-btn" onclick="filterMap('mountain', this)"><i class="fa-solid fa-mountain"></i> Mountains</button>
-      <button class="map-filter-btn" onclick="filterMap('coastal', this)"><i class="fa-solid fa-water"></i> Coastal</button>
+  <!-- Map Header Hero -->
+  <header class="map-hero">
+    <div class="map-hero-inner">
+      <span class="hero-eyebrow">✦ SPATIAL EXPEDITION MAP</span>
+      <h1>Explore Morocco's Hidden Gems</h1>
+      <p>Locate imperial medinas, Sahara sand dunes, and Atlantic coastal retreats on our spatial satellite map. Click
+        any pin to discover itineraries and highlights.</p>
+    </div>
+  </header>
+
+  <!-- Map Dashboard Container -->
+  <div class="map-dashboard-container">
+
+    <!-- Filter Toolbar -->
+    <div class="map-toolbar">
+      <div class="map-search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search location... e.g. Sahara, Fes"
+          oninput="window.searchMapQuery(this.value)">
+      </div>
+
+      <div class="map-filter-group">
+        <button class="map-filter-btn active" onclick="window.filterMapCategory('all', this)">
+          All (9)
+        </button>
+        <button class="map-filter-btn" onclick="window.filterMapCategory('medina', this)">
+          <i class="fa-solid fa-mosque"></i> Imperial Cities
+        </button>
+        <button class="map-filter-btn" onclick="window.filterMapCategory('desert', this)">
+          <i class="fa-solid fa-sun"></i> Sahara Desert
+        </button>
+        <button class="map-filter-btn" onclick="window.filterMapCategory('mountain', this)">
+          <i class="fa-solid fa-mountain"></i> Mountains
+        </button>
+        <button class="map-filter-btn" onclick="window.filterMapCategory('coastal', this)">
+          <i class="fa-solid fa-water"></i> Coastal Escapes
+        </button>
+      </div>
+
+      <button class="map-recenter-btn"
+        onclick="window.filterMapCategory('all', document.querySelector('.map-filter-btn'))">
+        <i class="fa-solid fa-arrows-to-dot"></i> Recenter Map
+      </button>
     </div>
 
-    <!-- Leaflet Map -->
-    <div id="interactiveMap"></div>
+    <!-- Main Map View Container -->
+    <div class="map-frame-wrapper">
+      <div id="interactiveMap"></div>
+
+      <!-- Floating Destination Details Panel -->
+      <div class="map-detail-panel" id="mapDetailPanel"></div>
+    </div>
+
   </div>
 
-  <script>
-    function filterMap(category, btn) {
-      document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (window.AppState && window.AppState.mapMarkers) {
-        // Re-render markers filtered by category
-      }
-    }
-  </script>
+  <!-- Shared Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+        <p>Boutique travel agency crafting unforgettable private journeys across Morocco's imperial cities, Sahara
+          dunes, and Atlas mountains.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html#marrakech">Marrakech</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga Sahara</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
+          <li><a href="destinations.html#fes">Fes El Bali</a></li>
+          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="testimonials.html">Reviews</a></li>
+          <li><a href="booking.html">Book Expedition</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="favorites.html">My Wishlist</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Marrakech HQ</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Rue Riad Zitoun el Kedim,<br>Medina, Marrakech</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>contact@hiddenmorocco.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <span>+212 77 166 3435</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Hidden Morocco. All Rights Reserved. Crafted with ❤️ in Marrakech.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

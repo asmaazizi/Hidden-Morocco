@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hidden Morocco — Discover Extraordinary Authentic Journeys</title>
-  <meta name="description" content="Boutique Moroccan travel agency. Private tours across imperial cities, Sahara desert, Atlas mountains, and the Atlantic coast.">
+  <meta name="description"
+    content="Boutique Moroccan travel agency. Private tours across imperial cities, Sahara desert, Atlas mountains, and the Atlantic coast.">
   <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,353 +14,1526 @@
   <style>
     /* ── Navigation ─────────────────────────────────────────── */
     .hn-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 16px 40px; transition: all 0.35s ease; background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 40px;
+      transition: all 0.35s ease;
+      background: transparent;
     }
-    .hn-nav.glass-nav { background: var(--hm-bg-nav); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .hn-nav.glass-nav {
+      background: var(--hm-bg-nav);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+
     .hn-nav-inner {
-      max-width: 1340px; margin: 0 auto; display: flex; align-items: center;
-      justify-content: space-between; gap: 20px;
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
+
     .hn-logo {
-      display: flex; align-items: center; gap: 11px; text-decoration: none; flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      flex-shrink: 0;
     }
-    .hn-logo img { height: 38px; width: auto; }
+
+    .hn-logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .hn-logo-text {
-      font-family: var(--hm-font-serif); font-size: 1.25rem; font-weight: 700;
-      color: #fff; transition: color 0.3s;
+      font-family: var(--hm-font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      transition: color 0.3s;
     }
-    .hn-nav.glass-nav .hn-logo-text { color: var(--hm-text-heading); }
+
+    .hn-nav.glass-nav .hn-logo-text {
+      color: var(--hm-text-heading);
+    }
+
     .hn-links {
-      display: flex; align-items: center; gap: 6px; list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
       transition: all 0.35s ease;
     }
+
     .hn-links a {
-      padding: 7px 13px; border-radius: 99px; font-size: 0.875rem;
-      font-weight: 600; color: rgba(255,255,255,0.88); text-decoration: none;
-      transition: all 0.25s; white-space: nowrap;
+      padding: 7px 13px;
+      border-radius: 99px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      transition: all 0.25s;
+      white-space: nowrap;
     }
-    .hn-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
-    .hn-nav.glass-nav .hn-links a { color: var(--hm-text-body); }
-    .hn-nav.glass-nav .hn-links a:hover { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
-    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher {
-      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-      color: #fff; padding: 7px 10px; border-radius: 99px; font-size: 0.8rem;
-      font-weight: 700; cursor: pointer; transition: all 0.25s; outline: none;
+
+    .hn-links a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
-    .hn-nav.glass-nav .lang-switcher {
-      background: var(--hm-bg-card-hover); border-color: var(--hm-border);
+
+    .hn-nav.glass-nav .hn-links a {
       color: var(--hm-text-body);
     }
-    .nav-icon-btn {
-      width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); font-size: 1rem;
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
-      text-decoration: none; transition: all 0.25s; position: relative; flex-shrink: 0;
+
+    .hn-nav.glass-nav .hn-links a:hover {
+      background: var(--hm-bg-card-hover);
+      color: var(--hm-terracotta);
     }
-    .nav-icon-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
-    .hn-nav.glass-nav .nav-icon-btn { border-color: var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); }
+
+    .hn-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      outline: none;
+    }
+
+    .hn-nav.glass-nav .lang-switcher {
+      background: var(--hm-bg-card-hover);
+      border-color: var(--hm-border);
+      color: var(--hm-text-body);
+    }
+
+    .nav-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .nav-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+    .hn-nav.glass-nav .nav-icon-btn {
+      border-color: var(--hm-border);
+      background: var(--hm-bg-card-hover);
+      color: var(--hm-text-heading);
+    }
+
     .fav-count-badge {
-      position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta);
-      color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px;
-      border-radius: 50%; display: none; align-items: center; justify-content: center;
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--hm-terracotta);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
       border: 2px solid #fff;
     }
-    .hn-nav-book { padding: 9px 20px; font-size: 0.85rem; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
-    .hn-nav.glass-nav .hamburger span { background: var(--hm-text-heading); }
+
+    .hn-nav-book {
+      padding: 9px 20px;
+      font-size: 0.85rem;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      margin: 5px 0;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .hn-nav.glass-nav .hamburger span {
+      background: var(--hm-text-heading);
+    }
 
     /* ── Hero ─────────────────────────────────────────────────── */
     .hero-section {
-      position: relative; min-height: 100vh; display: flex; align-items: center;
-      justify-content: center; overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
-    .hero-bg { position: absolute; inset: 0; z-index: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(165deg, rgba(17,17,30,0.52) 0%, rgba(17,17,30,0.72) 100%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(8, 5, 2, 0.55) 0%,
+          rgba(15, 8, 2, 0.40) 40%,
+          rgba(8, 5, 2, 0.72) 100%);
     }
+
     .hero-content {
-      position: relative; z-index: 2; text-align: center;
-      max-width: 860px; padding: 140px 24px 80px;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 920px;
+      padding: 160px 32px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
+    /* Badge/Eyebrow */
+    /* Eyebrow Badge */
     .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(212,175,55,0.18); border: 1px solid rgba(212,175,55,0.45);
-      color: #F5D87A; padding: 7px 18px; border-radius: 99px;
-      font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      margin-bottom: 28px; backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 160, 23, 0.4);
+      color: #F0BE86;
+      padding: 8px 26px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
+
+    /* Style Signature Italique Chic Hero Title */
     .hero-title {
-      font-family: var(--hm-font-serif); font-size: clamp(2.6rem, 6vw, 4.6rem);
-      color: #fff; line-height: 1.12; margin-bottom: 22px;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      margin-bottom: 16px;
+      text-align: center;
     }
-    .hero-title em { font-style: italic; color: var(--hm-gold); }
+
+    .hero-title-discover {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      letter-spacing: 12px;
+      text-transform: uppercase;
+      color: #FAF7F2;
+      opacity: 0.95;
+      margin-bottom: 6px;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-title-hidden {
+      display: block;
+      font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(3.8rem, 8.5vw, 6.6rem);
+      line-height: 1.04;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FAF7F2 35%, #F0BE86 70%, #E06D53 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.75));
+      letter-spacing: -0.5px;
+      padding-right: 6px;
+    }
+
+    /* Metallic Gold Divider */
+    .hero-gold-line {
+      display: block;
+      width: 72px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D4A017, transparent);
+      margin: 18px auto 26px;
+      border-radius: 99px;
+    }
+
+    /* Subtitle */
     .hero-subtitle {
-      font-size: 1.15rem; color: rgba(255,255,255,0.82); max-width: 620px;
-      margin: 0 auto 42px; line-height: 1.75;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.92);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
     }
 
-    /* Search Bar */
+    /* Ultra-Luxury Hero Search Bar Widget */
     .hero-search {
-      background: rgba(255,255,255,0.12); backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.25); border-radius: 99px;
-      display: flex; align-items: center; overflow: hidden; max-width: 620px;
-      margin: 0 auto; transition: box-shadow 0.3s;
-    }
-    .hero-search:focus-within { box-shadow: 0 0 0 3px rgba(212,175,55,0.35); }
-    .hero-search-icon { padding: 0 18px; color: rgba(255,255,255,0.7); font-size: 1.1rem; flex-shrink: 0; }
-    .hero-search input {
-      flex: 1; padding: 18px 4px; background: transparent; border: none; outline: none;
-      color: #fff; font-size: 0.97rem; font-family: var(--hm-font-sans);
-    }
-    .hero-search input::placeholder { color: rgba(255,255,255,0.6); }
-    .hero-search-btn {
-      flex-shrink: 0; margin: 6px; padding: 11px 26px; font-size: 0.88rem;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 99px;
+      padding: 6px 6px 6px 24px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 40px rgba(200, 90, 50, 0.15);
+      transition: all 0.35s ease;
     }
 
-    /* Scroll indicator */
+    .hero-search:focus-within {
+      background: #FFFFFF;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(200, 90, 50, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .hero-search-icon {
+      color: #C85A32;
+      font-size: 1.15rem;
+      margin-right: 14px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-search input {
+      flex: 1;
+      padding: 14px 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #0F172A;
+      font-size: 0.96rem;
+      font-weight: 600;
+      font-family: var(--hm-font-sans);
+    }
+
+    .hero-search input::placeholder {
+      color: #64748B;
+      font-weight: 400;
+    }
+
+    .hero-search-btn {
+      flex-shrink: 0;
+      padding: 14px 30px;
+      font-size: 0.92rem;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%) !important;
+      border-radius: 99px !important;
+      color: #FFFFFF !important;
+      font-weight: 700 !important;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(200, 90, 50, 0.4);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-search-btn:hover {
+      background: linear-gradient(135deg, #D46F4D 0%, #C85A32 100%) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(200, 90, 50, 0.6);
+    }
+
+    /* Scroll cue */
     .scroll-indicator {
-      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-      z-index: 2; text-align: center; color: rgba(255,255,255,0.6); cursor: pointer;
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.55);
+      cursor: pointer;
       animation: scrollBounce 2s ease-in-out infinite;
     }
-    .scroll-indicator span { display: block; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-    .scroll-indicator i { font-size: 1.3rem; }
+
+    .scroll-indicator span {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .scroll-indicator i {
+      font-size: 1rem;
+    }
+
     @keyframes scrollBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* ── Features & Highlights Section (Luxury Pearl & Terracotta Cards) ── */
+    .features-bar {
+      background: #FAF7F2;
+      padding: 72px 24px 36px;
+    }
+
+    .features-bar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .feature-item {
+      background: #FFFFFF;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 20px;
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 20px 40px -15px rgba(200, 90, 50, 0.06);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-6px);
+      border-color: #C85A32;
+      box-shadow: 0 20px 45px rgba(200, 90, 50, 0.18);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(200, 90, 50, 0.12) 0%, rgba(212, 160, 23, 0.18) 100%);
+      border: 1px solid rgba(200, 90, 50, 0.2);
+      color: #C85A32;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover .feature-icon {
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      color: #FFFFFF;
+      box-shadow: 0 8px 20px rgba(200, 90, 50, 0.35);
+    }
+
+    .feature-item h4 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .feature-item p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── Stats Banner Showcase ── */
+    .hero-stats-strip {
+      background: #FAF7F2;
+      padding: 0 24px 72px;
+    }
+
+    .hero-stats-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: #0F172A;
+      background-image: radial-gradient(circle at 50% 50%, rgba(200, 90, 50, 0.16) 0%, transparent 70%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+    }
+
+    .hero-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 32px 36px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background 0.3s ease;
+    }
+
+    .hero-stat-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .hero-stat-item:last-child {
+      border-right: none;
+    }
+
+    .hero-stat-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(212, 160, 23, 0.15);
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      font-size: 1.25rem;
+      color: #D4A017;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .hero-stat-item small {
+      display: block;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 1024px) {
+      .features-bar-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stat-item:nth-child(2) {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-bar-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .hero-stats-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-stat-item {
+        padding: 22px 18px;
+      }
     }
 
     /* ── Stats Section ─────────────────────────────────────────── */
     .stats-section {
-      background: var(--hm-bg-card); border-bottom: 1px solid var(--hm-border);
+      background: var(--hm-bg-card);
+      border-bottom: 1px solid var(--hm-border);
       padding: 52px 24px;
     }
+
     .stats-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
+
     .stat-item {
-      text-align: center; padding: 24px 16px;
+      text-align: center;
+      padding: 24px 16px;
       border-right: 1px solid var(--hm-border);
     }
-    .stat-item:last-child { border-right: none; }
-    .stat-item i { font-size: 1.8rem; color: var(--hm-terracotta); margin-bottom: 14px; display: block; }
-    .stat-value {
-      font-family: var(--hm-font-serif); font-size: 2.6rem; font-weight: 800;
-      color: var(--hm-text-heading); line-height: 1; margin-bottom: 6px;
+
+    .stat-item:last-child {
+      border-right: none;
     }
-    .stat-item p { font-size: 0.82rem; font-weight: 700; color: var(--hm-text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+    .stat-item i {
+      font-size: 1.8rem;
+      color: var(--hm-terracotta);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .stat-value {
+      font-family: var(--hm-font-serif);
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--hm-text-heading);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-item p {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--hm-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
 
     /* ── Welcome Section ───────────────────────────────────────── */
     .welcome-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: center;
     }
+
     .welcome-img-box {
-      position: relative; border-radius: var(--hm-radius-lg); overflow: hidden;
+      position: relative;
+      border-radius: var(--hm-radius-lg);
+      overflow: hidden;
       box-shadow: var(--hm-shadow-lg);
     }
-    .welcome-img { width: 100%; height: 480px; object-fit: cover; }
+
+    .welcome-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
     .welcome-badge {
-      position: absolute; bottom: 24px; left: 24px;
-      background: var(--hm-terracotta); color: #fff; padding: 12px 22px;
-      border-radius: var(--hm-radius-md); font-weight: 800; font-size: 0.95rem;
-      box-shadow: 0 8px 24px rgba(192,57,43,0.4); display: flex; align-items: center; gap: 8px;
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: var(--hm-terracotta);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: var(--hm-radius-md);
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 24px rgba(192, 57, 43, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .welcome-text h2 { font-family: var(--hm-font-serif); font-size: clamp(2rem, 3.5vw, 2.7rem); margin-bottom: 18px; }
-    .welcome-text p { color: var(--hm-text-muted); font-size: 1.02rem; line-height: 1.75; margin-bottom: 18px; }
-    .welcome-features { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
-    .wf-item { display: flex; align-items: flex-start; gap: 14px; }
+
+    .welcome-text h2 {
+      font-family: var(--hm-font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.7rem);
+      margin-bottom: 18px;
+    }
+
+    .welcome-text p {
+      color: var(--hm-text-muted);
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .welcome-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .wf-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
     .wf-item i {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--hm-terracotta-light);
-      color: var(--hm-terracotta); display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--hm-terracotta-light);
+      color: var(--hm-terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
-    .wf-item strong { display: block; font-size: 0.98rem; color: var(--hm-text-heading); margin-bottom: 2px; }
-    .wf-item span { font-size: 0.88rem; color: var(--hm-text-muted); }
+
+    .wf-item strong {
+      display: block;
+      font-size: 0.98rem;
+      color: var(--hm-text-heading);
+      margin-bottom: 2px;
+    }
+
+    .wf-item span {
+      font-size: 0.88rem;
+      color: var(--hm-text-muted);
+    }
 
     /* ── Experience Categories Grid ───────────────────────────── */
     .exp-cat-grid {
-      max-width: 1240px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 28px;
     }
+
     .exp-cat-card {
-      background: var(--hm-bg-card); border: 1px solid var(--hm-border);
-      border-radius: var(--hm-radius-lg); overflow: hidden;
+      background: var(--hm-bg-card);
+      border: 1px solid var(--hm-border);
+      border-radius: var(--hm-radius-lg);
+      overflow: hidden;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
+
     .exp-cat-card:hover {
-      transform: translateY(-6px); box-shadow: var(--hm-shadow-lg); border-color: var(--hm-terracotta);
+      transform: translateY(-6px);
+      box-shadow: var(--hm-shadow-lg);
+      border-color: var(--hm-terracotta);
     }
-    .exp-cat-img { position: relative; height: 210px; overflow: hidden; }
-    .exp-cat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .exp-cat-card:hover .exp-cat-img img { transform: scale(1.06); }
-    .exp-cat-badge { position: absolute; top: 16px; left: 16px; backdrop-filter: blur(8px); }
-    .exp-cat-body { padding: 26px 22px; display: flex; flex-direction: column; flex: 1; }
-    .exp-cat-body h3 { font-family: var(--hm-font-serif); font-size: 1.3rem; margin-bottom: 10px; }
-    .exp-cat-body p { font-size: 0.9rem; color: var(--hm-text-muted); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+
+    .exp-cat-img {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .exp-cat-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .exp-cat-card:hover .exp-cat-img img {
+      transform: scale(1.06);
+    }
+
+    .exp-cat-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .exp-cat-body {
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .exp-cat-body h3 {
+      font-family: var(--hm-font-serif);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .exp-cat-body p {
+      font-size: 0.9rem;
+      color: var(--hm-text-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
     .exp-cat-link {
-      font-size: 0.88rem; font-weight: 700; color: var(--hm-terracotta);
-      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--hm-terracotta);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
       transition: gap 0.2s;
     }
-    .exp-cat-link:hover { gap: 12px; }
+
+    .exp-cat-link:hover {
+      gap: 12px;
+    }
 
     /* ── Section Shared Styles ─────────────────────────────────── */
-    .section { padding: 96px 24px; }
-    .section-alt { background: var(--hm-bg-card); }
-    .section-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
-    .section-header h2 { font-family: var(--hm-font-serif); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
-    .section-header p { color: var(--hm-text-muted); font-size: 1.05rem; line-height: 1.7; }
+    .section {
+      padding: 96px 24px;
+    }
+
+    .section-alt {
+      background: var(--hm-bg-card);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 64px;
+    }
+
+    .section-header h2 {
+      font-family: var(--hm-font-serif);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      color: var(--hm-text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
 
     /* ── Map Preview Section ────────────────────────────────────── */
-    .map-section { padding: 96px 24px; background: var(--hm-bg-card); }
-    .map-inner {
-      max-width: 1340px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    .map-section {
+      padding: 96px 24px;
+      background: var(--hm-bg-card);
     }
-    .map-text .badge { margin-bottom: 16px; display: inline-flex; }
-    .map-text h2 { font-family: var(--hm-font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); margin-bottom: 18px; }
-    .map-text p { color: var(--hm-text-muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 30px; }
-    #homeMapPreview { height: 400px; border-radius: var(--hm-radius-lg); overflow: hidden; border: 1px solid var(--hm-border); box-shadow: var(--hm-shadow-lg); }
+
+    .map-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .map-text .badge {
+      margin-bottom: 16px;
+      display: inline-flex;
+    }
+
+    .map-text h2 {
+      font-family: var(--hm-font-serif);
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      margin-bottom: 18px;
+    }
+
+    .map-text p {
+      color: var(--hm-text-muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    #homeMapPreview {
+      height: 400px;
+      border-radius: var(--hm-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--hm-border);
+      box-shadow: var(--hm-shadow-lg);
+    }
 
     /* ── Why Choose Us ─────────────────────────────────────────── */
     .why-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
     }
+
     .why-card {
-      background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg);
-      padding: 36px 28px; transition: all 0.3s ease;
+      background: var(--hm-bg-card);
+      border: 1px solid var(--hm-border);
+      border-radius: var(--hm-radius-lg);
+      padding: 36px 28px;
+      transition: all 0.3s ease;
     }
-    .why-card:hover { border-color: var(--hm-terracotta); transform: translateY(-4px); box-shadow: var(--hm-shadow-md); }
+
+    .why-card:hover {
+      border-color: var(--hm-terracotta);
+      transform: translateY(-4px);
+      box-shadow: var(--hm-shadow-md);
+    }
+
     .why-icon {
-      width: 56px; height: 56px; background: var(--hm-terracotta-light); border-radius: var(--hm-radius-md);
-      display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
-      font-size: 1.4rem; color: var(--hm-terracotta);
+      width: 56px;
+      height: 56px;
+      background: var(--hm-terracotta-light);
+      border-radius: var(--hm-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      font-size: 1.4rem;
+      color: var(--hm-terracotta);
     }
-    .why-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .why-card p { color: var(--hm-text-muted); font-size: 0.93rem; line-height: 1.65; }
+
+    .why-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .why-card p {
+      color: var(--hm-text-muted);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    /* ── Blended Story & Welcome Showcase ────────────────────────────── */
+    .story-welcome-section {
+      padding: 108px 24px;
+      background: #FAF7F2;
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .story-welcome-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .story-img-wrapper {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -10px rgba(15, 23, 42, 0.16), 0 10px 30px -5px rgba(200, 90, 50, 0.12);
+    }
+
+    .story-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .story-img-wrapper:hover .story-img {
+      transform: scale(1.04);
+    }
+
+    .story-img-badge {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      color: #FFFFFF;
+      padding: 14px 26px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      box-shadow: 0 12px 30px rgba(200, 90, 50, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .story-content-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .story-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #C85A32;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .story-main-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: #0F172A;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+
+    .story-feeling-text {
+      font-style: italic;
+      color: #C85A32;
+      font-weight: 600;
+    }
+
+    .story-paragraph {
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .story-pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      margin-bottom: 36px;
+    }
+
+    .story-pillar-item {
+      background: #FFFFFF;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05);
+    }
+
+    .story-pillar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(200, 90, 50, 0.12);
+      color: #C85A32;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .story-pillar-item strong {
+      display: block;
+      font-size: 0.9rem;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+
+    .story-pillar-item span {
+      font-size: 0.78rem;
+      color: #64748B;
+    }
+
+    .btn-story-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      color: #FFFFFF !important;
+      padding: 15px 36px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(200, 90, 50, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-story-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 35px rgba(200, 90, 50, 0.5);
+    }
+
+    @media (max-width: 992px) {
+      .story-welcome-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .story-img {
+        height: 400px;
+      }
+
+      .story-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Inspiring Desert Quote Banner ────────────────────────── */
+    .desert-quote-banner {
+      position: relative;
+      padding: 140px 24px;
+      background: url('images/Merzouga/merzouga.jpg') center/cover no-repeat fixed;
+      text-align: center;
+      color: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .desert-quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.48) 0%, rgba(15, 23, 42, 0.78) 100%);
+    }
+
+    .desert-quote-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .desert-quote-icon {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      line-height: 1;
+      color: #C85A32;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .desert-quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.35;
+      color: #FFFFFF;
+      margin-bottom: 38px;
+      font-weight: 500;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-quote-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      color: #FFFFFF !important;
+      padding: 16px 42px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(200, 90, 50, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-quote-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(200, 90, 50, 0.6);
+      background: linear-gradient(135deg, #D46F4D 0%, #C85A32 100%);
+    }
 
     /* ── Testimonials ───────────────────────────────────────────── */
+    .testimonials-section-wrap {
+      background: #0F172A;
+      background-image: radial-gradient(circle at 50% 50%, rgba(200, 90, 50, 0.12) 0%, transparent 70%);
+      padding: 96px 24px;
+    }
+
     .reviews-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px; max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
+
     .review-card {
-      background: var(--hm-bg-card); border: 1px solid var(--hm-border); border-radius: var(--hm-radius-lg);
-      padding: 34px 28px; transition: box-shadow 0.3s;
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 34px 28px;
+      transition: all 0.35s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-    .review-card:hover { box-shadow: var(--hm-shadow-md); }
-    .review-stars { color: var(--hm-gold); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .review-text { font-size: 0.97rem; line-height: 1.75; color: var(--hm-text-body); font-style: italic; margin-bottom: 24px; }
-    .review-author { display: flex; align-items: center; gap: 14px; }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(200, 90, 50, 0.4);
+      box-shadow: 0 16px 40px rgba(200, 90, 50, 0.2);
+    }
+
+    .review-stars {
+      color: #D4A017;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #CBD5E1;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .review-avatar {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--hm-terracotta), var(--hm-gold));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #fff; font-size: 0.9rem; flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(200, 90, 50, 0.4);
     }
-    .review-author strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
-    .review-author span { font-size: 0.82rem; color: var(--hm-text-muted); }
+
+    .review-author strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+      color: #FFFFFF;
+    }
+
+    .review-author span {
+      font-size: 0.82rem;
+      color: #94A3B8;
+    }
 
     /* ── CTA Banner ─────────────────────────────────────────────── */
     .cta-banner {
-      background: linear-gradient(135deg, var(--hm-terracotta) 0%, #A0261A 100%);
-      padding: 96px 24px; text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0F172A 0%, #1A2638 50%, #C85A32 100%);
+      padding: 96px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+
     .cta-banner::before {
-      content: ''; position: absolute; inset: 0;
-      background: url('images/Marrakech/marrakech_a.jpg') center/cover no-repeat; opacity: 0.14;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/Marrakech/marrakech_a.jpg') center/cover no-repeat;
+      opacity: 0.12;
     }
-    .cta-banner-inner { position: relative; z-index: 1; }
-    .cta-banner h2 { font-family: var(--hm-font-serif); font-size: clamp(2rem, 4.5vw, 3.2rem); color: #fff; margin-bottom: 16px; }
-    .cta-banner p { font-size: 1.1rem; color: rgba(255,255,255,0.82); margin-bottom: 38px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+    .cta-banner-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-banner h2 {
+      font-family: var(--hm-font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 38px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
     .btn-cta-white {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #fff; color: var(--hm-terracotta) !important; padding: 15px 38px;
-      border-radius: 99px; font-weight: 700; font-size: 1rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2); transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--hm-terracotta) !important;
+      padding: 15px 38px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
       text-decoration: none;
     }
-    .btn-cta-white:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,0.3); }
+
+    .btn-cta-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+    }
 
     /* ── Footer ─────────────────────────────────────────────────── */
     .footer {
-      background: var(--hm-bg-footer); color: #94A3B8;
+      background: var(--hm-bg-footer);
+      color: #94A3B8;
       padding: 80px 24px 40px;
     }
+
     .footer-inner {
-      max-width: 1340px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 64px;
+      max-width: 1340px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
     }
-    .footer-brand img { height: 40px; margin-bottom: 18px; }
-    .footer-brand p { font-size: 0.9rem; line-height: 1.75; margin-bottom: 22px; max-width: 320px; }
-    .footer-socials { display: flex; gap: 12px; }
+
+    .footer-brand img {
+      height: 40px;
+      margin-bottom: 18px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 22px;
+      max-width: 320px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+
     .footer-socials a {
-      width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1); color: #94A3B8;
-      display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
-      text-decoration: none; transition: all 0.25s;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
     }
-    .footer-socials a:hover { background: var(--hm-terracotta); border-color: var(--hm-terracotta); color: #fff; }
-    .footer-col h4 { color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 20px; }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 11px; }
-    .footer-col ul li a { color: #94A3B8; font-size: 0.88rem; text-decoration: none; transition: color 0.25s; }
-    .footer-col ul li a:hover { color: var(--hm-gold); }
-    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 0.88rem; }
-    .footer-contact-item i { color: var(--hm-terracotta); margin-top: 3px; flex-shrink: 0; }
+
+    .footer-socials a:hover {
+      background: var(--hm-terracotta);
+      border-color: var(--hm-terracotta);
+      color: #fff;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 11px;
+    }
+
+    .footer-col ul li a {
+      color: #94A3B8;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--hm-gold);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+    }
+
+    .footer-contact-item i {
+      color: var(--hm-terracotta);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 30px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.84rem; max-width: 1340px; margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.84rem;
+      max-width: 1340px;
+      margin: 0 auto;
     }
-    .footer-bottom-links { display: flex; gap: 24px; }
-    .footer-bottom-links a { color: #94A3B8; text-decoration: none; transition: color 0.25s; }
-    .footer-bottom-links a:hover { color: var(--hm-gold); }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-bottom-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--hm-gold);
+    }
 
     /* ── Mobile Responsive ─────────────────────────────────────── */
     @media (max-width: 1024px) {
-      .map-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-    }
-    @media (max-width: 900px) {
-      .welcome-inner { grid-template-columns: 1fr; gap: 40px; }
-      .welcome-img { height: 340px; }
-    }
-    @media (max-width: 768px) {
-      .hn-nav { padding: 14px 20px; }
-      .hn-links {
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--hm-bg-nav); backdrop-filter: blur(20px);
-        flex-direction: column; padding: 20px; gap: 4px;
-        border-bottom: 1px solid var(--hm-border);
-        transform: translateY(-20px); opacity: 0; pointer-events: none; transition: all 0.3s ease;
+      .map-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
-      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-      .hn-links a { color: var(--hm-text-body) !important; width: 100%; padding: 12px 16px; border-radius: 8px; }
-      .hamburger { display: flex; flex-direction: column; justify-content: center; }
-      .hn-nav-book { display: none; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--hm-border); }
-      .stat-item:last-child { border-bottom: none; }
-      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .hero-search { flex-direction: column; border-radius: var(--hm-radius-lg); padding: 16px; }
-      .hero-search-btn { width: 100%; border-radius: 99px; margin: 0; }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .welcome-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .welcome-img {
+        height: 340px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hn-nav {
+        padding: 14px 20px;
+      }
+
+      .hn-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--hm-bg-nav);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 4px;
+        border-bottom: 1px solid var(--hm-border);
+        transform: translateY(-20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .hn-links.hn-links-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hn-links a {
+        color: var(--hm-text-body) !important;
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+      }
+
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hn-nav-book {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--hm-border);
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .hero-search {
+        flex-direction: column;
+        border-radius: var(--hm-radius-lg);
+        padding: 16px;
+      }
+
+      .hero-search-btn {
+        width: 100%;
+        border-radius: 99px;
+        margin: 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navigation -->
@@ -406,351 +1581,421 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-bg">
-      <img src="images/hero.jpg" alt="Morocco Desert Kasbah" fetchpriority="high">
+      <img src="images/hero.jpg" alt="Morocco Desert Kasbah — Ait Benhaddou" fetchpriority="high">
       <div class="hero-overlay"></div>
     </div>
 
     <div class="hero-content">
-      <div class="hero-eyebrow">✦ Morocco's #1 Boutique Private Tour Agency</div>
+      <div class="hero-eyebrow">✦ MOROCCO'S BOUTIQUE PRIVATE EXPEDITIONS ✦</div>
+
       <h1 class="hero-title">
-        Morocco Is Not Just<br>A Destination.
-        <em> It's A Feeling.</em>
+        <span class="hero-title-discover">Discover</span>
+        <span class="hero-title-hidden">Hidden Morocco</span>
       </h1>
-      <p class="hero-subtitle" data-i18n="hero_sub">
-        Discover hidden kasbahs, silent desert mornings under starry skies, and ancient medinas crafted by local storytellers.
+
+      <span class="hero-gold-line"></span>
+
+      <p class="hero-subtitle">
+        Uncover secret riads, vast Sahara dunes, and authentic cultural journeys tailored exclusively for you.
       </p>
 
-      <!-- Live Search Bar -->
+      <!-- Ultra-Luxury Search Bar -->
       <div class="hero-search">
-        <span class="hero-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input
-          type="text"
-          id="heroSearchInput"
-          placeholder="Search destinations... e.g. Sahara, Fes, Chefchaouen"
-          data-i18n-placeholder="search_placeholder"
-          autocomplete="off"
-        >
-        <a href="destinations.html" class="btn-primary hero-search-btn" data-i18n="search_btn">
-          <i class="fa-solid fa-compass"></i> Explore
+        <span class="hero-search-icon"><i class="fa-solid fa-compass"></i></span>
+        <input type="text" id="heroSearchInput" placeholder="Where would you like to go? e.g. Sahara, Fès..."
+          autocomplete="off">
+        <a href="destinations.html" class="hero-search-btn">
+          <span>Search</span> &nbsp;<i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
     </div>
 
-    <div class="scroll-indicator" onclick="document.getElementById('welcomeSection').scrollIntoView({behavior:'smooth'})">
-      <span>Discover</span>
+    <div class="scroll-indicator" onclick="document.getElementById('featuresBar').scrollIntoView({behavior:'smooth'})">
+      <span>Scroll</span>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
   </section>
 
-  <!-- Welcome Introduction Section -->
-  <section class="section section-alt" id="welcomeSection" style="padding: 96px 24px;">
-    <div class="welcome-inner">
-      <div class="welcome-img-box">
-        <img src="images/Marrakech/Marrakech.jpg" alt="Moroccan Riad & Architecture" class="welcome-img">
-        <div class="welcome-badge">
-          <i class="fa-solid fa-gem"></i> 100% Private Expeditions
+  <!-- Features Bar (dark strip) -->
+  <div class="features-bar" id="featuresBar">
+    <div class="features-bar-inner">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h4>Handpicked Destinations</h4>
+        <p>Carefully selected locations to show you the real Morocco.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+        <h4>Authentic Experiences</h4>
+        <p>Live unique moments with locals and traditions.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4>Private &amp; Tailor-Made</h4>
+        <p>100% personalized tours designed just for you.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+        <h4>24/7 Support</h4>
+        <p>We're here for you before, during and after your trip.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="hero-stats-strip">
+    <div class="hero-stats-inner">
+      <div class="hero-stat-item">
+        <div class="hero-stat-icon"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div class="hero-stat-val">2500+</div>
+          <small>Happy Travelers</small>
         </div>
       </div>
-      <div class="welcome-text">
-        <span class="badge badge-terracotta" style="margin-bottom: 16px;">✦ Welcome to Hidden Morocco</span>
-        <h2>Crafting Unforgettable Private Journeys</h2>
-        <p>We are a boutique travel agency born in the heart of Marrakech. We believe travel should be personal, authentic, and inspiring — far removed from mass group tours and rigid schedules.</p>
-        <p>Whether you dream of watching the sunset over Sahara dunes, wandering through centuries-old medinas with local storytellers, or breathing in coastal ocean breezes, we design every detail around your rhythm.</p>
-        <div class="welcome-features">
-          <div class="wf-item">
-            <i class="fa-solid fa-user-shield"></i>
-            <div>
-              <strong>100% Private Tours</strong>
-              <span>Just you and your loved ones. No shared buses.</span>
-            </div>
-          </div>
-          <div class="wf-item">
-            <i class="fa-solid fa-compass"></i>
-            <div>
-              <strong>Local Berber Guides</strong>
-              <span>Native experts unlocking secret spots off the map.</span>
-            </div>
-          </div>
-          <div class="wf-item">
-            <i class="fa-solid fa-sliders"></i>
-            <div>
-              <strong>Fully Tailor-Made</strong>
-              <span>Flexible pacing, custom accommodation &amp; activities.</span>
-            </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-icon"><i class="fa-regular fa-star"></i></div>
+        <div>
+          <div class="hero-stat-val">4.9/5</div>
+          <small>Average Rating</small>
+        </div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <div class="hero-stat-val">40+</div>
+          <small>Destinations</small>
+        </div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-icon"><i class="fa-regular fa-calendar"></i></div>
+        <div>
+          <div class="hero-stat-val">10+</div>
+          <small>Years of Experience</small>
+        </div>
+      </div>
+    </div>
+    <!-- Blended Luxury Welcome & Our Story Showcase -->
+    <section class="story-welcome-section" id="welcomeSection">
+      <div class="story-welcome-inner">
+        <!-- Left Column: Riad Visual & Badge -->
+        <div class="story-img-wrapper">
+          <img src="images/Marrakech/Marrakech.jpg" alt="Moroccan Riad Architecture & Ambiance" class="story-img">
+          <div class="story-img-badge">
+            <i class="fa-solid fa-gem"></i>
+            <span>100% Private Expeditions</span>
           </div>
         </div>
-        <a href="about.html" class="btn-primary" style="margin-top: 10px;">
-          Discover Our Story &nbsp;<i class="fa-solid fa-arrow-right"></i>
+
+        <!-- Right Column: Story & Philosophy -->
+        <div class="story-content-box">
+          <span class="story-eyebrow">OUR STORY &amp; PHILOSOPHY</span>
+          <h2 class="story-main-title">
+            Morocco is not just a destination.<br>
+            <span class="story-feeling-text">It's a feeling.</span>
+          </h2>
+          <p class="story-paragraph">
+            We are a team of passionate Moroccan guides and storytellers dedicated to showing you the kingdom beyond the
+            tourist trail — the hidden kasbahs, the silent desert mornings, and the ancient medinas that still breathe
+            history.
+          </p>
+
+          <div class="story-pillars-grid">
+            <div class="story-pillar-item">
+              <div class="story-pillar-icon"><i class="fa-solid fa-user-shield"></i></div>
+              <div>
+                <strong>100% Private Tours</strong>
+                <span>Exclusively for you &amp; your loved ones.</span>
+              </div>
+            </div>
+            <div class="story-pillar-item">
+              <div class="story-pillar-icon"><i class="fa-solid fa-compass"></i></div>
+              <div>
+                <strong>Local Berber Experts</strong>
+                <span>Native storytellers unlocking secret paths.</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="about.html" class="btn-story-cta">
+            Discover Our Story &nbsp;<i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Stats section removed — now integrated in hero-stats-strip above -->
+
+    <!-- Featured Experience Categories Overview -->
+    <section class="section" style="padding: 96px 24px; background: var(--hm-bg-main);">
+      <div class="section-header">
+        <span class="badge badge-gold" style="margin-bottom: 14px;">✦ Experience Categories</span>
+        <h2>Ways to Experience Morocco</h2>
+        <p>From silent desert dunes to vibrant imperial medinas, discover the diverse experiences waiting for you.</p>
+      </div>
+
+      <div class="exp-cat-grid">
+        <!-- Category 1: Sahara Desert -->
+        <div class="exp-cat-card">
+          <div class="exp-cat-img">
+            <img src="images/Merzouga/merzouga_1.jpg" alt="Sahara Desert Expedition">
+            <span class="badge badge-gold exp-cat-badge">Desert &amp; Dunes</span>
+          </div>
+          <div class="exp-cat-body">
+            <h3>Sahara Desert Expeditions</h3>
+            <p>Sunset camel treks, stargazing at luxury Berber camps, sandboarding, and campfire drumming in Merzouga
+              &amp; Zagora.</p>
+            <a href="destinations.html#merzouga" class="exp-cat-link">Explore Desert Tours <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Category 2: Imperial Medinas -->
+        <div class="exp-cat-card">
+          <div class="exp-cat-img">
+            <img src="images/Marrakech/marrakech_11.jpg" alt="Imperial Medinas &amp; Culture">
+            <span class="badge badge-terracotta exp-cat-badge">Cultural Heritage</span>
+          </div>
+          <div class="exp-cat-body">
+            <h3>Imperial Medinas &amp; Palaces</h3>
+            <p>Labyrinthine souks, historic palaces, ancient tanneries, and secret riads across Marrakech, Fès, and
+              Chefchaouen.</p>
+            <a href="destinations.html#marrakech" class="exp-cat-link">Explore Medina Tours <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Category 3: Atlas Mountains -->
+        <div class="exp-cat-card">
+          <div class="exp-cat-img">
+            <img src="images/Marrakech/imlil_1.jpg" alt="Atlas Mountains &amp; Treks">
+            <span class="badge badge-gold exp-cat-badge">Mountain Treks</span>
+          </div>
+          <div class="exp-cat-body">
+            <h3>Atlas Mountains &amp; Valleys</h3>
+            <p>Guided village hikes, Toubkal panoramas, lush green valleys, and authentic Berber tea ceremonies in Imlil
+              &amp; Ourika.</p>
+            <a href="destinations.html#marrakech" class="exp-cat-link">Explore Mountain Treks <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Category 4: Coastal Escapes -->
+        <div class="exp-cat-card">
+          <div class="exp-cat-img">
+            <img src="images/Essaouira/essaouira_1.jpg" alt="Atlantic Coastal Escapes">
+            <span class="badge badge-terracotta exp-cat-badge">Coastal Escape</span>
+          </div>
+          <div class="exp-cat-body">
+            <h3>Atlantic Coastal Escapes</h3>
+            <p>Historic sea ramparts, fresh grilled harbour seafood, argan forest visits, and ocean breezes in
+              Essaouira.
+            </p>
+            <a href="destinations.html#essaouira" class="exp-cat-link">Explore Coastal Escapes <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 56px;">
+        <a href="destinations.html" class="btn-primary" style="padding: 14px 36px; font-size: 1rem;">
+          View Full Destinations Catalog &nbsp;<i class="fa-solid fa-compass"></i>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Stats Section -->
-  <section class="stats-section" id="statsSection">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <i class="fa-solid fa-route"></i>
-        <div class="stat-value"><span class="stat-num" data-target="50">0</span>+</div>
-        <p data-i18n="stats_routes">Custom Routes</p>
-      </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-users"></i>
-        <div class="stat-value"><span class="stat-num" data-target="2500">0</span>+</div>
-        <p data-i18n="stats_travelers">Happy Travelers</p>
-      </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-map-location-dot"></i>
-        <div class="stat-value"><span class="stat-num" data-target="9">0</span></div>
-        <p data-i18n="stats_destinations">Iconic Destinations</p>
-      </div>
-      <div class="stat-item">
-        <i class="fa-solid fa-award"></i>
-        <div class="stat-value"><span class="stat-num" data-target="99">0</span>%</div>
-        <p data-i18n="stats_satisfaction">Satisfaction Rate</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Experience Categories Overview -->
-  <section class="section" style="padding: 96px 24px; background: var(--hm-bg-main);">
-    <div class="section-header">
-      <span class="badge badge-gold" style="margin-bottom: 14px;">✦ Experience Categories</span>
-      <h2>Ways to Experience Morocco</h2>
-      <p>From silent desert dunes to vibrant imperial medinas, discover the diverse experiences waiting for you.</p>
-    </div>
-
-    <div class="exp-cat-grid">
-      <!-- Category 1: Sahara Desert -->
-      <div class="exp-cat-card">
-        <div class="exp-cat-img">
-          <img src="images/Merzouga/merzouga_1.jpg" alt="Sahara Desert Expedition">
-          <span class="badge badge-gold exp-cat-badge">Desert &amp; Dunes</span>
+    <!-- Interactive Map Preview -->
+    <section class="map-section">
+      <div class="map-inner">
+        <div class="map-text">
+          <span class="badge badge-gold">🧭 Interactive Exploration</span>
+          <h2>Explore Morocco on an Interactive Map</h2>
+          <p>Plan your route effortlessly. Locate imperial cities, Sahara dunes, and coastal hideaways on our custom
+            spatial map — click any pin for details.</p>
+          <a href="map.html" class="btn-primary">
+            Open Fullscreen Map &nbsp;<i class="fa-solid fa-map"></i>
+          </a>
         </div>
-        <div class="exp-cat-body">
-          <h3>Sahara Desert Expeditions</h3>
-          <p>Sunset camel treks, stargazing at luxury Berber camps, sandboarding, and campfire drumming in Merzouga &amp; Zagora.</p>
-          <a href="destinations.html#merzouga" class="exp-cat-link">Explore Desert Tours <i class="fa-solid fa-arrow-right"></i></a>
+        <div id="homeMapPreview"></div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section" style="background: var(--hm-bg-main);">
+      <div class="section-header">
+        <span class="badge badge-terracotta" style="margin-bottom: 14px;" data-i18n="why_title">✦ Why Hidden
+          Morocco?</span>
+        <h2>Every Detail. Perfectly Crafted.</h2>
+        <p data-i18n="why_sub">Handcrafted boutique private journeys tailored to your rhythm.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
+          <h4>Private &amp; Exclusive</h4>
+          <p>Every journey is tailor-made for you alone. No shared buses, no crowds — just you and the real Morocco.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fa-solid fa-compass"></i></div>
+          <h4>Local Expert Guides</h4>
+          <p>Born and raised in Morocco, our guides unlock hidden corners that no tourist map will ever reveal.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fa-solid fa-sliders"></i></div>
+          <h4>Fully Customizable</h4>
+          <p>Want to linger at a viewpoint or skip a crowded site? Your itinerary flexes entirely to your wishes.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h4>Safe &amp; Reliable</h4>
+          <p>Modern vehicles, licensed drivers, and 24/7 real-time support throughout your entire journey.</p>
         </div>
       </div>
+    </section>
 
-      <!-- Category 2: Imperial Medinas -->
-      <div class="exp-cat-card">
-        <div class="exp-cat-img">
-          <img src="images/Marrakech/marrakech_11.jpg" alt="Imperial Medinas &amp; Culture">
-          <span class="badge badge-terracotta exp-cat-badge">Cultural Heritage</span>
+    <!-- Inspiring Desert Quote Banner -->
+    <section class="desert-quote-banner">
+      <div class="desert-quote-overlay"></div>
+      <div class="desert-quote-inner">
+        <div class="desert-quote-icon">“</div>
+        <blockquote class="desert-quote-text">
+          "Not all those who wander are lost — some are discovering Morocco."
+        </blockquote>
+        <a href="destinations.html" class="btn-quote-cta">Start Your Journey</a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section section-alt">
+      <div class="section-header">
+        <span class="badge badge-gold" style="margin-bottom: 14px;">★ Real Stories</span>
+        <h2>What Our Travelers Say</h2>
+        <p>Authentic reviews from people who explored Morocco with us.</p>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The Sahara night under the stars was something out of a dream. No shared group,
+            perfect
+            service, and a guide who felt like a lifelong friend. Worth every penny."</p>
+          <div class="review-author">
+            <div class="review-avatar">JL</div>
+            <div>
+              <strong>James &amp; Laura</strong>
+              <span>United Kingdom 🇬🇧 &nbsp;·&nbsp; Merzouga Expedition</span>
+            </div>
+          </div>
         </div>
-        <div class="exp-cat-body">
-          <h3>Imperial Medinas &amp; Palaces</h3>
-          <p>Labyrinthine souks, historic palaces, ancient tanneries, and secret riads across Marrakech, Fès, and Chefchaouen.</p>
-          <a href="destinations.html#marrakech" class="exp-cat-link">Explore Medina Tours <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Chefchaouen was magical. The blue alleyways, local food, and the mountain hike were
+            perfect. Our guide knew every secret viewpoint. We're already planning our return trip."</p>
+          <div class="review-author">
+            <div class="review-avatar">SM</div>
+            <div>
+              <strong>Sophie M.</strong>
+              <span>France 🇫🇷 &nbsp;·&nbsp; Chefchaouen Blue Walk</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The Marrakech experience was phenomenal — from the spice souks to the Bahia Palace
+            tour.
+            Everything was handled seamlessly. Hidden Morocco truly delivers luxury without pretension."</p>
+          <div class="review-author">
+            <div class="review-avatar">AR</div>
+            <div>
+              <strong>Ahmed &amp; Rida</strong>
+              <span>Canada 🇨🇦 &nbsp;·&nbsp; Marrakech Deep Dive</span>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- Category 3: Atlas Mountains -->
-      <div class="exp-cat-card">
-        <div class="exp-cat-img">
-          <img src="images/Marrakech/imlil_1.jpg" alt="Atlas Mountains &amp; Treks">
-          <span class="badge badge-gold exp-cat-badge">Mountain Treks</span>
-        </div>
-        <div class="exp-cat-body">
-          <h3>Atlas Mountains &amp; Valleys</h3>
-          <p>Guided village hikes, Toubkal panoramas, lush green valleys, and authentic Berber tea ceremonies in Imlil &amp; Ourika.</p>
-          <a href="destinations.html#marrakech" class="exp-cat-link">Explore Mountain Treks <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+      <div style="text-align:center; margin-top: 48px;">
+        <a href="testimonials.html" class="btn-ghost">Read All Reviews <i class="fa-solid fa-arrow-right"></i></a>
       </div>
+    </section>
 
-      <!-- Category 4: Coastal Escapes -->
-      <div class="exp-cat-card">
-        <div class="exp-cat-img">
-          <img src="images/Essaouira/essaouira_1.jpg" alt="Atlantic Coastal Escapes">
-          <span class="badge badge-terracotta exp-cat-badge">Coastal Escape</span>
-        </div>
-        <div class="exp-cat-body">
-          <h3>Atlantic Coastal Escapes</h3>
-          <p>Historic sea ramparts, fresh grilled harbour seafood, argan forest visits, and ocean breezes in Essaouira.</p>
-          <a href="destinations.html#essaouira" class="exp-cat-link">Explore Coastal Escapes <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 56px;">
-      <a href="destinations.html" class="btn-primary" style="padding: 14px 36px; font-size: 1rem;">
-        View Full Destinations Catalog &nbsp;<i class="fa-solid fa-compass"></i>
-      </a>
-    </div>
-  </section>
-
-  <!-- Interactive Map Preview -->
-  <section class="map-section">
-    <div class="map-inner">
-      <div class="map-text">
-        <span class="badge badge-gold">🧭 Interactive Exploration</span>
-        <h2>Explore Morocco on an Interactive Map</h2>
-        <p>Plan your route effortlessly. Locate imperial cities, Sahara dunes, and coastal hideaways on our custom spatial map — click any pin for details.</p>
-        <a href="map.html" class="btn-primary">
-          Open Fullscreen Map &nbsp;<i class="fa-solid fa-map"></i>
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+      <div class="cta-banner-inner">
+        <h2>Ready to Discover Hidden Morocco?</h2>
+        <p>Let us craft your perfect Moroccan adventure — fully private, fully tailored to you.</p>
+        <a href="booking.html" class="btn-cta-white">
+          <i class="fa-solid fa-paper-plane"></i> Plan My Journey
         </a>
       </div>
-      <div id="homeMapPreview"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Why Choose Us -->
-  <section class="section" style="background: var(--hm-bg-main);">
-    <div class="section-header">
-      <span class="badge badge-terracotta" style="margin-bottom: 14px;" data-i18n="why_title">✦ Why Hidden Morocco?</span>
-      <h2>Every Detail. Perfectly Crafted.</h2>
-      <p data-i18n="why_sub">Handcrafted boutique private journeys tailored to your rhythm.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
-        <h4>Private &amp; Exclusive</h4>
-        <p>Every journey is tailor-made for you alone. No shared buses, no crowds — just you and the real Morocco.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-compass"></i></div>
-        <h4>Local Expert Guides</h4>
-        <p>Born and raised in Morocco, our guides unlock hidden corners that no tourist map will ever reveal.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-sliders"></i></div>
-        <h4>Fully Customizable</h4>
-        <p>Want to linger at a viewpoint or skip a crowded site? Your itinerary flexes entirely to your wishes.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h4>Safe &amp; Reliable</h4>
-        <p>Modern vehicles, licensed drivers, and 24/7 real-time support throughout your entire journey.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+          <p>Boutique travel agency crafting unforgettable private journeys across Morocco's imperial cities, Sahara
+            dunes, and Atlas mountains.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
 
-  <!-- Testimonials -->
-  <section class="section section-alt">
-    <div class="section-header">
-      <span class="badge badge-gold" style="margin-bottom: 14px;">★ Real Stories</span>
-      <h2>What Our Travelers Say</h2>
-      <p>Authentic reviews from people who explored Morocco with us.</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"The Sahara night under the stars was something out of a dream. No shared group, perfect service, and a guide who felt like a lifelong friend. Worth every penny."</p>
-        <div class="review-author">
-          <div class="review-avatar">JL</div>
-          <div>
-            <strong>James &amp; Laura</strong>
-            <span>United Kingdom 🇬🇧 &nbsp;·&nbsp; Merzouga Expedition</span>
+        <div class="footer-col">
+          <h4>Destinations</h4>
+          <ul>
+            <li><a href="destinations.html#marrakech">Marrakech</a></li>
+            <li><a href="destinations.html#merzouga">Merzouga Sahara</a></li>
+            <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+            <li><a href="destinations.html#essaouira">Essaouira</a></li>
+            <li><a href="destinations.html#fes">Fes El Bali</a></li>
+            <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="map.html">Interactive Map</a></li>
+            <li><a href="testimonials.html">Reviews</a></li>
+            <li><a href="booking.html">Book Expedition</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="favorites.html">My Wishlist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Marrakech HQ</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Rue Riad Zitoun el Kedim,<br>Medina, Marrakech</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>contact@hiddenmorocco.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <span>+212 77 166 3435</span>
           </div>
         </div>
       </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Chefchaouen was magical. The blue alleyways, local food, and the mountain hike were perfect. Our guide knew every secret viewpoint. We're already planning our return trip."</p>
-        <div class="review-author">
-          <div class="review-avatar">SM</div>
-          <div>
-            <strong>Sophie M.</strong>
-            <span>France 🇫🇷 &nbsp;·&nbsp; Chefchaouen Blue Walk</span>
-          </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Hidden Morocco. All Rights Reserved. Crafted with ❤️ in Marrakech.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
         </div>
       </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"The Marrakech experience was phenomenal — from the spice souks to the Bahia Palace tour. Everything was handled seamlessly. Hidden Morocco truly delivers luxury without pretension."</p>
-        <div class="review-author">
-          <div class="review-avatar">AR</div>
-          <div>
-            <strong>Ahmed &amp; Rida</strong>
-            <span>Canada 🇨🇦 &nbsp;·&nbsp; Marrakech Deep Dive</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top: 48px;">
-      <a href="testimonials.html" class="btn-ghost">Read All Reviews <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </section>
+    </footer>
 
-  <!-- CTA Banner -->
-  <section class="cta-banner">
-    <div class="cta-banner-inner">
-      <h2>Ready to Discover Hidden Morocco?</h2>
-      <p>Let us craft your perfect Moroccan adventure — fully private, fully tailored to you.</p>
-      <a href="booking.html" class="btn-cta-white">
-        <i class="fa-solid fa-paper-plane"></i> Plan My Journey
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
-        <p>Boutique travel agency crafting unforgettable private journeys across Morocco's imperial cities, Sahara dunes, and Atlas mountains.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>Destinations</h4>
-        <ul>
-          <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga Sahara</a></li>
-          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
-          <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#fes">Fes El Bali</a></li>
-          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="map.html">Interactive Map</a></li>
-          <li><a href="testimonials.html">Reviews</a></li>
-          <li><a href="booking.html">Book Expedition</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="favorites.html">My Wishlist</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Marrakech HQ</h4>
-        <div class="footer-contact-item">
-          <i class="fa-solid fa-location-dot"></i>
-          <span>Rue Riad Zitoun el Kedim,<br>Medina, Marrakech</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fa-solid fa-envelope"></i>
-          <span>contact@hiddenmorocco.com</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <span>+212 77 166 3435</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 Hidden Morocco. All Rights Reserved. Crafted with ❤️ in Marrakech.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Cookie Policy</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

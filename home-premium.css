@@ -46,7 +46,7 @@
   font-weight: 700;
   letter-spacing: 0.3px;
 }
-.hn-logo img { height: 38px; width: auto; }
+.hn-logo img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; }
 
 .hn-links {
   list-style: none;

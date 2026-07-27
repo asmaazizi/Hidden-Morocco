@@ -1,516 +1,204 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Book Your Expedition — Hidden Morocco</title>
-  <meta name="description" content="Book your private Moroccan expedition with Hidden Morocco. Custom itineraries, instant WhatsApp confirmation.">
-  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
+  <title>Hidden Morocco</title>
   <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    /* ── Shared Nav ── */
-    .hn-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 36px; background: var(--hm-bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hm-border); }
-    .hn-nav-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .hn-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .hn-logo img { height: 36px; }
-    .hn-logo-text { font-family: var(--hm-font-serif); font-size: 1.2rem; font-weight: 700; color: var(--hm-text-heading); }
-    .hn-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .hn-links a { padding: 7px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: var(--hm-text-body); text-decoration: none; transition: all 0.25s; }
-    .hn-links a:hover { background: var(--hm-bg-card-hover); color: var(--hm-terracotta); }
-    .hn-nav-actions { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher { background: var(--hm-bg-card-hover); border: 1px solid var(--hm-border); color: var(--hm-text-body); padding: 7px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; outline: none; }
-    .nav-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; }
-    .nav-icon-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
-    .fav-count-badge { position: absolute; top: -4px; right: -4px; background: var(--hm-terracotta); color: #fff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; justify-content: center; gap: 5px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--hm-text-heading); border-radius: 2px; }
-    @media (max-width: 768px) {
-      .hn-nav { padding: 12px 18px; }
-      .hn-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--hm-bg-nav); flex-direction: column; padding: 16px; gap: 4px; border-bottom: 1px solid var(--hm-border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: all 0.3s; }
-      .hn-links.hn-links-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-      .hn-links a { width: 100%; padding: 12px 16px; border-radius: 8px; }
-      .hamburger { display: flex; }
-    }
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="exp.css">
+  <link rel="icon" type="image/png" href="hidden-removebg-preview.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    /* ── Page Layout ── */
-    body { background: var(--hm-bg-main); }
-
-    /* ── Hero Strip ── */
-    .booking-hero {
-      padding: 140px 24px 80px; text-align: center;
-      background: linear-gradient(160deg, var(--hm-terracotta) 0%, #7D1D12 100%);
-      position: relative; overflow: hidden;
-    }
-    .booking-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: url('images/Marrakech/marrakech_a.jpg') center/cover no-repeat; opacity: 0.12;
-    }
-    .booking-hero-inner { position: relative; z-index: 1; }
-    .booking-hero h1 { font-family: var(--hm-font-serif); font-size: clamp(2.4rem, 5vw, 3.6rem); color: #fff; margin-bottom: 16px; }
-    .booking-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 580px; margin: 0 auto; line-height: 1.75; }
-
-    /* ── Steps Indicator ── */
-    .steps-bar { max-width: 640px; margin: 0 auto; padding: 48px 24px 0; }
-    .steps { display: flex; align-items: center; gap: 0; }
-    .step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
-    .step-dot {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--hm-bg-card);
-      border: 2px solid var(--hm-border); display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; font-weight: 800; color: var(--hm-text-muted); z-index: 1; transition: all 0.3s;
-    }
-    .step.active .step-dot { background: var(--hm-terracotta); border-color: var(--hm-terracotta); color: #fff; box-shadow: 0 4px 16px rgba(192,57,43,0.3); }
-    .step.done .step-dot { background: #10B981; border-color: #10B981; color: #fff; }
-    .step-label { font-size: 0.75rem; font-weight: 700; color: var(--hm-text-muted); margin-top: 8px; text-align: center; }
-    .step.active .step-label { color: var(--hm-terracotta); }
-    .step-line { flex: 1; height: 2px; background: var(--hm-border); margin-bottom: 22px; }
-    .step-line.done { background: #10B981; }
-
-    /* ── Booking Layout ── */
-    .booking-section { padding: 0 24px 96px; }
-    .booking-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
-
-    /* ── Form Card ── */
-    .booking-card {
-      background: var(--hm-bg-card); border: 1px solid var(--hm-border);
-      border-radius: var(--hm-radius-lg); padding: 48px 40px;
-    }
-    .booking-card h2 { font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; }
-    .booking-card > p { color: var(--hm-text-muted); margin-bottom: 36px; font-size: 0.95rem; }
-    .form-section-title { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--hm-terracotta); margin: 32px 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--hm-border); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--hm-text-heading); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 13px 16px; border: 1.5px solid var(--hm-border);
-      border-radius: var(--hm-radius-md); background: var(--hm-bg-main);
-      color: var(--hm-text-heading); font-family: var(--hm-font-sans); font-size: 0.95rem;
-      transition: border-color 0.25s, box-shadow 0.25s; outline: none;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--hm-terracotta); box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .counter-row { display: flex; align-items: center; gap: 16px; }
-    .counter-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--hm-border); background: var(--hm-bg-card-hover); color: var(--hm-text-heading); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-    .counter-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); }
-    .counter-val { font-size: 1.2rem; font-weight: 800; min-width: 30px; text-align: center; }
-
-    /* Submission Buttons */
-    .booking-actions { display: flex; flex-direction: column; gap: 14px; margin-top: 36px; }
-    .wa-submit-btn {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      background: #25D366; color: #fff !important; padding: 16px 28px;
-      border-radius: 99px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
-      box-shadow: 0 10px 28px rgba(37,211,102,0.35); transition: all 0.3s; width: 100%;
-    }
-    .wa-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(37,211,102,0.5); }
-    .email-submit-btn {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      background: transparent; color: var(--hm-text-heading); padding: 16px 28px;
-      border-radius: 99px; font-weight: 700; font-size: 1rem;
-      border: 1.5px solid var(--hm-border); cursor: pointer; width: 100%; transition: all 0.3s;
-    }
-    .email-submit-btn:hover { border-color: var(--hm-terracotta); color: var(--hm-terracotta); background: var(--hm-terracotta-light); }
-
-    /* ── Sidebar ── */
-    .booking-sidebar { display: flex; flex-direction: column; gap: 20px; }
-    .sidebar-card {
-      background: var(--hm-bg-card); border: 1px solid var(--hm-border);
-      border-radius: var(--hm-radius-lg); padding: 28px 24px;
-    }
-    .sidebar-card h4 { font-size: 1.05rem; margin-bottom: 16px; display: flex; align-items: center; gap: 9px; }
-    .sidebar-card h4 i { color: var(--hm-terracotta); }
-    .trust-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; }
-    .trust-item i { color: #10B981; margin-top: 3px; flex-shrink: 0; }
-    .trust-item:last-child { margin-bottom: 0; }
-    .wa-chat-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: #25D366; color: #fff !important; padding: 12px 18px; border-radius: 99px;
-      font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; margin-top: 12px;
-    }
-    .wa-chat-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.4); }
-    .price-highlight { text-align: center; padding: 16px; background: var(--hm-terracotta-light); border-radius: var(--hm-radius-md); margin-top: 14px; }
-    .price-highlight .from { font-size: 0.78rem; color: var(--hm-text-muted); font-weight: 700; }
-    .price-highlight .amount { font-family: var(--hm-font-serif); font-size: 2rem; font-weight: 800; color: var(--hm-terracotta); }
-    .price-highlight .note { font-size: 0.78rem; color: var(--hm-text-muted); }
-    .dest-select-preview {
-      height: 140px; border-radius: var(--hm-radius-md); overflow: hidden; margin-bottom: 14px;
-      background: var(--hm-bg-card-hover); position: relative;
-    }
-    .dest-select-preview img { width: 100%; height: 100%; object-fit: cover; }
-    .dest-select-preview-label {
-      position: absolute; bottom: 10px; left: 12px; right: 12px;
-      font-weight: 700; font-size: 0.9rem; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-
-    /* ── Thank You State ── */
-    .booking-success {
-      display: none; text-align: center; padding: 80px 40px;
-    }
-    .booking-success i { font-size: 4rem; color: #10B981; margin-bottom: 24px; }
-    .booking-success h2 { font-family: var(--hm-font-serif); font-size: 2.2rem; margin-bottom: 14px; }
-    .booking-success p { color: var(--hm-text-muted); font-size: 1rem; max-width: 460px; margin: 0 auto; line-height: 1.75; }
-
-    /* Footer */
-    .footer { background: var(--hm-bg-footer); color: #94A3B8; padding: 40px 24px; text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; }
-    .footer-links a { color: #94A3B8; text-decoration: none; font-size: 0.85rem; }
-    .footer-links a:hover { color: var(--hm-gold); }
-
-    @media (max-width: 900px) { .booking-inner { grid-template-columns: 1fr; } .booking-sidebar { order: -1; } }
-    @media (max-width: 640px) { .booking-card { padding: 28px 20px; } .form-row { grid-template-columns: 1fr; } }
-  </style>
 </head>
+
 <body>
 
-  <!-- Navigation -->
-  <nav class="hn-nav" id="siteNav">
-    <div class="hn-nav-inner">
-      <a href="index.html" class="hn-logo">
-        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
-        <span class="hn-logo-text">Hidden Morocco</span>
+  <!-- Sticky Navbar -->
+  <nav class="site-nav scrolled" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco Logo">
+        <span>Hidden Morocco</span>
       </a>
-      <ul class="hn-links" id="navLinks">
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="map.html">Interactive Map</a></li>
-        <li><a href="about.html">About Us</a></li>
+        <li><a href="map.html">Map</a></li>
         <li><a href="testimonials.html">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="nav-cta">Book Now</a></li>
       </ul>
-      <div class="hn-nav-actions">
-        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
-        <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-        <a href="favorites.html" class="nav-icon-btn"><i class="fa-regular fa-heart"></i><span class="fav-count-badge">0</span></a>
-        <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
-      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="booking-hero">
-    <div class="booking-hero-inner">
-      <span class="badge badge-gold" style="margin-bottom: 20px; background: rgba(212,175,55,0.2); border-color: rgba(212,175,55,0.4); color: #F5D87A;">✈️ Private Expedition Booking</span>
-      <h1>Plan Your Dream Journey</h1>
-      <p>Fill in your details below. We'll send you a personalized proposal within 6 hours.</p>
-    </div>
-  </header>
-
-  <!-- Progress Steps -->
-  <div class="steps-bar">
-    <div class="steps">
-      <div class="step active" id="step1">
-        <div class="step-dot">1</div>
-        <span class="step-label">Your Details</span>
-      </div>
-      <div class="step-line"></div>
-      <div class="step" id="step2">
-        <div class="step-dot">2</div>
-        <span class="step-label">Trip Info</span>
-      </div>
-      <div class="step-line"></div>
-      <div class="step" id="step3">
-        <div class="step-dot">3</div>
-        <span class="step-label">Confirm</span>
-      </div>
+  <!-- Clean Luxury Header Section -->
+  <div style="padding: 130px 24px 20px; text-align: center; background: #FAF7F2;">
+    <div style="max-width: 760px; margin: 0 auto;">
+      <span style="display: inline-block; font-size: 0.78rem; font-weight: 700; color: #C85A32; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;">✦ PRIVATE EXPEDITIONS ✦</span>
+      <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.4rem, 4.5vw, 3.4rem); color: #0F172A; font-weight: 700; margin-bottom: 12px; line-height: 1.15;">Book Your Journey</h1>
+      <p style="font-size: 1.05rem; color: #475569; max-width: 600px; margin: 0 auto; line-height: 1.6;">Plan your 100% tailor-made private Moroccan adventure with our local travel specialists.</p>
     </div>
   </div>
 
-  <!-- Booking Form -->
-  <section class="booking-section" style="padding-top: 40px;">
-    <div class="booking-inner">
+  <section id="contact" class="travel-form-section reveal">
+    <div class="travel-form-container">
 
-      <!-- Form -->
-      <div class="booking-card" id="bookingFormCard">
-        <h2>Your Expedition Request</h2>
-        <p>Complete the form below — all trips are 100% private and fully customizable.</p>
-
-        <form id="bookingForm" novalidate>
-
-          <!-- Contact Info -->
-          <div class="form-section-title"><i class="fa-solid fa-user"></i> &nbsp;Your Information</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="b-name">Full Name *</label>
-              <input type="text" id="b-name" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-              <label for="b-email">Email Address *</label>
-              <input type="email" id="b-email" placeholder="your@email.com" required>
-            </div>
+      <div class="travel-form-left">
+        <img src="images/Marrakech/marrakech_11.jpg" alt="Morocco Journey" class="form-bg-img">
+        <div class="form-left-content">
+          <h2>Start Your Journey</h2>
+          <p>Tell us what you want, and we will craft a tailor-made Moroccan experience exclusively for you.</p>
+          <div class="form-contact-info">
+            <span><i class="fa-solid fa-envelope"></i> contact@hiddenmorocco.com</span>
+            <span><i class="fa-solid fa-phone"></i> +212 6 00 00 00 00</span>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="b-phone">WhatsApp / Phone *</label>
-              <input type="tel" id="b-phone" placeholder="+1 234 567 890" required>
-            </div>
-            <div class="form-group">
-              <label for="b-nationality">Nationality</label>
-              <input type="text" id="b-nationality" placeholder="e.g. French, British...">
-            </div>
-          </div>
-
-          <!-- Trip Info -->
-          <div class="form-section-title"><i class="fa-solid fa-map-location-dot"></i> &nbsp;Trip Details</div>
-          <div class="form-group">
-            <label for="b-destination">Preferred Destination *</label>
-            <select id="b-destination" required onchange="updateDestPreview(this.value)">
-              <option value="">Select a destination</option>
-              <option value="marrakech">🏛️ Marrakech Medina &amp; Palaces</option>
-              <option value="merzouga">🏜️ Merzouga Sahara Desert</option>
-              <option value="chefchaouen">💙 Chefchaouen Blue Pearl</option>
-              <option value="essaouira">🌊 Essaouira Coastal Escape</option>
-              <option value="ouarzazate">🎬 Ouarzazate &amp; Ait Benhaddou</option>
-              <option value="fes">🕌 Fes El Bali Ancient Medina</option>
-              <option value="custom">✨ Custom Multi-City Itinerary</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="b-date">Arrival Date *</label>
-              <input type="date" id="b-date" required>
-            </div>
-            <div class="form-group">
-              <label for="b-days">Duration (Nights) *</label>
-              <select id="b-days" required>
-                <option value="">Select duration</option>
-                <option>1 night</option><option>2 nights</option><option>3 nights</option>
-                <option>4 nights</option><option>5 nights</option><option>6 nights</option>
-                <option>7 nights</option><option>8+ nights</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Group Size -->
-          <div class="form-section-title"><i class="fa-solid fa-users"></i> &nbsp;Group Size</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Adults</label>
-              <div class="counter-row">
-                <button type="button" class="counter-btn" onclick="changeCount('adults', -1)">−</button>
-                <span class="counter-val" id="adults-val">2</span>
-                <button type="button" class="counter-btn" onclick="changeCount('adults', 1)">+</button>
-              </div>
-              <input type="hidden" id="b-adults" value="2">
-            </div>
-            <div class="form-group">
-              <label>Children (under 12)</label>
-              <div class="counter-row">
-                <button type="button" class="counter-btn" onclick="changeCount('children', -1)">−</button>
-                <span class="counter-val" id="children-val">0</span>
-                <button type="button" class="counter-btn" onclick="changeCount('children', 1)">+</button>
-              </div>
-              <input type="hidden" id="b-children" value="0">
-            </div>
-          </div>
-
-          <!-- Preferences -->
-          <div class="form-section-title"><i class="fa-solid fa-star"></i> &nbsp;Preferences &amp; Special Requests</div>
-          <div class="form-group">
-            <label for="b-accommodation">Accommodation Style</label>
-            <select id="b-accommodation">
-              <option value="">No preference</option>
-              <option>Luxury Riad (Boutique)</option>
-              <option>Desert Luxury Camp</option>
-              <option>Modern 4-5★ Hotel</option>
-              <option>Eco-Lodge / Guesthouse</option>
-              <option>Mix &amp; Variety</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="b-message">Message &amp; Specific Wishes</label>
-            <textarea id="b-message" placeholder="Tell us anything special — honeymoon, dietary restrictions, must-see spots, mobility requirements, etc."></textarea>
-          </div>
-
-          <!-- Submit -->
-          <div class="booking-actions">
-            <button type="button" class="wa-submit-btn" onclick="submitBookingWhatsApp()">
-              <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i>
-              Send via WhatsApp — Instant Reply
-            </button>
-            <button type="button" class="email-submit-btn" onclick="submitBookingEmail()">
-              <i class="fa-solid fa-envelope"></i>
-              Send via Email Instead
-            </button>
-          </div>
-        </form>
-
-        <!-- Success State (hidden until submit) -->
-        <div class="booking-success" id="bookingSuccess">
-          <i class="fa-solid fa-circle-check"></i>
-          <h2>Request Sent! 🎉</h2>
-          <p>Thank you! Your expedition request has been sent. Our team will contact you within 6–12 hours with a personalized proposal.</p>
-          <a href="destinations.html" class="btn-primary" style="margin-top: 32px;">Explore More Destinations</a>
         </div>
       </div>
 
-      <!-- Sidebar -->
-      <div class="booking-sidebar">
-
-        <!-- Destination Preview -->
-        <div class="sidebar-card">
-          <h4><i class="fa-solid fa-map-location-dot"></i> Selected Destination</h4>
-          <div class="dest-select-preview" id="destPreviewBox">
-            <img src="images/Marrakech/marrakech_11.jpg" alt="Destination" id="destPreviewImg">
-            <div class="dest-select-preview-label" id="destPreviewLabel">Select a destination above</div>
+      <div class="travel-form-right">
+        <form>
+          <div class="form-row">
+            <div class="input-group">
+              <input type="text" id="fname" required>
+              <label for="fname">Full Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="femail" required>
+              <label for="femail">Email Address</label>
+            </div>
           </div>
-          <div class="price-highlight">
-            <div class="from">Starting from</div>
-            <div class="amount" id="destPreviewPrice">€150</div>
-            <div class="note">per person · private tour</div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <input type="tel" id="fphone" required>
+              <label for="fphone">Phone / WhatsApp</label>
+            </div>
+            <div class="input-group">
+              <input type="date" id="fdate" required>
+              <label for="fdate">Travel Date</label>
+            </div>
           </div>
-        </div>
 
-        <!-- Trust Signals -->
-        <div class="sidebar-card">
-          <h4><i class="fa-solid fa-shield-halved"></i> You're in Safe Hands</h4>
-          <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span>100% Private — No group tours, ever</span></div>
-          <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span>Free cancellation (7+ days notice)</span></div>
-          <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span>No hidden fees — transparent pricing</span></div>
-          <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span>Licensed guides &amp; insured vehicles</span></div>
-          <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span>24/7 support throughout your trip</span></div>
-        </div>
+          <div class="form-row">
+            <div class="input-group select-group">
+              <select id="fadults" required>
+                <option value="" disabled selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4+</option>
+              </select>
+              <label for="fadults">Adults</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+            <div class="input-group select-group">
+              <select id="fchildren" required>
+                <option value="" disabled selected></option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3+</option>
+              </select>
+              <label for="fchildren">Children</label>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
+            </div>
+          </div>
 
-        <!-- WhatsApp CTA -->
-        <div class="sidebar-card">
-          <h4><i class="fab fa-whatsapp"></i> Prefer to Chat?</h4>
-          <p style="font-size: 0.9rem; color: var(--hm-text-muted); margin-bottom: 4px;">Message us directly. We typically reply within 30 minutes.</p>
-          <a href="https://wa.me/212771663435" target="_blank" class="wa-chat-btn">
-            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Open WhatsApp Chat
-          </a>
-        </div>
+          <div class="destination-select">
+            <label class="dest-title">Must-See Destinations</label>
+            <div class="dest-grid">
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Marrakech">
+                <span>Marrakech</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Ouarzazate">
+                <span>Ouarzazate</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Fes">
+                <span>Fes</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Chefchaouen">
+                <span>Chefchaouen</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Essaouira">
+                <span>Essaouira</span>
+              </label>
+              <label class="dest-card">
+                <input type="checkbox" name="destinations" value="Merzouga">
+                <span>Merzouga</span>
+              </label>
+            </div>
+          </div>
 
-        <!-- Reviews Mini -->
-        <div class="sidebar-card" style="text-align: center;">
-          <div style="font-size: 1.6rem; color: var(--hm-gold); margin-bottom: 8px;">★★★★★</div>
-          <div style="font-family: var(--hm-font-serif); font-size: 1.8rem; font-weight: 800;">4.9 / 5</div>
-          <p style="font-size: 0.82rem; color: var(--hm-text-muted); margin-top: 6px;">Based on 340+ verified reviews</p>
-          <a href="testimonials.html" class="btn-ghost" style="margin-top: 14px; width: 100%; font-size: 0.85rem;">Read Reviews</a>
-        </div>
+          <div class="input-group text-group">
+            <textarea id="fmessage" required></textarea>
+            <label for="fmessage">Tell us about your dream trip (duration, budget, preferences...)</label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="sendWhatsApp()">
+            <span>Send Request</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
       </div>
 
     </div>
   </section>
-
-  <!-- Footer -->
   <footer class="footer">
-    <p>© 2026 Hidden Morocco. All Rights Reserved. Crafted with ❤️ in Marrakech.</p>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="destinations.html">Destinations</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <div class="footer-container">
+
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html#marrakech">Marrakech</a></li>
+          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
+          <li><a href="destinations.html#essaouira">Essaouira</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
+          <li><a href="destinations.html#casablanca">Casablanca</a></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
+        <p>Tél : +212 6 12 34 56 78</p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
     </div>
   </footer>
 
-  <script>
-    /* ── Counters ── */
-    const counts = { adults: 2, children: 0 };
-    function changeCount(type, delta) {
-      counts[type] = Math.max(0, counts[type] + delta);
-      if (type === 'adults') counts.adults = Math.max(1, counts.adults);
-      document.getElementById(type + '-val').textContent = counts[type];
-      document.getElementById('b-' + type).value = counts[type];
-    }
-
-    /* ── Destination Preview ── */
-    const DEST_PREVIEW_DATA = {
-      marrakech:   { img: 'images/Marrakech/marrakech_11.jpg', label: '🏛️ Marrakech Medina & Palaces', price: '€180' },
-      merzouga:    { img: 'images/Merzouga/merzouga_1.jpg',    label: '🏜️ Merzouga Sahara Desert',    price: '€290' },
-      chefchaouen: { img: 'images/Chfchaouen/chefchaoun.jpg',  label: '💙 Chefchaouen Blue Pearl',    price: '€150' },
-      essaouira:   { img: 'images/Essaouira/essaouira_1.jpg',  label: '🌊 Essaouira Coastal Escape',  price: '€160' },
-      ouarzazate:  { img: 'images/Ouarzazat/ouarzazat1.jpeg',  label: '🎬 Ouarzazate & Ait Benhaddou', price: '€210' },
-      fes:         { img: 'images/Fes/fes_1.jpg',              label: '🕌 Fes El Bali Ancient Medina', price: '€195' },
-      custom:      { img: 'images/Marrakech/marrakech_11.jpg', label: '✨ Custom Multi-City Itinerary', price: 'On Request' }
-    };
-
-    function updateDestPreview(val) {
-      const data = DEST_PREVIEW_DATA[val];
-      if (data) {
-        document.getElementById('destPreviewImg').src = data.img;
-        document.getElementById('destPreviewLabel').textContent = data.label;
-        document.getElementById('destPreviewPrice').textContent = data.price;
-      }
-    }
-
-    /* ── WhatsApp Submit ── */
-    function submitBookingWhatsApp() {
-      const name     = document.getElementById('b-name').value.trim();
-      const email    = document.getElementById('b-email').value.trim();
-      const phone    = document.getElementById('b-phone').value.trim();
-      const dest     = document.getElementById('b-destination').options[document.getElementById('b-destination').selectedIndex].text;
-      const date     = document.getElementById('b-date').value;
-      const days     = document.getElementById('b-days').value;
-      const adults   = document.getElementById('b-adults').value;
-      const children = document.getElementById('b-children').value;
-      const accom    = document.getElementById('b-accommodation').value;
-      const msg      = document.getElementById('b-message').value;
-
-      if (!name || !email || !phone || !document.getElementById('b-destination').value || !date || !days) {
-        alert('Please fill in all required fields (marked with *) before submitting.');
-        return;
-      }
-
-      const text = [
-        `👋 Hello Hidden Morocco!`,
-        ``,
-        `📋 *New Expedition Booking Request*`,
-        ``,
-        `👤 *Name:* ${name}`,
-        `📧 *Email:* ${email}`,
-        `📱 *Phone:* ${phone}`,
-        ``,
-        `🗺️ *Destination:* ${dest}`,
-        `📅 *Arrival Date:* ${date}`,
-        `🌙 *Duration:* ${days}`,
-        `👥 *Adults:* ${adults} | 🧒 *Children:* ${children}`,
-        `🏨 *Accommodation:* ${accom || 'No preference'}`,
-        ``,
-        `💬 *Message:* ${msg || 'N/A'}`,
-        ``,
-        `Thank you! 🙏`
-      ].join('\n');
-
-      window.open(`https://wa.me/212771663435?text=${encodeURIComponent(text)}`, '_blank');
-      showSuccessState();
-    }
-
-    /* ── Email Submit ── */
-    function submitBookingEmail() {
-      const name   = document.getElementById('b-name').value.trim();
-      const email  = document.getElementById('b-email').value.trim();
-      const dest   = document.getElementById('b-destination').options[document.getElementById('b-destination').selectedIndex].text;
-      const date   = document.getElementById('b-date').value;
-      const days   = document.getElementById('b-days').value;
-      const adults = document.getElementById('b-adults').value;
-      const msg    = document.getElementById('b-message').value;
-
-      if (!name || !email || !document.getElementById('b-destination').value) {
-        alert('Please fill in your name, email, and destination before submitting.');
-        return;
-      }
-
-      const subject = encodeURIComponent(`Booking Request — ${dest}`);
-      const body = encodeURIComponent(`Name: ${name}\nDestination: ${dest}\nArrival: ${date}\nDuration: ${days}\nAdults: ${adults}\nMessage: ${msg || 'N/A'}`);
-      window.location.href = `mailto:contact@hiddenmorocco.com?subject=${subject}&body=${body}`;
-      showSuccessState();
-    }
-
-    function showSuccessState() {
-      document.getElementById('bookingForm').style.display = 'none';
-      document.getElementById('bookingSuccess').style.display = 'block';
-      // Update steps
-      document.querySelectorAll('.step').forEach((s, i) => {
-        s.classList.remove('active');
-        s.classList.add('done');
-      });
-      document.querySelectorAll('.step-line').forEach(l => l.classList.add('done'));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    /* ── Set min date to today ── */
-    document.getElementById('b-date').min = new Date().toISOString().split('T')[0];
-  </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
+
+
+
 </body>
+
 </html>
