@@ -645,3 +645,22 @@ img {
   right: -2px !important;
   top: -2px !important;
 }
+
+/* Mobile & Tablet Modal Responsiveness */
+@media (max-width: 768px) {
+  .modal {
+    padding: 16px 10px;
+  }
+  .modal-content {
+    padding: 24px 18px;
+    margin: 10px auto;
+    border-radius: 20px;
+  }
+  .modal .swiper {
+    height: 260px;
+    border-radius: 14px;
+  }
+  .modal-content h2 {
+    font-size: 1.7rem;
+  }
+}
