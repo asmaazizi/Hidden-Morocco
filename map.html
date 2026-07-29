@@ -399,23 +399,26 @@
       color: #fff !important;
     }
 
+    /* ── Premium Map Pin Markers ─────────────────────────────── */
     .map-pin-marker {
-      width: 32px;
-      height: 40px;
-      background: #E8622A;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #E8622A 0%, #C0392B 100%);
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
       border: 3px solid #ffffff;
-      box-shadow: 0 4px 14px rgba(232, 98, 42, 0.6);
+      box-shadow: 0 4px 18px rgba(232, 98, 42, 0.65), 0 0 0 0 rgba(232, 98, 42, 0.4);
       position: relative;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      animation: pinPulse 2.5s infinite;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
     }
 
     .map-pin-marker:hover,
     .map-pin-marker.is-active {
-      transform: rotate(-45deg) scale(1.15);
-      background: #C0392B;
-      box-shadow: 0 6px 20px rgba(192, 57, 43, 0.8);
+      transform: rotate(-45deg) scale(1.2);
+      background: linear-gradient(135deg, #C0392B 0%, #962d22 100%);
+      box-shadow: 0 8px 28px rgba(192, 57, 43, 0.85), 0 0 0 6px rgba(192, 57, 43, 0.2);
     }
 
     .map-pin-marker .pin-inner {
@@ -427,6 +430,13 @@
       height: 10px;
       background: #ffffff;
       border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,255,255,0.8);
+    }
+
+    @keyframes pinPulse {
+      0%   { box-shadow: 0 4px 18px rgba(232, 98, 42, 0.65), 0 0 0 0 rgba(232, 98, 42, 0.35); }
+      60%  { box-shadow: 0 4px 18px rgba(232, 98, 42, 0.65), 0 0 0 10px rgba(232, 98, 42, 0); }
+      100% { box-shadow: 0 4px 18px rgba(232, 98, 42, 0.65), 0 0 0 0 rgba(232, 98, 42, 0); }
     }
 
     /* Custom Popup Box */
@@ -544,18 +554,18 @@
       background: #A93226;
     }
 
-    /* Side Destination Details Panel */
+    /* ── Premium Side Destination Details Panel ────────────────── */
     .map-detail-panel {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      bottom: 20px;
-      width: 380px;
+      top: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: 360px;
       z-index: 1000;
       pointer-events: none;
       opacity: 0;
-      transform: translateX(30px);
-      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transform: translateX(24px);
+      transition: all 0.38s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .map-detail-panel.is-open {
@@ -565,128 +575,157 @@
     }
 
     .map-side-card {
-      background: var(--hm-bg-card);
-      border: 1px solid var(--hm-border);
-      border-radius: 20px;
+      background: rgba(10, 14, 26, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 22px;
       height: 100%;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
       overflow: hidden;
       position: relative;
     }
 
     .map-card-close {
       position: absolute;
-      top: 14px;
-      right: 14px;
+      top: 12px;
+      right: 12px;
       z-index: 10;
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
       color: #fff;
-      border: none;
-      font-size: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .map-card-close:hover {
-      background: var(--hm-terracotta);
+      background: #C85A32;
+      border-color: #C85A32;
     }
 
     .map-side-img {
       position: relative;
-      height: 200px;
+      height: 220px;
       width: 100%;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     .map-side-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .map-side-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to top, rgba(10,14,26,0.95) 0%, transparent 100%);
+      pointer-events: none;
     }
 
     .map-card-badge {
       position: absolute;
       bottom: 14px;
       left: 16px;
-      background: var(--hm-terracotta);
+      z-index: 2;
+      background: linear-gradient(135deg, #C85A32, #A5411E);
       color: #fff;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       padding: 5px 14px;
       border-radius: 99px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 14px rgba(200,90,50,0.5);
     }
 
     .map-side-content {
-      padding: 22px 24px;
+      padding: 20px 22px 18px;
       display: flex;
       flex-direction: column;
       flex: 1;
       overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(200,90,50,0.3) transparent;
     }
 
     .map-card-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.82rem;
-      color: var(--hm-text-muted);
+      font-size: 0.78rem;
+      color: #94A3B8;
       margin-bottom: 10px;
+      gap: 8px;
     }
 
     .map-card-meta i {
-      color: var(--hm-terracotta);
+      color: #C85A32;
+      margin-right: 4px;
     }
 
     .map-card-rating {
       font-weight: 700;
-      color: var(--hm-text-heading);
+      color: #F59E0B;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .map-card-rating i {
-      color: var(--hm-gold);
+      color: #F59E0B;
     }
 
     .map-side-content h3 {
       font-family: var(--hm-font-serif);
-      font-size: 1.45rem;
-      color: var(--hm-text-heading);
+      font-size: 1.38rem;
+      color: #FFFFFF;
       margin-bottom: 10px;
       font-weight: 700;
+      line-height: 1.3;
     }
 
-    .map-side-content p {
-      font-size: 0.9rem;
-      color: var(--hm-text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
+    .map-side-content > p {
+      font-size: 0.875rem;
+      color: #CBD5E1;
+      line-height: 1.65;
+      margin-bottom: 18px;
     }
 
     .map-card-highlights h5 {
-      font-size: 0.82rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--hm-text-heading);
+      letter-spacing: 1.5px;
+      color: #D4AF37;
       margin-bottom: 10px;
+      font-weight: 800;
     }
 
     .map-card-highlights ul {
       list-style: none;
       padding: 0;
-      margin: 0 0 24px;
+      margin: 0 0 20px;
     }
 
     .map-card-highlights li {
-      font-size: 0.85rem;
-      color: var(--hm-text-body);
+      font-size: 0.84rem;
+      color: #CBD5E1;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -695,82 +734,212 @@
 
     .map-card-highlights li i {
       color: #27AE60;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      flex-shrink: 0;
     }
 
     .map-card-footer {
       margin-top: auto;
-      border-top: 1px solid var(--hm-border);
-      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
     .price-lbl {
       display: block;
-      font-size: 0.75rem;
-      color: var(--hm-text-muted);
+      font-size: 0.72rem;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
     }
 
     .price-val {
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      color: var(--hm-text-heading);
+      color: #FFFFFF;
     }
 
     .price-val small {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 400;
-      color: var(--hm-text-muted);
+      color: #64748B;
     }
 
     .map-card-action-btn {
-      padding: 11px 22px;
-      font-size: 0.88rem;
-      text-decoration: none;
-      border-radius: 99px;
+      padding: 11px 20px !important;
+      font-size: 0.85rem !important;
+      text-decoration: none !important;
+      border-radius: 99px !important;
+      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(200,90,50,0.4) !important;
+      transition: all 0.25s !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
     }
 
-    /* ── Responsive Styling ────────────────────────────────────── */
+    .map-card-action-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 24px rgba(200,90,50,0.6) !important;
+    }
+
+    /* ── Mobile: Full layout overhaul ───────────────────────────── */
     @media (max-width: 900px) {
+
+      /* Hide hero section — map fills full screen */
+      .map-hero {
+        display: none !important;
+      }
+
+      /* ── Dashboard container: no padding ── */
+      .map-dashboard-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* ── Toolbar: single compact horizontal row ── */
       .map-toolbar {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 8px !important;
+        padding: 10px 12px !important;
+        margin: 8px 10px !important;
+        border-radius: 14px !important;
+        scrollbar-width: none;
       }
+      .map-toolbar::-webkit-scrollbar { display: none; }
 
+      /* Hide search box on mobile (saves space) */
       .map-search-box {
-        max-width: 100%;
+        display: none !important;
       }
 
+      /* Filter chips scroll horizontally */
       .map-filter-group {
-        overflow-x: auto;
-        padding-bottom: 6px;
-        flex-wrap: nowrap;
-      }
-
-      .map-filter-btn {
-        white-space: nowrap;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 6px !important;
+        scrollbar-width: none;
         flex-shrink: 0;
       }
+      .map-filter-group::-webkit-scrollbar { display: none; }
 
+      .map-filter-btn {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        padding: 7px 13px !important;
+        font-size: 0.78rem !important;
+      }
+
+      /* Recenter button compact */
+      .map-recenter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 7px 12px !important;
+        font-size: 0.78rem !important;
+      }
+
+      /* ── Map frame: full width, edge to edge ── */
+      .map-frame-wrapper {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        /* Height = 100dvh minus navbar (~64px) minus toolbar (~60px) */
+        height: calc(100dvh - 124px) !important;
+        min-height: 400px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+
+      #interactiveMap {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ── Bottom sheet: 58vh, slides up from bottom ── */
       .map-detail-panel {
-        top: auto;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-        width: auto;
-        height: 320px;
-        transform: translateY(40px);
+        position: fixed !important;
+        top: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 58vh !important;
+        max-height: 520px !important;
+        transform: translateY(100%) !important;
+        border-radius: 0 !important;
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+        z-index: 9000 !important;
       }
 
       .map-detail-panel.is-open {
-        transform: translateY(0);
+        transform: translateY(0) !important;
+        opacity: 1 !important;
       }
 
-      .map-frame-wrapper {
-        height: 580px;
+      .map-side-card {
+        border-radius: 20px 20px 0 0 !important;
+        height: 100% !important;
       }
+
+      /* Drag handle */
+      .map-side-card::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 99px;
+        margin: 10px auto 0;
+        flex-shrink: 0;
+      }
+
+      /* Smaller image on mobile */
+      .map-side-img {
+        height: 130px !important;
+      }
+
+      .map-card-footer {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .map-card-action-btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+
+      /* Backdrop overlay behind bottom sheet */
+      #mapSheetOverlay {
+        display: block;
+      }
+    }
+
+    /* Sheet overlay backdrop — hidden by default */
+    #mapSheetOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 8999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    #mapSheetOverlay.is-visible {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     @media (max-width: 768px) {
@@ -911,9 +1080,12 @@
     <div class="map-frame-wrapper">
       <div id="interactiveMap"></div>
 
-      <!-- Floating Destination Details Panel -->
+      <!-- Floating Destination Details Panel (absolute inside map on desktop, fixed on mobile via CSS) -->
       <div class="map-detail-panel" id="mapDetailPanel"></div>
     </div>
+
+    <!-- Sheet Overlay Backdrop (mobile only) -->
+    <div id="mapSheetOverlay" onclick="window.closeMapDestCard()"></div>
 
   </div>
 

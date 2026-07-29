@@ -799,6 +799,18 @@ function initMapPage() {
     zoomControl: false
   }).setView([31.7917, -7.0926], 6);
 
+  // Force Leaflet to recalculate map dimensions (critical for mobile)
+  setTimeout(() => {
+    AppState.mapInstance.invalidateSize();
+  }, 150);
+
+  // Re-invalidate on resize (orientation change, window resize)
+  window.addEventListener('resize', () => {
+    if (AppState.mapInstance) {
+      AppState.mapInstance.invalidateSize();
+    }
+  });
+
   // Add zoom control at top-left
   L.control.zoom({ position: 'topleft' }).addTo(AppState.mapInstance);
 
@@ -824,28 +836,11 @@ function initMapPage() {
     const marker = L.marker([dest.lat, dest.lng], { icon: createPinIcon(false) }).addTo(AppState.mapInstance);
     marker.destData = dest;
 
-    // Popup HTML
-    const popupContent = `
-      <div class="map-popup-card">
-        <div class="map-popup-img-wrap">
-          <img src="${dest.img}" alt="${dest.title}">
-          <span class="map-popup-badge">${dest.badge || 'Popular'}</span>
-        </div>
-        <div class="map-popup-body">
-          <div class="map-popup-meta">${dest.region} • ★ ${dest.rating}</div>
-          <h4>${dest.title}</h4>
-          <p>${dest.desc.substring(0, 85)}...</p>
-          <div class="map-popup-footer">
-            <div class="map-popup-price">From <strong>€${dest.price}</strong></div>
-            <a href="destinations.html#${dest.id}" class="map-popup-btn">Explore <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    `;
-
-    marker.bindPopup(popupContent, { maxWidth: 260, className: 'hm-custom-leaflet-popup' });
-
-    marker.on('click', () => {
+    // Click opens the premium side panel only (no duplicate popup)
+    marker.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      // Close any open Leaflet popups
+      AppState.mapInstance.closePopup();
       window.showMapDestCard(dest);
     });
 
@@ -872,6 +867,11 @@ function initMapPage() {
     dashArray: '8, 10',
     lineJoin: 'round'
   }).addTo(AppState.mapInstance);
+
+  // Click on empty map area → close the side panel
+  AppState.mapInstance.on('click', () => {
+    window.closeMapDestCard();
+  });
 }
 
 // ── Map Filtering Engine ───────────────────────────────────────────────────
@@ -932,9 +932,11 @@ window.showMapDestCard = function (dest) {
   const panel = document.getElementById('mapDetailPanel');
   if (!panel) return;
 
-  // Center map on marker location
+  const isMobile = window.innerWidth <= 900;
+
+  // Center map on marker location (less zoom on mobile to keep context)
   if (AppState.mapInstance) {
-    AppState.mapInstance.flyTo([dest.lat, dest.lng], 8, { duration: 1.2 });
+    AppState.mapInstance.flyTo([dest.lat, dest.lng], isMobile ? 7 : 8, { duration: 1.2 });
   }
 
   // Populate Panel Content
@@ -974,11 +976,19 @@ window.showMapDestCard = function (dest) {
   `;
 
   panel.classList.add('is-open');
+
+  // Show backdrop on mobile
+  const overlay = document.getElementById('mapSheetOverlay');
+  if (overlay && isMobile) overlay.classList.add('is-visible');
 };
 
 window.closeMapDestCard = function () {
   const panel = document.getElementById('mapDetailPanel');
   if (panel) panel.classList.remove('is-open');
+
+  // Hide backdrop
+  const overlay = document.getElementById('mapSheetOverlay');
+  if (overlay) overlay.classList.remove('is-visible');
 };
 
 function initHomeMapPreview() {
