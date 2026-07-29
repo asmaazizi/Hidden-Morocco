@@ -248,20 +248,30 @@
     }
 
     /* Destination Booking & Detail Modal Styling */
-    .modal {
+    .modal,
+    .dest-booking-modal-overlay,
+    .exp-modal,
+    #globalQuickBookModal,
+    #destModal {
       display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      overflow-y: auto;
-      padding: 40px 20px;
-      box-sizing: border-box;
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 9999999 !important;
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 20px !important;
+      box-sizing: border-box !important;
       animation: modalFadeIn 0.3s ease;
+      margin: 0 !important;
     }
 
     @keyframes modalFadeIn {
@@ -269,59 +279,98 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    .modal-content {
-      position: relative;
-      max-width: 920px;
-      margin: 40px auto;
-      background: #FAF7F2;
-      border-radius: 28px;
-      padding: 40px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      color: #0F172A;
+    .modal-content,
+    .dest-booking-sheet,
+    .exp-sheet {
+      position: relative !important;
+      max-width: 1200px !important;
+      width: min(1200px, 95vw) !important;
+      max-height: 88vh !important;
+      overflow-y: auto !important;
+      margin: auto !important;
+      background: #FDFBF7 !important;
+      border-radius: 32px !important;
+      padding: 52px 48px !important;
+      box-shadow: 0 35px 100px -15px rgba(15, 23, 42, 0.6), 0 0 50px rgba(200, 90, 50, 0.12) !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+      color: #0F172A !important;
     }
 
     .modal-content .close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      font-size: 2rem;
-      font-weight: 300;
-      color: #64748B;
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(15, 23, 42, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s ease;
-      z-index: 10;
-      line-height: 1;
+      position: absolute !important;
+      top: 28px !important;
+      right: 32px !important;
+      font-size: 1.5rem !important;
+      font-weight: 400 !important;
+      color: #0F172A !important;
+      cursor: pointer !important;
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: 50% !important;
+      background: rgba(15, 23, 42, 0.06) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(15, 23, 42, 0.12) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      z-index: 20 !important;
+      line-height: 1 !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
     }
 
     .modal-content .close:hover {
-      background: #C85A32;
-      color: #FFFFFF;
-      transform: rotate(90deg);
+      background: linear-gradient(135deg, #C85A32, #A5411E) !important;
+      color: #FFFFFF !important;
+      border-color: transparent !important;
+      transform: rotate(180deg) scale(1.1) !important;
+      box-shadow: 0 10px 25px rgba(200, 90, 50, 0.4) !important;
     }
 
     .modal-content h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.4rem;
-      color: #0F172A;
-      margin-bottom: 24px;
-      padding-right: 50px;
+      font-family: 'Playfair Display', Georgia, serif !important;
+      font-size: clamp(2.4rem, 4vw, 3.2rem) !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      text-align: center !important;
+      letter-spacing: -0.5px !important;
+      margin-bottom: 28px !important;
+      padding-right: 0 !important;
+      position: relative !important;
+    }
+
+    .modal-content h2::after {
+      content: "" !important;
+      display: block !important;
+      width: 90px !important;
+      height: 4px !important;
+      background: linear-gradient(90deg, #C85A32, #D4AF37, #C85A32) !important;
+      margin: 14px auto 0 !important;
+      border-radius: 99px !important;
+      box-shadow: 0 4px 12px rgba(200, 90, 50, 0.4) !important;
+    }
+
+    .modal-content > p {
+      font-size: 1.12rem !important;
+      line-height: 1.9 !important;
+      color: #334155 !important;
+      background: linear-gradient(145deg, #FFFFFF 0%, #FAF7F2 100%) !important;
+      padding: 32px 36px !important;
+      border-radius: 24px !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
+      margin-bottom: 40px !important;
+      text-align: justify !important;
+      position: relative !important;
     }
 
     .modal .swiper {
-      width: 100%;
-      height: 420px;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 28px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      width: 100% !important;
+      height: 520px !important;
+      border-radius: 28px !important;
+      overflow: hidden !important;
+      margin-bottom: 40px !important;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
     }
 
     .modal .swiper-slide img {
@@ -346,31 +395,39 @@
       font-weight: bold;
     }
 
-    .dest-booking-modal-overlay {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(17, 17, 30, 0.75);
-      backdrop-filter: blur(10px);
-      z-index: 99999;
+    .dest-booking-modal-overlay,
+    #destBookingModal {
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(10, 15, 29, 0.92) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      z-index: 10000005 !important;
       display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-sizing: border-box;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 20px !important;
+      box-sizing: border-box !important;
     }
 
     .dest-booking-sheet {
-      position: relative;
-      background: #ffffff;
-      border-radius: 24px;
-      max-width: 920px;
-      width: 100%;
-      max-height: 90vh;
-      display: flex;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+      position: relative !important;
+      background: #ffffff !important;
+      border-radius: 28px !important;
+      max-width: 960px !important;
+      width: min(960px, 94vw) !important;
+      max-height: 88vh !important;
+      display: flex !important;
+      overflow: hidden !important;
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.6) !important;
+      z-index: 10000010 !important;
+      margin: auto !important;
     }
 
     .dest-booking-close {
@@ -580,10 +637,11 @@
 
     .destinations .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 32px;
       max-width: 1340px;
       margin: 0 auto;
+      justify-content: center;
     }
 
     .destinations .card {
@@ -596,6 +654,9 @@
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
       display: flex;
       flex-direction: column;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .destinations .card:hover {
@@ -818,6 +879,9 @@
           <i class="fa-regular fa-heart"></i>
           <span class="fav-badge2 fav-count-badge">0</span>
         </a>
+        <a href="login.html" class="nav-icon-btn2 profile-btn" aria-label="User Account">
+          <i class="fa-regular fa-user"></i>
+        </a>
         <a href="booking.html" class="book-btn2">Book Expedition</a>
         <button class="hburg" onclick="document.getElementById('premNavLinks').classList.toggle('open')">
           <span></span><span></span><span></span>
@@ -912,22 +976,22 @@
             <div class="travel-cards">
 
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Marrakech Menara Airport – national and international flights</p>
               </div>
 
               <div class="travel-item">
-                <span>Train</span>
+                <span><i class="fa-solid fa-train"></i> Train</span>
                 <p>ONCF from Casablanca, Rabat and Fes</p>
               </div>
 
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>CTM & Supratours – comfortable journeys</p>
               </div>
 
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Well accessible highways and national roads</p>
               </div>
 
@@ -1282,15 +1346,15 @@
             <h3 class="travel-title">How to travel to Merzouga</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Flight to Errachidia (ERH) + Transfer (2h)</p>
               </div>
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>Direct Supratours from Marrakech or Fes</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Scenic route via Ouarzazate</p>
               </div>
             </div>
@@ -1396,15 +1460,15 @@
             <h3 class="travel-title">How to travel to Chefchaouen</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>CTM is the most popular and reliable option</p>
               </div>
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Flight to Tangier (TNG) + Taxi/Bus (2h)</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Mountain roads from Tangier or Fes</p>
               </div>
             </div>
@@ -1611,15 +1675,15 @@
             <h3 class="travel-title">How to travel to Essaouira</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>Frequent departures CTM/Supratours (3h)</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Expressway R207 from Marrakech (2h30)</p>
               </div>
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Essaouira-Mogador Airport (ESU)</p>
               </div>
             </div>
@@ -1824,15 +1888,15 @@
             <h3 class="travel-title">How to travel to Fes</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Train</span>
+                <span><i class="fa-solid fa-train"></i> Train</span>
                 <p>ONCF station connected to Casablanca, Rabat, Tangier</p>
               </div>
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Fes-Saïss Airport (FEZ)</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Highway A2 from Rabat/Oujda</p>
               </div>
             </div>
@@ -2084,19 +2148,19 @@
             <h3 class="travel-title">How to travel to Casablanca</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Mohammed V International Airport (CMN) – Africa's busiest hub</p>
               </div>
               <div class="travel-item">
-                <span>Train</span>
+                <span><i class="fa-solid fa-train"></i> Train</span>
                 <p>ONCF Al Boraq high-speed from Tangier, direct to Rabat, Marrakech & Fes</p>
               </div>
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>CTM & Supratours – comfortable nationwide connections</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Highway hub connecting all major Moroccan cities</p>
               </div>
             </div>
@@ -2301,15 +2365,15 @@
             <h3 class="travel-title">How to travel to Zagora</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>CTM buses from Marrakech or Ouarzazate</p>
               </div>
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Zagora Airport (Ouarzazate also nearby)</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>Scenic route via N9 from Marrakech (6h)</p>
               </div>
             </div>
@@ -2524,15 +2588,15 @@
             <h3 class="travel-title">How to travel to Agadir</h3>
             <div class="travel-cards">
               <div class="travel-item">
-                <span>Bus</span>
+                <span><i class="fa-solid fa-bus"></i> Bus</span>
                 <p>Premium CTM and Supratours available nationwide</p>
               </div>
               <div class="travel-item">
-                <span>Flight</span>
+                <span><i class="fa-solid fa-plane-departure"></i> Flight</span>
                 <p>Agadir Al Massira Airport (AGA)</p>
               </div>
               <div class="travel-item">
-                <span>Car</span>
+                <span><i class="fa-solid fa-car-side"></i> Car</span>
                 <p>A3 Highway direct from Casablanca or Marrakech</p>
               </div>
             </div>
@@ -3018,37 +3082,66 @@
   </script>
 
   <footer class="footer">
-    <div class="footer-container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="hidden-removebg-preview.png" alt="Hidden Morocco">
+        <p>Boutique travel agency crafting unforgettable private journeys across Morocco's imperial cities, Sahara dunes, and Atlas mountains.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
 
       <div class="footer-col">
         <h4>Destinations</h4>
         <ul>
           <li><a href="destinations.html#marrakech">Marrakech</a></li>
-          <li><a href="destinations.html#fes">Fes</a></li>
+          <li><a href="destinations.html#merzouga">Merzouga Sahara</a></li>
           <li><a href="destinations.html#chefchaouen">Chefchaouen</a></li>
           <li><a href="destinations.html#essaouira">Essaouira</a></li>
-          <li><a href="destinations.html#merzouga">Merzouga</a></li>
+          <li><a href="destinations.html#fes">Fes El Bali</a></li>
           <li><a href="destinations.html#ouarzazate">Ouarzazate</a></li>
-          <li><a href="destinations.html#casablanca">Casablanca</a></li>
         </ul>
       </div>
 
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="testimonials.html">Reviews</a></li>
+          <li><a href="booking.html">Book Expedition</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="favorites.html">My Wishlist</a></li>
+        </ul>
+      </div>
 
       <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-            data-cfemail="e98a86879d888a9da98c919985869b8c84869b868a8a86c78488">[email&#160;protected]</a></p>
-        <p>Tél : +212 6 12 34 56 78</p>
-
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <h4>Marrakech HQ</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Rue Riad Zitoun el Kedim,<br>Medina, Marrakech</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>contact@hiddenmorocco.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <span>+212 77 166 3435</span>
         </div>
       </div>
     </div>
+
     <div class="footer-bottom">
-      <p>&copy; 2026 Hidden Morocco. All rights reserved. Created with passion for travelers.</p>
+      <p>© 2026 Hidden Morocco. All Rights Reserved. Crafted with ❤️ in Marrakech.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
+      </div>
     </div>
   </footer>
 

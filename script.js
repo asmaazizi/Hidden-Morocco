@@ -289,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Theme Engine (Light / Dark Mode) ───────────────────────────────────────
 function initTheme() {
   document.documentElement.setAttribute('data-theme', AppState.theme);
+  if (document.body) document.body.setAttribute('data-theme', AppState.theme);
   updateThemeIcon();
 
   document.querySelectorAll('.theme-toggle').forEach(btn => {
@@ -296,6 +297,7 @@ function initTheme() {
       AppState.theme = AppState.theme === 'light' ? 'dark' : 'light';
       localStorage.setItem('hm_theme', AppState.theme);
       document.documentElement.setAttribute('data-theme', AppState.theme);
+      if (document.body) document.body.setAttribute('data-theme', AppState.theme);
       updateThemeIcon();
       showToast(`Switched to ${AppState.theme.toUpperCase()} mode ✨`);
     });
@@ -305,8 +307,8 @@ function initTheme() {
 function updateThemeIcon() {
   document.querySelectorAll('.theme-toggle').forEach(btn => {
     btn.innerHTML = AppState.theme === 'dark'
-      ? '<i class="fa-solid fa-sun" style="color: var(--hm-gold);"></i>'
-      : '<i class="fa-solid fa-moon"></i>';
+      ? '<i class="fa-solid fa-sun" style="color: #F59E0B; transform: rotate(360deg); transition: all 0.4s ease;"></i>'
+      : '<i class="fa-solid fa-moon" style="transition: all 0.4s ease;"></i>';
   });
 }
 
@@ -422,11 +424,12 @@ function initStickyNav() {
 }
 
 window.toggleMobileMenu = function () {
-  const menu = document.querySelector('.hn-links, .nav-links');
-  if (menu) {
+  const menus = document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks');
+  menus.forEach(menu => {
     menu.classList.toggle('hn-links-open');
+    menu.classList.toggle('open');
     menu.classList.toggle('active');
-  }
+  });
 };
 
 // ── Live Destination Search Engine ─────────────────────────────────────────
@@ -586,18 +589,20 @@ window.openQuickBooking = function (destId = 'marrakech') {
     modal = document.createElement('div');
     modal.id = 'globalQuickBookModal';
     modal.style.cssText = `
-      position: fixed; inset: 0; z-index: 999999; display: flex; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(14px);
+      position: fixed; inset: 0; z-index: 9999999; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(14px);
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     `;
+    document.body.appendChild(modal);
+  } else if (modal.parentElement !== document.body) {
     document.body.appendChild(modal);
   }
 
   modal.innerHTML = `
-    <div style="
+    <div class="qb-modal-content" style="
       background: #FFFFFF; border: 1px solid rgba(15,23,42,0.08); border-radius: 24px;
       width: min(580px, 95vw); max-height: 90vh; overflow-y: auto; padding: 32px;
-      box-shadow: 0 25px 60px rgba(15,23,42,0.2); position: relative; color: #0F172A;
+      box-shadow: 0 25px 60px rgba(15,23,42,0.2); position: relative; color: #0F172A; margin: auto;
     ">
       <button onclick="window.closeQuickBooking()" style="
         position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%;
@@ -610,14 +615,14 @@ window.openQuickBooking = function (destId = 'marrakech') {
         <span style="background: rgba(200,90,50,0.12); color:#C85A32; padding:6px 14px; border-radius:99px; font-size:0.78rem; font-weight:700; text-transform:uppercase;">✦ Instant Booking</span>
       </div>
 
-      <h3 style="font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; color: #0F172A;">Plan Your Moroccan Expedition</h3>
-      <p style="color: #64748B; font-size: 0.92rem; margin-bottom: 24px; line-height: 1.6;">Customize your trip details below. Live pricing updates automatically.</p>
+      <h3 class="qb-title" style="font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; color: #0F172A;">Plan Your Moroccan Expedition</h3>
+      <p class="qb-desc" style="color: #475569; font-size: 0.92rem; margin-bottom: 24px; line-height: 1.6;">Customize your trip details below. Live pricing updates automatically.</p>
 
       <form id="quickBookingForm" onsubmit="window.handleQuickBookSubmit(event)">
         <div style="margin-bottom: 18px;">
-          <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Select Destination</label>
+          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Select Destination</label>
           <select id="qb-dest" onchange="window.updateQuickBookPrice()" style="
-            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
             background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit;
           ">
             ${DESTINATIONS_DB.map(d => `<option value="${d.id}" ${d.id === dest.id ? 'selected' : ''}>${d.title} (€${d.price}/person)</option>`).join('')}
@@ -626,15 +631,15 @@ window.openQuickBooking = function (destId = 'marrakech') {
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
           <div>
-            <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travel Date</label>
+            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travel Date</label>
             <input type="date" id="qb-date" required style="
-              width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+              width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
               background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
             ">
           </div>
           <div>
-            <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travelers</label>
-            <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid rgba(15,23,42,0.12); border-radius:12px; overflow:hidden;">
+            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travelers</label>
+            <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid rgba(15,23,42,0.15); border-radius:12px; overflow:hidden;">
               <button type="button" onclick="window.changeTravelers(-1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">-</button>
               <input type="number" id="qb-travelers" value="2" min="1" max="20" readonly style="width:100%; text-align:center; border:none; background:transparent; color:#0F172A; font-size:1rem; font-weight:700;">
               <button type="button" onclick="window.changeTravelers(1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">+</button>
@@ -643,22 +648,22 @@ window.openQuickBooking = function (destId = 'marrakech') {
         </div>
 
         <div style="margin-bottom: 22px;">
-          <label style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Full Name</label>
+          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Full Name</label>
           <input type="text" id="qb-name" placeholder="e.g. Sarah Jenkins" required style="
-            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.12);
+            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
             background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
           ">
         </div>
 
-        <div style="
-          background: #FAF7F2; border: 1px dashed rgba(200,90,50,0.3);
+        <div class="qb-price-box" style="
+          background: #0F172A; border: 1px solid rgba(212,175,55,0.3);
           border-radius: 16px; padding: 18px 20px; margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center;
         ">
           <div>
-            <span style="font-size:0.8rem; color:#9CA3AF; display:block;">Estimated Total Price</span>
-            <span style="font-size:0.78rem; color:#FBBF24;">100% Private Expedition</span>
+            <span style="font-size:0.82rem; color:#94A3B8; display:block;">Estimated Total Price</span>
+            <span style="font-size:0.8rem; color:#F59E0B; font-weight:700;">100% Private Expedition</span>
           </div>
-          <div id="qb-total-price" style="font-size: 1.6rem; font-weight: 800; color: #F59E0B;">€360</div>
+          <div id="qb-total-price" style="font-size: 1.65rem; font-weight: 800; color: #F59E0B;">€360</div>
         </div>
 
         <button type="submit" style="
@@ -680,10 +685,18 @@ window.openQuickBooking = function (destId = 'marrakech') {
   if (dateInput) dateInput.value = tomorrow.toISOString().split('T')[0];
 
   window.updateQuickBookPrice();
+  lockBodyScroll(true);
+
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  const content = modal.querySelector('.qb-modal-content');
+  if (content) content.scrollTop = 0;
 
   requestAnimationFrame(() => {
     modal.style.opacity = '1';
     modal.style.pointerEvents = 'auto';
+    modal.setAttribute('tabindex', '-1');
+    modal.focus();
   });
 };
 
@@ -692,7 +705,9 @@ window.closeQuickBooking = function () {
   if (modal) {
     modal.style.opacity = '0';
     modal.style.pointerEvents = 'none';
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
   }
+  lockBodyScroll(false);
 };
 
 window.changeTravelers = function (delta) {
@@ -1019,7 +1034,7 @@ function initHomeMapPreview() {
   }).addTo(miniMap);
 }
 
-// ── Legacy Modal Helpers (Preserved for Untouched destinations.html) ───────
+// ── Global Modal Engine & Helpers ─────────────────────────
 function lockBodyScroll(lock) {
   document.body.style.overflow = lock ? 'hidden' : '';
 }
@@ -1027,8 +1042,19 @@ function lockBodyScroll(lock) {
 window.openModal = function (city, scrollToBooking = false) {
   const modal = document.getElementById('modal-' + city);
   if (!modal) return;
-  modal.style.display = 'block';
+  if (modal.parentElement !== document.body) {
+    document.body.appendChild(modal);
+  }
+
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  const modalContent = modal.querySelector('.modal-content');
+  if (modalContent) modalContent.scrollTop = 0;
+
   lockBodyScroll(true);
+
+  modal.setAttribute('tabindex', '-1');
+  modal.focus();
 
   if (scrollToBooking) {
     const bookingSection = document.getElementById('booking-' + city);
@@ -1082,20 +1108,24 @@ const DEST_IMAGES = {
 window.openDestBooking = function (city) {
   const modal = document.getElementById('destBookingModal');
   if (!modal) return;
-  document.getElementById('destBookingTitle').textContent = city + ' Expedition';
+  if (modal.parentElement !== document.body) {
+    document.body.appendChild(modal);
+  }
+
+  const titleEl = document.getElementById('destBookingTitle');
+  if (titleEl && city) titleEl.textContent = city + ' Expedition';
   const img = document.getElementById('destBookingImg');
   if (img && DEST_IMAGES[city]) img.src = DEST_IMAGES[city];
-  const fesPromo = document.getElementById('fesPromoBlock');
-  if (fesPromo) fesPromo.style.display = (city === 'Fes') ? 'block' : 'none';
-  document.getElementById('db-name').value = '';
-  document.getElementById('db-email').value = '';
-  document.getElementById('db-phone').value = '';
-  document.getElementById('db-date').value = '';
-  document.getElementById('db-adults').value = 2;
-  document.getElementById('db-children').value = 0;
-  document.getElementById('db-message').value = '';
+
+  modal.style.zIndex = '10000005';
   modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  const sheet = modal.querySelector('.dest-booking-sheet, .travel-form-container');
+  if (sheet) sheet.scrollTop = 0;
+
   lockBodyScroll(true);
+  modal.setAttribute('tabindex', '-1');
+  modal.focus();
 };
 
 window.closeDestBooking = function () {
@@ -1189,14 +1219,16 @@ window.openExp = function (key) {
     modal = document.createElement('div');
     modal.id = 'destModal';
     modal.style.cssText = `
-      position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(17, 17, 30, 0.75); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      position: fixed; inset: 0; z-index: 9999999; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(17, 17, 30, 0.85); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     `;
+    document.body.appendChild(modal);
+  } else if (modal.parentElement !== document.body) {
     document.body.appendChild(modal);
   }
 
   modal.innerHTML = `
-    <div class="glass-panel" style="width: min(850px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: #FFFFFF;">
+    <div class="glass-panel exp-inner-content" style="width: min(850px, 95vw); max-height: 90vh; border-radius: var(--hm-radius-lg); overflow-y: auto; position: relative; background: #FFFFFF; margin: auto;">
       <button onclick="closeDestinationModal()" style="position: absolute; top: 20px; right: 20px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(0,0,0,0.5); color: #fff; cursor: pointer; font-size: 1.2rem;">
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -1241,9 +1273,17 @@ window.openExp = function (key) {
     </div>
   `;
 
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  const content = modal.querySelector('.exp-inner-content');
+  if (content) content.scrollTop = 0;
+  lockBodyScroll(true);
+
   requestAnimationFrame(() => {
     modal.style.opacity = '1';
     modal.style.pointerEvents = 'auto';
+    modal.setAttribute('tabindex', '-1');
+    modal.focus();
   });
 };
 
@@ -1252,5 +1292,48 @@ window.closeDestinationModal = function () {
   if (modal) {
     modal.style.opacity = '0';
     modal.style.pointerEvents = 'none';
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
   }
+  lockBodyScroll(false);
 };
+
+window.closeExp = window.closeDestinationModal;
+
+// Global Escape Key & Backdrop Click Listener for All Modals
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal, .dest-booking-modal-overlay, .exp-modal, #globalQuickBookModal, #destModal').forEach(modal => {
+      if (modal.style.display === 'flex' || modal.style.display === 'block' || modal.style.opacity === '1') {
+        const id = modal.id;
+        if (id.startsWith('modal-')) {
+          const city = id.replace('modal-', '');
+          closeModal(city);
+        } else if (id === 'globalQuickBookModal') {
+          closeQuickBooking();
+        } else if (id === 'destBookingModal') {
+          closeDestBooking();
+        } else if (id === 'destModal' || id === 'expModal') {
+          closeDestinationModal();
+        } else {
+          modal.style.display = 'none';
+          lockBodyScroll(false);
+        }
+      }
+    });
+  }
+});
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('modal') || e.target.classList.contains('dest-booking-modal-overlay') || e.target.classList.contains('exp-modal') || e.target.id === 'globalQuickBookModal' || e.target.id === 'destModal') {
+    const id = e.target.id;
+    if (id.startsWith('modal-')) {
+      closeModal(id.replace('modal-', ''));
+    } else if (id === 'globalQuickBookModal') {
+      closeQuickBooking();
+    } else if (id === 'destBookingModal') {
+      closeDestBooking();
+    } else if (id === 'destModal' || id === 'expModal') {
+      closeDestinationModal();
+    }
+  }
+});
