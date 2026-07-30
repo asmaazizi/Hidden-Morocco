@@ -2182,6 +2182,7 @@ a.btn-primary:hover,
 [data-theme="dark"] .modal .close {
   color: #94A3B8 !important;
 }
+
 [data-theme="dark"] .modal .close:hover {
   color: #FFFFFF !important;
 }
@@ -2261,7 +2262,7 @@ a.btn-primary:hover,
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .tour-details > p {
+[data-theme="dark"] .tour-details>p {
   color: #CBD5E1 !important;
 }
 
@@ -2422,7 +2423,7 @@ a.btn-primary:hover,
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .map-side-content > p {
+[data-theme="dark"] .map-side-content>p {
   color: #CBD5E1 !important;
 }
 

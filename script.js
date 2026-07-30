@@ -668,11 +668,11 @@ window.openQuickBooking = function (destId = 'marrakech') {
 
         <button type="submit" style="
           width:100%; padding:15px; border-radius:99px; border:none;
-          background: linear-gradient(135deg, #F59E0B, #D97706); color:#FFFFFF; font-weight:700;
-          font-size:1rem; cursor:pointer; box-shadow:0 8px 24px rgba(245,158,11,0.35); transition:all 0.3s;
+          background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); color:#FFFFFF; font-weight:700;
+          font-size:1rem; cursor:pointer; box-shadow:0 8px 24px rgba(200,90,50,0.35); transition:all 0.3s;
           display:flex; align-items:center; justify-content:center; gap:8px;
         ">
-          Confirm Expedition Request &nbsp;<i class="fa-solid fa-paper-plane"></i>
+          Confirm Expedition Request &nbsp;<i class="fa-solid fa-compass"></i>
         </button>
       </form>
     </div>

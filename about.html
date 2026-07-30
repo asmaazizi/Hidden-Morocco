@@ -429,12 +429,22 @@
     }
 
     .team-avatar {
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      background: linear-gradient(135deg, var(--hm-terracotta-light), var(--hm-gold-light));
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+      background: #1C2333;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover .team-avatar img {
+      transform: scale(1.08);
     }
 
     .team-info {
@@ -442,14 +452,19 @@
     }
 
     .team-info h4 {
-      font-size: 1.15rem;
-      margin-bottom: 6px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .team-info .team-role {
-      font-size: 0.85rem;
-      color: var(--hm-terracotta);
-      font-weight: 700;
+      font-size: 0.84rem;
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
       margin-bottom: 12px;
     }
 
@@ -676,16 +691,20 @@
       </div>
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-avatar">🧔</div>
+          <div class="team-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Youssef El Alami">
+          </div>
           <div class="team-info">
             <h4>Youssef El Alami</h4>
-            <div class="team-role">Founder & Head Guide</div>
+            <div class="team-role">Founder &amp; Head Guide</div>
             <p>Born in the Medina of Marrakech, Youssef has been guiding international travelers through Morocco's
               hidden gems since 2014.</p>
           </div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">👩</div>
+          <div class="team-avatar">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Fatima Zahra">
+          </div>
           <div class="team-info">
             <h4>Fatima Zahra</h4>
             <div class="team-role">Travel Designer</div>
@@ -694,7 +713,9 @@
           </div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">🧑</div>
+          <div class="team-avatar">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Karim Benhaddou">
+          </div>
           <div class="team-info">
             <h4>Karim Benhaddou</h4>
             <div class="team-role">Desert Expedition Expert</div>
@@ -710,7 +731,7 @@
   <section class="about-cta">
     <h2>Ready to Experience Real Morocco?</h2>
     <p>Let our passionate team craft your most unforgettable journey yet — tailored entirely to you.</p>
-    <a href="booking.html" class="btn-white"><i class="fa-solid fa-paper-plane"></i> Start Planning</a>
+    <a href="booking.html" class="btn-white"><i class="fa-solid fa-compass"></i> Start Planning</a>
   </section>
 
   <!-- Footer -->
