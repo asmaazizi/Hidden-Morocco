@@ -436,6 +436,8 @@
   /* ── 2. Subtle Dark Section Canvas ───────────────────────────────── */
   [data-theme="dark"] .section,
   [data-theme="dark"] .section-alt,
+  [data-theme="dark"] .features-bar,
+  [data-theme="dark"] .hero-stats-strip,
   [data-theme="dark"] .destinations,
   [data-theme="dark"] .story-welcome-section,
   [data-theme="dark"] .story-section,
@@ -447,6 +449,7 @@
   [data-theme="dark"] .travel-form-section,
   [data-theme="dark"] .contact-section,
   [data-theme="dark"] .favorites-section,
+  [data-theme="dark"] .dest-clean-header,
   [data-theme="dark"] div[style*="background: #FAF7F2"],
   [data-theme="dark"] div[style*="background:#FAF7F2"] {
     background: #141824 !important;
@@ -482,25 +485,26 @@
   /* ── Features & Why Cards Crystal-Clear Contrast ── */
   .feature-item,
   .why-card {
-    background: #FFFFFF !important;
-    border: 1px solid rgba(15, 23, 42, 0.08) !important;
-    border-radius: 20px !important;
+    background: #FFFFFF;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 20px;
   }
 
   .feature-item h4,
   .why-card h4 {
-    color: #0F172A !important;
+    color: #0F172A;
   }
 
   .feature-item p,
   .why-card p {
-    color: #475569 !important;
+    color: #475569;
   }
 
   [data-theme="dark"] .feature-item,
   [data-theme="dark"] .why-card {
     background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(212, 175, 55, 0.18) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
   }
 
   [data-theme="dark"] .feature-item h4,
@@ -511,6 +515,38 @@
   [data-theme="dark"] .feature-item p,
   [data-theme="dark"] .why-card p {
     color: #CBD5E1 !important;
+  }
+
+  [data-theme="dark"] .feature-icon {
+    background: rgba(200, 90, 50, 0.18) !important;
+    border: 1px solid rgba(200, 90, 50, 0.35) !important;
+    color: #F08A5D !important;
+  }
+
+  /* ── Hero Stats Showcase in Dark Mode ── */
+  [data-theme="dark"] .hero-stats-inner {
+    background: #1C2333 !important;
+    background-image: radial-gradient(circle at 50% 50%, rgba(200, 90, 50, 0.18) 0%, transparent 70%) !important;
+    border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  [data-theme="dark"] .hero-stat-item {
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  [data-theme="dark"] .hero-stat-icon {
+    background: rgba(212, 160, 23, 0.18) !important;
+    border: 1px solid rgba(212, 160, 23, 0.35) !important;
+    color: #F5D87A !important;
+  }
+
+  [data-theme="dark"] .hero-stat-val {
+    color: #F8FAFC !important;
+  }
+
+  [data-theme="dark"] .hero-stat-item small {
+    color: #94A3B8 !important;
   }
 
   /* ── 3. Subtle Dark Cards ─────────────────────────────────────────── */
