@@ -2400,3 +2400,97 @@ a.btn-primary:hover,
   color: #F08A5D !important;
   border: 1px solid rgba(200, 90, 50, 0.4) !important;
 }
+
+/* ── Map Page Dark Mode & WhatsApp Accent Standardization ── */
+[data-theme="dark"] .map-side-card {
+  background: rgba(10, 14, 26, 0.94) !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .map-side-img::after {
+  background: linear-gradient(to top, rgba(10, 14, 26, 0.95) 0%, transparent 100%) !important;
+}
+
+[data-theme="dark"] .map-side-content h3 {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .map-card-meta {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .map-card-rating {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .map-side-content > p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .map-card-highlights h5 {
+  color: #D4AF37 !important;
+}
+
+[data-theme="dark"] .map-card-highlights li {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .map-card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .price-lbl {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .price-val {
+  color: #FFFFFF !important;
+}
+
+/* WhatsApp Buttons Signature Gradient Standardization */
+.btn-submit,
+.whatsapp-btn,
+.btn-whatsapp,
+.agafay-btn-whatsapp,
+.book-btn,
+button[onclick*="WhatsApp"],
+button[onclick*="sendWhatsApp"],
+button[onclick*="sendDestBookingWhatsApp"],
+a[href*="wa.me"],
+a[href*="whatsapp"],
+.contact-info-card a[href*="whatsapp"],
+.contact-info-card a[href*="wa.me"],
+#simple-chat-button--button {
+  background: linear-gradient(135deg, #C85A32 0%, #D4AF37 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(200, 90, 50, 0.35) !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.btn-submit:hover,
+.whatsapp-btn:hover,
+.btn-whatsapp:hover,
+.agafay-btn-whatsapp:hover,
+.book-btn:hover,
+button[onclick*="WhatsApp"]:hover,
+button[onclick*="sendWhatsApp"]:hover,
+button[onclick*="sendDestBookingWhatsApp"]:hover,
+a[href*="wa.me"]:hover,
+a[href*="whatsapp"]:hover,
+#simple-chat-button--button:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #C85A32 100%) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 28px rgba(200, 90, 50, 0.55), 0 0 14px rgba(212, 175, 55, 0.4) !important;
+}
+
+.btn-submit i,
+.whatsapp-btn i,
+.btn-whatsapp i,
+.book-btn i {
+  color: #FFFFFF !important;
+}

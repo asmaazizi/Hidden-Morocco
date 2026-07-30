@@ -145,7 +145,7 @@ const DESTINATIONS_DB = [
     currency: "EUR",
     rating: 4.7,
     reviewsCount: 160,
-    img: "images/Casablanca/casablanca_hero.png",
+    img: "images/Casablanca/casablanca.png",
     badge: "Modern Hub",
     desc: "Morocco's vibrant economic capital featuring the architectural masterpiece Hassan II Mosque perched directly over the Atlantic ocean.",
     lat: 33.5731,
@@ -948,11 +948,11 @@ window.showMapDestCard = function (dest) {
         <span class="map-card-badge">${dest.badge || 'Featured'}</span>
       </div>
       <div class="map-side-content">
+        <h3>${dest.title}</h3>
         <div class="map-card-meta">
-          <span><i class="fa-solid fa-location-dot"></i> ${dest.region}</span>
+          <span class="map-card-region"><i class="fa-solid fa-location-dot"></i> ${dest.region}</span>
           <span class="map-card-rating"><i class="fa-solid fa-star"></i> ${dest.rating} (${dest.reviewsCount || 100}+ reviews)</span>
         </div>
-        <h3>${dest.title}</h3>
         <p>${dest.desc}</p>
         
         <div class="map-card-highlights">
