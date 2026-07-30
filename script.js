@@ -16,7 +16,7 @@ const AppState = {
 const DESTINATIONS_DB = [
   {
     id: "marrakech",
-    title: "Marrakech Medina & Palaces",
+    title: "Marrakech",
     region: "Marrakech-Safi",
     category: "medina",
     price: 180,
@@ -37,7 +37,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "merzouga",
-    title: "Merzouga Sahara Desert",
+    title: "Merzouga",
     region: "Draâ-Tafilalet",
     category: "desert",
     price: 290,
@@ -58,7 +58,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "chefchaouen",
-    title: "Chefchaouen Blue Pearl",
+    title: "Chefchaouen",
     region: "Tanger-Tetouan-Al Hoceima",
     category: "mountain",
     price: 150,
@@ -78,7 +78,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "essaouira",
-    title: "Essaouira Coastal Escape",
+    title: "Essaouira",
     region: "Marrakech-Safi",
     category: "coastal",
     price: 160,
@@ -98,7 +98,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "ouarzazate",
-    title: "Ouarzazate & Ait Benhaddou",
+    title: "Ouarzazate",
     region: "Draâ-Tafilalet",
     category: "desert",
     price: 210,
@@ -118,7 +118,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "fes",
-    title: "Fes El Bali Ancient Medina",
+    title: "Fes",
     region: "Fès-Meknès",
     category: "medina",
     price: 195,
@@ -138,7 +138,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "casablanca",
-    title: "Casablanca Ocean Hub & Mosque",
+    title: "Casablanca",
     region: "Casablanca-Settat",
     category: "coastal",
     price: 140,
@@ -158,7 +158,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "zagora",
-    title: "Zagora Draa Oasis & Desert",
+    title: "Zagora",
     region: "Draâ-Tafilalet",
     category: "desert",
     price: 220,
@@ -178,7 +178,7 @@ const DESTINATIONS_DB = [
   },
   {
     id: "agadir",
-    title: "Agadir Sun & Sea Resort",
+    title: "Agadir",
     region: "Souss-Massa",
     category: "coastal",
     price: 130,
@@ -487,32 +487,32 @@ function initCounters() {
 function createCardHTML(dest) {
   const favActive = isFavorite(dest.id);
   return `
-    <div class="glass-panel hover-lift" style="border-radius: var(--hm-radius-lg); overflow: hidden; position: relative; background: var(--hm-bg-card);">
-      <div style="position: relative; height: 230px; overflow: hidden;">
-        <img src="${dest.img}" alt="${dest.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
-        <span class="badge badge-gold" style="position: absolute; top: 16px; left: 16px; backdrop-filter: blur(8px);">✦ ${dest.badge}</span>
-        <button class="fav-btn ${favActive ? 'is-active' : ''}" data-id="${dest.id}" onclick="toggleFavorite('${dest.id}', event)" style="position: absolute; top: 16px; right: 16px;" aria-label="Add to Wishlist">
+    <div class="card glass-panel hover-lift">
+      <div class="card-img-wrapper">
+        <img src="${dest.img}" alt="${dest.title}" loading="lazy">
+        <span class="badge badge-gold card-badge">✦ ${dest.badge}</span>
+        <button class="fav-btn card-fav-btn ${favActive ? 'is-active' : ''}" data-id="${dest.id}" onclick="toggleFavorite('${dest.id}', event)" aria-label="Add to Wishlist">
           <i class="fa-${favActive ? 'solid' : 'regular'} fa-heart"></i>
         </button>
       </div>
 
-      <div style="padding: 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="font-size: 0.8rem; font-weight: 700; color: var(--hm-terracotta); text-transform: uppercase; letter-spacing: 0.5px;">${dest.region}</span>
-          <div style="display: flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; color: var(--hm-text-heading);">
-            <i class="fa-solid fa-star" style="color: var(--hm-gold);"></i> ${dest.rating}
-          </div>
+      <div class="card-content">
+        <h3>${dest.title}</h3>
+        <div class="card-meta-row">
+          <span class="card-region"><i class="fa-solid fa-location-dot"></i> ${dest.region}</span>
+          <div class="card-rating"><i class="fa-solid fa-star"></i> ${dest.rating} (${dest.reviewsCount || 100})</div>
         </div>
 
-        <h3 style="font-family: var(--hm-font-serif); font-size: 1.45rem; margin-bottom: 10px;">${dest.title}</h3>
-        <p style="font-size: 0.92rem; color: var(--hm-text-muted); line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${dest.desc}</p>
+        <p>${dest.desc}</p>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hm-border); padding-top: 16px;">
+        <div class="card-footer-row">
           <div>
-            <span style="font-size: 0.78rem; color: var(--hm-text-muted);">From</span>
-            <div style="font-size: 1.25rem; font-weight: 800; color: var(--hm-text-heading);">€${dest.price}</div>
+            <span class="card-price-label">From</span>
+            <div class="card-price-val">€${dest.price}</div>
           </div>
-          <a href="destinations.html#${dest.id}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Explore <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="card-btns">
+            <a href="destinations.html#${dest.id}" class="btn-primary">Explore <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
     </div>

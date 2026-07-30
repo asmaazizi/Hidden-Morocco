@@ -738,40 +738,48 @@
       flex: 1;
     }
 
+    .destinations .card-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #0F172A;
+      line-height: 1.25;
+    }
+
     .card-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      margin-top: 2px;
     }
 
     .card-region {
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 600;
+      color: #64748B;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-region i {
       color: #C85A32;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.8rem;
     }
 
     .card-rating {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 4px;
       font-size: 0.85rem;
       font-weight: 700;
-      color: #0F172A;
+      color: #1E293B;
     }
 
     .card-rating i {
-      color: #D4A017;
-    }
-
-    .destinations .card-content h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #0F172A;
+      color: #F59E0B;
     }
 
     .destinations .card-content p {
@@ -914,11 +922,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Marrakech</h3>
           <div class="card-meta-row">
-            <span class="card-region">Marrakech-Safi</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Marrakech-Safi</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.9 (340)</div>
           </div>
-          <h3>Marrakech Medina & Palaces</h3>
           <p>Imperial city with unique charm, bustling souks, hidden riads, and historic palaces.</p>
           <span class="city-badge">✦ The Red City</span>
           <div class="card-footer-row">
@@ -1082,11 +1090,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Ouarzazate</h3>
           <div class="card-meta-row">
-            <span class="card-region">Draâ-Tafilalet</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Draâ-Tafilalet</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.8 (180)</div>
           </div>
-          <h3>Ouarzazate & Ait Benhaddou</h3>
           <p>The gateway to the desert and cinema. Ancient kasbahs and desert film studios.</p>
           <span class="city-badge">✦ Door of the Desert</span>
           <div class="card-footer-row">
@@ -1287,11 +1295,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Merzouga</h3>
           <div class="card-meta-row">
-            <span class="card-region">Draâ-Tafilalet</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Draâ-Tafilalet</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 5.0 (420)</div>
           </div>
-          <h3>Merzouga Sahara Desert</h3>
           <p>Experience pure magic among golden dunes. Ride camels at sunset and sleep under starry skies.</p>
           <span class="city-badge">✦ The Sea of Dunes</span>
           <div class="card-footer-row">
@@ -1399,11 +1407,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Chefchaouen</h3>
           <div class="card-meta-row">
-            <span class="card-region">Rif Mountains</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Tanger-Tetouan</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.8 (290)</div>
           </div>
-          <h3>Chefchaouen Blue Pearl</h3>
           <p>Wander through world-famous cobalt blue alleyways nestled in the tranquil Rif Mountains.</p>
           <span class="city-badge">✦ The Blue Pearl</span>
           <div class="card-footer-row">
@@ -1611,11 +1619,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Essaouira</h3>
           <div class="card-meta-row">
-            <span class="card-region">Atlantic Coast</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Marrakech-Safi</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.9 (215)</div>
           </div>
-          <h3>Essaouira Coastal Escape</h3>
           <p>Breathe in ocean breezes, historic sea ramparts, fresh grilled seafood, and bohemian galleries.</p>
           <span class="city-badge">✦ Mogador</span>
           <div class="card-footer-row">
@@ -1826,11 +1834,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Fes</h3>
           <div class="card-meta-row">
-            <span class="card-region">Fès-Meknès</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Fès-Meknès</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.9 (310)</div>
           </div>
-          <h3>Fes El Bali Ancient Medina</h3>
           <p>Journey back in time in the world's largest car-free medina. Tanneries, tilework & culture.</p>
           <span class="city-badge">✦ Imperial Capital</span>
           <div class="card-footer-row">
@@ -2087,11 +2095,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Casablanca</h3>
           <div class="card-meta-row">
-            <span class="card-region">Atlantic Coast</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Casablanca-Settat</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.7 (160)</div>
           </div>
-          <h3>Casablanca Ocean Hub</h3>
           <p>Morocco's economic capital by the sea featuring the magnificent oceanfront Hassan II Mosque.</p>
           <span class="city-badge">✦ The White City</span>
           <div class="card-footer-row">
@@ -2305,11 +2313,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Zagora</h3>
           <div class="card-meta-row">
-            <span class="card-region">Draâ-Tafilalet</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Draâ-Tafilalet</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.8 (190)</div>
           </div>
-          <h3>Zagora Draa Oasis & Desert</h3>
           <p>The gateway to the immense Draa Valley. Palm groves, ancient mud kasbahs, and Berber camps.</p>
           <span class="city-badge">✦ Gateway to the Sahara</span>
           <div class="card-footer-row">
@@ -2527,11 +2535,11 @@
           </button>
         </div>
         <div class="card-content">
+          <h3>Agadir</h3>
           <div class="card-meta-row">
-            <span class="card-region">Souss-Massa</span>
+            <span class="card-region"><i class="fa-solid fa-location-dot"></i> Souss-Massa</span>
             <div class="card-rating"><i class="fa-solid fa-star"></i> 4.7 (140)</div>
           </div>
-          <h3>Agadir Sun & Sea Resort</h3>
           <p>Coastal breeze, golden sandy beaches, year-round sunshine, sea promenade, and Atlantic waters.</p>
           <span class="city-badge">✦ The Resort Hub</span>
           <div class="card-footer-row">

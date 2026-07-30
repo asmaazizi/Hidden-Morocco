@@ -561,10 +561,46 @@
   [data-theme="dark"] .faq-item,
   [data-theme="dark"] .story-pillar-item {
     background: #1C2333 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(212, 175, 55, 0.15) !important;
     color: #F8FAFC !important;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
     transition: all 0.3s ease !important;
+  }
+
+  [data-theme="dark"] .card-rating,
+  [data-theme="dark"] .map-card-rating {
+    color: #F8FAFC !important;
+  }
+
+  [data-theme="dark"] .card-rating i,
+  [data-theme="dark"] .map-card-rating i {
+    color: #F59E0B !important;
+  }
+
+  [data-theme="dark"] .card-region {
+    color: #94A3B8 !important;
+  }
+
+  [data-theme="dark"] .card-region i {
+    color: #F08A5D !important;
+  }
+
+  [data-theme="dark"] .destinations .card-content h3,
+  [data-theme="dark"] .card-content h3 {
+    color: #FFFFFF !important;
+  }
+
+  [data-theme="dark"] .destinations .card-content p,
+  [data-theme="dark"] .card-content p {
+    color: #CBD5E1 !important;
+  }
+
+  [data-theme="dark"] .card-price-val {
+    color: #FFFFFF !important;
+  }
+
+  [data-theme="dark"] .card-price-label {
+    color: #94A3B8 !important;
   }
 
   [data-theme="dark"] .card:hover,
