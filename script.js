@@ -1007,11 +1007,11 @@ function initHomeMapPreview() {
       className: '',
       html: `<div style="
         width: 22px; height: 28px;
-        background: #E8622A;
+        background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
         border-radius: 50% 50% 50% 0;
         transform: rotate(-45deg);
         border: 2px solid #fff;
-        box-shadow: 0 2px 8px rgba(232,98,42,0.6);
+        box-shadow: 0 2px 8px rgba(200,90,50,0.6);
         position: relative;
       "><div style="
         position: absolute; top: 50%; left: 50%;
