@@ -356,7 +356,7 @@ function toggleFavorite(id, e) {
   const idx = AppState.favorites.indexOf(id);
   if (idx > -1) {
     AppState.favorites.splice(idx, 1);
-    showToast("Removed from Wishlist ❤️");
+    showToast("Removed from Wishlist");
   } else {
     AppState.favorites.push(id);
     showToast("Added to Wishlist! ✨");
