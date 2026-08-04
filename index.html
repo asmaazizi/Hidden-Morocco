@@ -472,20 +472,25 @@
       width: 54px;
       height: 54px;
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(200, 90, 50, 0.12) 0%, rgba(212, 160, 23, 0.18) 100%);
-      border: 1px solid rgba(200, 90, 50, 0.2);
-      color: #C85A32;
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+      border: none !important;
+      color: #FFFFFF !important;
       font-size: 1.35rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(200, 90, 50, 0.35);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feature-icon i {
+      color: #FFFFFF !important;
     }
 
     .feature-item:hover .feature-icon {
-      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
-      color: #FFFFFF;
-      box-shadow: 0 8px 20px rgba(200, 90, 50, 0.35);
+      background: linear-gradient(135deg, #E7A93C 0%, #C85A32 100%) !important;
+      transform: scale(1.08) rotate(4deg);
+      box-shadow: 0 10px 25px rgba(200, 90, 50, 0.5);
     }
 
     .feature-item h4 {
@@ -552,20 +557,28 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(200, 90, 50, 0.12) 0%, rgba(231, 169, 60, 0.15) 100%);
-      border: 1px solid rgba(200, 90, 50, 0.25);
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+      border: none !important;
+      color: #FFFFFF !important;
       font-size: 1.25rem;
-      color: #C85A32;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(200, 90, 50, 0.35);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .hero-stat-icon i {
-      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #FFFFFF !important;
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+    }
+
+    .hero-stat-item:hover .hero-stat-icon {
+      transform: scale(1.08);
+      box-shadow: 0 10px 25px rgba(200, 90, 50, 0.5);
     }
 
     .hero-stat-val {
