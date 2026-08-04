@@ -3111,3 +3111,130 @@ a[href*="whatsapp"]:hover,
 [data-theme="dark"] .story-pillar-item span {
   color: #94A3B8 !important;
 }
+
+/* ==========================================================================
+   GLOBAL BRAND ACCENT REFINEMENT: OFFICIAL GRADIENT (#C85A32 -> #E7A93C)
+   ========================================================================== */
+
+/* ── 1. All Section Badges & Eyebrows ── */
+.badge,
+.badge-gold,
+.badge-terracotta,
+.badge-primary,
+.section-badge,
+.hero-eyebrow,
+.story-eyebrow,
+.exp-cat-badge {
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.8px !important;
+  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.3) !important;
+  border-radius: 99px !important;
+  padding: 6px 16px !important;
+}
+
+.exp-cat-badge {
+  top: 16px !important;
+  left: 16px !important;
+  padding: 6px 14px !important;
+  font-size: 0.78rem !important;
+}
+
+/* ── 2. Why Choose Us Icon Badges ── */
+.why-icon,
+.why-card .why-icon {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.35rem !important;
+  box-shadow: 0 6px 20px rgba(200, 90, 50, 0.35) !important;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.why-icon i,
+.why-card .why-icon i {
+  color: #FFFFFF !important;
+}
+
+.why-card:hover .why-icon {
+  transform: scale(1.08) rotate(4deg) !important;
+  background: linear-gradient(135deg, #E7A93C 0%, #C85A32 100%) !important;
+  box-shadow: 0 10px 25px rgba(200, 90, 50, 0.5) !important;
+}
+
+.why-card:hover {
+  border-color: rgba(200, 90, 50, 0.4) !important;
+  box-shadow: 0 12px 30px rgba(200, 90, 50, 0.12) !important;
+}
+
+/* ── 3. Review Stars & Rating Stars ── */
+.review-stars,
+.stars,
+.rating-stars,
+.card-rating i,
+.dest-card-rating i {
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 2px !important;
+  display: inline-block !important;
+}
+
+/* ── 4. Review Avatars (JL, SM, AR) ── */
+.review-avatar,
+.author-avatar,
+.rev-avatar {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  box-shadow: 0 6px 18px rgba(200, 90, 50, 0.4) !important;
+}
+
+/* ── 5. Category Card Links (Explore Desert Tours ->, etc.) ── */
+.exp-cat-link,
+.card-link,
+.btn-link {
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+}
+
+.exp-cat-link i,
+.card-link i,
+.btn-link i {
+  color: #E7A93C !important;
+  -webkit-text-fill-color: #E7A93C !important;
+  transition: transform 0.25s ease !important;
+}
+
+.exp-cat-link:hover i,
+.card-link:hover i,
+.btn-link:hover i {
+  transform: translateX(4px) !important;
+  color: #C85A32 !important;
+  -webkit-text-fill-color: #C85A32 !important;
+}
