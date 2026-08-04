@@ -56,7 +56,14 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="hn-nav-actions">
-        <select class="lang-switcher" id="langSwitcher"><option value="en">🌐 EN</option><option value="fr">🌐 FR</option><option value="es">🌐 ES</option></select>
+        <div class="lang-wrapper">
+          <i class="fa-solid fa-globe lang-icon"></i>
+          <select class="lang-switcher" id="langSwitcher" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+            <option value="es">ES</option>
+          </select>
+        </div>
         <button class="nav-icon-btn theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
         <a href="favorites.html" class="nav-icon-btn active" style="border-color: var(--hm-terracotta); color: var(--hm-terracotta);" aria-label="Wishlist"><i class="fa-solid fa-heart"></i><span class="fav-count-badge">0</span></a>
         <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>

@@ -2748,11 +2748,32 @@ a[href*="whatsapp"]:hover,
   gap: 10px !important;
 }
 
-/* Language Selector Pill */
+/* Language Selector Pill & Monochromatic Globe Icon */
+.lang-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.lang-wrapper i.lang-icon {
+  position: absolute;
+  left: 14px;
+  pointer-events: none;
+  font-size: 0.88rem;
+  color: var(--hm-text-heading, #0F172A);
+  transition: color 0.25s ease;
+  z-index: 2;
+}
+
+.lang-wrapper:hover i.lang-icon {
+  color: #C85A32;
+}
+
 .lang-switcher,
 .lang-sw {
   height: 40px !important;
-  padding: 0 16px !important;
+  padding: 0 16px 0 34px !important;
   background: var(--hm-bg-card-hover, rgba(15, 23, 42, 0.04)) !important;
   border: 1px solid var(--hm-border, rgba(15, 23, 42, 0.12)) !important;
   color: var(--hm-text-heading, #0F172A) !important;
@@ -2780,6 +2801,14 @@ a[href*="whatsapp"]:hover,
   color: #C85A32 !important;
   box-shadow: 0 4px 14px rgba(200, 90, 50, 0.12) !important;
   transform: translateY(-1px) !important;
+}
+
+[data-theme="dark"] .lang-wrapper i.lang-icon {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .lang-wrapper:hover i.lang-icon {
+  color: #E7A93C !important;
 }
 
 [data-theme="dark"] .lang-switcher,
