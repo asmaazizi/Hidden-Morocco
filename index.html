@@ -505,21 +505,26 @@
 
     /* ── Stats Banner Showcase ── */
     .hero-stats-strip {
-      background: #FAF7F2;
+      background: var(--hm-bg-main);
       padding: 0 24px 72px;
     }
 
     .hero-stats-inner {
       max-width: 1240px;
       margin: 0 auto;
-      background: #0F172A;
-      background-image: radial-gradient(circle at 50% 50%, rgba(200, 90, 50, 0.16) 0%, transparent 70%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #FFFFFF;
+      border: 1px solid rgba(15, 23, 42, 0.08);
       border-radius: 24px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+    }
+
+    [data-theme="dark"] .hero-stats-inner {
+      background: #0F172A !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
     }
 
     .hero-stat-item {
@@ -527,12 +532,16 @@
       align-items: center;
       gap: 20px;
       padding: 32px 36px;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(15, 23, 42, 0.08);
       transition: background 0.3s ease;
     }
 
+    [data-theme="dark"] .hero-stat-item {
+      border-right-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
     .hero-stat-item:hover {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(200, 90, 50, 0.03);
     }
 
     .hero-stat-item:last-child {
@@ -540,33 +549,47 @@
     }
 
     .hero-stat-icon {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      background: rgba(212, 160, 23, 0.15);
-      border: 1px solid rgba(212, 160, 23, 0.3);
+      background: linear-gradient(135deg, rgba(200, 90, 50, 0.12) 0%, rgba(231, 169, 60, 0.15) 100%);
+      border: 1px solid rgba(200, 90, 50, 0.25);
       font-size: 1.25rem;
-      color: #D4A017;
+      color: #C85A32;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
+    .hero-stat-icon i {
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .hero-stat-val {
       font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
       font-weight: 800;
-      color: #FFFFFF;
+      color: #0F172A;
       line-height: 1;
+    }
+
+    [data-theme="dark"] .hero-stat-val {
+      color: #FFFFFF !important;
     }
 
     .hero-stat-item small {
       display: block;
       font-size: 0.85rem;
-      color: #94A3B8;
+      color: #64748B;
       margin-top: 6px;
       font-weight: 500;
+    }
+
+    [data-theme="dark"] .hero-stat-item small {
+      color: #94A3B8 !important;
     }
 
     @media (max-width: 1024px) {

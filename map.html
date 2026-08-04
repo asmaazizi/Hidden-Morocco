@@ -181,10 +181,14 @@
     /* ── Map Header Hero ───────────────────────────────────────── */
     .map-hero {
       padding: 130px 24px 36px;
-      background: #0F172A;
-      background-image: radial-gradient(circle at 50% 30%, rgba(200, 90, 50, 0.15) 0%, transparent 70%);
+      background: var(--hm-bg-main);
       text-align: center;
       position: relative;
+    }
+
+    [data-theme="dark"] .map-hero {
+      background: #0F172A !important;
+      background-image: radial-gradient(circle at 50% 30%, rgba(200, 90, 50, 0.15) 0%, transparent 70%) !important;
     }
 
     .map-hero-inner {
@@ -196,9 +200,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(212, 160, 23, 0.14);
-      border: 1px solid rgba(212, 160, 23, 0.35);
-      color: #D4A017;
+      background: linear-gradient(135deg, rgba(200, 90, 50, 0.12) 0%, rgba(231, 169, 60, 0.15) 100%);
+      border: 1px solid rgba(200, 90, 50, 0.25);
+      color: #C85A32;
       padding: 6px 16px;
       border-radius: 99px;
       font-size: 0.76rem;
@@ -208,15 +212,25 @@
       margin-bottom: 16px;
     }
 
+    [data-theme="dark"] .hero-eyebrow {
+      background: rgba(200, 90, 50, 0.2) !important;
+      border-color: rgba(231, 169, 60, 0.35) !important;
+      color: #E7A93C !important;
+    }
+
     .map-hero h1 {
       font-family: var(--hm-font-serif);
       font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      color: #FFFFFF;
+      color: var(--hm-text-heading);
       margin-bottom: 16px;
       font-weight: 700;
       position: relative;
       display: inline-block;
       padding-bottom: 14px;
+    }
+
+    [data-theme="dark"] .map-hero h1 {
+      color: #FFFFFF !important;
     }
 
     .map-hero h1::after {
@@ -227,16 +241,20 @@
       transform: translateX(-50%);
       width: 70px;
       height: 3px;
-      background: #C85A32;
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
       border-radius: 99px;
     }
 
     .map-hero p {
       font-size: 1.05rem;
-      color: #FAF7F2;
+      color: var(--hm-text-muted);
       line-height: 1.65;
       max-width: 620px;
       margin: 12px auto 0;
+    }
+
+    [data-theme="dark"] .map-hero p {
+      color: #CBD5E1 !important;
     }
 
     /* ── Map Dashboard Layout ──────────────────────────────────── */

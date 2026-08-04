@@ -2492,3 +2492,248 @@ a[href*="whatsapp"]:hover,
 .book-btn i {
   color: #FFFFFF !important;
 }
+
+/* ==========================================================================
+   DESTINATION MODALS: TOUR META & EXPEDITION HIGHLIGHTS LUXURY STYLING
+   ========================================================================== */
+
+/* ── 1. Trip Quick Info / Tour Meta Bar ── */
+.tour-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  background: linear-gradient(135deg, rgba(200, 90, 50, 0.04) 0%, rgba(231, 169, 60, 0.08) 100%);
+  border: 1px solid rgba(200, 90, 50, 0.2);
+  border-radius: var(--hm-radius-lg, 16px);
+  padding: 18px 24px;
+  margin: 28px 0 36px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+}
+
+.tour-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #0F172A;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s ease;
+}
+
+.tour-meta .meta-item:hover {
+  border-color: rgba(200, 90, 50, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 90, 50, 0.12);
+}
+
+.tour-meta .meta-item i {
+  font-size: 1.05rem;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tour-meta .meta-item strong {
+  font-weight: 700;
+  color: #0F172A;
+}
+
+[data-theme="dark"] .tour-meta {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border-color: rgba(200, 90, 50, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .tour-meta .meta-item {
+  background: #1C2333 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .tour-meta .meta-item strong {
+  color: #FFFFFF !important;
+}
+
+/* ── 2. Expedition Highlights Section & Cards ── */
+.activities-luxury {
+  margin: 40px 0;
+}
+
+.activities-luxury .section-title {
+  font-family: var(--hm-font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0F172A;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.activities-luxury .section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
+  margin: 10px auto 0;
+  border-radius: 99px;
+}
+
+.activities-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.activities-list li {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--hm-radius-md, 12px);
+  padding: 22px 24px 22px 54px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  list-style: none !important;
+}
+
+.activities-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.activities-list li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 90, 50, 0.35);
+  box-shadow: 0 12px 30px rgba(200, 90, 50, 0.12);
+}
+
+.activities-list li h4 {
+  font-family: var(--hm-font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+}
+
+.activities-list li p {
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}
+
+[data-theme="dark"] .activities-list li {
+  background: #1C2333 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .activities-list li h4 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .activities-list li p {
+  color: #CBD5E1 !important;
+}
+
+/* ── 3. Included & Excluded Lists in Modals ── */
+.tour-inc-exc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 36px 0;
+}
+
+.tour-inc,
+.tour-exc {
+  border-radius: var(--hm-radius-md, 12px);
+  padding: 24px;
+}
+
+.tour-inc {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.tour-exc {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.tour-inc h4 {
+  color: #059669;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-exc h4 {
+  color: #DC2626;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-inc ul,
+.tour-exc ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.tour-inc ul li,
+.tour-exc ul li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.tour-inc ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #10B981;
+  font-weight: 800;
+}
+
+.tour-exc ul li::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #EF4444;
+  font-weight: 800;
+}
+
+/* Generic modal list reset */
+.modal-content ul {
+  list-style: none;
+  padding-left: 0;
+}
