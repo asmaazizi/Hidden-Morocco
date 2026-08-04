@@ -208,7 +208,7 @@ const TRANSLATIONS = {
     nav_reviews: "Reviews",
     nav_contact: "Contact",
     nav_favorites: "Wishlist",
-    nav_book: "Book Expedition",
+    nav_book: "Book Now",
     hero_title: "Morocco Is Not Just A Destination. It's A Feeling.",
     hero_sub: "Discover hidden kasbahs, silent desert mornings under starry skies, and ancient medinas crafted by local storytellers.",
     search_placeholder: "Where to? e.g. Sahara, Chefchaouen",

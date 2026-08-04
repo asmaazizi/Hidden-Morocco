@@ -2737,3 +2737,130 @@ a[href*="whatsapp"]:hover,
   list-style: none;
   padding-left: 0;
 }
+
+/* ==========================================================================
+   GLOBAL NAVBAR ACTIONS (LANGUAGE SELECTOR & CTA BUTTON REFINEMENT)
+   ========================================================================== */
+
+.hn-nav-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Language Selector Pill */
+.lang-switcher,
+.lang-sw {
+  height: 40px !important;
+  padding: 0 16px !important;
+  background: var(--hm-bg-card-hover, rgba(15, 23, 42, 0.04)) !important;
+  border: 1px solid var(--hm-border, rgba(15, 23, 42, 0.12)) !important;
+  color: var(--hm-text-heading, #0F172A) !important;
+  border-radius: 99px !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.lang-switcher:hover,
+.lang-sw:hover,
+.lang-switcher:focus,
+.lang-sw:focus {
+  border-color: rgba(200, 90, 50, 0.4) !important;
+  color: #C85A32 !important;
+  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+[data-theme="dark"] .lang-switcher,
+[data-theme="dark"] .lang-sw {
+  background: #1C2333 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .lang-switcher option,
+[data-theme="dark"] .lang-sw option {
+  background: #1C2333 !important;
+  color: #F8FAFC !important;
+}
+
+/* Navbar Icon Buttons */
+.nav-icon-btn,
+.nav-icon-btn2 {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--hm-border, rgba(15, 23, 42, 0.12)) !important;
+  background: var(--hm-bg-card-hover, rgba(15, 23, 42, 0.04)) !important;
+  color: var(--hm-text-heading, #0F172A) !important;
+  font-size: 0.95rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+}
+
+.nav-icon-btn:hover,
+.nav-icon-btn2:hover {
+  border-color: #C85A32 !important;
+  color: #C85A32 !important;
+  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+[data-theme="dark"] .nav-icon-btn,
+[data-theme="dark"] .nav-icon-btn2 {
+  background: #1C2333 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+/* Navbar Primary CTA Button ("Book Now") */
+.hn-nav-book,
+.book-btn-nav,
+.book-btn2,
+.nav-book-btn {
+  height: 40px !important;
+  padding: 0 22px !important;
+  font-size: 0.88rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 99px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border: none !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 6px 20px rgba(200, 90, 50, 0.35) !important;
+  white-space: nowrap !important;
+}
+
+.hn-nav-book:hover,
+.book-btn-nav:hover,
+.book-btn2:hover,
+.nav-book-btn:hover {
+  background: linear-gradient(135deg, #E7A93C 0%, #C85A32 100%) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 26px rgba(200, 90, 50, 0.5) !important;
+}
