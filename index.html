@@ -21,12 +21,31 @@
       z-index: 1000;
       padding: 16px 40px;
       transition: all 0.35s ease;
-      background: transparent;
+      background: transparent !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Home Page Dark Mode Transparent Nav Over Hero */
+    body.page-home [data-theme="dark"] .hn-nav:not(.glass-nav),
+    body.page-home [data-theme="dark"] #siteNav:not(.glass-nav) {
+      background: transparent !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
     }
 
     .hn-nav.glass-nav {
-      background: var(--hm-bg-nav);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      background: var(--hm-bg-nav) !important;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    body.page-home [data-theme="dark"] .hn-nav.glass-nav,
+    body.page-home [data-theme="dark"] #siteNav.glass-nav {
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
     }
 
     .hn-nav-inner {
@@ -1223,18 +1242,18 @@
     }
 
     .review-card {
-      background: #1E293B;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #FFFFFF;
+      border: 1px solid rgba(15, 23, 42, 0.08);
       border-radius: 20px;
       padding: 34px 28px;
       transition: all 0.35s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
     }
 
     .review-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(200, 90, 50, 0.4);
-      box-shadow: 0 16px 40px rgba(200, 90, 50, 0.2);
+      border-color: rgba(200, 90, 50, 0.35);
+      box-shadow: 0 16px 40px rgba(200, 90, 50, 0.12);
     }
 
     .review-stars {
@@ -1247,8 +1266,9 @@
     .review-text {
       font-size: 0.97rem;
       line-height: 1.75;
-      color: #CBD5E1;
+      color: #1E293B;
       font-style: italic;
+      font-weight: 500;
       margin-bottom: 24px;
     }
 
@@ -1262,7 +1282,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #C85A32 0%, #A5411E 100%);
+      background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1270,19 +1290,21 @@
       color: #FFFFFF;
       font-size: 0.9rem;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(200, 90, 50, 0.4);
+      box-shadow: 0 4px 14px rgba(200, 90, 50, 0.35);
     }
 
     .review-author strong {
       display: block;
       font-size: 0.95rem;
+      font-weight: 800;
       margin-bottom: 2px;
-      color: #FFFFFF;
+      color: #0F172A;
     }
 
     .review-author span {
       font-size: 0.82rem;
-      color: #94A3B8;
+      color: #475569;
+      font-weight: 500;
     }
 
     /* ── CTA Banner ─────────────────────────────────────────────── */
@@ -1598,7 +1620,7 @@
   </style>
 </head>
 
-<body>
+<body class="page-home">
 
   <!-- Navigation -->
   <nav class="hn-nav" id="siteNav">
@@ -1761,7 +1783,6 @@
 
         <!-- Right Column: Story & Philosophy -->
         <div class="story-content-box">
-          <span class="story-eyebrow">OUR STORY &amp; PHILOSOPHY</span>
           <h2 class="story-main-title">
             Morocco is not just a destination.<br>
             <span class="story-feeling-text">It's a feeling.</span>

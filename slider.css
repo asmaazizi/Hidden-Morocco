@@ -92,9 +92,11 @@
 
 .acc-content h4 {
   margin: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.6rem;
   line-height: 1.2;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

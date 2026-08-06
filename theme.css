@@ -401,12 +401,25 @@
     transition: background-color 0.4s ease, color 0.4s ease;
   }
 
-  /* ── 1. Subtle Dark Navbar ────────────────────────────────────────── */
-  [data-theme="dark"] .hn-nav,
-  [data-theme="dark"] #siteNav,
-  [data-theme="dark"] .site-nav {
-    background: rgba(20, 24, 36, 0.95) !important;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+  /* ── 1. Dark Mode Navbar for Inner Pages & Scrolled State ────────────────────────────────────────── */
+  html[data-theme="dark"] body:not(.page-home) .hn-nav,
+  html[data-theme="dark"] body:not(.page-home) #siteNav,
+  html[data-theme="dark"] body:not(.page-home) .site-nav,
+  html[data-theme="dark"] body.page-home .hn-nav.glass-nav,
+  html[data-theme="dark"] body.page-home #siteNav.glass-nav {
+    background: rgba(18, 23, 36, 0.96) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* ── Home Page Top Unscrolled Navbar Exception (ALWAYS 100% Transparent in Light & Dark Mode) ── */
+  html[data-theme="dark"] body.page-home .hn-nav:not(.glass-nav),
+  html[data-theme="dark"] body.page-home #siteNav:not(.glass-nav),
+  body.page-home .hn-nav:not(.glass-nav),
+  body.page-home #siteNav:not(.glass-nav) {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
 
   [data-theme="dark"] .hn-logo-text,
@@ -556,7 +569,6 @@
   [data-theme="dark"] .team-card,
   [data-theme="dark"] .value-card,
   [data-theme="dark"] .contact-info-card,
-  [data-theme="dark"] .contact-form-card,
   [data-theme="dark"] .faq-item,
   [data-theme="dark"] .story-pillar-item {
     background: #1C2333 !important;
@@ -1685,11 +1697,11 @@
     margin-top: 48px !important;
     margin-bottom: 48px !important;
     padding: 40px !important;
-    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%) !important;
-    color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
     border-radius: 28px !important;
-    border: 1px solid rgba(212, 175, 55, 0.3) !important;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.05) !important;
     position: relative !important;
     overflow: hidden !important;
   }
@@ -1701,7 +1713,7 @@
     right: -20% !important;
     width: 300px !important;
     height: 300px !important;
-    background: radial-gradient(circle, rgba(200, 90, 50, 0.18) 0%, transparent 70%) !important;
+    background: radial-gradient(circle, rgba(200, 90, 50, 0.08) 0%, transparent 70%) !important;
     pointer-events: none !important;
   }
 
@@ -1709,7 +1721,7 @@
   .travel-title {
     font-family: 'Playfair Display', Georgia, serif !important;
     font-size: 2rem !important;
-    color: #FFFFFF !important;
+    color: #0F172A !important;
     margin-bottom: 28px !important;
     text-align: center !important;
     letter-spacing: 0.5px !important;
@@ -1722,7 +1734,7 @@
     display: block !important;
     width: 60px !important;
     height: 3px !important;
-    background: #D4AF37 !important;
+    background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
     margin: 12px auto 0 !important;
     border-radius: 99px !important;
   }
@@ -1734,21 +1746,20 @@
   }
 
   .travel-item {
-    background: rgba(255, 255, 255, 0.07) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: #FAF7F2 !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
     border-radius: 20px !important;
     padding: 24px 22px !important;
     text-align: left !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03) !important;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
   .travel-item:hover {
     transform: translateY(-6px) !important;
-    background: rgba(255, 255, 255, 0.14) !important;
-    border-color: #D4AF37 !important;
-    box-shadow: 0 16px 36px rgba(212, 175, 55, 0.2) !important;
+    background: #FFFFFF !important;
+    border-color: rgba(200, 90, 50, 0.35) !important;
+    box-shadow: 0 12px 30px rgba(200, 90, 50, 0.12) !important;
   }
 
   .travel-item span {
@@ -1759,13 +1770,17 @@
     font-weight: 800 !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
-    color: #D4AF37 !important;
+    color: #C85A32 !important;
     margin-bottom: 10px !important;
+  }
+
+  .travel-item span i {
+    color: #C85A32 !important;
   }
 
   .travel-item p {
     font-size: 0.92rem !important;
-    color: #CBD5E1 !important;
+    color: #475569 !important;
     line-height: 1.6 !important;
     margin: 0 !important;
     background: transparent !important;
@@ -2189,10 +2204,12 @@ a.btn-primary:hover,
 
 /* How to Travel Section in Modals */
 [data-theme="dark"] .travel-info {
-  background: transparent !important;
-  border: none !important;
+  background: #121724 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
 }
 
+[data-theme="dark"] .travel-info h3,
 [data-theme="dark"] .travel-title {
   color: #F8FAFC !important;
 }
@@ -2205,15 +2222,34 @@ a.btn-primary:hover,
 }
 
 [data-theme="dark"] .travel-item span {
-  color: #F5D87A !important;
+  color: #E7A93C !important;
 }
 
 [data-theme="dark"] .travel-item span i {
-  color: #F08A5D !important;
+  color: #E7A93C !important;
 }
 
 [data-theme="dark"] .travel-item p {
   color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .review-card {
+  background: #1C2333 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .review-text {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .review-author strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .review-author span {
+  color: #94A3B8 !important;
 }
 
 /* Marrakech Accordion */
@@ -3116,30 +3152,81 @@ a[href*="whatsapp"]:hover,
    GLOBAL BRAND ACCENT REFINEMENT: OFFICIAL GRADIENT (#C85A32 -> #E7A93C)
    ========================================================================== */
 
-/* ── 1. All Section Badges & Eyebrows ── */
-.badge,
-.badge-gold,
-.badge-terracotta,
-.badge-primary,
-.section-badge,
+/* ── Minimalist Hero Eyebrow with Fine Gold Border ── */
 .hero-eyebrow,
-.story-eyebrow,
-.exp-cat-badge {
-  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+.hn-hero-eyebrow {
+  background: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(231, 169, 60, 0.45) !important;
   color: #FFFFFF !important;
-  border: none !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.8px !important;
-  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.3) !important;
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase !important;
   border-radius: 99px !important;
-  padding: 6px 16px !important;
+  padding: 8px 24px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  transition: all 0.3s ease !important;
 }
 
-.exp-cat-badge {
-  top: 16px !important;
-  left: 16px !important;
-  padding: 6px 14px !important;
+.hero-eyebrow:hover {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border-color: rgba(231, 169, 60, 0.75) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* ── Glassmorphic Crystal Badges on Photos/Cards ── */
+.card-badge,
+.exp-cat-badge,
+.acc-tag,
+.photo-badge,
+.image-badge,
+.card-badge.badge-gold,
+.card-badge.badge-terracotta,
+.card-badge.badge-primary {
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(14px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
   font-size: 0.78rem !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  border-radius: 99px !important;
+  padding: 8px 22px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.hero-eyebrow:hover,
+.story-eyebrow:hover,
+.card-badge:hover,
+.exp-cat-badge:hover,
+.acc-tag:hover {
+  background: rgba(15, 23, 42, 0.78) !important;
+  border-color: rgba(231, 169, 60, 0.6) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Global Vibrant Brand Orange Contact Info Icons ── */
+.contact-info-icon {
+  background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 20px rgba(200, 90, 50, 0.35) !important;
+}
+
+.contact-info-icon i {
+  color: #FFFFFF !important;
 }
 
 /* ── 2. Why Choose Us Icon Badges ── */
@@ -3237,4 +3324,64 @@ a[href*="whatsapp"]:hover,
   transform: translateX(4px) !important;
   color: #C85A32 !important;
   -webkit-text-fill-color: #C85A32 !important;
+}
+
+/* ── 6. Review Cards Typography Contrast ── */
+.review-text {
+  color: #1E293B !important;
+}
+
+.review-author strong {
+  color: #0F172A !important;
+}
+
+.review-author span {
+  color: #475569 !important;
+}
+
+[data-theme="dark"] .review-text {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .review-author strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .review-author span {
+  color: #94A3B8 !important;
+}
+
+/* ── 7. Accordion Photo Card Overlay & Titles (Always Crisp White on Photo Overlays) ── */
+.acc-content h4,
+.acc-item .acc-content h4,
+.marr-accordion .acc-content h4 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+.acc-content .acc-desc,
+.acc-item .acc-content .acc-desc {
+  color: #F8FAFC !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+.acc-content .acc-tag,
+.acc-item .acc-content .acc-tag {
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(14px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  border-radius: 99px !important;
+  padding: 6px 14px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.acc-overlay,
+.acc-item .acc-overlay {
+  background: linear-gradient(0deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.45) 45%, rgba(0, 0, 0, 0) 100%) !important;
 }

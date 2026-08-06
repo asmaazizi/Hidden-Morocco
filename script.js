@@ -598,79 +598,94 @@ window.openQuickBooking = function (destId = 'marrakech') {
     document.body.appendChild(modal);
   }
 
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const modalBg = isDark ? '#121724' : '#FFFFFF';
+  const modalBorder = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(15,23,42,0.08)';
+  const textColor = isDark ? '#F8FAFC' : '#0F172A';
+  const subTextColor = isDark ? '#CBD5E1' : '#475569';
+  const inputBg = isDark ? '#1C2333' : '#FFFFFF';
+  const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(15,23,42,0.14)';
+  const priceBoxBg = isDark ? '#1C2333' : 'linear-gradient(135deg, rgba(200, 90, 50, 0.05) 0%, rgba(231, 169, 60, 0.1) 100%)';
+  const priceBoxBorder = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(200, 90, 50, 0.25)';
+
   modal.innerHTML = `
     <div class="qb-modal-content" style="
-      background: #FFFFFF; border: 1px solid rgba(15,23,42,0.08); border-radius: 24px;
-      width: min(580px, 95vw); max-height: 90vh; overflow-y: auto; padding: 32px;
-      box-shadow: 0 25px 60px rgba(15,23,42,0.2); position: relative; color: #0F172A; margin: auto;
+      background: ${modalBg}; border: 1px solid ${modalBorder}; border-radius: 28px;
+      width: min(580px, 95vw); max-height: 90vh; overflow-y: auto; padding: 36px 32px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25); position: relative; color: ${textColor}; margin: auto;
     ">
-      <button onclick="window.closeQuickBooking()" style="
-        position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%;
-        border: 1px solid rgba(15,23,42,0.08); background: #FAF7F2; color: #0F172A;
+      <button onclick="window.closeQuickBooking()" aria-label="Close" style="
+        position: absolute; top: 22px; right: 22px; width: 38px; height: 38px; border-radius: 50%;
+        border: 1px solid ${inputBorder}; background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.04)'}; color: ${textColor};
         font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-        transition: background 0.2s;
+        transition: all 0.2s ease;
       ">&times;</button>
 
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
-        <span style="background: rgba(200,90,50,0.12); color:#C85A32; padding:6px 14px; border-radius:99px; font-size:0.78rem; font-weight:700; text-transform:uppercase;">✦ Instant Booking</span>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom: 18px;">
+        <span style="background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); color: #FFFFFF; padding: 6px 16px; border-radius: 99px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 14px rgba(200, 90, 50, 0.3);">✦ Instant Booking</span>
       </div>
 
-      <h3 class="qb-title" style="font-family: var(--hm-font-serif); font-size: 1.8rem; margin-bottom: 8px; color: #0F172A;">Plan Your Moroccan Expedition</h3>
-      <p class="qb-desc" style="color: #475569; font-size: 0.92rem; margin-bottom: 24px; line-height: 1.6;">Customize your trip details below. Live pricing updates automatically.</p>
+      <h3 class="qb-title" style="font-family: var(--hm-font-serif, 'Playfair Display', Georgia, serif); font-size: 1.85rem; font-weight: 800; margin-bottom: 8px; color: ${textColor};">Plan Your Moroccan Expedition</h3>
+      <p class="qb-desc" style="color: ${subTextColor}; font-size: 0.92rem; margin-bottom: 26px; line-height: 1.6;">Customize your trip details below. Live pricing updates automatically.</p>
 
       <form id="quickBookingForm" onsubmit="window.handleQuickBookSubmit(event)">
-        <div style="margin-bottom: 18px;">
-          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Select Destination</label>
+        <div style="margin-bottom: 20px;">
+          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:${textColor}; margin-bottom:8px;">Select Destination</label>
           <select id="qb-dest" onchange="window.updateQuickBookPrice()" style="
-            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
-            background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit;
+            width:100%; padding:13px 16px; border-radius:14px; border:1px solid ${inputBorder};
+            background:${inputBg}; color:${textColor}; font-size:0.95rem; font-weight:600; outline:none; font-family:inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor:pointer;
           ">
             ${DESTINATIONS_DB.map(d => `<option value="${d.id}" ${d.id === dest.id ? 'selected' : ''}>${d.title} (€${d.price}/person)</option>`).join('')}
           </select>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
           <div>
-            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travel Date</label>
+            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:${textColor}; margin-bottom:8px;">Travel Date</label>
             <input type="date" id="qb-date" required style="
-              width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
-              background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
+              width:100%; padding:13px 16px; border-radius:14px; border:1px solid ${inputBorder};
+              background:${inputBg}; color:${textColor}; font-size:0.95rem; font-weight:600; outline:none; font-family:inherit; box-sizing:border-box;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             ">
           </div>
           <div>
-            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Travelers</label>
-            <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid rgba(15,23,42,0.15); border-radius:12px; overflow:hidden;">
-              <button type="button" onclick="window.changeTravelers(-1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">-</button>
-              <input type="number" id="qb-travelers" value="2" min="1" max="20" readonly style="width:100%; text-align:center; border:none; background:transparent; color:#0F172A; font-size:1rem; font-weight:700;">
-              <button type="button" onclick="window.changeTravelers(1)" style="width:40px; height:44px; border:none; background:transparent; color:#0F172A; font-size:1.2rem; cursor:pointer;">+</button>
+            <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:${textColor}; margin-bottom:8px;">Travelers</label>
+            <div style="display:flex; align-items:center; background:${inputBg}; border:1px solid ${inputBorder}; border-radius:14px; overflow:hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+              <button type="button" onclick="window.changeTravelers(-1)" style="width:44px; height:46px; border:none; background:transparent; color:${textColor}; font-size:1.25rem; font-weight:700; cursor:pointer;">-</button>
+              <input type="number" id="qb-travelers" value="2" min="1" max="20" readonly style="width:100%; text-align:center; border:none; background:transparent; color:${textColor}; font-size:1.05rem; font-weight:800;">
+              <button type="button" onclick="window.changeTravelers(1)" style="width:44px; height:46px; border:none; background:transparent; color:${textColor}; font-size:1.25rem; font-weight:700; cursor:pointer;">+</button>
             </div>
           </div>
         </div>
 
-        <div style="margin-bottom: 22px;">
-          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:700; color:#334155; margin-bottom:8px;">Full Name</label>
+        <div style="margin-bottom: 24px;">
+          <label class="qb-label" style="display:block; font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:${textColor}; margin-bottom:8px;">Full Name</label>
           <input type="text" id="qb-name" placeholder="e.g. Sarah Jenkins" required style="
-            width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(15,23,42,0.15);
-            background:#FAF7F2; color:#0F172A; font-size:0.92rem; outline:none; font-family:inherit; box-sizing:border-box;
+            width:100%; padding:13px 16px; border-radius:14px; border:1px solid ${inputBorder};
+            background:${inputBg}; color:${textColor}; font-size:0.95rem; font-weight:600; outline:none; font-family:inherit; box-sizing:border-box;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
           ">
         </div>
 
         <div class="qb-price-box" style="
-          background: #0F172A; border: 1px solid rgba(212,175,55,0.3);
-          border-radius: 16px; padding: 18px 20px; margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center;
+          background: ${priceBoxBg};
+          border: 1px solid ${priceBoxBorder};
+          border-radius: 18px; padding: 20px 24px; margin-bottom: 26px; display:flex; justify-content:space-between; align-items:center;
+          box-shadow: 0 6px 20px rgba(200, 90, 50, 0.06);
         ">
           <div>
-            <span style="font-size:0.82rem; color:#94A3B8; display:block;">Estimated Total Price</span>
-            <span style="font-size:0.8rem; color:#F59E0B; font-weight:700;">100% Private Expedition</span>
+            <span style="font-size:0.84rem; font-weight:700; color:${textColor}; display:block; margin-bottom: 2px;">Estimated Total Price</span>
+            <span style="font-size:0.82rem; font-weight:800; background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✦ 100% Private Expedition</span>
           </div>
-          <div id="qb-total-price" style="font-size: 1.65rem; font-weight: 800; color: #F59E0B;">€360</div>
+          <div id="qb-total-price" style="font-size: 1.9rem; font-weight: 800; background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">€360</div>
         </div>
 
         <button type="submit" style="
-          width:100%; padding:15px; border-radius:99px; border:none;
-          background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); color:#FFFFFF; font-weight:700;
-          font-size:1rem; cursor:pointer; box-shadow:0 8px 24px rgba(200,90,50,0.35); transition:all 0.3s;
-          display:flex; align-items:center; justify-content:center; gap:8px;
+          width:100%; padding:16px; border-radius:99px; border:none;
+          background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); color:#FFFFFF; font-weight:800;
+          font-size:1.02rem; cursor:pointer; box-shadow:0 8px 25px rgba(200,90,50,0.4); transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          display:flex; align-items:center; justify-content:center; gap:10px;
         ">
           Confirm Expedition Request &nbsp;<i class="fa-solid fa-compass"></i>
         </button>
