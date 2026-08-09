@@ -1052,18 +1052,38 @@
     }
   }
 
-  /* ── Global Navbar & Logo Perfection Fix ───────────────────────── */
+  /* ── Ultra-Luxury Horizontal Combination Logo ("Discover Hidden Morocco") ── */
+  .hn-logo-text,
+  .hn-logo span,
+  .auth-brand span {
+    display: none !important;
+  }
+
   .hn-logo img,
   .footer-brand img,
-  .hn-logo-img {
-    height: 40px !important;
-    width: 40px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
+  .hn-logo-img,
+  .auth-brand img {
+    height: 48px !important;
+    width: auto !important;
+    max-height: 48px !important;
+    max-width: 280px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    object-fit: contain !important;
     display: inline-block !important;
     vertical-align: middle !important;
-    background: transparent !important;
     flex-shrink: 0 !important;
+    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.3)) !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .hn-logo:hover img,
+  .footer-brand:hover img,
+  .auth-brand:hover img {
+    transform: scale(1.04) !important;
   }
 
   .hn-nav {
@@ -1126,26 +1146,53 @@
 
   @media (max-width: 992px) {
 
+    .hn-logo-text,
+    .hn-logo span {
+      display: none !important;
+    }
+
     .hn-nav-book,
     .book-btn2,
     .nav-cta {
       display: none !important;
     }
 
+    .hn-nav {
+      padding: 10px 16px !important;
+    }
+
     .hn-nav-inner {
-      padding-left: 12px !important;
-      padding-right: 12px !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
       justify-content: space-between !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
 
     .hn-nav-actions {
       gap: 6px !important;
     }
 
+    .nav-icon-btn,
+    .nav-icon-btn2 {
+      width: 36px !important;
+      height: 36px !important;
+      font-size: 0.9rem !important;
+    }
+
+    .lang-switcher,
+    .lang-sw {
+      padding: 5px 8px !important;
+      font-size: 0.75rem !important;
+    }
+
     .hamburger,
     .hburg {
       display: flex !important;
+      width: 36px !important;
+      height: 36px !important;
       order: 99 !important;
+      flex-shrink: 0 !important;
     }
 
     .hn-links,
@@ -1210,6 +1257,29 @@
     .nav-links a.active {
       background: rgba(200, 90, 50, 0.1) !important;
       color: #C85A32 !important;
+    }
+
+    /* Dark Mode Mobile Drawer */
+    [data-theme="dark"] .hn-links,
+    [data-theme="dark"] .nav-links,
+    [data-theme="dark"] #premNavLinks,
+    [data-theme="dark"] #navLinks {
+      background: rgba(18, 23, 36, 0.98) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    [data-theme="dark"] .hn-links a,
+    [data-theme="dark"] .nav-links a {
+      color: #F8FAFC !important;
+    }
+
+    [data-theme="dark"] .hn-links a:hover,
+    [data-theme="dark"] .hn-links a.active,
+    [data-theme="dark"] .nav-links a:hover,
+    [data-theme="dark"] .nav-links a.active {
+      background: rgba(200, 90, 50, 0.25) !important;
+      color: #E7A93C !important;
     }
   }
 

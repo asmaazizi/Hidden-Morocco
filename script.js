@@ -423,7 +423,8 @@ function initStickyNav() {
   handleScroll();
 }
 
-window.toggleMobileMenu = function () {
+window.toggleMobileMenu = function (e) {
+  if (e && e.stopPropagation) e.stopPropagation();
   const menus = document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks');
   menus.forEach(menu => {
     menu.classList.toggle('hn-links-open');
@@ -431,6 +432,14 @@ window.toggleMobileMenu = function () {
     menu.classList.toggle('active');
   });
 };
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.hn-links a, .nav-links a')) {
+    document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks').forEach(m => {
+      m.classList.remove('hn-links-open', 'open', 'active');
+    });
+  }
+});
 
 // ── Live Destination Search Engine ─────────────────────────────────────────
 function initSearchEngine() {
