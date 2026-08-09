@@ -426,17 +426,32 @@ function initStickyNav() {
 window.toggleMobileMenu = function (e) {
   if (e && e.stopPropagation) e.stopPropagation();
   const menus = document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks');
+  const hburgs = document.querySelectorAll('.hamburger, .hburg');
+  
+  let isOpen = false;
   menus.forEach(menu => {
     menu.classList.toggle('hn-links-open');
     menu.classList.toggle('open');
     menu.classList.toggle('active');
+    if (menu.classList.contains('open') || menu.classList.contains('hn-links-open')) {
+      isOpen = true;
+    }
+  });
+
+  hburgs.forEach(btn => {
+    if (isOpen) btn.classList.add('is-active');
+    else btn.classList.remove('is-active');
   });
 };
 
 document.addEventListener('click', (e) => {
-  if (e.target.closest('.hn-links a, .nav-links a')) {
+  const isNavClick = e.target.closest('.hn-links, .nav-links, #premNavLinks, #navLinks, .hamburger, .hburg');
+  if (!isNavClick || e.target.closest('.hn-links a, .nav-links a')) {
     document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks').forEach(m => {
       m.classList.remove('hn-links-open', 'open', 'active');
+    });
+    document.querySelectorAll('.hamburger, .hburg').forEach(btn => {
+      btn.classList.remove('is-active');
     });
   }
 });
