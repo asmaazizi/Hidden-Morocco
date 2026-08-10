@@ -427,6 +427,7 @@ window.toggleMobileMenu = function (e) {
   if (e && e.stopPropagation) e.stopPropagation();
   const menus = document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks');
   const hburgs = document.querySelectorAll('.hamburger, .hburg');
+  const backdrops = document.querySelectorAll('.drawer-backdrop');
   
   let isOpen = false;
   menus.forEach(menu => {
@@ -442,16 +443,24 @@ window.toggleMobileMenu = function (e) {
     if (isOpen) btn.classList.add('is-active');
     else btn.classList.remove('is-active');
   });
+
+  backdrops.forEach(bd => {
+    if (isOpen) bd.classList.add('drawer-backdrop-open');
+    else bd.classList.remove('drawer-backdrop-open');
+  });
 };
 
 document.addEventListener('click', (e) => {
   const isNavClick = e.target.closest('.hn-links, .nav-links, #premNavLinks, #navLinks, .hamburger, .hburg');
-  if (!isNavClick || e.target.closest('.hn-links a, .nav-links a')) {
+  if (!isNavClick || e.target.closest('.hn-links a, .nav-links a, .mobile-menu-close')) {
     document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks').forEach(m => {
       m.classList.remove('hn-links-open', 'open', 'active');
     });
     document.querySelectorAll('.hamburger, .hburg').forEach(btn => {
       btn.classList.remove('is-active');
+    });
+    document.querySelectorAll('.drawer-backdrop').forEach(bd => {
+      bd.classList.remove('drawer-backdrop-open');
     });
   }
 });
