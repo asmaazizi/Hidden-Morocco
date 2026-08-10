@@ -451,8 +451,16 @@ window.toggleMobileMenu = function (e) {
 };
 
 document.addEventListener('click', (e) => {
+  const isLinkClick = e.target.closest('a[href]');
+  const isCloseBtn = e.target.closest('.mobile-menu-close');
+  const isBackdrop = e.target.closest('.drawer-backdrop');
   const isNavClick = e.target.closest('.hn-links, .nav-links, #premNavLinks, #navLinks, .hamburger, .hburg');
-  if (!isNavClick || e.target.closest('.hn-links a, .nav-links a, .mobile-menu-close')) {
+
+  if (isLinkClick && !isCloseBtn) {
+    return;
+  }
+
+  if (isCloseBtn || isBackdrop || !isNavClick) {
     document.querySelectorAll('.hn-links, .nav-links, #premNavLinks, #navLinks').forEach(m => {
       m.classList.remove('hn-links-open', 'open', 'active');
     });
