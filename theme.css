@@ -5023,3 +5023,35 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
 [data-theme="dark"] .custom-tour-callout-banner p {
   color: #CBD5E1 !important;
 }
+
+/* Destination Booking Modal Dark Mode Enhancements */
+[data-theme="dark"] .dest-booking-sheet,
+[data-theme="dark"] .travel-form-right {
+  background: #121724 !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .dest-booking-close {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .travel-form-right input[type="text"],
+[data-theme="dark"] .travel-form-right input[type="email"],
+[data-theme="dark"] .travel-form-right input[type="tel"],
+[data-theme="dark"] .travel-form-right input[type="date"],
+[data-theme="dark"] .travel-form-right select,
+[data-theme="dark"] .travel-form-right textarea {
+  background: #1C2333 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .travel-form-right .input-group label {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .travel-form-right .select-icon {
+  color: #94A3B8 !important;
+}
