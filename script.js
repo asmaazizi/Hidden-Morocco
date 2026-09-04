@@ -852,7 +852,9 @@ function initMapPage() {
 
   // Create Map centered on Morocco
   AppState.mapInstance = L.map('interactiveMap', {
-    zoomControl: false
+    zoomControl: false,
+    maxZoom: 9,
+    minZoom: 5
   }).setView([31.7917, -7.0926], 6);
 
   // Force Leaflet to recalculate map dimensions (critical for mobile)
@@ -873,7 +875,7 @@ function initMapPage() {
   // ESRI World Imagery satellite tiles (matches reference design)
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP',
-    maxZoom: 18,
+    maxZoom: 9,
     minZoom: 5
   }).addTo(AppState.mapInstance);
 
@@ -990,9 +992,9 @@ window.showMapDestCard = function (dest) {
 
   const isMobile = window.innerWidth <= 900;
 
-  // Center map on marker location (less zoom on mobile to keep context)
+  // Center map on marker location (keeps full regional Morocco overview)
   if (AppState.mapInstance) {
-    AppState.mapInstance.flyTo([dest.lat, dest.lng], isMobile ? 7 : 8, { duration: 1.2 });
+    AppState.mapInstance.flyTo([dest.lat, dest.lng], isMobile ? 6.5 : 7, { duration: 1.2 });
   }
 
   // Populate Panel Content
@@ -1045,6 +1047,11 @@ window.closeMapDestCard = function () {
   // Hide backdrop
   const overlay = document.getElementById('mapSheetOverlay');
   if (overlay) overlay.classList.remove('is-visible');
+
+  // Reset view to full Morocco map overview (Image 1 style)
+  if (AppState.mapInstance) {
+    AppState.mapInstance.flyTo([31.7917, -7.0926], 6, { duration: 1.2 });
+  }
 };
 
 function initHomeMapPreview() {
