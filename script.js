@@ -548,8 +548,8 @@ function createCardHTML(dest) {
 
         <div class="card-footer-row">
           <div>
-            <span class="card-price-label">From</span>
-            <div class="card-price-val">€${dest.price}</div>
+            <span class="card-price-label">Pricing</span>
+            <div class="card-price-val" style="font-size: 0.95rem; font-weight: 700;">Price on Request</div>
           </div>
           <div class="card-btns">
             <a href="destinations.html#${dest.id}" class="btn-primary">Explore <i class="fa-solid fa-arrow-right"></i></a>
@@ -677,7 +677,7 @@ window.openQuickBooking = function (destId = 'marrakech') {
             background:${inputBg}; color:${textColor}; font-size:0.95rem; font-weight:600; outline:none; font-family:inherit;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor:pointer;
           ">
-            ${DESTINATIONS_DB.map(d => `<option value="${d.id}" ${d.id === dest.id ? 'selected' : ''}>${d.title} (€${d.price}/person)</option>`).join('')}
+            ${DESTINATIONS_DB.map(d => `<option value="${d.id}" ${d.id === dest.id ? 'selected' : ''}>${d.title}</option>`).join('')}
           </select>
         </div>
 
@@ -716,10 +716,10 @@ window.openQuickBooking = function (destId = 'marrakech') {
           box-shadow: 0 6px 20px rgba(200, 90, 50, 0.06);
         ">
           <div>
-            <span style="font-size:0.84rem; font-weight:700; color:${textColor}; display:block; margin-bottom: 2px;">Estimated Total Price</span>
+            <span style="font-size:0.84rem; font-weight:700; color:${textColor}; display:block; margin-bottom: 2px;">Tailor-Made Expedition Quote</span>
             <span style="font-size:0.82rem; font-weight:800; background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✦ 100% Private Expedition</span>
           </div>
-          <div id="qb-total-price" style="font-size: 1.9rem; font-weight: 800; background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">€360</div>
+          <div id="qb-total-price" style="font-size: 1.15rem; font-weight: 800; background: linear-gradient(135deg, #C85A32 0%, #E7A93C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Price on Request</div>
         </div>
 
         <button type="submit" style="
@@ -782,7 +782,7 @@ window.updateQuickBookPrice = function () {
   const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
   const priceDisplay = document.getElementById('qb-total-price');
   if (priceDisplay && dest) {
-    priceDisplay.textContent = `€${dest.price * count}`;
+    priceDisplay.textContent = 'Price on Request';
   }
 };
 
@@ -1022,8 +1022,8 @@ window.showMapDestCard = function (dest) {
 
         <div class="map-card-footer">
           <div class="map-card-price-box">
-            <span class="price-lbl">Starting from</span>
-            <span class="price-val">€${dest.price} <small>/ person</small></span>
+            <span class="price-lbl">Pricing</span>
+            <span class="price-val" style="font-size: 0.98rem; font-weight: 700; color: #E7A93C;">Price on Request</span>
           </div>
           <a href="destinations.html#${dest.id}" class="btn-primary map-card-action-btn">
             View Experience &nbsp;<i class="fa-solid fa-arrow-right"></i>
@@ -1227,7 +1227,7 @@ const EXPERIENCES = {
     desc: "Nature excursion 60 km from Marrakech: green valley, Berber villages and Setti Fatma waterfalls.",
     duration: "1 day",
     timing: "Departure 08:30 • Return ~18:00",
-    price: "45€",
+    price: "Price on Request",
     schedule: ["08:30 – Pick up in Marrakech", "10:00 – Scenic drive", "11:00 – Setti Fatma & waterfalls", "18:00 – Return"],
     activities: ["Berber villages", "Walk to waterfalls", "Panoramic photos"]
   },
@@ -1237,7 +1237,7 @@ const EXPERIENCES = {
     desc: "The most beautiful waterfalls in Morocco: nature, easy hike and magnificent views.",
     duration: "1 day",
     timing: "Departure 08:00 • Return ~19:00",
-    price: "250 DH",
+    price: "Price on Request",
     schedule: ["08:00 – Departure", "11:00 – Walk", "15:00 – Boat ride", "19:00 – Return"],
     activities: ["Easy hike", "Macaque monkeys observation", "Boat ride"]
   },
@@ -1247,7 +1247,7 @@ const EXPERIENCES = {
     desc: "Late afternoon adventure: camel, quad, sunset and dinner in a Berber tent.",
     duration: "≈ 6 hours",
     timing: "Departure 15:30 • Return ~21:30",
-    price: "190€",
+    price: "Price on Request",
     schedule: ["15:30 – Pick up", "17:30 – Camel ride", "18:15 – Quad biking", "20:00 – Dinner + show"],
     activities: ["Camel ride", "Quad biking", "Sunset", "Berber dinner"]
   },
@@ -1257,7 +1257,7 @@ const EXPERIENCES = {
     desc: "Mountain day: hiking, Amazigh villages and panoramas of Toubkal.",
     duration: "1 day",
     timing: "Departure 08:00 • Return ~18:00",
-    price: "75€",
+    price: "Price on Request",
     schedule: ["08:00 – Departure", "10:00 – Arrival in Imlil", "11:00 – Guided village hike", "18:00 – Return"],
     activities: ["Guided Hiking", "Amazigh villages", "Atlas Panoramas"]
   },
@@ -1267,7 +1267,7 @@ const EXPERIENCES = {
     desc: "Relaxing outing: lake, nature and outdoor activities depending on the package.",
     duration: "Half-day",
     timing: "Morning or afternoon departure",
-    price: "50€",
+    price: "Price on Request",
     schedule: ["Pick-up", "Scenic drive to Lake", "Free time & quad", "Tea break"],
     activities: ["Walk by the lake", "Relaxation", "Outdoor Activities"]
   },
@@ -1277,7 +1277,7 @@ const EXPERIENCES = {
     desc: "Sunrise flight + Berber breakfast after landing.",
     duration: "≈ 4–5 hours",
     timing: "Departure ~2h before sunrise",
-    price: "177€",
+    price: "Price on Request",
     schedule: ["Pick-up", "Balloon preparation", "Flight over Atlas", "Berber breakfast"],
     activities: ["Sunrise Flight", "Atlas Views", "Berber Breakfast"]
   }
