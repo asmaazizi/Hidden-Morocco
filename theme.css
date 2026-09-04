@@ -4961,3 +4961,44 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
     font-size: 0.88rem;
   }
 }
+
+/* Custom Tour Callout Banner Theme Adapters */
+.custom-tour-callout-banner {
+  background: linear-gradient(135deg, rgba(200, 90, 50, 0.05) 0%, rgba(231, 169, 60, 0.08) 100%) !important;
+  color: var(--hm-text-heading) !important;
+  padding: 72px 24px !important;
+  border-top: 1px solid var(--hm-border, rgba(15, 23, 42, 0.1)) !important;
+  border-bottom: 1px solid var(--hm-border, rgba(15, 23, 42, 0.1)) !important;
+  text-align: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-tour-callout-banner h2 {
+  font-family: var(--hm-font-serif, 'Playfair Display', Georgia, serif) !important;
+  font-size: clamp(2.2rem, 3.8vw, 3rem) !important;
+  color: var(--hm-text-heading, #0F172A) !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+}
+
+.custom-tour-callout-banner p {
+  font-size: 1.05rem !important;
+  color: var(--hm-text-muted, #64748B) !important;
+  max-width: 620px !important;
+  margin: 0 auto 30px !important;
+  line-height: 1.65 !important;
+}
+
+[data-theme="dark"] .custom-tour-callout-banner {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%) !important;
+  border-top-color: rgba(212, 175, 55, 0.3) !important;
+  border-bottom-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-theme="dark"] .custom-tour-callout-banner h2 {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .custom-tour-callout-banner p {
+  color: #CBD5E1 !important;
+}
