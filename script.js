@@ -787,9 +787,9 @@ window.updateQuickBookPrice = function () {
 };
 
 window.handleQuickBookSubmit = function (e) {
-  e.preventDefault();
-  const name = document.getElementById('qb-name').value;
-  const destId = document.getElementById('qb-dest').value;
+  if (e && e.preventDefault) e.preventDefault();
+  const name = document.getElementById('qb-name')?.value || 'Valued Guest';
+  const destId = document.getElementById('qb-dest')?.value || 'marrakech';
   const dest = DESTINATIONS_DB.find(d => d.id === destId) || DESTINATIONS_DB[0];
 
   window.closeQuickBooking();
@@ -1209,12 +1209,12 @@ window.closeDestBooking = function () {
 
 window.sendDestBookingWhatsApp = function () {
   const WHATSAPP_NUMBER = '212771663435';
-  const cityTitle = document.getElementById('destBookingTitle').textContent;
-  const name = document.getElementById('db-name').value;
-  const date = document.getElementById('db-date').value;
-  const adults = document.getElementById('db-adults').value;
-  const children = document.getElementById('db-children').value;
-  const message = document.getElementById('db-message').value;
+  const cityTitle = document.getElementById('destBookingTitle')?.textContent || 'Morocco Tour';
+  const name = document.getElementById('db-name')?.value || '';
+  const date = document.getElementById('db-date')?.value || '';
+  const adults = document.getElementById('db-adults')?.value || '1';
+  const children = document.getElementById('db-children')?.value || '0';
+  const message = document.getElementById('db-message')?.value || '';
   if (!name || !date) { alert('Please fill in your name and preferred date.'); return; }
   const text = `Hello 👋\nI am interested in booking:\n✅ Destination: ${cityTitle}\n👤 Name: ${name}\n📅 Date: ${date}\n👥 Adults: ${adults}\n🧒 Children: ${children}\n📝 Message: ${message || 'N/A'}\n\nThank you!`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
