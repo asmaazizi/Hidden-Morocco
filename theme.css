@@ -4348,30 +4348,30 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
 
 .ct-modal-content {
   position: relative !important;
-  width: min(960px, 95vw) !important;
-  max-height: 90vh !important;
+  width: min(1320px, 96vw) !important;
+  max-height: 93vh !important;
   overflow-y: auto !important;
   margin: auto !important;
   background: var(--hm-bg-card, #FFFFFF) !important;
   border-radius: 28px !important;
-  padding: 36px 40px !important;
-  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.35), 0 0 40px rgba(200, 90, 50, 0.12) !important;
-  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  padding: 40px 52px !important;
+  box-shadow: 0 35px 100px rgba(15, 23, 42, 0.45), 0 0 50px rgba(200, 90, 50, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
   color: var(--hm-text-heading, #0F172A) !important;
   box-sizing: border-box !important;
 }
 
 .ct-close-btn {
   position: absolute !important;
-  top: 22px !important;
-  right: 22px !important;
-  width: 40px !important;
-  height: 40px !important;
+  top: 24px !important;
+  right: 24px !important;
+  width: 42px !important;
+  height: 42px !important;
   border-radius: 50% !important;
   border: 1px solid var(--hm-border, rgba(15, 23, 42, 0.12)) !important;
   background: var(--hm-bg-card-hover, rgba(15, 23, 42, 0.04)) !important;
   color: var(--hm-text-heading, #0F172A) !important;
-  font-size: 1.25rem !important;
+  font-size: 1.3rem !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -4390,6 +4390,7 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
 /* Header & Progress Tracker */
 .ct-wizard-header {
   margin-bottom: 28px;
+  padding-right: 48px;
 }
 
 .ct-progress-meta {
@@ -4471,9 +4472,9 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
 /* Step 1: Destination Cards Grid */
 .ct-dest-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
 }
 
 .ct-dest-card {
@@ -4501,7 +4502,7 @@ body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scrolled) .hn-links a:hover
 }
 
 .ct-dest-card-img {
-  height: 125px;
+  height: 145px;
   width: 100%;
   position: relative;
   overflow: hidden;
