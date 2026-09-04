@@ -42,11 +42,11 @@
   text-decoration: none;
   color: #fff;
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.3px;
 }
-.hn-logo img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; }
+.hn-logo img { height: 58px; width: auto; max-height: 58px; object-fit: contain; }
 
 .hn-links {
   list-style: none;

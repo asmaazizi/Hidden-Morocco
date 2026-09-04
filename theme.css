@@ -3668,10 +3668,10 @@ html[data-theme="dark"] body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scr
 .footer-brand img,
 .hn-logo-img,
 .auth-brand img {
-  height: 40px !important;
+  height: 58px !important;
   width: auto !important;
-  max-height: 40px !important;
-  max-width: 260px !important;
+  max-height: 58px !important;
+  max-width: 320px !important;
   border-radius: 0 !important;
   background: transparent !important;
   border: none !important;
@@ -3695,7 +3695,7 @@ html[data-theme="dark"] body.page-home .site-nav:not(.glass-nav):not(.hn-nav-scr
 .hn-logo-text,
 .nav-logo span {
   font-family: var(--hm-font-serif) !important;
-  font-size: 1.25rem !important;
+  font-size: 1.5rem !important;
   font-weight: 700 !important;
   color: var(--hm-text-heading) !important;
   transition: color 0.3s !important;
