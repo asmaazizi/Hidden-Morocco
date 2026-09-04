@@ -902,6 +902,7 @@
       <ul class="hn-links" id="premNavLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="destinations.html" class="active">Destinations</a></li>
+        <li><a href="#" class="custom-tour-trigger">Customize Tour</a></li>
         <li><a href="map.html">Interactive Map</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="testimonials.html">Reviews</a></li>
@@ -925,9 +926,6 @@
             <a href="favorites.html" class="setting-icon-item fav-item" aria-label="Wishlist">
               <i class="fa-regular fa-heart"></i>
               <span class="mobile-fav-badge">0</span>
-            </a>
-            <a href="login.html" class="setting-icon-item user-item" aria-label="Account">
-              <i class="fa-regular fa-user"></i>
             </a>
           </div>
         </li>
@@ -953,9 +951,6 @@
           <i class="fa-regular fa-heart"></i>
           <span class="fav-badge2 fav-count-badge">0</span>
         </a>
-        <a href="login.html" class="nav-icon-btn2 profile-btn" aria-label="User Account">
-          <i class="fa-regular fa-user"></i>
-        </a>
         <a href="booking.html" class="book-btn2" data-i18n="nav_book">Book Now</a>
         <button class="hburg" onclick="document.getElementById('premNavLinks').classList.toggle('open')">
           <span></span><span></span><span></span>
@@ -974,8 +969,14 @@
       <h1
         style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.4rem, 4.5vw, 3.4rem); color: #0F172A; font-weight: 700; margin-bottom: 12px; line-height: 1.15;">
         Our Destinations</h1>
-      <p style="font-size: 1.05rem; color: #475569; max-width: 600px; margin: 0 auto; line-height: 1.6;">Explore
+      <p style="font-size: 1.05rem; color: #475569; max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Explore
         imperial cities, vast Sahara desert dunes, and coastal hideaways across Morocco.</p>
+
+      <div style="display: flex; justify-content: center;">
+        <button type="button" class="btn-primary custom-tour-trigger" style="padding: 13px 32px; font-size: 0.95rem; background: linear-gradient(135deg, #E7A93C 0%, #C85A32 100%) !important; box-shadow: 0 8px 24px rgba(200,90,50,0.3) !important;">
+          Customize My Tour
+        </button>
+      </div>
     </div>
   </div>
 
@@ -3159,6 +3160,22 @@
       window.addEventListener("hashchange", handleHash);
     });
   </script>
+
+  <!-- Dedicated Custom Tour Callout Banner -->
+  <section style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; padding: 72px 24px; border-top: 1px solid rgba(212,175,55,0.3); text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <span class="badge badge-gold" style="margin-bottom: 16px;">✦ TAILOR-MADE EXPEDITIONS</span>
+      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 700; margin-bottom: 16px;">
+        Want a Custom Morocco Itinerary?
+      </h2>
+      <p style="font-size: 1.05rem; color: #CBD5E1; max-width: 620px; margin: 0 auto 30px; line-height: 1.65;">
+        Design your personalized travel route connecting your favorite Moroccan destinations, travel style, activities, and budget tier.
+      </p>
+      <button type="button" class="btn-primary custom-tour-trigger" style="padding: 16px 36px; font-size: 1.02rem;">
+        Launch Customize My Tour Wizard →
+      </button>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer-inner">

@@ -1368,7 +1368,7 @@ window.closeExp = window.closeDestinationModal;
 // Global Escape Key & Backdrop Click Listener for All Modals
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
-    document.querySelectorAll('.modal, .dest-booking-modal-overlay, .exp-modal, #globalQuickBookModal, #destModal').forEach(modal => {
+    document.querySelectorAll('.modal, .dest-booking-modal-overlay, .exp-modal, #globalQuickBookModal, #destModal, #customTourModal').forEach(modal => {
       if (modal.style.display === 'flex' || modal.style.display === 'block' || modal.style.opacity === '1') {
         const id = modal.id;
         if (id.startsWith('modal-')) {
@@ -1380,6 +1380,8 @@ document.addEventListener('keydown', function (e) {
           closeDestBooking();
         } else if (id === 'destModal' || id === 'expModal') {
           closeDestinationModal();
+        } else if (id === 'customTourModal') {
+          closeCustomTourModal();
         } else {
           modal.style.display = 'none';
           lockBodyScroll(false);
@@ -1390,7 +1392,7 @@ document.addEventListener('keydown', function (e) {
 });
 
 document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('modal') || e.target.classList.contains('dest-booking-modal-overlay') || e.target.classList.contains('exp-modal') || e.target.id === 'globalQuickBookModal' || e.target.id === 'destModal') {
+  if (e.target.classList.contains('modal') || e.target.classList.contains('dest-booking-modal-overlay') || e.target.classList.contains('exp-modal') || e.target.id === 'globalQuickBookModal' || e.target.id === 'destModal' || e.target.id === 'customTourModal') {
     const id = e.target.id;
     if (id.startsWith('modal-')) {
       closeModal(id.replace('modal-', ''));
@@ -1400,6 +1402,631 @@ document.addEventListener('click', function (e) {
       closeDestBooking();
     } else if (id === 'destModal' || id === 'expModal') {
       closeDestinationModal();
+    } else if (id === 'customTourModal') {
+      closeCustomTourModal();
     }
   }
 });
+
+// ==========================================================================
+// CUSTOMIZE MY TOUR — INTERACTIVE 9-STEP WIZARD ENGINE
+// ==========================================================================
+
+const CUSTOM_TOUR_DESTINATIONS = [
+  { id: 'marrakech', name: 'Marrakech', region: 'Marrakech-Safi', img: 'images/Marrakech/marrakech_11.jpg' },
+  { id: 'fes', name: 'Fès', region: 'Fès-Meknès', img: 'images/Fes/fes_1.jpg' },
+  { id: 'chefchaouen', name: 'Chefchaouen', region: 'Rif Mountains', img: 'images/Chfchaouen/chefchaoun.jpg' },
+  { id: 'merzouga', name: 'Merzouga', region: 'Sahara Desert', img: 'images/Merzouga/merzouga_1.jpg' },
+  { id: 'ouarzazate', name: 'Ouarzazate', region: 'Draâ-Tafilalet', img: 'images/Ouarzazat/ouarzazat1.jpeg' },
+  { id: 'essaouira', name: 'Essaouira', region: 'Atlantic Coast', img: 'images/Essaouira/essaouira_1.jpg' },
+  { id: 'agadir', name: 'Agadir', region: 'Souss-Massa', img: 'images/Agadir/agadir_hero.png' },
+  { id: 'casablanca', name: 'Casablanca', region: 'Casablanca-Settat', img: 'images/Casablanca/casablanca.png' },
+  { id: 'rabat', name: 'Rabat', region: 'Rabat-Salé-Kénitra', img: 'images/rabat.jpg' },
+  { id: 'tangier', name: 'Tangier', region: 'Tanger-Tetouan', img: 'images/tangier.jpg' },
+  { id: 'atlas', name: 'Atlas Mountains', region: 'High Atlas', img: 'images/Marrakech/imlil_1.jpg' },
+  { id: 'sahara', name: 'Sahara Desert', region: 'Erg Chebbi & Dunes', img: 'images/Zagora/zagora_hero.png' }
+];
+
+const CUSTOM_TOUR_DURATIONS = [
+  { id: '2-3', title: '2–3 Days', desc: 'Short weekend getaway & city highlights' },
+  { id: '4-5', title: '4–5 Days', desc: 'Express adventure & imperial tour' },
+  { id: '6-7', title: '6–7 Days', desc: 'Classic Morocco journey & desert camel trek' },
+  { id: '8-10', title: '8–10 Days', desc: 'Comprehensive expedition across cities & dunes' },
+  { id: '10+', title: '10+ Days', desc: 'Grand Morocco complete experience' }
+];
+
+const CUSTOM_TOUR_STYLES = [
+  { id: 'luxury', title: 'Luxury', icon: 'fa-crown', desc: '5-star private riads & fine dining' },
+  { id: 'cultural', title: 'Cultural', icon: 'fa-landmark', desc: 'Ancient medinas & heritage storytellers' },
+  { id: 'adventure', title: 'Adventure', icon: 'fa-compass', desc: 'Desert dunes, quad biking & mountain treks' },
+  { id: 'relaxation', title: 'Relaxation', icon: 'fa-spa', desc: 'Traditional hammams & peaceful coastal stays' },
+  { id: 'family', title: 'Family', icon: 'fa-people-roof', desc: 'Kid-friendly pace & authentic experiences' },
+  { id: 'romantic', title: 'Romantic', icon: 'fa-sparkles', desc: 'Private dinners under desert starry skies' },
+  { id: 'authentic', title: 'Authentic / Local', icon: 'fa-hand-holding-heart', desc: 'Immersive Berber hospitality & craft workshops' }
+];
+
+const CUSTOM_TOUR_ACTIVITIES = [
+  { id: 'desert', title: 'Desert Experience', icon: 'fa-sun' },
+  { id: 'camel', title: 'Camel Trek', icon: 'fa-dharmachakra' },
+  { id: 'hiking', title: 'Mountain Hiking', icon: 'fa-mountain' },
+  { id: 'souks', title: 'Medina & Souks', icon: 'fa-store' },
+  { id: 'cooking', title: 'Moroccan Cooking', icon: 'fa-utensils' },
+  { id: 'food', title: 'Local Food Experiences', icon: 'fa-mug-hot' },
+  { id: 'riad', title: 'Riad Stay', icon: 'fa-hotel' },
+  { id: 'beach', title: 'Beach & Coastal', icon: 'fa-umbrella-beach' },
+  { id: 'history', title: 'Historical Sites', icon: 'fa-monument' },
+  { id: 'photo', title: 'Photography Tour', icon: 'fa-camera' },
+  { id: 'wellness', title: 'Wellness & Relaxation', icon: 'fa-leaf' }
+];
+
+const CUSTOM_TOUR_ACCOMMODATION = [
+  { id: 'luxury_riad', title: 'Luxury Riad', desc: 'Palatial historic riads with private courtyard & plunge pool' },
+  { id: 'boutique_hotel', title: 'Boutique Hotel', desc: 'Charming boutique stays with unique local character' },
+  { id: 'luxury_hotel', title: 'Luxury Hotel', desc: '5-star luxury resorts with full amenities & spas' },
+  { id: 'desert_camp', title: 'Desert Camp', desc: 'Private glamping tents in Erg Chebbi with ensuite bath' },
+  { id: 'standard', title: 'Comfortable / Standard', desc: 'Handpicked quality 3-4 star hotels & guesthouses' }
+];
+
+const CUSTOM_TOUR_TRANSPORTATION = [
+  { id: 'private_driver', title: 'Private Driver', desc: 'Dedicated air-conditioned 4x4 or Mercedes V-Class with professional driver' },
+  { id: 'rental_car', title: 'Rental Car', desc: 'Self-drive SUV or sedan delivered to your arrival city' },
+  { id: 'mixed', title: 'Mixed Transportation', desc: 'Combination of high-speed train, private transfers, and short flights' },
+  { id: 'recommend', title: "I don't know / Recommend for me", desc: 'Let our travel specialists select the optimal routes' }
+];
+
+const CUSTOM_TOUR_BUDGET = [
+  { id: 'comfortable', title: 'Comfortable', desc: 'Value-focused high quality comfort', tier: '€' },
+  { id: 'premium', title: 'Premium', desc: 'High standard with handpicked luxury riads', tier: '€€' },
+  { id: 'luxury', title: 'Luxury', desc: 'Ultra-exclusive 5-star private expeditions', tier: '€€€' }
+];
+
+const CustomTourState = {
+  currentStep: 1,
+  destinations: [],
+  duration: '',
+  travelStyles: [],
+  activities: [],
+  accommodation: '',
+  transportation: '',
+  budget: '',
+  preferences: '',
+  contact: { name: '', email: '', phone: '', dates: '' }
+};
+
+window.openCustomTourModal = function () {
+  let modal = document.getElementById('customTourModal');
+  if (!modal) {
+    initCustomTourDOM();
+    modal = document.getElementById('customTourModal');
+  }
+  if (modal.parentElement !== document.body) {
+    document.body.appendChild(modal);
+  }
+
+  // Reset to Step 1 if opening fresh
+  CustomTourState.currentStep = 1;
+  renderCustomTourStep(1);
+
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  const content = modal.querySelector('.ct-modal-content');
+  if (content) content.scrollTop = 0;
+
+  lockBodyScroll(true);
+
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    modal.setAttribute('tabindex', '-1');
+    modal.focus();
+  });
+};
+
+window.closeCustomTourModal = function () {
+  const modal = document.getElementById('customTourModal');
+  if (modal) {
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
+  }
+  lockBodyScroll(false);
+};
+
+function initCustomTourDOM() {
+  if (document.getElementById('customTourModal')) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'customTourModal';
+  modal.innerHTML = `
+    <div class="ct-modal-content">
+      <button class="ct-close-btn" onclick="window.closeCustomTourModal()" aria-label="Close">&times;</button>
+
+      <div class="ct-wizard-header">
+        <div class="ct-progress-meta">
+          <span class="ct-step-badge">Customize My Tour</span>
+          <span class="ct-step-count" id="ctStepCount">Step 1 of 9</span>
+        </div>
+        <div class="ct-progress-track">
+          <div class="ct-progress-fill" id="ctProgressFill" style="width: 11%;"></div>
+        </div>
+      </div>
+
+      <!-- STEP 1: DESTINATIONS -->
+      <div class="ct-step-content is-active" id="ctStep1">
+        <h3 class="ct-step-title">Step 1 — Choose Destinations</h3>
+        <p class="ct-step-subtitle">Select one or multiple Moroccan destinations you wish to include in your personalized trip.</p>
+        <div class="ct-dest-grid">
+          ${CUSTOM_TOUR_DESTINATIONS.map(d => `
+            <div class="ct-dest-card" data-id="${d.id}" onclick="window.toggleCTDest('${d.id}')">
+              <div class="ct-dest-card-img">
+                <img src="${d.img}" alt="${d.name}" loading="lazy">
+                <div class="ct-dest-card-overlay"></div>
+                <div class="ct-dest-check"><i class="fa-solid fa-check"></i></div>
+              </div>
+              <div class="ct-dest-card-body">
+                <div class="ct-dest-card-title">${d.name}</div>
+                <div class="ct-dest-card-region"><i class="fa-solid fa-location-dot" style="color:#C85A32;"></i> ${d.region}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 2: DURATION -->
+      <div class="ct-step-content" id="ctStep2">
+        <h3 class="ct-step-title">Step 2 — Trip Duration</h3>
+        <p class="ct-step-subtitle">Select the approximate duration for your customized journey.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_DURATIONS.map(dur => `
+            <div class="ct-option-card" data-val="${dur.id}" onclick="window.selectCTDuration('${dur.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><i class="fa-regular fa-calendar-days"></i></div>
+              <div class="ct-option-title">${dur.title}</div>
+              <div class="ct-option-desc">${dur.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 3: TRAVEL STYLE -->
+      <div class="ct-step-content" id="ctStep3">
+        <h3 class="ct-step-title">Step 3 — Travel Style</h3>
+        <p class="ct-step-subtitle">Choose one or more travel experiences that match your travel vision.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_STYLES.map(style => `
+            <div class="ct-option-card" data-val="${style.id}" onclick="window.toggleCTStyle('${style.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><i class="fa-solid ${style.icon}"></i></div>
+              <div class="ct-option-title">${style.title}</div>
+              <div class="ct-option-desc">${style.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 4: ACTIVITIES -->
+      <div class="ct-step-content" id="ctStep4">
+        <h3 class="ct-step-title">Step 4 — Activities & Experiences</h3>
+        <p class="ct-step-subtitle">Select all activities you would like to experience during your journey.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_ACTIVITIES.map(act => `
+            <div class="ct-option-card" data-val="${act.id}" onclick="window.toggleCTActivity('${act.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><i class="fa-solid ${act.icon}"></i></div>
+              <div class="ct-option-title">${act.title}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 5: ACCOMMODATION -->
+      <div class="ct-step-content" id="ctStep5">
+        <h3 class="ct-step-title">Step 5 — Preferred Accommodation</h3>
+        <p class="ct-step-subtitle">Select the style of accommodation you prefer throughout your tour.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_ACCOMMODATION.map(acc => `
+            <div class="ct-option-card" data-val="${acc.id}" onclick="window.selectCTAccom('${acc.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><i class="fa-solid fa-bed"></i></div>
+              <div class="ct-option-title">${acc.title}</div>
+              <div class="ct-option-desc">${acc.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 6: TRANSPORTATION -->
+      <div class="ct-step-content" id="ctStep6">
+        <h3 class="ct-step-title">Step 6 — Preferred Transportation</h3>
+        <p class="ct-step-subtitle">Choose your preferred mode of travel between destinations.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_TRANSPORTATION.map(trans => `
+            <div class="ct-option-card" data-val="${trans.id}" onclick="window.selectCTTrans('${trans.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><i class="fa-solid fa-car-side"></i></div>
+              <div class="ct-option-title">${trans.title}</div>
+              <div class="ct-option-desc">${trans.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 7: BUDGET -->
+      <div class="ct-step-content" id="ctStep7">
+        <h3 class="ct-step-title">Step 7 — Budget Range</h3>
+        <p class="ct-step-subtitle">Select your preferred travel budget tier.</p>
+        <div class="ct-option-grid">
+          ${CUSTOM_TOUR_BUDGET.map(b => `
+            <div class="ct-option-card" data-val="${b.id}" onclick="window.selectCTBudget('${b.id}')">
+              <div class="ct-option-radio"></div>
+              <div class="ct-option-icon"><span style="font-weight:800; font-size:1.1rem;">${b.tier}</span></div>
+              <div class="ct-option-title">${b.title}</div>
+              <div class="ct-option-desc">${b.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 8: PERSONAL PREFERENCES -->
+      <div class="ct-step-content" id="ctStep8">
+        <h3 class="ct-step-title">Step 8 — Personal Preferences</h3>
+        <p class="ct-step-subtitle">Tell us anything else you would like for your trip (dietary requirements, celebratory events, travel pace, special requests...)</p>
+        <div class="ct-textarea-group">
+          <textarea id="ctPreferencesInput" class="ct-textarea" placeholder="Tell us anything else you would like for your trip... e.g. We are celebrating an anniversary, prefer vegetarian meals, and want a relaxed pace."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 9: CONTACT DETAILS -->
+      <div class="ct-step-content" id="ctStep9">
+        <h3 class="ct-step-title">Step 9 — Contact Details</h3>
+        <p class="ct-step-subtitle">Provide your contact details so our Moroccan travel designers can prepare your itinerary.</p>
+        <div class="ct-form-grid">
+          <div class="ct-input-group">
+            <label class="ct-label">Full Name <span class="req">*</span></label>
+            <input type="text" id="ctNameInput" class="ct-input" placeholder="e.g. Sarah Jenkins" required>
+          </div>
+          <div class="ct-input-group">
+            <label class="ct-label">Email Address <span class="req">*</span></label>
+            <input type="email" id="ctEmailInput" class="ct-input" placeholder="e.g. sarah@example.com" required>
+          </div>
+          <div class="ct-input-group">
+            <label class="ct-label">Phone / WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="ctPhoneInput" class="ct-input" placeholder="e.g. +1 555 123 4567" required>
+          </div>
+          <div class="ct-input-group">
+            <label class="ct-label">Preferred Travel Dates <span class="req">*</span></label>
+            <input type="text" id="ctDatesInput" class="ct-input" placeholder="e.g. October 15–25, 2026 or Spring 2027" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 10: SUMMARY REVIEW -->
+      <div class="ct-step-content" id="ctStep10">
+        <h3 class="ct-step-title" style="color:#C85A32;">Your Morocco Journey</h3>
+        <p class="ct-step-subtitle">Review your custom tour selections below before submitting your request.</p>
+
+        <div class="ct-summary-box" id="ctSummaryBox">
+          <!-- Dynamic Summary Output -->
+        </div>
+      </div>
+
+      <!-- STEP 11: SUCCESS CONFIRMATION -->
+      <div class="ct-step-content" id="ctStep11">
+        <div class="ct-success-card">
+          <div class="ct-success-icon"><i class="fa-solid fa-check"></i></div>
+          <h3 class="ct-step-title" style="text-align:center;">Request Received! 🎉</h3>
+          <p class="ct-step-subtitle" style="text-align:center; max-width:600px; margin:0 auto 24px;">
+            Thank you <strong id="ctSuccessName" style="color:#C85A32;">Traveler</strong>! Your custom Morocco tour request has been successfully submitted. Our boutique travel experts will craft your detailed itinerary and contact you within 2 hours.
+          </p>
+
+          <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+            <button onclick="window.sendCustomTourWhatsApp()" class="ct-btn-next" style="background:#25D366; box-shadow:0 6px 20px rgba(37,211,102,0.4);">
+              Send via WhatsApp &nbsp;<i class="fa-brands fa-whatsapp"></i>
+            </button>
+            <button onclick="window.closeCustomTourModal()" class="ct-btn-back">
+              Done & Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAV FOOTER -->
+      <div class="ct-nav-footer" id="ctNavFooter">
+        <button type="button" class="ct-btn-back" id="ctBackBtn" onclick="window.prevCTStep()">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </button>
+
+        <button type="button" class="ct-btn-next" id="ctNextBtn" onclick="window.nextCTStep()">
+          Continue &nbsp;<i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+window.toggleCTDest = function (id) {
+  const idx = CustomTourState.destinations.indexOf(id);
+  if (idx > -1) {
+    CustomTourState.destinations.splice(idx, 1);
+  } else {
+    CustomTourState.destinations.push(id);
+  }
+  document.querySelectorAll('#ctStep1 .ct-dest-card').forEach(card => {
+    const cardId = card.getAttribute('data-id');
+    card.classList.toggle('is-selected', CustomTourState.destinations.includes(cardId));
+  });
+};
+
+window.selectCTDuration = function (val) {
+  CustomTourState.duration = val;
+  document.querySelectorAll('#ctStep2 .ct-option-card').forEach(card => {
+    card.classList.toggle('is-selected', card.getAttribute('data-val') === val);
+  });
+};
+
+window.toggleCTStyle = function (val) {
+  const idx = CustomTourState.travelStyles.indexOf(val);
+  if (idx > -1) {
+    CustomTourState.travelStyles.splice(idx, 1);
+  } else {
+    CustomTourState.travelStyles.push(val);
+  }
+  document.querySelectorAll('#ctStep3 .ct-option-card').forEach(card => {
+    const cVal = card.getAttribute('data-val');
+    card.classList.toggle('is-selected', CustomTourState.travelStyles.includes(cVal));
+  });
+};
+
+window.toggleCTActivity = function (val) {
+  const idx = CustomTourState.activities.indexOf(val);
+  if (idx > -1) {
+    CustomTourState.activities.splice(idx, 1);
+  } else {
+    CustomTourState.activities.push(val);
+  }
+  document.querySelectorAll('#ctStep4 .ct-option-card').forEach(card => {
+    const cVal = card.getAttribute('data-val');
+    card.classList.toggle('is-selected', CustomTourState.activities.includes(cVal));
+  });
+};
+
+window.selectCTAccom = function (val) {
+  CustomTourState.accommodation = val;
+  document.querySelectorAll('#ctStep5 .ct-option-card').forEach(card => {
+    card.classList.toggle('is-selected', card.getAttribute('data-val') === val);
+  });
+};
+
+window.selectCTTrans = function (val) {
+  CustomTourState.transportation = val;
+  document.querySelectorAll('#ctStep6 .ct-option-card').forEach(card => {
+    card.classList.toggle('is-selected', card.getAttribute('data-val') === val);
+  });
+};
+
+window.selectCTBudget = function (val) {
+  CustomTourState.budget = val;
+  document.querySelectorAll('#ctStep7 .ct-option-card').forEach(card => {
+    card.classList.toggle('is-selected', card.getAttribute('data-val') === val);
+  });
+};
+
+function renderCustomTourStep(step) {
+  CustomTourState.currentStep = step;
+
+  // Hide all steps
+  for (let i = 1; i <= 11; i++) {
+    const el = document.getElementById('ctStep' + i);
+    if (el) el.classList.remove('is-active');
+  }
+
+  const currentEl = document.getElementById('ctStep' + step);
+  if (currentEl) currentEl.classList.add('is-active');
+
+  const stepCount = document.getElementById('ctStepCount');
+  const progressFill = document.getElementById('ctProgressFill');
+  const backBtn = document.getElementById('ctBackBtn');
+  const nextBtn = document.getElementById('ctNextBtn');
+  const navFooter = document.getElementById('ctNavFooter');
+
+  if (step <= 9) {
+    if (navFooter) navFooter.style.display = 'flex';
+    if (stepCount) stepCount.textContent = `Step ${step} of 9`;
+    if (progressFill) progressFill.style.width = `${Math.round((step / 9) * 100)}%`;
+
+    if (backBtn) backBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
+    if (nextBtn) {
+      nextBtn.innerHTML = step === 9 ? 'Review My Journey &nbsp;<i class="fa-solid fa-eye"></i>' : 'Continue &nbsp;<i class="fa-solid fa-arrow-right"></i>';
+    }
+  } else if (step === 10) {
+    if (navFooter) navFooter.style.display = 'flex';
+    if (stepCount) stepCount.textContent = 'Summary Review';
+    if (progressFill) progressFill.style.width = '100%';
+
+    if (backBtn) backBtn.style.visibility = 'visible';
+    if (nextBtn) {
+      nextBtn.innerHTML = 'Request My Personalized Tour &nbsp;<i class="fa-solid fa-paper-plane"></i>';
+    }
+    renderCustomTourSummary();
+  } else if (step === 11) {
+    if (navFooter) navFooter.style.display = 'none';
+  }
+
+  const modal = document.getElementById('customTourModal');
+  if (modal) {
+    const content = modal.querySelector('.ct-modal-content');
+    if (content) content.scrollTop = 0;
+  }
+}
+
+window.nextCTStep = function () {
+  const step = CustomTourState.currentStep;
+
+  // Validation before progressing
+  if (step === 1) {
+    if (CustomTourState.destinations.length === 0) {
+      showToast('Please select at least 1 destination');
+      return;
+    }
+  } else if (step === 2) {
+    if (!CustomTourState.duration) {
+      showToast('Please select your approximate trip duration');
+      return;
+    }
+  } else if (step === 3) {
+    if (CustomTourState.travelStyles.length === 0) {
+      showToast('Please select at least 1 travel style');
+      return;
+    }
+  } else if (step === 4) {
+    if (CustomTourState.activities.length === 0) {
+      showToast('Please select at least 1 activity');
+      return;
+    }
+  } else if (step === 5) {
+    if (!CustomTourState.accommodation) {
+      showToast('Please select your preferred accommodation style');
+      return;
+    }
+  } else if (step === 6) {
+    if (!CustomTourState.transportation) {
+      showToast('Please select your transportation option');
+      return;
+    }
+  } else if (step === 7) {
+    if (!CustomTourState.budget) {
+      showToast('Please select your budget range');
+      return;
+    }
+  } else if (step === 8) {
+    const prefEl = document.getElementById('ctPreferencesInput');
+    if (prefEl) CustomTourState.preferences = prefEl.value.trim();
+  } else if (step === 9) {
+    const name = document.getElementById('ctNameInput')?.value.trim();
+    const email = document.getElementById('ctEmailInput')?.value.trim();
+    const phone = document.getElementById('ctPhoneInput')?.value.trim();
+    const dates = document.getElementById('ctDatesInput')?.value.trim();
+
+    if (!name || !email || !phone || !dates) {
+      showToast('Please complete all required contact fields');
+      return;
+    }
+
+    CustomTourState.contact = { name, email, phone, dates };
+  } else if (step === 10) {
+    // Final Submit Action
+    window.submitCustomTour();
+    return;
+  }
+
+  renderCustomTourStep(step + 1);
+};
+
+window.prevCTStep = function () {
+  if (CustomTourState.currentStep > 1) {
+    renderCustomTourStep(CustomTourState.currentStep - 1);
+  }
+};
+
+function renderCustomTourSummary() {
+  const box = document.getElementById('ctSummaryBox');
+  if (!box) return;
+
+  const destObjs = CUSTOM_TOUR_DESTINATIONS.filter(d => CustomTourState.destinations.includes(d.id));
+  const durObj = CUSTOM_TOUR_DURATIONS.find(d => d.id === CustomTourState.duration);
+  const styleObjs = CUSTOM_TOUR_STYLES.filter(s => CustomTourState.travelStyles.includes(s.id));
+  const actObjs = CUSTOM_TOUR_ACTIVITIES.filter(a => CustomTourState.activities.includes(a.id));
+  const accObj = CUSTOM_TOUR_ACCOMMODATION.find(a => a.id === CustomTourState.accommodation);
+  const transObj = CUSTOM_TOUR_TRANSPORTATION.find(t => t.id === CustomTourState.transportation);
+  const budObj = CUSTOM_TOUR_BUDGET.find(b => b.id === CustomTourState.budget);
+
+  box.innerHTML = `
+    <div class="ct-summary-grid">
+      <div class="ct-summary-item" style="grid-column: 1 / -1;">
+        <span class="ct-summary-label"><i class="fa-solid fa-map-location-dot" style="color:#C85A32;"></i> Selected Destinations</span>
+        <div class="ct-summary-chips">
+          ${destObjs.map(d => `<span class="ct-chip"><i class="fa-solid fa-location-pin"></i> ${d.name}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-regular fa-calendar-days"></i> Duration & Dates</span>
+        <span class="ct-summary-val">${durObj ? durObj.title : 'N/A'} (${CustomTourState.contact.dates || 'TBD'})</span>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-solid fa-gem"></i> Travel Style</span>
+        <div class="ct-summary-chips">
+          ${styleObjs.map(s => `<span class="ct-chip">${s.title}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="ct-summary-item" style="grid-column: 1 / -1;">
+        <span class="ct-summary-label"><i class="fa-solid fa-compass"></i> Planned Activities</span>
+        <div class="ct-summary-chips">
+          ${actObjs.map(a => `<span class="ct-chip"><i class="fa-solid ${a.icon}"></i> ${a.title}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-solid fa-bed"></i> Accommodation</span>
+        <span class="ct-summary-val">${accObj ? accObj.title : 'N/A'}</span>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-solid fa-car"></i> Transportation</span>
+        <span class="ct-summary-val">${transObj ? transObj.title : 'N/A'}</span>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-solid fa-wallet"></i> Budget Tier</span>
+        <span class="ct-summary-val" style="color:#C85A32;">${budObj ? budObj.title + ' (' + budObj.tier + ')' : 'N/A'}</span>
+      </div>
+
+      <div class="ct-summary-item">
+        <span class="ct-summary-label"><i class="fa-solid fa-user"></i> Contact Traveler</span>
+        <span class="ct-summary-val">${CustomTourState.contact.name} (${CustomTourState.contact.phone})</span>
+      </div>
+
+      ${CustomTourState.preferences ? `
+        <div class="ct-summary-item" style="grid-column: 1 / -1;">
+          <span class="ct-summary-label"><i class="fa-regular fa-comment-dots"></i> Additional Preferences</span>
+          <p style="font-size:0.92rem; color:var(--hm-text-body); font-style:italic; background:rgba(200,90,50,0.05); padding:10px 14px; border-radius:12px; border:1px dashed rgba(200,90,50,0.2);">
+            "${CustomTourState.preferences}"
+          </p>
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+window.submitCustomTour = function () {
+  const nameEl = document.getElementById('ctSuccessName');
+  if (nameEl) nameEl.textContent = CustomTourState.contact.name || 'Traveler';
+
+  renderCustomTourStep(11);
+  showToast(`Custom Tour request submitted for ${CustomTourState.contact.name}! ✨`);
+};
+
+window.sendCustomTourWhatsApp = function () {
+  const WHATSAPP_NUMBER = '212771663435';
+  const destNames = CUSTOM_TOUR_DESTINATIONS.filter(d => CustomTourState.destinations.includes(d.id)).map(d => d.name).join(', ');
+  const durObj = CUSTOM_TOUR_DURATIONS.find(d => d.id === CustomTourState.duration);
+  const styles = CUSTOM_TOUR_STYLES.filter(s => CustomTourState.travelStyles.includes(s.id)).map(s => s.title).join(', ');
+
+  const text = `Hello 👋 Discover Hidden Morocco!\nI would like to request a Personalized Custom Tour:\n\n📍 Destinations: ${destNames}\n⏱️ Duration: ${durObj ? durObj.title : ''}\n✨ Style: ${styles}\n📅 Dates: ${CustomTourState.contact.dates}\n👤 Name: ${CustomTourState.contact.name}\n📞 Phone: ${CustomTourState.contact.phone}\n📧 Email: ${CustomTourState.contact.email}\n📝 Notes: ${CustomTourState.preferences || 'N/A'}\n\nThank you!`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+};
+
+// Wire up openCustomTourModal buttons globally across all pages
+document.addEventListener('click', function (e) {
+  const trigger = e.target.closest('.custom-tour-trigger, [data-action="custom-tour"]');
+  if (trigger) {
+    e.preventDefault();
+    window.openCustomTourModal();
+  }
+});
+
