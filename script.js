@@ -1208,7 +1208,7 @@ window.closeDestBooking = function () {
 };
 
 window.sendDestBookingWhatsApp = function () {
-  const WHATSAPP_NUMBER = '212771663435';
+  const WHATSAPP_NUMBER = '212660082066';
   const cityTitle = document.getElementById('destBookingTitle')?.textContent || 'Morocco Tour';
   const name = document.getElementById('db-name')?.value || '';
   const date = document.getElementById('db-date')?.value || '';
@@ -1217,6 +1217,25 @@ window.sendDestBookingWhatsApp = function () {
   const message = document.getElementById('db-message')?.value || '';
   if (!name || !date) { alert('Please fill in your name and preferred date.'); return; }
   const text = `Hello 👋\nI am interested in booking:\n✅ Destination: ${cityTitle}\n👤 Name: ${name}\n📅 Date: ${date}\n👥 Adults: ${adults}\n🧒 Children: ${children}\n📝 Message: ${message || 'N/A'}\n\nThank you!`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+};
+
+window.sendWhatsApp = function () {
+  const WHATSAPP_NUMBER = '212660082066';
+  const name = document.getElementById('fname')?.value || document.getElementById('c-name')?.value || '';
+  const email = document.getElementById('femail')?.value || document.getElementById('c-email')?.value || '';
+  const phone = document.getElementById('fphone')?.value || '';
+  const date = document.getElementById('fdate')?.value || '';
+  const adults = document.getElementById('fadults')?.value || '1';
+  const children = document.getElementById('fchildren')?.value || '0';
+  const message = document.getElementById('fmessage')?.value || document.getElementById('c-message')?.value || '';
+  
+  const destEls = document.querySelectorAll('input[name="destinations"]:checked');
+  const dests = Array.from(destEls).map(el => el.value).join(', ');
+
+  if (!name) { alert('Please enter your name.'); return; }
+
+  const text = `Hello 👋 Discover Hidden Morocco!\nI would like to request a Tour Booking:\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone || 'N/A'}\n📅 Travel Date: ${date || 'N/A'}\n👥 Adults: ${adults}\n🧒 Children: ${children}\n📍 Destinations: ${dests || 'Not specified'}\n📝 Message: ${message || 'N/A'}\n\nThank you!`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
 };
 
@@ -2018,7 +2037,7 @@ window.submitCustomTour = function () {
 };
 
 window.sendCustomTourWhatsApp = function () {
-  const WHATSAPP_NUMBER = '212771663435';
+  const WHATSAPP_NUMBER = '212660082066';
   const destNames = CUSTOM_TOUR_DESTINATIONS.filter(d => CustomTourState.destinations.includes(d.id)).map(d => d.name).join(', ');
   const durObj = CUSTOM_TOUR_DURATIONS.find(d => d.id === CustomTourState.duration);
   const styles = CUSTOM_TOUR_STYLES.filter(s => CustomTourState.travelStyles.includes(s.id)).map(s => s.title).join(', ');
